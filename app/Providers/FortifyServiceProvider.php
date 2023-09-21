@@ -37,6 +37,10 @@ class FortifyServiceProvider extends ServiceProvider
             return view('apps.login');
         });
 
+        Fortify::registerView(function () {
+            return view('apps.register');
+        });
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
