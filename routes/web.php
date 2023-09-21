@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'data';
+    return view('welcome');
 });
 
 Route::domain('register.' . env('APP_URL'))->group(function(){
