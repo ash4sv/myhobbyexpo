@@ -35,6 +35,6 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
         'as' => 'apps.',
     ], function (){
         Route::get('login', [AppsController::class, 'login'])->name('login');
-        Route::get('`dashboard`', [AppsController::class, 'dashboard'])->name('dashboard');
+        Route::get('dashboard`', [AppsController::class, 'dashboard'])->name('dashboard');
     });
 });
