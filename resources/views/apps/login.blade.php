@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>MHX2023 EXHIBITOR | DASHBOARD</title>
+    <title>MHX2023 EXHIBITOR | LOGIN</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content name="description" />
     <meta content name="author" />
@@ -42,14 +42,14 @@
 
 
                 <div class="login-content">
-                    <form action="" method="POST">
+                    <form action="{{ route('apps.login') }}" method="POST">
                         @csrf
                         <div class="form-floating mb-20px">
-                            <input type="text" class="form-control fs-13px h-45px border-0" placeholder="Email Address" id="emailAddress" />
+                            <input name="email" type="email" class="form-control fs-13px h-45px border-0 @error('email') invalid-feedback @enderror" placeholder="Email Address" id="emailAddress" />
                             <label for="emailAddress" class="d-flex align-items-center text-gray-600 fs-13px">Email Address</label>
                         </div>
                         <div class="form-floating mb-20px">
-                            <input type="password" class="form-control fs-13px h-45px border-0" placeholder="Password" />
+                            <input name="password" type="password" class="form-control fs-13px h-45px border-0 @error('password') invalid-feedback @enderror" placeholder="Password" />
                             <label for="emailAddress" class="d-flex align-items-center text-gray-600 fs-13px">Password</label>
                         </div>
                         {{--<div class="form-check mb-20px">

@@ -34,7 +34,12 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
         'namespace' => 'Apps',
         'as' => 'apps.',
     ], function (){
-        Route::get('login', [AppsController::class, 'login'])->name('login');
-        Route::get('dashboard`', [AppsController::class, 'dashboard'])->name('dashboard');
+        require base_path('routes/fortify.php');
+        /*Route::get('login', [AppsController::class, 'login'])->name('login');*/
+        Route::group([
+            'middleware'   => 'auth',
+        ], function (){
+           Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
+        });
     });
 });

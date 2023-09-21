@@ -1,6 +1,6 @@
 <div id="header" class="app-header">
     <div class="navbar-header">
-        <a href="#" class="navbar-brand"><span class="navbar-logo"></span><b class="pe-5px">MHX2023</b> Exhibitor</a>
+        <a href="{{ route('apps.dashboard') }}" class="navbar-brand"><span class="navbar-logo"></span><b class="pe-5px">MHX2023</b> Exhibitor</a>
         <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
