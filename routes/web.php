@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('front.registration');
+    return 'data';
 });
 
 Route::domain('register.' . env('APP_URL'))->group(function(){
