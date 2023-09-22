@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'DASHBOARD')
-@section('page-header', 'DASHBOARD')
+@section('page-title', 'EVENT EXHIBIT')
+@section('page-header', 'EVENT EXHIBIT')
 @section('description', '')
 
 @section('content')

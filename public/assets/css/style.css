@@ -1,0 +1,6 @@
+body.myhobbyexpo {
+    background-image: url("../images/bg-image.svg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

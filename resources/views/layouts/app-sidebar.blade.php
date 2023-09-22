@@ -85,6 +85,23 @@
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
                     </div>
+                    <div class="menu-text">Events Exhibitor</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="{{ route('apps.events.exhibit.index') }}" class="menu-link">
+                            <div class="menu-text">Type of Exhibit</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
                     <div class="menu-text">Menu Level</div>
                     <div class="menu-caret"></div>
                 </a>

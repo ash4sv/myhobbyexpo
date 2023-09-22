@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Apps\TypeOfInterest;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class TypeOfInterestSeeder extends Seeder
 {
@@ -37,7 +38,12 @@ class TypeOfInterestSeeder extends Seeder
         ];
 
         foreach ($interests as $interest) {
-            TypeOfInterest::create($interest);
+            TypeOfInterest::create([
+                'slug' => Str::slug($interest['name']),
+                'image' => $interest['image'],
+                'name' => $interest['name'],
+                'description'  => $interest['description'],
+            ]);
         }
     }
 }
