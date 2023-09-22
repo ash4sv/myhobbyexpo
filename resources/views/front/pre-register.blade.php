@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <div class="card shadow p-3 mb-5 rounded" id="pre_register">
+            <div class="card shadow rounded" id="pre_register">
                 <div class="card-body">
                     <h4 class="card-title mb-4 text-center">Pre-Register to 5<sup>th</sup> MALAYSIA HOBBY EXPO 2023</h4>
 
