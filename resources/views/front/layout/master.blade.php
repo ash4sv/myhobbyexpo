@@ -18,7 +18,7 @@
 
 @include('layouts.loader')
 
-<div id="app" class="app app-header-fixed app-sidebar-fixed app-content-full-height">
+<div id="app" class="app py-4">
     <div class="container">
         <div class="col-md-12 mx-auto">
 

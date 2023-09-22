@@ -6,12 +6,13 @@
         <div class="col-md-6 mx-auto">
             <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-4 w-xs-300px w-md-450px">
 
-            <form action="{{ route('preregsubmit') }}" method="POST" class="mb-5">
+            <h4 class="text-white text-center">MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</h4>
+            <h5 class="text-white mb-4 text-center">PRE-REGISTRATION FOR EXHIBITOR ONLY</h5>
+
+            <form action="{{ route('preregsubmit') }}" method="POST">
                 @csrf
                 <div class="card mb-4 shadow rounded" id="section_a">
                     <div class="card-body">
-                        <h4 class="card-title text-center">MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</h4>
-                        <h5 class="card-title mb-4 text-center">PRE-REGISTRATION FOR EXHIBITOR ONLY</h5>
 
                         <h5>Section A</h5>
                         <hr class="my-10px">
@@ -74,6 +75,7 @@
 
                         <div class="mb-2 title-section-size">
                             <label for="barred_size" class="form-label">Size of Lot Required? <span class="text-danger">*</span></label>
+                            <p><label for="" class="form-label">Please choose:</label></p>
                         </div>
 
                         <div class="mb-3" id="barred_size_sec">
