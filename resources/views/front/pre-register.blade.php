@@ -6,8 +6,8 @@
         <div class="col-md-6 mx-auto">
             <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-4 w-xs-300px w-md-450px">
 
-            <h4 class="text-white text-center">MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</h4>
-            <h5 class="text-white mb-4 text-center">PRE-REGISTRATION FOR EXHIBITOR ONLY</h5>
+            <h3 class="text-white text-center"><strong>MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</strong></h3>
+            <h4 class="text-white mb-4 text-center"><strong>PRE-REGISTRATION FOR EXHIBITOR ONLY</strong></h4>
 
             <form action="{{ route('preregsubmit') }}" method="POST">
                 @csrf
