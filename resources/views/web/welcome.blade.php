@@ -13,7 +13,7 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 
 </head>
-<body data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="51">
+<body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="51">
 
 <div id="page-container" class="fade">
 
@@ -36,9 +36,14 @@
 
             <div class="collapse navbar-collapse" id="header-navbar">
                 <ul class="nav navbar-nav navbar-end">
-                    <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT MHX</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">WHY MHX</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#service" data-click="scroll-to-target">OUR AREA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT US</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#stats" data-click="scroll-to-target">STATS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#layout" data-click="scroll-to-target">LAYOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq" data-click="scroll-to-target">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact" data-click="scroll-to-target">CONTACT</a></li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="btn btn-primary mb-4px" href="{{ route('preregister') }}" target="_blank">Pre Register</a>
+                    </li>
                 </ul>
             </div>
 
@@ -47,9 +52,8 @@
 
 
     <div id="home" class="content has-bg home">
-        <div class="content-bg" style="background-image: url({{ asset('assets/images/bg-image.svg') }});" data-paroller="true" data-paroller-type="foreground" data-paroller-factor="-0.25">
-        </div>
-
+        {{--<div class="content-bg" style="background-image: url({{ asset('assets/images/bg-image.svg') }});" data-paroller="true" data-paroller-type="foreground" data-paroller-factor="-0.25">
+        </div>--}}
         <div class="container home-content">
             <div class="row gx-3">
                 <div class="col-md-6">
@@ -63,150 +67,20 @@
     </div>
 
 
-    {{--<div id="about" class="content" data-scrollview="true">
-
-        <div class="container" data-animation="true" data-animation-type="animate__fadeInDown">
-            <h2 class="content-title">About Us</h2>
-            <p class="content-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur eros dolor,<br/>
-                sed bibendum turpis luctus eget
-            </p>
-
-            <div class="row">
-
-                <div class="col-lg-4">
-
-                    <div class="about">
-                        <h3 class="mb-3">Our Story</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Vestibulum posuere augue eget ante porttitor fringilla.
-                            Aliquam laoreet, sem eu dapibus congue, velit justo ullamcorper urna,
-                            non rutrum dolor risus non sapien. Vivamus vel tincidunt quam.
-                            Donec ultrices nisl ipsum, sed elementum ex dictum nec.
-                        </p>
-                        <p>
-                            In non libero at orci rutrum viverra at ac felis.
-                            Curabitur a efficitur libero, eu finibus quam.
-                            Pellentesque pretium ante vitae est molestie, ut faucibus tortor commodo.
-                            Donec gravida, eros ac pretium cursus, est erat dapibus quam,
-                            sit amet dapibus nisl magna sit amet orci.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-4">
-                    <h3 class="mb-3">Our Philosophy</h3>
-
-                    <div class="about-author">
-                        <div class="quote">
-                            <i class="fa fa-quote-left"></i>
-                            <h3>We work harder,<br/><span>to let our user keep simple</span></h3>
-                            <i class="fa fa-quote-right"></i>
-                        </div>
-                        <div class="author">
-                            <div class="image">
-                                <img src="../assets/img/user/user-1.jpg" alt="Sean Ngu" />
-                            </div>
-                            <div class="info">
-                                Sean Ngu
-                                <small>Front End Developer</small>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-4">
-                    <h3 class="mb-3">Our Experience</h3>
-
-                    <div class="skills">
-                        <div class="skills-name">Front End</div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-theme" style="width: 95%">
-                                <span class="progress-number">95%</span>
-                            </div>
-                        </div>
-                        <div class="skills-name">Programming</div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-theme" style="width: 90%">
-                                <span class="progress-number">90%</span>
-                            </div>
-                        </div>
-                        <div class="skills-name">Database Design</div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-theme" style="width: 85%">
-                                <span class="progress-number">85%</span>
-                            </div>
-                        </div>
-                        <div class="skills-name">Wordpress</div>
-                        <div class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-theme" style="width: 80%">
-                                <span class="progress-number">80%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true">
-
-        <div class="content-bg" style="background-image: url(../assets/img/bg/bg-milestone.jpg)"></div>
-
+    <div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true" style="height: 100vh;">
+        {{--<div class="content-bg" style="background-image: url({{ asset('assets/images/about-us-bg@4x.png') }}); background-position:top; background-size:cover;"></div>--}}
 
         <div class="container">
-
             <div class="row">
+                <div class="col-md-4">
 
-                <div class="col-lg-3 milestone-col">
-                    <div class="milestone">
-                        <div class="number" data-animation="true" data-animation-type="number" data-final-number="1292">1,292</div>
-                        <div class="title">Themes & Template</div>
-                    </div>
                 </div>
-
-
-                <div class="col-lg-3 milestone-col">
-                    <div class="milestone">
-                        <div class="number" data-animation="true" data-animation-type="number" data-final-number="9039">9,039</div>
-                        <div class="title">Registered Members</div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-3 milestone-col">
-                    <div class="milestone">
-                        <div class="number" data-animation="true" data-animation-type="number" data-final-number="89291">89,291</div>
-                        <div class="title">Items Sold</div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-3 milestone-col">
-                    <div class="milestone">
-                        <div class="number" data-animation="true" data-animation-type="number" data-final-number="129">129</div>
-                        <div class="title">Theme Authors</div>
-                    </div>
-                </div>
-
             </div>
-
         </div>
-
     </div>
 
 
-    <div id="team" class="content" data-scrollview="true">
+    {{--<div id="team" class="content" data-scrollview="true">
 
         <div class="container">
             <h2 class="content-title">Our Team</h2>
