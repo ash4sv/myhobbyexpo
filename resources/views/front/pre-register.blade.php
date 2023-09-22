@@ -65,14 +65,14 @@
                                 <option value="0">Select</option>
                                 <option value="1">Selling Vendor</option>
                                 <option value="2">Hobby Activity Only</option>
-                                <option value="3">Bobby Show Off Only</option>
+                                <option value="3">Hobby Show Off Only</option>
                             </select>
                             @error('selection_in')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="mb-2">
+                        <div class="mb-2 title-section-size">
                             <label for="barred_size" class="form-label">Size of Lot Required? <span class="text-danger">*</span></label>
                         </div>
 

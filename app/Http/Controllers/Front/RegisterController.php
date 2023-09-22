@@ -16,8 +16,6 @@ class RegisterController extends Controller
 
     public function preRegSubmit(Request $request)
     {
-        return $request;
-
         $validatedData = $request->validate([
             'name_company' => 'required|string',
             'person_in_charge' => 'required|string',
