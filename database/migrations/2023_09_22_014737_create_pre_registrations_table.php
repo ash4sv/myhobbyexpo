@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('pre_registrations', function (Blueprint $table) {
             $table->id();
+            $table->string('name_company');
+            $table->string('person_in_charge');
+            $table->string('contact_no');
+            $table->string('email');
+            $table->string('group_team_members')->nullable();
+            $table->integer('selection_in');
+            $table->string('bare_size')->nullable();
+            $table->decimal('shell_scheme')->nullable();
+            $table->decimal('basic_lot')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

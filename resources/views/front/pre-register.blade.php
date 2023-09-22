@@ -18,7 +18,7 @@
                         <hr class="my-10px">
 
                         <div class="mb-3">
-                            <label for="name_company" class="form-label">Name of Company / Shop / Group / Club / Associate: <span class="text-danger">*</span></label>
+                            <label for="name_company" class="form-label">Name of Company / Shop / Group / Association / Club / Society: <span class="text-danger">*</span></label>
                             <input class="form-control @error('name_company') is-invalid @enderror" type="text" name="name_company" id="name_company" />
                             @error('name_company')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -46,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="group_team_members" class="form-label">For Hobby Group Association, Club, Society Only: </label>
+                            <label for="group_team_members" class="form-label">Group / Team Members (For Hobby Group, Association, Club, Society Only): </label>
                             <input class="form-control @error('group_team_members') is-invalid @enderror" type="text" name="group_team_members" id="group_team_members" />
                             @error('group_team_members')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -79,16 +79,16 @@
                         </div>
 
                         <div class="mb-3" id="barred_size_sec">
-                            <label for="barred_size" class="form-label">Barred Size (meter): <span class="text-danger">*</span></label>
+                            <label for="bare_size" class="form-label">Lot Size (meter): </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="barred_size[]" placeholder="Length">
+                                <input type="text" class="form-control" name="bare_size[]" placeholder="Length">
                                 <span class="input-group-text input-group-addon">to</span>
-                                <input type="text" class="form-control" name="barred_size[]" placeholder="Width">
+                                <input type="text" class="form-control" name="bare_size[]" placeholder="Width">
                             </div>
                         </div>
 
                         <div class="mb-3" id="shell_scheme_sec">
-                            <label for="shell_scheme" class="form-label">Shell Scheme (3.0m x 3.0m): <span class="text-danger">*</span></label>
+                            <label for="shell_scheme" class="form-label">Shell Scheme (3.0m x 3.0m): </label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="shell_scheme" placeholder="">
                                 <span class="input-group-text input-group-addon">Lot</span>
@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="mb-3" id="bacis_lot_sec">
-                            <label for="basic_lot" class="form-label">Basic Lot (2.0m  x 2.5m): <span class="text-danger">*</span></label>  {{--Only Table, Chair, and SSO 13 Amp--}}
+                            <label for="basic_lot" class="form-label">Basic Lot (2.0m  x 2.5m): </label>  {{--Only Table, Chair, and SSO 13 Amp--}}
                             <div class="input-group">
                                 <input type="text" class="form-control" name="basic_lot" placeholder="">
                                 <span class="input-group-text input-group-addon">Lot</span>
@@ -139,10 +139,10 @@
                     $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec").show();
                 } else if (selectedValue === "2") {
                     // User selected "Hobby Activity Only"
-                    $("#shell_scheme_sec, #bacis_lot_sec").show();
+                    $("#barred_size_sec").show();
                 } else if (selectedValue === "3") {
                     // User selected "Bobby Show Off Only"
-                    $("#bacis_lot_sec").show();
+                    $("#barred_size_sec").show();
                 }
             });
 

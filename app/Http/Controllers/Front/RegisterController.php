@@ -22,12 +22,23 @@ class RegisterController extends Controller
             'contact_no' => 'required|string',
             'email' => 'required|email',
             'selection_in' => 'required|in:1,2,3',
+            'bare_size' => '',
+            'shell_scheme' => '',
+            'basic_lot' => '',
         ]);
 
-        /*$preRegistration = new PreRegistration($validatedData);
+        $preRegistration = new PreRegistration();
+        $preRegistration->name_company = $request->name_company;
+        $preRegistration->person_in_charge = $request->person_in_charge;
+        $preRegistration->contact_no = $request->contact_no;
+        $preRegistration->email = $request->email;
+        $preRegistration->selection_in = $request->selection_in;
+        $preRegistration->bare_size = $bare_size = json_encode([ 'length' => $request->bare_size[0], 'width' => $request->bare_size[1] ]);;
+        $preRegistration->shell_scheme = $request->shell_scheme;
+        $preRegistration->basic_lot = $request->basic_lot;
         $preRegistration->save();
 
-        return redirect()->back()->with('success', 'Pre-registration successful!');*/
+        return redirect()->back()->with('success', 'Pre-registration successful!');
     }
 
     public function register()
