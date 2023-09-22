@@ -78,15 +78,6 @@
                             <p><label for="" class="form-label">Please choose:</label></p>
                         </div>
 
-                        <div class="mb-3" id="barred_size_sec">
-                            <label for="bare_size" class="form-label">Lot Size (meter): </label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="bare_size[]" placeholder="Length">
-                                <span class="input-group-text input-group-addon">to</span>
-                                <input type="text" class="form-control" name="bare_size[]" placeholder="Width">
-                            </div>
-                        </div>
-
                         <div class="mb-3" id="shell_scheme_sec">
                             <label for="shell_scheme" class="form-label">Shell Scheme (3.0m x 3.0m): </label>
                             <div class="input-group">
@@ -103,6 +94,15 @@
                                 <span class="input-group-text input-group-addon">Lot</span>
                             </div>
                             <div id="barredMsg" class="form-text">Only 1 Unit Table, 2 Unit Chair, SSO 13Amp</div>
+                        </div>
+
+                        <div class="mb-3" id="barred_size_sec">
+                            <label for="bare_size" class="form-label">Bare Space Size (meter): </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="bare_size[]" placeholder="Length">
+                                <span class="input-group-text input-group-addon">to</span>
+                                <input type="text" class="form-control" name="bare_size[]" placeholder="Width">
+                            </div>
                         </div>
                     </div>
                 </div>

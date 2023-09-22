@@ -36,9 +36,9 @@
 
             <div class="collapse navbar-collapse" id="header-navbar">
                 <ul class="nav navbar-nav navbar-end">
-                    {{--<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT MHX</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT MHX</a></li>
                     <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">WHY MHX</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#service" data-click="scroll-to-target">OUR AREA</a></li>--}}
+                    <li class="nav-item"><a class="nav-link" href="#service" data-click="scroll-to-target">OUR AREA</a></li>
                 </ul>
             </div>
 
@@ -47,10 +47,8 @@
 
 
     <div id="home" class="content has-bg home">
-
         <div class="content-bg" style="background-image: url({{ asset('assets/images/bg-image.svg') }});" data-paroller="true" data-paroller-type="foreground" data-paroller-factor="-0.25">
         </div>
-
 
         <div class="container home-content">
             <div class="row gx-3">
@@ -62,7 +60,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
@@ -802,7 +799,7 @@
             </div>
             <p>
                 &copy; Copyright of Malaysia Hobby Expo {{ date('Y') }} <br/>
-                {{--An admin & front end theme with serious impact.--}} Created by <a href="#">Ardia Nexus Sdn. Bhd.</a>
+                {{--An admin & front end theme with serious impact. Created by <a href="#">Ardia Nexus Sdn. Bhd.--}}</a>
             </p>
             {{--<p class="social-list">
                 <a href="#"><i class="fab fa-facebook-f fa-fw"></i></a>
