@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <img src="{{ asset('assets/images/logo-event.svg') }}" alt="" class="d-block mx-auto mb-4 w-xs-300px w-md-450px">
+            <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-4 w-xs-300px w-md-450px">
 
             <form action="{{ route('preregsubmit') }}" method="POST" class="mb-5">
                 @csrf
@@ -45,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="group_team_members" class="form-label">Group / Team Members: </label>
+                            <label for="group_team_members" class="form-label">For Hobby Group Association, Club, Society Only: </label>
                             <input class="form-control @error('group_team_members') is-invalid @enderror" type="text" name="group_team_members" id="group_team_members" />
                             @error('group_team_members')
                             <div class="invalid-feedback">{{ $message }}</div>
