@@ -42,7 +42,7 @@
                     <li class="nav-item"><a class="nav-link" href="#faq" data-click="scroll-to-target">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact" data-click="scroll-to-target">CONTACT</a></li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="btn btn-primary mb-4px" href="{{ route('preregister') }}" target="_blank">Pre Register</a>
+                        <a class="btn btn-indigo mb-4px" href="{{ route('preregister') }}" target="_blank">PRE-REGISTRATION</a>
                     </li>
                 </ul>
             </div>
