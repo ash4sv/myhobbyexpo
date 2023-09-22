@@ -45,12 +45,18 @@
                     <form action="{{ route('apps.login') }}" method="POST">
                         @csrf
                         <div class="form-floating mb-20px">
-                            <input name="email" type="email" class="form-control fs-13px h-45px border-0 @error('email') invalid-feedback @enderror" placeholder="Email Address" id="emailAddress" />
+                            <input name="email" type="email" class="form-control fs-13px h-45px border-0 @error('email') is-invalid @enderror" placeholder="Email Address" id="emailAddress" />
                             <label for="emailAddress" class="d-flex align-items-center text-gray-600 fs-13px">Email Address</label>
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-floating mb-20px">
-                            <input name="password" type="password" class="form-control fs-13px h-45px border-0 @error('password') invalid-feedback @enderror" placeholder="Password" />
+                            <input name="password" type="password" class="form-control fs-13px h-45px border-0 @error('password') is-invalid @enderror" placeholder="Password" />
                             <label for="emailAddress" class="d-flex align-items-center text-gray-600 fs-13px">Password</label>
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         {{--<div class="form-check mb-20px">
                             <input class="form-check-input border-0" type="checkbox" value="1" id="rememberMe" />

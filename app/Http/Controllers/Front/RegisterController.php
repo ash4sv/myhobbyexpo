@@ -16,18 +16,20 @@ class RegisterController extends Controller
 
     public function preRegSubmit(Request $request)
     {
+        return $request;
+
         $validatedData = $request->validate([
             'name_company' => 'required|string',
             'person_in_charge' => 'required|string',
             'contact_no' => 'required|string',
             'email' => 'required|email',
-            'interest_in' => 'required|in:1,2',
+            'selection_in' => 'required|in:1,2,3',
         ]);
 
-        $preRegistration = new PreRegistration($validatedData);
+        /*$preRegistration = new PreRegistration($validatedData);
         $preRegistration->save();
 
-        return redirect()->back()->with('success', 'Pre-registration successful!');
+        return redirect()->back()->with('success', 'Pre-registration successful!');*/
     }
 
     public function register()

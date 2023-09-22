@@ -19,7 +19,7 @@
 @include('layouts.loader')
 
 <div id="app" class="app app-header-fixed app-sidebar-fixed app-content-full-height">
-    <div class="container py-5">
+    <div class="container">
         <div class="col-md-12 mx-auto">
 
             @yield('reg-form')
