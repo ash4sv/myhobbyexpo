@@ -4,10 +4,10 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-4 w-xs-300px w-md-450px">
+            <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
 
             <h3 class="text-white text-center"><strong>MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</strong></h3>
-            <h4 class="text-white mb-4 text-center"><strong>PRE-REGISTRATION FOR EXHIBITOR ONLY</strong></h4>
+            <h4 class="text-white mb-30px text-center"><strong>PRE-REGISTRATION FOR EXHIBITOR ONLY</strong></h4>
 
             <form action="{{ route('preregsubmit') }}" method="POST">
                 @csrf

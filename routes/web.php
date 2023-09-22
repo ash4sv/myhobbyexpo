@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\ExhibitController;
+use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Front\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
             'middleware'   => 'auth',
         ], function (){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
+           Route::resource('pre-register', PreRegisterController::class);
            Route::group([
                'prefix'  => 'events',
                'as'     => 'events.',

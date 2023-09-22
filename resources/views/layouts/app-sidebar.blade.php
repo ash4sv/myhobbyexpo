@@ -53,6 +53,15 @@
                 </a>
             </div>
 
+            <div class="menu-item {{ (request()->segment(2) == 'pre-register') ? 'active' : '' }}">
+                <a href="{{ route('apps.pre-register.index') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-square-full"></i>
+                    </div>
+                    <div class="menu-text">Pre-Register</div>
+                </a>
+            </div>
+
             <div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
