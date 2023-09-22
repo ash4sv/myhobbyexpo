@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group([
+    'as' => 'web.',
+    ], function (){
+    Route::get('/', [\App\Http\Controllers\Front\WebController::class, 'welcome'])->name('welcome');
 });
 
 Route::domain('register.' . env('APP_URL'))->group(function(){

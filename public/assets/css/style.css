@@ -4,3 +4,10 @@ body.myhobbyexpo {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
+
+/*======one-page-parallax======*/
+.home .home-content {
+  margin-top: -320px;
+}
