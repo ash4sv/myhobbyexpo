@@ -21,13 +21,21 @@ class UsersSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Administrator',
-                'email' => 'admin@myhobbyexpo.com',
+                'name' => 'Super Administrator',
+                'email' => 'masteradmin@myhobbyexpo.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('Fido@8182'),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'name' => 'Administrator',
+                'email' => 'admin@myhobbyexpo.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('admin1234'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         foreach ($users as $user) {
