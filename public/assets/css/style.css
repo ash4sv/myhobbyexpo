@@ -32,8 +32,8 @@ body.myhobbyexpo {
 
 
 /*======one-page-parallax======*/
-.home .home-content {
-    margin-top: -320px;
+#home .home-content {
+    margin-top: 120px;
 }
 
 ul.custom-accordion {

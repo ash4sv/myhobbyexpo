@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div id="home" class="content has-bg home">
+    <div id="home" class="content">
         {{--<div class="content-bg" style="background-image: url({{ asset('assets/images/bg-image.svg') }});" data-paroller="true" data-paroller-type="foreground" data-paroller-factor="-0.25">
         </div>--}}
         <div class="container home-content">
