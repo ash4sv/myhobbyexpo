@@ -38,7 +38,7 @@
 
 <script>
     $(".default-select2").select2();
-    $(".masked-input-phone").mask("+6099 999 9999");
+    $(".masked-input-phone").mask("+6099 9999 9999");
 </script>
 
 @stack('reg-script')

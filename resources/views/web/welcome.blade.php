@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    {{--<div id="stats" class="content" data-scrollview="true">
+    <div id="stats" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
             <div class="row">
                 <div class="col-md-4">
@@ -156,7 +156,7 @@
 
             </div>
         </div>
-    </div>--}}
+    </div>
 
     <div id="faq" class="content bg-light" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
@@ -678,8 +678,9 @@
                     </p>
                     <p>
                         <strong>MHX2023 Booking & Enquiry:</strong> <br>
-                        Mr. Hilmie: <a class="text-white" href="tel:+016-644 3005">+016-644 3005</a> <br>
-                        Mr. Faiz: <a class="text-white" href="tel:+6017-768 8863">+6017-768 8863</a> <br>
+                        Ms. Syaz: <a class="text-white" href="tel:+6011-7008 0331">+6011-7008 0331</a> <br>
+                        Ms. leya: <a class="text-white" href="tel:+6011-7008 0332">+6011-7008 0332</a> <br>
+                        Mrs: Nadia: <a href="tel:+616-347 7295" class="text-white">+616-347 7295</a> <br>
                     </p>
                 </div>
 
@@ -726,7 +727,7 @@
             </div>
             <p>
                 &copy; Copyright of Malaysia Hobby Expo {{ date('Y') }} <br/>
-                {{--An admin & front end theme with serious impact.--}} Powered by <a class="text-indigo" href="#">Ardia Nexus Sdn. Bhd.</a>
+                {{--An admin & front end theme with serious impact.--}} Powered and designed by <a class="text-indigo" href="#">Ardia Nexus Sdn. Bhd.</a>
             </p>
             {{--<p class="social-list">
                 <a href="#"><i class="fab fa-facebook-f fa-fw"></i></a>
