@@ -5,9 +5,65 @@ body.myhobbyexpo {
     background-size: cover;
 }
 
+.bg-white-08 {
+    background-color: rgba(255, 255, 255, .8);
+}
+.bg-white-07 {
+    background-color: rgba(255, 255, 255, .7);
+}
+.bg-white-06 {
+    background-color: rgba(255, 255, 255, .6);
+}
+.bg-white-05 {
+    background-color: rgba(255, 255, 255, .5);
+}
+.bg-white-04 {
+    background-color: rgba(255, 255, 255, .4);
+}
+.bg-white-03 {
+    background-color: rgba(255, 255, 255, .3);
+}
+.bg-white-02 {
+    background-color: rgba(255, 255, 255, .2);
+}
+.bg-white-01 {
+    background-color: rgba(255, 255, 255, .1);
+}
 
 
 /*======one-page-parallax======*/
 .home .home-content {
-  margin-top: -320px;
+    margin-top: -320px;
+}
+
+ul.custom-accordion {
+    list-style: none;
+    padding: 0;
+}
+
+ul.custom-accordion .inner {
+    padding: 1rem;
+    overflow: hidden;
+    display: none;
+    margin-bottom: 0;
+    background-color: #FFFFFF;
+}
+
+ul.custom-accordion li {
+    margin: 0.5em 0;
+}
+
+ul.custom-accordion li a.accordion-toggle {
+    width: 100%;
+    display: block;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fefefe;
+    padding: 0.75em;
+    border-radius: 0.15em;
+    transition: background 0.3s ease;
+}
+
+ul.custom-accordion li a.accordion-toggle:hover {
+    background: rgba(0, 0, 0, 0.9);
+    text-decoration: none;
 }

@@ -67,8 +67,8 @@
     </div>
 
 
-    <div id="about" class="content py-5" data-scrollview="true">
-        <div class="container" data-animation="true" data-animation-type="animate__fadeInDown">
+    <div id="about" class="content" data-scrollview="true">
+        <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
             <div class="row gx-5">
                 <div class="col-lg-4">
                     <div class="about text-white">
@@ -82,7 +82,7 @@
                     <div class="about text-white">
                         <img src="{{ asset('assets/images/au-vission@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
                         <p>We believe that certain experiences help young people to develop fully and successfully from their passion of hobby. These include close relationships among friends, healthy competitions, engaging activities, opportunities to make a difference from creative mind, and continuity of support in every setting in which they live, work, and study.</p>
-                        <p class="text-purple">“Hobby is not only about passion but, it is a part ofenjoyment in life.”</p>
+                        <p class="text-purple">“Hobby is not only about passion but, it is a part of enjoyment in life.”</p>
                     </div>
                 </div>
 
@@ -102,8 +102,117 @@
         </div>
     </div>
 
+    <div id="faq" class="content py-5 bg-white-06" data-scrollview="true">
+        <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
 
-    
+            <div class="mb-20px">
+                <img src="{{ asset('assets/images/faq-exhibitor@2x.png') }}" alt="" class="img-fluid h-50px">
+                <h4 class="h4 text-pink">FREQUENTLY ASK QUESTION</h4>
+            </div>
+            <ul class="custom-accordion mb-5">
+                <li>
+                    <a class="accordion-toggle" href=#>How many exhibitors can you accommodate?</a>
+                    <p class="inner">
+                        Well over 350 exhibitor with the space to expand if we need to as on 2019, we are moving to bigger hall @ 10,000m2.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>What size spaces do you have available?</a>
+                    <p class="inner">
+                        We have a variety of different exhibition spaces available. Our smallest space starts at 2m x 2m all the way up to your request. We can also accommodate larger sizes on request. If you want more info on the spaces available, please request a copy of our exhibitor information pack and refer to the attached floor plan.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>How much does it cost to exhibit?</a>
+                    <p class="inner">
+                        All of our stands are priced started from rm85 per 1m2.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>Do you offer a shell scheme?</a>
+                    <p class="inner">
+                        Yes. Some of our smaller spaces from (3m x 3m) can be purchased as 'booth package’ including shell scheme and carpet.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>Do you have sponsorship packages available?</a>
+                    <p class="inner">
+                        Yes we do have and we are seeking for a various type of sponsorship. Please contact us to know more about sponsorship matter.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>Can we sponsor the event without exhibiting?</a>
+                    <p class="inner">
+                        Yes. We are aware that under certain circumstances it's not always ideal for you to exhibit but may well like to advertise your presence at the event. We have several advertising opportunities available please get in touch for more information.
+                    </p>
+                </li>
+
+                <li>
+                    <a class="accordion-toggle" href=#>Is there accommodation near by?</a>
+                    <p class="inner">
+                        There are a few hotels on site with many a short car ride away.
+                    </p>
+                </li>
+            </ul>
+
+
+            <div class="mb-20px">
+                <img src="{{ asset('assets/images/faq-visitor@2x.png') }}" alt="" class="img-fluid h-50px">
+                <h4 class="h4 text-pink">FREQUENTLY ASK QUESTION</h4>
+            </div>
+            <ul class="custom-accordion">
+                <li>
+                    <a href="#" class="accordion-toggle">What are the dates and times?</a>
+                    <p class="inner">
+                        The MHX2020 started on Saturday and Sunday (2nd & 3rd December 2023) from 10.00am - 10.00pm.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">How much is admission fee?</a>
+                    <p class="inner">
+                        The admission are rm15.00 for 2 days for adults & rm5.00 per day for kids. Free admission for kids below 6 years old, oku & senior citizens. All visitors who are pay are entitled to get lucky draw number.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">What companies are exhibiting?</a>
+                    <p class="inner">
+                        Please take a look at our exhibitor list by following a link in the header above. The exhibitor list is updated on a regular basis so please keep checking back for new additions.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">Do I have to pay for car parking?</a>
+                    <p class="inner">
+                        Venue have more than 4,500 parking bays at outside area. There is no parking fees.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">Will there be freebies and competitions?</a>
+                    <p class="inner">
+                        We can never guarantee what our exhibitors will choose to give away or when but it is likely that you will receive a lot of free samples and merchandise.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">Are children allowed?</a>
+                    <p class="inner">
+                        Yes, of course! You can bring anyone especially you, your kids and family. Some zone are not for kids under 12 years old and school students.
+                    </p>
+                </li>
+                <li>
+                    <a href="#" class="accordion-toggle">Do you have disabled access?</a>
+                    <p class="inner">
+                        Yes, the venue site is accessible for the disabled by using elevator.
+                    </p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
 
     {{--<div id="team" class="content" data-scrollview="true">
 
@@ -715,6 +824,24 @@
 
 <script src="{{ asset('assets/js/one-page-parallax/vendor.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/one-page-parallax/app.min.js') }}" type="text/javascript"></script>
+
+<script>
+    $('.accordion-toggle').click(function(e) {
+        e.preventDefault();
+
+        let $this = $(this);
+
+        if ($this.next().hasClass('show')) {
+            $this.next().removeClass('show');
+            $this.next().slideUp(350);
+        } else {
+            $this.parent().parent().find('li .inner').removeClass('show');
+            $this.parent().parent().find('li .inner').slideUp(350);
+            $this.next().toggleClass('show');
+            $this.next().slideToggle(350);
+        }
+    });
+</script>
 
 </body>
 </html>
