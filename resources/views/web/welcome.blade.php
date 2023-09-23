@@ -13,7 +13,7 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 
 </head>
-<body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="102">
+<body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="120">
 
 <div id="page-container" class="fade">
 
@@ -36,6 +36,7 @@
 
             <div class="collapse navbar-collapse" id="header-navbar">
                 <ul class="nav navbar-nav navbar-end">
+                    <li class="nav-item"><a class="nav-link" href="#home" data-click="scroll-to-target">HOME</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT US</a></li>
                     <li class="nav-item"><a class="nav-link" href="#stats" data-click="scroll-to-target">STATS</a></li>
                     <li class="nav-item"><a class="nav-link" href="#layout" data-click="scroll-to-target">LAYOUT</a></li>
@@ -49,7 +50,6 @@
 
         </div>
     </div>
-
 
     <div id="home" class="content has-bg home">
         {{--<div class="content-bg" style="background-image: url({{ asset('assets/images/bg-image.svg') }});" data-paroller="true" data-paroller-type="foreground" data-paroller-factor="-0.25">
@@ -65,7 +65,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="about" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
@@ -102,7 +101,64 @@
         </div>
     </div>
 
-    <div id="faq" class="content py-5 bg-white-06" data-scrollview="true">
+    {{--<div id="stats" class="content" data-scrollview="true">
+        <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="" class="img-fluid mb-5">
+                </div>
+            </div>
+            <div class="row row-space-10">
+                <div class="col-lg-6 col-md-6">
+                    <div class="work mb-30px">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">EVENT DATE</span>
+                            <span class="desc-text">30 & 31 July 2016</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work mb-30px">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">EVENT DATE</span>
+                            <span class="desc-text">25 & 26 November 2017</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">EVENT DATE</span>
+                            <span class="desc-text">6 & 7 October 2018</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">EVENT DATE</span>
+                            <span class="desc-text">5 & 6 October 2019</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>--}}
+
+    <div id="faq" class="content bg-light" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
 
             <div class="mb-20px">
@@ -433,141 +489,7 @@
     </div>
 
 
-    <div id="work" class="content" data-scrollview="true">
 
-        <div class="container" data-animation="true" data-animation-type="animate__fadeInDown">
-            <h2 class="content-title">Our Latest Work</h2>
-            <p class="content-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur eros dolor,<br/>
-                sed bibendum turpis luctus eget
-            </p>
-
-            <div class="row row-space-10">
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-1.jpg" alt="Work 1" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Aliquam molestie</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-2.jpg" alt="Work 2" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Quisque at pulvinar lacus</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-3.jpg" alt="Work 3" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Vestibulum et erat ornare</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-4.jpg" alt="Work 4" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Sed vitae mollis magna</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-5.jpg" alt="Work 5" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Suspendisse at mattis odio</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-6.jpg" alt="Work 6" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Aliquam vitae commodo diam</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-7.jpg" alt="Work 7" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Phasellus eu vehicula lorem</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="col-lg-3 col-md-4">
-
-                    <div class="work">
-                        <div class="image">
-                            <a href="#"><img src="../assets/img/work/work-img-8.jpg" alt="Work 8" /></a>
-                        </div>
-                        <div class="desc">
-                            <span class="desc-title">Morbi bibendum pellentesque</span>
-                            <span class="desc-text">Lorem ipsum dolor sit amet</span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
 
 
     <div id="client" class="content has-bg bg-green" data-scrollview="true">
@@ -730,54 +652,54 @@
             </ul>
         </div>
 
-    </div>
+    </div>--}}
 
 
-    <div id="contact" class="content bg-light" data-scrollview="true">
-
-        <div class="container">
-            <h2 class="content-title">Contact Us</h2>
-            <p class="content-desc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur eros dolor,<br/>
-                sed bibendum turpis luctus eget
-            </p>
-
+    <div id="contact" class="content" data-scrollview="true">
+        <div class="container py-5">
             <div class="row">
-
-                <div class="col-lg-6" data-animation="true" data-animation-type="animate__fadeInLeft">
-                    <h3>If you have a project you would like to discuss, get in touch with us.</h3>
+                <div class="col-lg-6 text-white" data-animation="true" data-animation-type="animate__fadeInLeft">
+                    <img src="{{ asset('assets/images/contact-us@2x.png') }}" alt="" class="img-fluid h-100px mb-4">
+                    {{--<h3>If you have a project you would like to discuss, get in touch with us.</h3>--}}
+                    <p>If you need to get in contact with us you can do so in the following ways:</p>
                     <p>
-                        Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus.
+                        <strong>MALAYSIA HOBBY EXPO SECRETARIAT</strong><br/>
+                        <strong>SPECTA GROUP VENTURE</strong><br/>
+                        39B, Jalan Kampar Sentul Selatan<br/>
+                        51000 Kuala Lumpur<br/> <br>
+                        Office: <a class="text-white" href="tel:+603-2387 0090">+603-2387 0090</a><br/>
+                        Email: <a class="text-white" href="mailto:myhobbyexpo@gmail.com">myhobbyexpo@gmail.com</a><br/>
                     </p>
                     <p>
-                        <strong>SeanTheme Studio, Inc</strong><br/>
-                        795 Folsom Ave, Suite 600<br/>
-                        San Francisco, CA 94107<br/>
-                        P: (123) 456-7890<br/>
+                        <strong>MHX2023 Overseas Secretariat &</strong> <br>
+                        <strong>Sponsorship enquiry:</strong> <br>
+                        Mr. Apis Azmi: <a class="text-white" href="tel:+6013-222 2310">+6013-222 2310</a> <br>
+                        Mr. Faris: <a class="text-white" href="tel:">+6019-932 3137</a> <br>
                     </p>
                     <p>
-                        <span class="phone">+11 (0) 123 456 78</span><br/>
-                        <a href="../../../cdn-cgi/l/email-protection.html#f39b969f9f9cb3969e929a9f92979781968080dd909c9e" class="text-theme"><span class="__cf_email__" data-cfemail="730016121d071b161e160033000603031c01075d101c1e">[email&#160;protected]</span></a>
+                        <strong>MHX2023 Booking & Enquiry:</strong> <br>
+                        Mr. Hilmie: <a class="text-white" href="tel:+016-644 3005">+016-644 3005</a> <br>
+                        Mr. Faiz: <a class="text-white" href="tel:+6017-768 8863">+6017-768 8863</a> <br>
                     </p>
                 </div>
 
-
                 <div class="col-lg-6 form-col" data-animation="true" data-animation-type="animate__fadeInRight">
-                    <form class="form-horizontal">
+                    <form action="#" method="POST" class="form-horizontal">
+                        @csrf
                         <div class="row mb-3">
-                            <label class="col-form-label col-lg-3 text-lg-right">Name <span class="text-theme">*</span></label>
+                            <label class="col-form-label col-lg-3 text-lg-right text-white">Name <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-form-label col-lg-3 text-lg-right">Email <span class="text-theme">*</span></label>
+                            <label class="col-form-label col-lg-3 text-lg-right text-white">Email <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-form-label col-lg-3 text-lg-right">Message <span class="text-theme">*</span></label>
+                            <label class="col-form-label col-lg-3 text-lg-right text-white">Message <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
                                 <textarea class="form-control" rows="10"></textarea>
                             </div>
@@ -785,17 +707,14 @@
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right"></label>
                             <div class="col-lg-9 text-left">
-                                <button type="submit" class="btn btn-theme btn-primary btn-block">Send Message</button>
+                                <button type="submit" class="btn btn-indigo btn-primary btn-block">Send Message</button>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </div>
-
-    </div>--}}
+    </div>
 
 
     <div id="footer" class="footer">
@@ -807,7 +726,7 @@
             </div>
             <p>
                 &copy; Copyright of Malaysia Hobby Expo {{ date('Y') }} <br/>
-                {{--An admin & front end theme with serious impact. Created by <a href="#">Ardia Nexus Sdn. Bhd.--}}</a>
+                {{--An admin & front end theme with serious impact.--}} Powered by <a class="text-indigo" href="#">Ardia Nexus Sdn. Bhd.</a>
             </p>
             {{--<p class="social-list">
                 <a href="#"><i class="fab fa-facebook-f fa-fw"></i></a>
