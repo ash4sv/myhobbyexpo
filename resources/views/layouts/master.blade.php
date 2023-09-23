@@ -80,7 +80,8 @@
         colReorder: true,
         keys: true,
         rowReorder: true,
-        select: true
+        select: true,
+        pageLength: 50
     };
 
     if ($(window).width() <= 767) {

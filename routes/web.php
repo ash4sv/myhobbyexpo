@@ -49,14 +49,14 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
             'middleware'   => 'auth',
         ], function (){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
-           Route::resource('pre-register', PreRegisterController::class);
            Route::group([
                'prefix'  => 'pre-register',
-               'as'     => 'pre-register.'
+               'as'     => 'preregister.'
            ], function (){
+               Route::resource('pre-register', PreRegisterController::class);
                Route::get('selling-vendor', [AppsController::class, 'sellingVendor'])->name('sellingvendor');
                Route::get('hobby-activity', [AppsController::class, 'hobbyActivity'])->name('hobbyactivity');
-               Route::get('hobby-show-off', [AppsController::class, 'hobbyShowoff'])->name('hobbyshowoff');
+               Route::get('hobby-showoff', [AppsController::class, 'hobbyShowoff'])->name('hobbyshowoff');
            });
            Route::group([
                'prefix'  => 'events',

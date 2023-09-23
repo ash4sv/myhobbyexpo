@@ -25,6 +25,7 @@ class AppsController extends Controller
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
         return view($this->view.'index', [
             'registers' => $selling_vendor,
+            'title' => 'Selling Vendor',
         ]);
     }
     public function hobbyActivity()
@@ -32,6 +33,7 @@ class AppsController extends Controller
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
         return view($this->view.'index', [
             'registers' => $hobby_activity,
+            'title' => 'Hobby Activity',
         ]);
     }
     public function hobbyShowoff()
@@ -39,6 +41,7 @@ class AppsController extends Controller
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
         return view($this->view.'index', [
             'registers' => $hobby_showoff,
+            'title' => 'Hobby Show-off',
         ]);
     }
 }

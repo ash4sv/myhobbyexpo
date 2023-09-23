@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Pre-Register')
-@section('page-header', 'Pre-Register')
+@section('page-title', 'Pre-Register ' . $title)
+@section('page-header', 'Pre-Register ' . $title)
 @section('description', '')
 
 @section('content')
@@ -16,7 +16,7 @@
 
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">Selling Vendor</h4>
+            <h4 class="panel-title">{{ $title }}</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -34,18 +34,30 @@
                     <th>Name of Person in Charge</th>
                     <th>Contact No.</th>
                     <th>Email</th>
-                    <th>#</th>
+                    <th width="2%">Interested Sponsors</th>
+                    <th width="1%">#</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($selling_vendor as $item)
+                @foreach($registers as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name_company }}</td>
                         <td>{{ $item->person_in_charge }}</td>
                         <td>{{ $item->contact_no }}</td>
                         <td>{{ $item->email }}</td>
-                        <td></td>
+                        <td>
+                            <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $item->become_sponsors == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
+                             <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $item->become_sponsors == 1 ? 'Yes' : 'No' }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group w-100">
+                            <a href="{{ route('apps.preregister.pre-register.show', $item) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('apps.preregister.pre-register.edit', $item) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -56,6 +68,7 @@
                     <th>Name of Person in Charge</th>
                     <th>Contact No.</th>
                     <th>Email</th>
+                    <th>Sponsors</th>
                     <th>#</th>
                 </tr>
                 </tfoot>
@@ -65,108 +78,5 @@
     </div>
 
     <!-- ========= -->
-
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <h4 class="panel-title">Hobby Activity</h4>
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-            </div>
-        </div>
-        <div class="panel-body">
-
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
-                <thead>
-                <tr>
-                    <th width="1%">No.</th>
-                    <th class="w-25">Company / Shop / Group / Association / Club / Society</th>
-                    <th>Name of Person in Charge</th>
-                    <th>Contact No.</th>
-                    <th>Email</th>
-                    <th>#</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($hobby_activity as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->name_company }}</td>
-                        <td>{{ $item->person_in_charge }}</td>
-                        <td>{{ $item->contact_no }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td></td>
-                    </tr>
-                @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th>No.</th>
-                    <th>Company / Shop / Group / Association / Club / Society</th>
-                    <th>Name of Person in Charge</th>
-                    <th>Contact No.</th>
-                    <th>Email</th>
-                    <th>#</th>
-                </tr>
-                </tfoot>
-            </table>
-
-        </div>
-    </div>
-
-    <!-- ========= -->
-
-
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <h4 class="panel-title">Hobby Show Off</h4>
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-            </div>
-        </div>
-        <div class="panel-body">
-
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
-                <thead>
-                <tr>
-                    <th width="1%">No.</th>
-                    <th class="w-25">Company / Shop / Group / Association / Club / Society</th>
-                    <th>Name of Person in Charge</th>
-                    <th>Contact No.</th>
-                    <th>Email</th>
-                    <th>#</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($hobby_showoff as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->name_company }}</td>
-                        <td>{{ $item->person_in_charge }}</td>
-                        <td>{{ $item->contact_no }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td></td>
-                    </tr>
-                @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th>No.</th>
-                    <th>Company / Shop / Group / Association / Club / Society</th>
-                    <th>Name of Person in Charge</th>
-                    <th>Contact No.</th>
-                    <th>Email</th>
-                    <th>#</th>
-                </tr>
-                </tfoot>
-            </table>
-
-        </div>
-    </div>
 
 @endsection

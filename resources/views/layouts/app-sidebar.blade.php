@@ -14,13 +14,13 @@
                             <div class="flex-grow-1">
                                 Web Admin
                             </div>
-                            {{--<div class="menu-caret ms-auto"></div>--}}
+                            <div class="menu-caret ms-auto"></div>
                         </div>
                         <small>Administrator</small>
                     </div>
                 </a>
             </div>
-            {{--<div id="appSidebarProfileMenu" class="collapse">
+            <div id="appSidebarProfileMenu" class="collapse">
                 <div class="menu-item pt-5px">
                     <a href="javascript:;" class="menu-link">
                         <div class="menu-icon"><i class="fa fa-cog"></i></div>
@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="menu-divider m-0"></div>
-            </div>--}}
+            </div>
 
             <div class="menu-header">Navigation</div>
 
@@ -53,16 +53,16 @@
                 </a>
             </div>
 
-            <div class="menu-item {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
+            {{--<div class="menu-item {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="{{ route('apps.pre-register.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-square-full"></i>
                     </div>
                     <div class="menu-text">Pre-Register</div>
                 </a>
-            </div>
+            </div>--}}
 
-            {{--<div class="menu-item has-sub">
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -71,23 +71,23 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="{{ route('apps.pre-register.sellingvendor') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->segment(2) == 'selling-vendor') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.sellingvendor') }}" class="menu-link">
                             <div class="menu-text">Selling Vendor</div>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <a href="{{ route('apps.pre-register.hobbyactivity') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->segment(2) == 'hobby-activity') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.hobbyactivity') }}" class="menu-link">
                             <div class="menu-text">Hobby Activity</div>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <a href="{{ route('apps.pre-register.hobbyshowoff') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->segment(2) == 'hobby-showoff') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.hobbyshowoff') }}" class="menu-link">
                             <div class="menu-text">Hobby Show Off</div>
                         </a>
                     </div>
                 </div>
-            </div>--}}
+            </div>
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
