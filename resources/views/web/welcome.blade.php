@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <div id="stats" class="content" data-scrollview="true">
+{{--    <div id="stats" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
             <div class="row">
                 <div class="col-md-4">
@@ -156,7 +156,7 @@
 
             </div>
         </div>
-    </div>
+    </div>--}}
 
     <div id="faq" class="content bg-light" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
