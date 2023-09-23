@@ -133,7 +133,8 @@
                         </div>
 
                         <div class="mb-3" id="activities_pic">
-                            <label for="anw_activities_pic" class="form-label">Attach Hobby Group TT, Gathering photos: </label>
+                            <label for="anw_activities_pic" class="form-label activity_label">Attach activities photos: </label>
+                            <label for="anw_activities_pic" class="form-label hobby_label">Attach Hobby Group TT, Gathering photos: </label>
                             <input class="form-control @error('anw_activities_pic') is-invalid @enderror" type="file" name="anw_activities_pic[]" id="anw_activities_pic" multiple />
                             <div id="barredMsg" class="form-text">Please upload your activities events photos. Maximum 6 images and 2MB</div>
                         </div>
@@ -192,7 +193,7 @@
     <script>
         $(document).ready(function() {
             // Initially hide all sections
-            $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff").hide();
+            $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
 
             // Attach a change event listener to the "Selection" dropdown
             $("#selection_in").change(function() {
@@ -200,7 +201,7 @@
                 var selectedValue = $(this).val();
 
                 // Hide all sections first
-                $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff").hide();
+                $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
 
                 // Show sections based on the selected value
                 if (selectedValue === "1") {
@@ -208,10 +209,10 @@
                     $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #item_for_sale").show();
                 } else if (selectedValue === "2") {
                     // User selected "Hobby Activity Only"
-                    $("#barred_size_sec, #tnc_hobby_activity, #activities_explain, #activities_pic").show();
+                    $("#barred_size_sec, #tnc_hobby_activity, #activities_explain, #activities_pic, .activity_label").show();
                 } else if (selectedValue === "3") {
                     // User selected "Bobby Show Off Only"
-                    $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic").show();
+                    $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic, .hobby_label").show();
                 }
             });
 
