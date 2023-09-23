@@ -143,10 +143,10 @@
 
                 <div class="card mb-4 shadow rounded" id="section_b">
                     <div class="card-body">
-                        <h5>Section C - Sponsorship <span class="text-danger">*</span></h5>
+                        <h5>Section C - Sponsorship</h5>
                         <hr>
                         <div class="mb-3">
-                            <label for="name_company" class="form-label mb-3">Interested to become MHX 2023 sponsors? </label>
+                            <label for="name_company" class="form-label mb-3">Interested to become MHX 2023 sponsors? <span class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-md-4 col-5">
                                     <div class="form-check">
