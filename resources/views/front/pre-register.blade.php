@@ -65,8 +65,8 @@
                             <select class="form-control default-select2 @error('selection_in') is-invalid @enderror" name="selection_in" id="selection_in" required>
                                 <option value="0">Select</option>
                                 <option value="1">Selling Vendor</option>
-                                <option value="2">Hobby Activity Only</option>
                                 <option value="3">Hobby Show Off Only</option>
+                                <option value="2">Hobby Activity Only</option>
                             </select>
                             @error('selection_in')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -82,7 +82,7 @@
                         </div>
 
                         <div id="tnc_hobby_show_off" class="mb-3">
-                            <p class="mb-2px"><strong>This section in only for Hobby Competition / Tournament / Performance. You are NOT ALLOW TO DO ANY SALES in this section. Please describe your activities and we will contact you later. T&C applied.</strong></p>
+                            <p class="mb-2px"><strong>This section in only for Hobby Competition / Tournament / Performance. You are NOT ALLOW TO DO ANY SALES in this section. T&C applied.</strong></p>
                         </div>
 
                         <div class="mb-2 title-section-size">
@@ -133,7 +133,7 @@
                         </div>
 
                         <div class="mb-3" id="activities_pic">
-                            <label for="anw_activities_pic" class="form-label">Attach activities photos: </label>
+                            <label for="anw_activities_pic" class="form-label">Attach Hobby Group TT, Gathering photos: </label>
                             <input class="form-control @error('anw_activities_pic') is-invalid @enderror" type="file" name="anw_activities_pic[]" id="anw_activities_pic" multiple />
                             <div id="barredMsg" class="form-text">Please upload your activities events photos. Maximum 6 images and 2MB</div>
                         </div>
@@ -211,7 +211,7 @@
                     $("#barred_size_sec, #tnc_hobby_activity, #activities_explain, #activities_pic").show();
                 } else if (selectedValue === "3") {
                     // User selected "Bobby Show Off Only"
-                    $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff").show();
+                    $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic").show();
                 }
             });
 

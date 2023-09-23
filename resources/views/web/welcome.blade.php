@@ -57,10 +57,11 @@
         <div class="container home-content">
             <div class="row gx-3">
                 <div class="col-md-6">
-                    <img src="{{ asset('assets/images/left-image@4x.png') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('assets/images/left-image@4x.png') }}" alt="" class="img-fluid mb-sm-0 mb-5">
                 </div>
                 <div class="col-md-6">
-                    <img src="{{ asset('assets/images/right-image@4x.png') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('assets/images/right-image@4x.png') }}" alt="" class="img-fluid d-sm-block d-none">
+                    <img src="{{ asset('assets/images/only-date@3x.png') }}" alt="" class="img-fluid d-sm-none d-block">
                 </div>
             </div>
         </div>
