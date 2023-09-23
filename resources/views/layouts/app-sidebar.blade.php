@@ -44,7 +44,7 @@
 
             <div class="menu-header">Navigation</div>
 
-            <div class="menu-item {{ (request()->segment(2) == 'dashboard') ? 'active' : '' }}">
+            <div class="menu-item {{ (request()->segment(1) == 'dashboard') ? 'active' : '' }}">
                 <a href="{{ route('apps.dashboard') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-square-full"></i>
