@@ -24,7 +24,7 @@ class UsersSeeder extends Seeder
                 'name' => 'Administrator',
                 'email' => 'admin@myhobbyexpo.com',
                 'email_verified_at' => now(),
-                'password' => Hash::make('password'),
+                'password' => Hash::make('Fido@8182'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
