@@ -9,12 +9,6 @@
             <h3 class="text-white text-center"><strong>MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</strong></h3>
             <h4 class="text-white mb-30px text-center"><strong>PRE-REGISTRATION FOR EXHIBITOR ONLY</strong></h4>
 
-            @if($message = Session::get('success'))
-                <div class="alert alert-indigo">
-                    <h3 class="mb-0">{{ $message }}</h3>
-                </div>
-            @endif
-
             <form action="{{ route('preregsubmit') }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
                 <div class="card mb-4 shadow rounded" id="section_a">

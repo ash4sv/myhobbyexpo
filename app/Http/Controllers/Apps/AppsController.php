@@ -23,6 +23,11 @@ class AppsController extends Controller
     public function sellingVendor()
     {
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
+
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view($this->view.'index', [
             'registers' => $selling_vendor,
             'title' => 'Selling Vendor',

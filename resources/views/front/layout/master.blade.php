@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/default/app.min.css') }}" rel="stylesheet" />
+    li
     <link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
@@ -34,9 +35,9 @@
 <script src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
 @include('sweetalert::alert')
-
 <script>
     $(".default-select2").select2();
     /*$(".masked-input-phone").mask("+6099 9999 9999");*/

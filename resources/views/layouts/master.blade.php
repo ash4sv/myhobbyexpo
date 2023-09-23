@@ -60,9 +60,11 @@
 <script src="{{ asset('assets/plugins/pdfmake/build/pdfmake.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/pdfmake/build/vfs_fonts.js') }}"></script>
 <script src="{{ asset('assets/plugins/jszip/dist/jszip.min.js') }}"></script>
-
 <script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
+
+@include('sweetalert::alert')
 
 @stack('script')
 

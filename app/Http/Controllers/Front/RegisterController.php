@@ -7,6 +7,7 @@ use App\Models\Apps\PreRegistration;
 use App\Models\Apps\TypeOfInterest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -72,7 +73,8 @@ class RegisterController extends Controller
         $preRegistration->become_sponsors = $request->become_sponsors;
         $preRegistration->save();
 
-        return redirect()->back()->with('success', 'Thank you for registration, we already received your registration');
+        Alert::success('Thank you for registration', 'We already received your registration');
+        return redirect()->back();
     }
 
     public function register()

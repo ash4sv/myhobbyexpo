@@ -48,7 +48,10 @@ class PreRegisterController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $registered = PreRegistration::findOrFail($id);
+        return view($this->view.'show', [
+            'registered' => $registered
+        ]);
     }
 
     /**
@@ -75,6 +78,6 @@ class PreRegisterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $id;
     }
 }
