@@ -72,7 +72,7 @@ class RegisterController extends Controller
         $preRegistration->become_sponsors = $request->become_sponsors;
         $preRegistration->save();
 
-        return redirect()->back()->with('success', 'Pre-registration successful!');
+        return redirect()->back()->with('success', 'Thank you for registration, we already received your registration');
     }
 
     public function register()
