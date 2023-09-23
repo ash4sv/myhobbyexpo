@@ -13,7 +13,7 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
 
 </head>
-<body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="51">
+<body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="102">
 
 <div id="page-container" class="fade">
 
@@ -67,18 +67,43 @@
     </div>
 
 
-    <div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true" style="height: 100vh;">
-        {{--<div class="content-bg" style="background-image: url({{ asset('assets/images/about-us-bg@4x.png') }}); background-position:top; background-size:cover;"></div>--}}
+    <div id="about" class="content py-5" data-scrollview="true">
+        <div class="container" data-animation="true" data-animation-type="animate__fadeInDown">
+            <div class="row gx-5">
+                <div class="col-lg-4">
+                    <div class="about text-white">
+                        <img src="{{ asset('assets/images/au-mission@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                        <p>To invite youth in malaysia to enjoy the healthy and creative hobby instead of only socializing with social media. Helping to grow a very creative generations by involving in this kind of hobby scene.</p>
+                        <p>Other than that, it is also motivated youth to startup a business that is so tiny in malaysia. What mhx can offer is a platform for malaysian to start entering new market of business which is hobby related!</p>
+                    </div>
+                </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-lg-4">
+                    <div class="about text-white">
+                        <img src="{{ asset('assets/images/au-vission@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                        <p>We believe that certain experiences help young people to develop fully and successfully from their passion of hobby. These include close relationships among friends, healthy competitions, engaging activities, opportunities to make a difference from creative mind, and continuity of support in every setting in which they live, work, and study.</p>
+                        <p class="text-purple">“Hobby is not only about passion but, it is a part ofenjoyment in life.”</p>
+                    </div>
+                </div>
 
+                <div class="col-lg-4">
+                    <div class="about text-white">
+                        <img src="{{ asset('assets/images/au-objective@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                        <ul class="pl-1">
+                            <li>To host our own much needed public hobby exhibition.</li>
+                            <li>To build new connection between youth & senior under one roof</li>
+                            <li>To gather all kind of hobbies and share knowledgeable art & inspiration</li>
+                            <li>To explore the newest and most sought after manufacturers and products</li>
+                            <li>To build brand recognition at an event entirely targeted towards hobby vendors and consumers</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    
 
     {{--<div id="team" class="content" data-scrollview="true">
 
