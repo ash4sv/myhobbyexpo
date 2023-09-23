@@ -217,7 +217,7 @@
             });
 
             // Add input validation for numeric fields in shell_scheme_sec and bacis_lot_sec
-            $("#barred_size_sec input, #shell_scheme_sec input, #bacis_lot_sec input").on("input", function() {
+            $("#barred_size_sec input, #shell_scheme_sec input, #bacis_lot_sec input, #contact_no").on("input", function() {
                 // Remove non-numeric characters using a regular expression
                 var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
                 $(this).val(sanitizedValue);
