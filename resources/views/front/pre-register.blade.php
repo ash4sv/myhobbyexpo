@@ -222,6 +222,21 @@
                 var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
                 $(this).val(sanitizedValue);
             });
+
+            // Define the maximum number
+            var maxNumber = 99999999999999999999; // Change this to your desired maximum number
+
+            // Add an event listener to the input field
+            $("#contact_no").on("input", function () {
+                var inputVal = $(this).val().replace(/\D/g, ''); // Remove non-numeric characters
+                if (inputVal.length > 0) {
+                    // If the input value is greater than the maximum number, truncate it
+                    if (parseInt(inputVal) > maxNumber) {
+                        inputVal = inputVal.substring(0, 10); // Keep only the first 10 digits
+                    }
+                    $(this).val(inputVal); // Set the input value
+                }
+            });
         });
     </script>
 @endpush
