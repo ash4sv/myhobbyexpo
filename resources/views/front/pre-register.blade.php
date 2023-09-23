@@ -118,22 +118,22 @@
                         </div>
 
                         <div class="mb-3" id="item_for_showoff">
-                            <label for="anw_item_for_sale" class="form-label">Explain your show-off: </label>
+                            <label for="anw_item_for_sale" class="form-label">Describe what you want to show-off in the box below: </label>
                             <textarea class="form-control @error('anw_item_for_showoff') is-invalid @enderror" name="anw_item_for_showoff" id="anw_item_for_showoff" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="item_for_sale">
-                            <label for="anw_item_for_sale" class="form-label">Explain your item for sale: </label>
+                            <label for="anw_item_for_sale" class="form-label">Describe your item for sale: </label>
                             <textarea class="form-control @error('anw_item_for_sale') is-invalid @enderror" name="anw_item_for_sale" id="anw_item_for_sale" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="activities_explain">
-                            <label for="anw_activities_explain" class="form-label">Explain your activities: </label>
+                            <label for="anw_activities_explain" class="form-label">Describe your activity, how many expected participant, etc. in the box below: </label>
                             <textarea class="form-control @error('anw_activities_explain') is-invalid @enderror" name="anw_activities_explain" id="anw_activities_explain" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="activities_pic">
-                            <label for="anw_activities_pic" class="form-label">Your activities photos: </label>
+                            <label for="anw_activities_pic" class="form-label">Attach activities photos: </label>
                             <input class="form-control @error('anw_activities_pic') is-invalid @enderror" type="file" name="anw_activities_pic[]" id="anw_activities_pic" multiple />
                             <div id="barredMsg" class="form-text">Please upload your activities events photos. Maximum 6 images and 2MB</div>
                         </div>
