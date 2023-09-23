@@ -1,7 +1,7 @@
 /*!
-FullCalendar v5.8.0
+FullCalendar v5.11.3
 Docs & License: https://fullcalendar.io/
-(c) 2021 Adam Shaw
+(c) 2022 Adam Shaw
 */
 var FullCalendarTimeGrid = (function (exports, common, daygrid) {
     'use strict';
@@ -153,18 +153,18 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                 var dateProfile = _this.props.dateProfile;
                 var range = dateProfile.renderRange;
                 var dayCnt = common.diffDays(range.start, range.end);
-                var navLinkAttrs = (options.navLinks && dayCnt === 1) // only do in day views (to avoid doing in week views that dont need it)
-                    ? { 'data-navlink': common.buildNavLinkData(range.start, 'week'), tabIndex: 0 }
+                var navLinkAttrs = (dayCnt === 1) // only do in day views (to avoid doing in week views that dont need it)
+                    ? common.buildNavLinkAttrs(_this.context, range.start, 'week')
                     : {};
                 if (options.weekNumbers && rowKey === 'day') {
-                    return (common.createElement(common.WeekNumberRoot, { date: range.start, defaultFormat: DEFAULT_WEEK_NUM_FORMAT }, function (rootElRef, classNames, innerElRef, innerContent) { return (common.createElement("th", { ref: rootElRef, className: [
+                    return (common.createElement(common.WeekNumberRoot, { date: range.start, defaultFormat: DEFAULT_WEEK_NUM_FORMAT }, function (rootElRef, classNames, innerElRef, innerContent) { return (common.createElement("th", { ref: rootElRef, "aria-hidden": true, className: [
                             'fc-timegrid-axis',
                             'fc-scrollgrid-shrink',
                         ].concat(classNames).join(' ') },
                         common.createElement("div", { className: "fc-timegrid-axis-frame fc-scrollgrid-shrink-frame fc-timegrid-axis-frame-liquid", style: { height: frameHeight } },
                             common.createElement("a", __assign({ ref: innerElRef, className: "fc-timegrid-axis-cushion fc-scrollgrid-shrink-cushion fc-scrollgrid-sync-inner" }, navLinkAttrs), innerContent)))); }));
                 }
-                return (common.createElement("th", { className: "fc-timegrid-axis" },
+                return (common.createElement("th", { "aria-hidden": true, className: "fc-timegrid-axis" },
                     common.createElement("div", { className: "fc-timegrid-axis-frame", style: { height: frameHeight } })));
             };
             /* Table Component Render Methods
@@ -179,7 +179,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                 };
                 return (
                 // TODO: make reusable hook. used in list view too
-                common.createElement(common.RenderHook, { hookProps: hookProps, classNames: options.allDayClassNames, content: options.allDayContent, defaultContent: renderAllDayInner, didMount: options.allDayDidMount, willUnmount: options.allDayWillUnmount }, function (rootElRef, classNames, innerElRef, innerContent) { return (common.createElement("td", { ref: rootElRef, className: [
+                common.createElement(common.RenderHook, { hookProps: hookProps, classNames: options.allDayClassNames, content: options.allDayContent, defaultContent: renderAllDayInner, didMount: options.allDayDidMount, willUnmount: options.allDayWillUnmount }, function (rootElRef, classNames, innerElRef, innerContent) { return (common.createElement("td", { ref: rootElRef, "aria-hidden": true, className: [
                         'fc-timegrid-axis',
                         'fc-scrollgrid-shrink',
                     ].concat(classNames).join(' ') },
@@ -219,7 +219,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                     type: 'body',
                     key: 'all-day-divider',
                     outerContent: ( // TODO: rename to cellContent so don't need to define <tr>?
-                    common.createElement("tr", { className: "fc-scrollgrid-section" },
+                    common.createElement("tr", { role: "presentation", className: "fc-scrollgrid-section" },
                         common.createElement("td", { className: 'fc-timegrid-divider ' + context.theme.getClass('tableCellShaded') }))),
                 });
             }
@@ -255,7 +255,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                     chunks: [
                         {
                             key: 'axis',
-                            rowContent: function (arg) { return (common.createElement("tr", null, _this.renderHeadAxis('day', arg.rowSyncHeights[0]))); },
+                            rowContent: function (arg) { return (common.createElement("tr", { role: "presentation" }, _this.renderHeadAxis('day', arg.rowSyncHeights[0]))); },
                         },
                         {
                             key: 'cols',
@@ -274,7 +274,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                     chunks: [
                         {
                             key: 'axis',
-                            rowContent: function (contentArg) { return (common.createElement("tr", null, _this.renderTableRowAxis(contentArg.rowSyncHeights[0]))); },
+                            rowContent: function (contentArg) { return (common.createElement("tr", { role: "presentation" }, _this.renderTableRowAxis(contentArg.rowSyncHeights[0]))); },
                         },
                         {
                             key: 'cols',
@@ -286,7 +286,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                     key: 'all-day-divider',
                     type: 'body',
                     outerContent: ( // TODO: rename to cellContent so don't need to define <tr>?
-                    common.createElement("tr", { className: "fc-scrollgrid-section" },
+                    common.createElement("tr", { role: "presentation", className: "fc-scrollgrid-section" },
                         common.createElement("td", { colSpan: 2, className: 'fc-timegrid-divider ' + context.theme.getClass('tableCellShaded') }))),
                 });
             }
@@ -302,7 +302,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                         content: function (arg) { return (
                         // TODO: make this now-indicator arrow more DRY with TimeColsContent
                         common.createElement("div", { className: "fc-timegrid-axis-chunk" },
-                            common.createElement("table", { style: { height: arg.expandRows ? arg.clientHeight : '' } },
+                            common.createElement("table", { "aria-hidden": true, style: { height: arg.expandRows ? arg.clientHeight : '' } },
                                 arg.tableColGroupNode,
                                 common.createElement("tbody", null,
                                     common.createElement(TimeBodyAxis, { slatMetas: slatMetas }))),
@@ -458,8 +458,8 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
         }
         TimeColsSlats.prototype.render = function () {
             var _a = this, props = _a.props, context = _a.context;
-            return (common.createElement("div", { className: "fc-timegrid-slots", ref: this.rootElRef },
-                common.createElement("table", { className: context.theme.getClass('table'), style: {
+            return (common.createElement("div", { ref: this.rootElRef, className: "fc-timegrid-slots" },
+                common.createElement("table", { "aria-hidden": true, className: context.theme.getClass('table'), style: {
                         minWidth: props.tableMinWidth,
                         width: props.clientWidth,
                         height: props.minHeight,
@@ -541,10 +541,10 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
         TimeColMoreLink.prototype.render = function () {
             var _this = this;
             var props = this.props;
-            return (common.createElement(common.MoreLinkRoot, { allDayDate: null, moreCnt: props.hiddenSegs.length, allSegs: props.hiddenSegs, hiddenSegs: props.hiddenSegs, alignmentElRef: this.rootElRef, defaultContent: renderMoreLinkInner, extraDateSpan: props.extraDateSpan, dateProfile: props.dateProfile, todayRange: props.todayRange, popoverContent: function () { return renderPlainFgSegs(props.hiddenSegs, props); } }, function (rootElRef, classNames, innerElRef, innerContent, handleClick) { return (common.createElement("a", { ref: function (el) {
+            return (common.createElement(common.MoreLinkRoot, { allDayDate: null, moreCnt: props.hiddenSegs.length, allSegs: props.hiddenSegs, hiddenSegs: props.hiddenSegs, alignmentElRef: this.rootElRef, defaultContent: renderMoreLinkInner, extraDateSpan: props.extraDateSpan, dateProfile: props.dateProfile, todayRange: props.todayRange, popoverContent: function () { return renderPlainFgSegs(props.hiddenSegs, props); } }, function (rootElRef, classNames, innerElRef, innerContent, handleClick, title, isExpanded, popoverId) { return (common.createElement("a", { ref: function (el) {
                     common.setRef(rootElRef, el);
                     common.setRef(_this.rootElRef, el);
-                }, className: ['fc-timegrid-more-link'].concat(classNames).join(' '), style: { top: props.top, bottom: props.bottom }, onClick: handleClick },
+                }, className: ['fc-timegrid-more-link'].concat(classNames).join(' '), style: { top: props.top, bottom: props.bottom }, onClick: handleClick, title: title, "aria-expanded": isExpanded, "aria-controls": popoverId },
                 common.createElement("div", { ref: innerElRef, className: "fc-timegrid-more-link-inner fc-sticky" }, innerContent))); }));
         };
         return TimeColMoreLink;
@@ -805,7 +805,7 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
                 (props.eventResize && props.eventResize.affectedInstances) ||
                 {};
             var sortedFgSegs = this.sortEventSegs(props.fgEventSegs, context.options.eventOrder);
-            return (common.createElement(common.DayCellRoot, { elRef: props.elRef, date: props.date, dateProfile: props.dateProfile, todayRange: props.todayRange, extraHookProps: props.extraHookProps }, function (rootElRef, classNames, dataAttrs) { return (common.createElement("td", __assign({ ref: rootElRef, className: ['fc-timegrid-col'].concat(classNames, props.extraClassNames || []).join(' ') }, dataAttrs, props.extraDataAttrs),
+            return (common.createElement(common.DayCellRoot, { elRef: props.elRef, date: props.date, dateProfile: props.dateProfile, todayRange: props.todayRange, extraHookProps: props.extraHookProps }, function (rootElRef, classNames, dataAttrs) { return (common.createElement("td", __assign({ ref: rootElRef, role: "gridcell", className: ['fc-timegrid-col'].concat(classNames, props.extraClassNames || []).join(' ') }, dataAttrs, props.extraDataAttrs),
                 common.createElement("div", { className: "fc-timegrid-col-frame" },
                     common.createElement("div", { className: "fc-timegrid-col-bg" },
                         _this.renderFillSegs(props.businessHourSegs, 'non-business'),
@@ -961,14 +961,14 @@ var FullCalendarTimeGrid = (function (exports, common, daygrid) {
             var eventDragByRow = this.splitEventDrag(props.eventDrag, colCnt);
             var eventResizeByRow = this.splitEventResize(props.eventResize, colCnt);
             return (common.createElement("div", { className: "fc-timegrid-cols", ref: this.rootElRef },
-                common.createElement("table", { style: {
+                common.createElement("table", { role: "presentation", style: {
                         minWidth: props.tableMinWidth,
                         width: props.clientWidth,
                     } },
                     props.tableColGroupNode,
-                    common.createElement("tbody", null,
-                        common.createElement("tr", null,
-                            props.axis && (common.createElement("td", { className: "fc-timegrid-col fc-timegrid-axis" },
+                    common.createElement("tbody", { role: "presentation" },
+                        common.createElement("tr", { role: "row" },
+                            props.axis && (common.createElement("td", { "aria-hidden": true, className: "fc-timegrid-col fc-timegrid-axis" },
                                 common.createElement("div", { className: "fc-timegrid-col-frame" },
                                     common.createElement("div", { className: "fc-timegrid-now-indicator-container" }, typeof nowIndicatorTop === 'number' && (common.createElement(common.NowIndicatorRoot, { isAxis: true, date: props.nowDate }, function (rootElRef, classNames, innerElRef, innerContent) { return (common.createElement("div", { ref: rootElRef, className: ['fc-timegrid-now-indicator-arrow'].concat(classNames).join(' '), style: { top: nowIndicatorTop } }, innerContent)); })))))),
                             props.cells.map(function (cell, i) { return (common.createElement(TimeCol, { key: cell.key, elRef: _this.cellElRefs.createRef(cell.key), dateProfile: props.dateProfile, date: cell.date, nowDate: props.nowDate, todayRange: props.todayRange, extraHookProps: cell.extraHookProps, extraDataAttrs: cell.extraDataAttrs, extraClassNames: cell.extraClassNames, extraDateSpan: cell.extraDateSpan, fgEventSegs: fgEventSegsByRow[i], bgEventSegs: bgEventSegsByRow[i], businessHourSegs: businessHourSegsByRow[i], nowIndicatorSegs: nowIndicatorSegsByRow[i], dateSelectionSegs: dateSelectionSegsByRow[i], eventDrag: eventDragByRow[i], eventResize: eventResizeByRow[i], slatCoords: props.slatCoords, eventSelection: props.eventSelection, forPrint: props.forPrint })); }))))));

@@ -1,7 +1,7 @@
 /*!
-FullCalendar v5.8.0
+FullCalendar v5.11.3
 Docs & License: https://fullcalendar.io/
-(c) 2021 Adam Shaw
+(c) 2022 Adam Shaw
 */
 var FullCalendarDayGrid = (function (exports, common) {
     'use strict';
@@ -48,10 +48,14 @@ var FullCalendarDayGrid = (function (exports, common) {
         return __assign.apply(this, arguments);
     };
 
-    function __spreadArray(to, from) {
-        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-            to[j] = from[i];
-        return to;
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+            if (ar || !(i in from)) {
+                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                ar[i] = from[i];
+            }
+        }
+        return to.concat(ar || from);
     }
 
     /* An abstract class for the daygrid views, as well as month view. Renders one or more rows of day cells.
@@ -190,11 +194,9 @@ var FullCalendarDayGrid = (function (exports, common) {
         }
         TableCellTop.prototype.render = function () {
             var props = this.props;
-            var navLinkAttrs = this.context.options.navLinks
-                ? { 'data-navlink': common.buildNavLinkData(props.date), tabIndex: 0 }
-                : {};
+            var navLinkAttrs = common.buildNavLinkAttrs(this.context, props.date);
             return (common.createElement(common.DayCellContent, { date: props.date, dateProfile: props.dateProfile, todayRange: props.todayRange, showDayNumber: props.showDayNumber, extraHookProps: props.extraHookProps, defaultContent: renderTopInner }, function (innerElRef, innerContent) { return ((innerContent || props.forceDayTop) && (common.createElement("div", { className: "fc-daygrid-day-top", ref: innerElRef },
-                common.createElement("a", __assign({ className: "fc-daygrid-day-number" }, navLinkAttrs), innerContent || common.createElement(common.Fragment, null, "\u00A0"))))); }));
+                common.createElement("a", __assign({ id: props.dayNumberId, className: "fc-daygrid-day-number" }, navLinkAttrs), innerContent || common.createElement(common.Fragment, null, "\u00A0"))))); }));
         };
         return TableCellTop;
     }(common.BaseComponent));
@@ -240,7 +242,7 @@ var FullCalendarDayGrid = (function (exports, common) {
             var timeFormat = context.options.eventTimeFormat || DEFAULT_TABLE_EVENT_TIME_FORMAT;
             var timeText = common.buildSegTimeText(props.seg, timeFormat, context, true, props.defaultDisplayEventEnd);
             return (common.createElement(common.EventRoot, { seg: props.seg, timeText: timeText, defaultContent: renderInnerContent, isDragging: props.isDragging, isResizing: false, isDateSelecting: false, isSelected: props.isSelected, isPast: props.isPast, isFuture: props.isFuture, isToday: props.isToday }, function (rootElRef, classNames, innerElRef, innerContent) { return ( // we don't use styles!
-            common.createElement("a", __assign({ className: ['fc-daygrid-event', 'fc-daygrid-dot-event'].concat(classNames).join(' '), ref: rootElRef }, getSegAnchorAttrs(props.seg)), innerContent)); }));
+            common.createElement("a", __assign({ className: ['fc-daygrid-event', 'fc-daygrid-dot-event'].concat(classNames).join(' '), ref: rootElRef }, common.getSegAnchorAttrs(props.seg, context)), innerContent)); }));
         };
         return TableListItemEvent;
     }(common.BaseComponent));
@@ -249,10 +251,6 @@ var FullCalendarDayGrid = (function (exports, common) {
             common.createElement("div", { className: "fc-daygrid-event-dot", style: { borderColor: innerProps.borderColor || innerProps.backgroundColor } }),
             innerProps.timeText && (common.createElement("div", { className: "fc-event-time" }, innerProps.timeText)),
             common.createElement("div", { className: "fc-event-title" }, innerProps.event.title || common.createElement(common.Fragment, null, "\u00A0"))));
-    }
-    function getSegAnchorAttrs(seg) {
-        var url = seg.eventRange.def.url;
-        return url ? { href: url } : {};
     }
 
     var TableCellMoreLink = /** @class */ (function (_super) {
@@ -275,7 +273,7 @@ var FullCalendarDayGrid = (function (exports, common) {
                                 visibility: isForcedInvisible[instanceId] ? 'hidden' : '',
                             } }, hasListItemDisplay(seg) ? (common.createElement(TableListItemEvent, __assign({ seg: seg, isDragging: false, isSelected: instanceId === props.eventSelection, defaultDisplayEventEnd: false }, common.getSegMeta(seg, props.todayRange)))) : (common.createElement(TableBlockEvent, __assign({ seg: seg, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: instanceId === props.eventSelection, defaultDisplayEventEnd: false }, common.getSegMeta(seg, props.todayRange))))));
                     })));
-                } }, function (rootElRef, classNames, innerElRef, innerContent, handleClick) { return (common.createElement("a", { ref: rootElRef, className: ['fc-daygrid-more-link'].concat(classNames).join(' '), onClick: handleClick }, innerContent)); }));
+                } }, function (rootElRef, classNames, innerElRef, innerContent, handleClick, title, isExpanded, popoverId) { return (common.createElement("a", __assign({ ref: rootElRef, className: ['fc-daygrid-more-link'].concat(classNames).join(' '), title: title, "aria-expanded": isExpanded, "aria-controls": popoverId }, common.createAriaClickAttrs(handleClick)), innerContent)); }));
         };
         return TableCellMoreLink;
     }(common.BaseComponent));
@@ -298,6 +296,9 @@ var FullCalendarDayGrid = (function (exports, common) {
         function TableCell() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.rootElRef = common.createRef();
+            _this.state = {
+                dayNumberId: common.getUniqueDomId(),
+            };
             _this.handleRootEl = function (el) {
                 common.setRef(_this.rootElRef, el);
                 common.setRef(_this.props.elRef, el);
@@ -305,16 +306,13 @@ var FullCalendarDayGrid = (function (exports, common) {
             return _this;
         }
         TableCell.prototype.render = function () {
-            var _a = this, props = _a.props, context = _a.context, rootElRef = _a.rootElRef;
-            var options = context.options;
+            var _a = this, context = _a.context, props = _a.props, state = _a.state, rootElRef = _a.rootElRef;
             var date = props.date, dateProfile = props.dateProfile;
-            var navLinkAttrs = options.navLinks
-                ? { 'data-navlink': common.buildNavLinkData(date, 'week'), tabIndex: 0 }
-                : {};
-            return (common.createElement(common.DayCellRoot, { date: date, dateProfile: dateProfile, todayRange: props.todayRange, showDayNumber: props.showDayNumber, extraHookProps: props.extraHookProps, elRef: this.handleRootEl }, function (dayElRef, dayClassNames, rootDataAttrs, isDisabled) { return (common.createElement("td", __assign({ ref: dayElRef, className: ['fc-daygrid-day'].concat(dayClassNames, props.extraClassNames || []).join(' ') }, rootDataAttrs, props.extraDataAttrs),
+            var navLinkAttrs = common.buildNavLinkAttrs(context, date, 'week');
+            return (common.createElement(common.DayCellRoot, { date: date, dateProfile: dateProfile, todayRange: props.todayRange, showDayNumber: props.showDayNumber, extraHookProps: props.extraHookProps, elRef: this.handleRootEl }, function (dayElRef, dayClassNames, rootDataAttrs, isDisabled) { return (common.createElement("td", __assign({ ref: dayElRef, role: "gridcell", className: ['fc-daygrid-day'].concat(dayClassNames, props.extraClassNames || []).join(' ') }, rootDataAttrs, props.extraDataAttrs, (props.showDayNumber ? { 'aria-labelledby': state.dayNumberId } : {})),
                 common.createElement("div", { className: "fc-daygrid-day-frame fc-scrollgrid-sync-inner", ref: props.innerElRef /* different from hook system! RENAME */ },
                     props.showWeekNumber && (common.createElement(common.WeekNumberRoot, { date: date, defaultFormat: DEFAULT_WEEK_NUM_FORMAT }, function (weekElRef, weekClassNames, innerElRef, innerContent) { return (common.createElement("a", __assign({ ref: weekElRef, className: ['fc-daygrid-week-number'].concat(weekClassNames).join(' ') }, navLinkAttrs), innerContent)); })),
-                    !isDisabled && (common.createElement(TableCellTop, { date: date, dateProfile: dateProfile, showDayNumber: props.showDayNumber, forceDayTop: props.forceDayTop, todayRange: props.todayRange, extraHookProps: props.extraHookProps })),
+                    !isDisabled && (common.createElement(TableCellTop, { date: date, dateProfile: dateProfile, showDayNumber: props.showDayNumber, dayNumberId: state.dayNumberId, forceDayTop: props.forceDayTop, todayRange: props.todayRange, extraHookProps: props.extraHookProps })),
                     common.createElement("div", { className: "fc-daygrid-day-events", ref: props.fgContentElRef },
                         props.fgContent,
                         common.createElement("div", { className: "fc-daygrid-day-bottom", style: { marginTop: props.moreMarginTop } },
@@ -437,7 +435,7 @@ var FullCalendarDayGrid = (function (exports, common) {
                     seg: resliceSeg(seg, col, col + 1, cells),
                     isVisible: true,
                     isAbsolute: false,
-                    absoluteTop: 0,
+                    absoluteTop: rect.levelCoord,
                     marginTop: rect.levelCoord - currentHeight,
                 });
                 currentHeight = rect.levelCoord + rect.thickness;
@@ -470,7 +468,7 @@ var FullCalendarDayGrid = (function (exports, common) {
                         seg: resliceSeg(seg, rect.span.start, rect.span.end, cells),
                         isVisible: true,
                         isAbsolute: false,
-                        absoluteTop: 0,
+                        absoluteTop: rect.levelCoord,
                         marginTop: currentMarginTop, // claim the margin
                     });
                     currentMarginTop = 0;
@@ -535,25 +533,21 @@ var FullCalendarDayGrid = (function (exports, common) {
         };
         DayGridSegHierarchy.prototype.handleInvalidInsertion = function (insertion, entry, hiddenEntries) {
             var _a = this, entriesByLevel = _a.entriesByLevel, forceHidden = _a.forceHidden;
-            var touchingLevel = insertion.touchingLevel;
-            if (this.hiddenConsumes && touchingLevel >= 0) {
-                for (var lateral = insertion.lateralStart; lateral < insertion.lateralEnd; lateral += 1) {
-                    var leadingEntry = entriesByLevel[touchingLevel][lateral];
+            var touchingEntry = insertion.touchingEntry, touchingLevel = insertion.touchingLevel, touchingLateral = insertion.touchingLateral;
+            if (this.hiddenConsumes && touchingEntry) {
+                var touchingEntryId = common.buildEntryKey(touchingEntry);
+                // if not already hidden
+                if (!forceHidden[touchingEntryId]) {
                     if (this.allowReslicing) {
-                        var placeholderEntry = __assign(__assign({}, leadingEntry), { span: common.intersectSpans(leadingEntry.span, entry.span) });
+                        var placeholderEntry = __assign(__assign({}, touchingEntry), { span: common.intersectSpans(touchingEntry.span, entry.span) });
                         var placeholderEntryId = common.buildEntryKey(placeholderEntry);
-                        if (!forceHidden[placeholderEntryId]) { // if not already hidden
-                            forceHidden[placeholderEntryId] = true;
-                            entriesByLevel[touchingLevel][lateral] = placeholderEntry; // replace leadingEntry with our placeholder
-                            this.splitEntry(leadingEntry, entry, hiddenEntries); // split up the leadingEntry, reinsert it
-                        }
+                        forceHidden[placeholderEntryId] = true;
+                        entriesByLevel[touchingLevel][touchingLateral] = placeholderEntry; // replace touchingEntry with our placeholder
+                        this.splitEntry(touchingEntry, entry, hiddenEntries); // split up the touchingEntry, reinsert it
                     }
                     else {
-                        var placeholderEntryId = common.buildEntryKey(leadingEntry);
-                        if (!forceHidden[placeholderEntryId]) {
-                            forceHidden[placeholderEntryId] = true;
-                            hiddenEntries.push(leadingEntry);
-                        }
+                        forceHidden[touchingEntryId] = true;
+                        hiddenEntries.push(touchingEntry);
                     }
                 }
             }
@@ -592,7 +586,7 @@ var FullCalendarDayGrid = (function (exports, common) {
              (props.eventDrag && props.eventDrag.affectedInstances) ||
                 (props.eventResize && props.eventResize.affectedInstances) ||
                 {};
-            return (common.createElement("tr", { ref: this.rootElRef },
+            return (common.createElement("tr", { ref: this.rootElRef, role: "row" },
                 props.renderIntro && props.renderIntro(),
                 props.cells.map(function (cell, col) {
                     var normalFgNodes = _this.renderFgSegs(col, props.forPrint ? singleColPlacements[col] : multiColPlacements[col], props.todayRange, isForcedInvisible);
@@ -710,9 +704,14 @@ var FullCalendarDayGrid = (function (exports, common) {
                         });
                     }
                 }
+                var oldInstanceHeights = this.state.eventInstanceHeights;
+                var newInstanceHeights = this.queryEventInstanceHeights();
                 var limitByContentHeight = props.dayMaxEvents === true || props.dayMaxEventRows === true;
-                this.setState({
-                    eventInstanceHeights: this.queryEventInstanceHeights(),
+                this.safeSetState({
+                    // HACK to prevent oscillations of events being shown/hidden from max-event-rows
+                    // Essentially, once you compute an element's height, never null-out.
+                    // TODO: always display all events, as visibility:hidden?
+                    eventInstanceHeights: __assign(__assign({}, oldInstanceHeights), newInstanceHeights),
                     maxContentHeight: limitByContentHeight ? this.computeMaxContentHeight() : null,
                 });
             }
@@ -765,7 +764,7 @@ var FullCalendarDayGrid = (function (exports, common) {
                 topsByInstanceId[placement.seg.eventRange.instance.instanceId] = placement.absoluteTop;
             }
         }
-        return colPlacements;
+        return topsByInstanceId;
     }
 
     var Table = /** @class */ (function (_super) {
@@ -824,13 +823,13 @@ var FullCalendarDayGrid = (function (exports, common) {
                     minWidth: props.tableMinWidth,
                 } },
                 common.createElement(common.NowTimer, { unit: "day" }, function (nowDate, todayRange) { return (common.createElement(common.Fragment, null,
-                    common.createElement("table", { className: "fc-scrollgrid-sync-table", style: {
+                    common.createElement("table", { role: "presentation", className: "fc-scrollgrid-sync-table", style: {
                             width: props.clientWidth,
                             minWidth: props.tableMinWidth,
                             height: expandRows ? props.clientHeight : '',
                         } },
                         props.colGroupNode,
-                        common.createElement("tbody", null, props.cells.map(function (cells, row) { return (common.createElement(TableRow, { ref: _this.rowRefs.createRef(row), key: cells.length
+                        common.createElement("tbody", { role: "presentation" }, props.cells.map(function (cells, row) { return (common.createElement(TableRow, { ref: _this.rowRefs.createRef(row), key: cells.length
                                 ? cells[0].date.toISOString() /* best? or put key on cell? or use diff formatter? */
                                 : row // in case there are no cells (like when resource view is loading)
                             , showDayNumbers: rowCnt > 1, showWeekNumbers: props.showWeekNumbers, todayRange: todayRange, dateProfile: dateProfile, cells: cells, renderIntro: props.renderRowIntro, businessHourSegs: businessHourSegsByRow[row], eventSelection: props.eventSelection, bgEventSegs: bgEventSegsByRow[row].filter(isSegAllDay) /* hack */, fgEventSegs: fgEventSegsByRow[row], dateSelectionSegs: dateSelectionSegsByRow[row], eventDrag: eventDragByRow[row], eventResize: eventResizeByRow[row], dayMaxEvents: dayMaxEvents, dayMaxEventRows: dayMaxEventRows, clientWidth: props.clientWidth, clientHeight: props.clientHeight, forPrint: props.forPrint })); }))))); })));

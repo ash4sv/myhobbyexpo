@@ -15,8 +15,13 @@ class PreRegisterController extends Controller
      */
     public function index()
     {
+        $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
+        $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
+        $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
         return view($this->view.'index', [
-            'registers' => PreRegistration::all()
+            'selling_vendor' => $selling_vendor,
+            'hobby_activity' => $hobby_activity,
+            'hobby_showoff' => $hobby_showoff,
         ]);
     }
 

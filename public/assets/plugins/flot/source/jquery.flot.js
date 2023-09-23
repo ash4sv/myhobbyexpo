@@ -130,7 +130,7 @@ function setRange(axis,autoScale){var min=typeof axis.options.min==='number'?axi
 min=(min!=null?min:-1)+(plotOffset.below||0);max=(max!=null?max:1)+(plotOffset.above||0);if(min>max){var tmp=min;min=max;max=tmp;axis.options.offset={above:0,below:0};}
 axis.min=$.plot.saturated.saturate(min);axis.max=$.plot.saturated.saturate(max);}
 function computeValuePrecision(min,max,direction,ticks,tickDecimals){var noTicks=fixupNumberOfTicks(direction,surface,ticks);var delta=$.plot.saturated.delta(min,max,noTicks),dec=-Math.floor(Math.log(delta)/Math.LN10);if(tickDecimals&&dec>tickDecimals){dec=tickDecimals;}
-var magn=parseFloat('1e'+(-dec)),norm=delta/magn;if(norm>2.25&&norm<3&&(dec+1)<=tickDecimals){++dec;}
+var magn=parseFloat('1e'+(-dec)),norm=delta/magn;if(norm>2.25&&norm<3&&(tickDecimals==null||(dec+1)<=tickDecimals)){++dec;}
 return isFinite(dec)?dec:0;};function computeTickSize(min,max,noTicks,tickDecimals){var delta=$.plot.saturated.delta(min,max,noTicks),dec=-Math.floor(Math.log(delta)/Math.LN10);if(tickDecimals&&dec>tickDecimals){dec=tickDecimals;}
 var magn=parseFloat('1e'+(-dec)),norm=delta/magn,size;if(norm<1.5){size=1;}else if(norm<3){size=2;if(norm>2.25&&(tickDecimals==null||(dec+1)<=tickDecimals)){size=2.5;}}else if(norm<7.5){size=5;}else{size=10;}
 size*=magn;return size;}
