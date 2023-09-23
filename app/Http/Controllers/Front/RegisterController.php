@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'anw_item_for_sale' => '',
             'anw_item_for_showoff' => '',
             'anw_activities_explain' => '',
-            'anw_activities_pic' => 'required|array|max:6',
+            'anw_activities_pic' => 'array|max:6',
             'anw_activities_pic.*' => 'image|mimetypes:image/jpeg,image/png,image/jpg,image/gif|max:2048',
             'become_sponsors' => 'required',
         ]);
