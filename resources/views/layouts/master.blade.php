@@ -13,8 +13,11 @@
     <link href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 
 </head>
@@ -64,17 +67,28 @@
 @stack('script')
 
 <script>
-    $('.data-table').DataTable({
-        responsive: true,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    var options = {
+        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
         buttons: [
-            { extend: 'copy', className: 'btn-sm' },
+            /*{ extend: 'copy', className: 'btn-sm' },*/
             { extend: 'csv', className: 'btn-sm' },
             { extend: 'excel', className: 'btn-sm' },
             /*{ extend: 'pdf', className: 'btn-sm' },*/
             /*{ extend: 'print', className: 'btn-sm' }*/
         ],
-    });
+        responsive: true,
+        colReorder: true,
+        keys: true,
+        rowReorder: true,
+        select: true
+    };
+
+    if ($(window).width() <= 767) {
+        options.rowReorder = false;
+        options.colReorder = false;
+    }
+
+    $('.data-table').DataTable(options);
 </script>
 
 </body>

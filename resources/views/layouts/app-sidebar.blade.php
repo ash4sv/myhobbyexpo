@@ -62,7 +62,34 @@
                 </a>
             </div>
 
-            <div class="menu-item has-sub">
+            {{--<div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="menu-text">Pre-Register</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="{{ route('apps.pre-register.sellingvendor') }}" class="menu-link">
+                            <div class="menu-text">Selling Vendor</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="{{ route('apps.pre-register.hobbyactivity') }}" class="menu-link">
+                            <div class="menu-text">Hobby Activity</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="{{ route('apps.pre-register.hobbyshowoff') }}" class="menu-link">
+                            <div class="menu-text">Hobby Show Off</div>
+                        </a>
+                    </div>
+                </div>
+            </div>--}}
+
+            {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -104,9 +131,9 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
-            <div class="menu-item has-sub">
+            {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -138,7 +165,7 @@
                     <div class="menu-item"><a href="javascript:;" class="menu-link"><div class="menu-text">Menu 1.2</div></a></div>
                     <div class="menu-item"><a href="javascript:;" class="menu-link"><div class="menu-text">Menu 1.3</div></a></div>
                 </div>
-            </div>
+            </div>--}}
 
             <div class="menu-item d-flex">
                 <a href="javascript:;" class="app-sidebar-minify-btn ms-auto" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
