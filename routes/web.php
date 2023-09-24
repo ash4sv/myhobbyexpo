@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\ExhibitController;
+use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
+use App\Http\Controllers\Apps\RolesController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
@@ -65,6 +67,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                'prefix'  => 'acl',
                'as'     => 'acl.'
            ], function (){
+               Route::resource('permissions', PermissionsController::class);
+               Route::resource('roles', RolesController::class);
                Route::resource('users', UserController::class);
            });
            Route::group([

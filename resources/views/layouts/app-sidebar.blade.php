@@ -135,7 +135,7 @@
 
             <div class="menu-header">Systems</div>
 
-            <div class="menu-item has-sub">
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'acl') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -145,17 +145,17 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{ route('apps.acl.permissions.index') }}" class="menu-link">
                             <div class="menu-text">Permissions</div>
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{ route('apps.acl.roles.index') }}" class="menu-link">
                             <div class="menu-text">Roles</div>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
+                    <div class="menu-item {{ (request()->segment(2) == 'users') ? 'active' : '' }}">
+                        <a href="{{ route('apps.acl.users.index') }}" class="menu-link">
                             <div class="menu-text">Users</div>
                         </a>
                     </div>

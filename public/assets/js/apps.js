@@ -35,8 +35,8 @@ var Apps = {
     deleteConfirm: function(removeID) {
         Swal.fire({
             icon: 'warning',
-            title: 'Do you want to delete this?',
-            text: '',
+            title: 'Delete this?',
+            text: 'Are you sure you want to delete?',
             showCancelButton: true,
             confirmButtonText: 'Delete',
             confirmButtonColor: '#e3342f',

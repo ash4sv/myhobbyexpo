@@ -3,25 +3,18 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PermissionsController extends Controller
 {
-    private string $view = 'apps.acl.user.';
+    private string $view = 'apps.acl.permission.';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
-        return view($this->view.'index', [
-            'users' => User::all(),
-        ]);
+        return view($this->view.'index');
     }
 
     /**
@@ -29,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view($this->view.'create');
+        //
     }
 
     /**
@@ -45,7 +38,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return view($this->view.'show');
+        //
     }
 
     /**
@@ -53,7 +46,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit');
+        //
     }
 
     /**

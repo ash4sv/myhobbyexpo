@@ -54,7 +54,7 @@
                         <td>
                             <a href="{{ route('apps.preregister.pre-register.show', $item) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('apps.preregister.pre-register.edit', $item) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ route('apps.preregister.pre-register.destroy', $item->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" onclick="event.preventDefault();"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('apps.preregister.pre-register.destroy', $item->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 @endforeach
