@@ -20,7 +20,7 @@ class AppsController extends Controller
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
-        $sponsors = PreRegistration::Where('become_sponsors', '=', 3)->get();
+        $sponsors = PreRegistration::Where('become_sponsors', '=', 1)->get();
         return view('apps.index', [
             'selling_vendor' => $selling_vendor,
             'hobby_activity' => $hobby_activity,
