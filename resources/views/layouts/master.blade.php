@@ -44,6 +44,8 @@
 
 <script src="{{ asset('assets/js/vendor.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
+
+<script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 <script src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
@@ -61,6 +63,7 @@
 <script src="{{ asset('assets/plugins/pdfmake/build/vfs_fonts.js') }}"></script>
 <script src="{{ asset('assets/plugins/jszip/dist/jszip.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+
 <script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/apps.js') }}"></script>
 

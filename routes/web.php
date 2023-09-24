@@ -3,6 +3,7 @@
 use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\ExhibitController;
 use App\Http\Controllers\Apps\PreRegisterController;
+use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,12 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::get('selling-vendor', [AppsController::class, 'sellingVendor'])->name('sellingvendor');
                Route::get('hobby-activity', [AppsController::class, 'hobbyActivity'])->name('hobbyactivity');
                Route::get('hobby-showoff', [AppsController::class, 'hobbyShowoff'])->name('hobbyshowoff');
+           });
+           Route::group([
+               'prefix'  => 'acl',
+               'as'     => 'acl.'
+           ], function (){
+               Route::resource('users', UserController::class);
            });
            Route::group([
                'prefix'  => 'events',

@@ -1,7 +1,7 @@
 var Apps = {
     init: function () {
-        Apps.datatable();
-        Apps.select2('.default-select2');
+        /*Apps.datatable();*/
+        /*Apps.select2('.default-select2');*/
         /*Apps.summernote('.summernote');*/
         /*Apps.switchery('switchery-default');*/
     },
@@ -50,8 +50,8 @@ var Apps = {
     logoutConfirm: function(removeID) {
         Swal.fire({
             icon: 'warning',
-            title: 'Do you confirm to logout?',
-            text: '',
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
             showCancelButton: true,
             confirmButtonText: 'Yes, Log Out',
             confirmButtonColor: '#e3342f',
