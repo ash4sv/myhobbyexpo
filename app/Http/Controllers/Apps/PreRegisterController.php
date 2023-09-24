@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\PreRegistration;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PreRegisterController extends Controller
 {
@@ -78,6 +79,9 @@ class PreRegisterController extends Controller
      */
     public function destroy(string $id)
     {
-        return $id;
+        $registered = PreRegistration::findOrFail($id);
+        $registered->delete();
+        Alert::success('Deleted!', 'Registered successfully deleted!');
+        return redirect()->back();
     }
 }

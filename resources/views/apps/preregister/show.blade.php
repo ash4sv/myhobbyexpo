@@ -39,17 +39,23 @@
                 {{ $registered->email }} <br>
             @endisset
             @isset($registered->selection_in)
-                {{ $registered->selection_in }} <br>
+                @if($registered->selection_in == 1)
+                    Selling Vendor
+                @elseif($registered->selection_in == 2)
+                    Hobby Activity
+                @elseif($registered->selection_in == 3)
+                    Hobby Show-off
+                @endif
             @endisset
-            @isset($registered->bare_size)
+            @isset(json_decode($registered->bare_size)->length)
                 Length: {{ json_decode($registered->bare_size)->length }} x
                 Width: {{ json_decode($registered->bare_size)->width }} <br>
             @endisset
             @isset($registered->shell_scheme)
-                {{ $registered->shell_scheme }} <br>
+                Shell Scheme: {{ $registered->shell_scheme }} Lot<br>
             @endisset
             @isset($registered->basic_lot)
-                {{ $registered->basic_lot }} <br>
+                Basic Lot: {{ $registered->basic_lot }} Lot<br>
             @endisset
             @isset($registered->item_for_sale)
                 {{ $registered->item_for_sale }} <br>
@@ -61,9 +67,12 @@
                 {{ $registered->activity }} <br>
             @endisset
 
-            <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $registered->become_sponsors == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
-            <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $registered->become_sponsors == 1 ? 'Yes' : 'No' }}
-            </span>
+            @isset($registered->become_sponsors)
+                Become Sponsors
+                <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $registered->become_sponsors == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
+                <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $registered->become_sponsors == 1 ? 'Yes' : 'No' }}
+                </span>
+            @endisset
 
             @isset($registered->activity_pic)
                 @foreach(json_decode($registered->activity_pic) as $picture)

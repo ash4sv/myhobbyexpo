@@ -686,24 +686,24 @@
                 </div>
 
                 <div class="col-lg-6 form-col" data-animation="true" data-animation-type="animate__fadeInRight">
-                    <form action="#" method="POST" class="form-horizontal">
+                    <form action="{{ route('web.submit') }}" method="POST" class="form-horizontal">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Name <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" name="contact_name" id="contact_name" value="{{ old('contact_name') }}" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Email <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" />
+                                <input type="email" class="form-control" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Message <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <textarea class="form-control" rows="10"></textarea>
+                                <textarea class="form-control" rows="10" name="contact_message" id="contact_message">{{ old('contact_message') }}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">

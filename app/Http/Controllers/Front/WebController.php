@@ -13,4 +13,9 @@ class WebController extends Controller
     {
         return view($this->view.'welcome');
     }
+
+    public function submitContact(Request $request)
+    {
+        return $request;
+    }
 }

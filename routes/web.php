@@ -4,6 +4,7 @@ use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\ExhibitController;
 use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Front\RegisterController;
+use App\Http\Controllers\Front\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'as' => 'web.',
     ], function (){
-    Route::get('/', [\App\Http\Controllers\Front\WebController::class, 'welcome'])->name('welcome');
+    Route::get('/', [WebController::class, 'welcome'])->name('welcome');
+    Route::post('contactus', [WebController::class, 'submitContact'])->name('submit');
 });
 
 Route::domain('register.' . env('APP_URL'))->group(function(){
