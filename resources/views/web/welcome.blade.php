@@ -171,7 +171,9 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/images/layout-1@2x-50.jpg') }}" alt="MHE Hall A" /></a>
+                            <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" data-caption="MHE Hall A">
+                                <img src="{{ asset('assets/images/layout-1@2x-50.jpg') }}" alt="MHE Hall A" />
+                            </a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">Layout MHE Hall A</span>
@@ -182,7 +184,9 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/images/layout-2@2x-50.jpg') }}" alt="MHE Hall B" /></a>
+                            <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-2@4x-50.jpg') }}" data-caption="MHE Hall B">
+                                <img src="{{ asset('assets/images/layout-2@2x-50.jpg') }}" alt="MHE Hall B" />
+                            </a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">Layout MHE Hall B</span>
@@ -193,7 +197,9 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/images/layout-3@2x-50.jpg') }}" alt="MHE Hall C" /></a>
+                            <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-3@4x-50.jpg') }}" data-caption="MHE Hall C">
+                                <img src="{{ asset('assets/images/layout-3@2x-50.jpg') }}" alt="MHE Hall C" />
+                            </a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">Layout MHE Hall C</span>
@@ -204,7 +210,9 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/images/layout-4@2x-50.jpg') }}" alt="MHE Hall D2" /></a>
+                            <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-4@4x-50.jpg') }}" data-caption="MHE Hall D2">
+                                <img src="{{ asset('assets/images/layout-4@2x-50.jpg') }}" alt="MHE Hall D2" />
+                            </a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">Layout MHE Hall D2</span>

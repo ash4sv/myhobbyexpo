@@ -62,7 +62,7 @@
         </div>
         <div class="col-md-3">
             <!-- begin widget-stats -->
-            <div class="widget widget-stats bg-teal mb-10px">
+            <div class="widget widget-stats bg-orange mb-10px">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">Interested Sponsors</div>
