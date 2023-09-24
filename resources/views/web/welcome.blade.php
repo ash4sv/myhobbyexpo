@@ -162,11 +162,11 @@
 
     <div id="layout" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
-            {{--<div class="row">
+            <div class="row">
                 <div class="col-md-4">
-                    <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="" class="img-fluid mb-5">
+                    <img src="{{ asset('assets/images/layout-floor-plan-title@2x.png') }}" alt="" class="img-fluid h-100px mb-5">
                 </div>
-            </div>--}}
+            </div>
             <div class="row row-space-10">
                 <div class="col-lg-6 col-md-6">
                     <div class="work mb-30px">
