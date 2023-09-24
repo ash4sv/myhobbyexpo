@@ -757,19 +757,37 @@
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Name <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="contact_name" id="contact_name" value="{{ old('contact_name') }}" />
+                                <input type="text" class="form-control @error('contact_name') is-invalid @enderror" name="contact_name" id="contact_name" value="{{ old('contact_name') }}" />
+                                @error('contact_name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-form-label col-lg-3 text-lg-right text-white">Phone <span class="text-indigo">*</span></label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control @error('contact_phone') is-invalid @enderror" name="contact_phone" id="contact_phone" value="{{ old('contact_phone') }}" />
+                                @error('contact_phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Email <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <input type="email" class="form-control" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" />
+                                <input type="email" class="form-control @error('contact_email') is-invalid @enderror" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" />
+                                @error('contact_email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-form-label col-lg-3 text-lg-right text-white">Message <span class="text-indigo">*</span></label>
                             <div class="col-lg-9">
-                                <textarea class="form-control" rows="10" name="contact_message" id="contact_message">{{ old('contact_message') }}</textarea>
+                                <textarea class="form-control @error('contact_message') is-invalid @enderror" rows="10" name="contact_message" id="contact_message">{{ old('contact_message') }}</textarea>
+                                @error('contact_message')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">

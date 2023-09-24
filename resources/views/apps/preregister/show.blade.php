@@ -40,11 +40,11 @@
             @endisset
             @isset($registered->selection_in)
                 @if($registered->selection_in == 1)
-                    Selling Vendor
+                    Selling Vendor <br>
                 @elseif($registered->selection_in == 2)
-                    Hobby Activity
+                    Hobby Activity <br>
                 @elseif($registered->selection_in == 3)
-                    Hobby Show-off
+                    Hobby Show-off <br>
                 @endif
             @endisset
             @isset(json_decode($registered->bare_size)->length)
