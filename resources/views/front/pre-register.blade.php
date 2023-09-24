@@ -214,9 +214,6 @@
                     // User selected "Bobby Show Off Only"
                     $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic, .hobby_label").show();
                 }
-
-                // Clear data already set into fields
-                $("input[type='text'], textarea").val('');
             });
 
             // Add input validation for numeric fields in shell_scheme_sec and bacis_lot_sec

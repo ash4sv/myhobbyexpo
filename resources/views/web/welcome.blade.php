@@ -812,6 +812,7 @@
 <script src="{{ asset('assets/js/one-page-parallax/vendor.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
 <script src="{{ asset('assets/js/one-page-parallax/app.min.js') }}" type="text/javascript"></script>
+@include('sweetalert::alert')
 
 <script>
     $('.accordion-toggle').click(function(e) {
