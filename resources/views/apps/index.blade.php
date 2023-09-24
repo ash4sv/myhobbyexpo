@@ -14,6 +14,71 @@
 
     <h1 class="page-header">@yield('page-header') {{--<small>header small text goes here...</small>--}}</h1>
 
+    <div class="row">
+        <div class="col-md-3">
+            <!-- begin widget-stats -->
+            <div class="widget widget-stats bg-indigo mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Selling Vendor</div>
+                    <div class="stats-number">{{ count($selling_vendor) }}</div>
+                    {{--<div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>--}}
+                </div>
+            </div>
+            <!-- end widget-stats -->
+        </div>
+        <div class="col-md-3">
+            <!-- begin widget-stats -->
+            <div class="widget widget-stats bg-purple mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Hobby Activity</div>
+                    <div class="stats-number">{{ count($hobby_activity) }}</div>
+                    {{--<div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>--}}
+                </div>
+            </div>
+            <!-- end widget-stats -->
+        </div>
+        <div class="col-md-3">
+            <!-- begin widget-stats -->
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Hobby Show-off</div>
+                    <div class="stats-number">{{ count($hobby_showoff) }}</div>
+                    {{--<div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>--}}
+                </div>
+            </div>
+            <!-- end widget-stats -->
+        </div>
+        <div class="col-md-3">
+            <!-- begin widget-stats -->
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Interested Sponsors</div>
+                    <div class="stats-number">{{ count($sponsors) }}</div>
+                    {{--<div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>--}}
+                </div>
+            </div>
+            <!-- end widget-stats -->
+        </div>
+
+
+    </div>
+
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <h4 class="panel-title">@yield('page-title')</h4>

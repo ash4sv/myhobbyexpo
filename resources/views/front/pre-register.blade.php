@@ -93,7 +93,7 @@
                         <div class="mb-3" id="shell_scheme_sec">
                             <label for="shell_scheme" class="form-label">Shell Scheme (3.0m x 3.0m): </label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="shell_scheme" placeholder="">
+                                <input type="text" class="form-control" name="shell_scheme" id="shell_scheme" placeholder="">
                                 <span class="input-group-text input-group-addon">Lot</span>
                             </div>
                             <div id="barredMsg" class="form-text">Came with 1 Unit Table, 2 Unit Chair, SSO 13Amp</div>
@@ -102,7 +102,7 @@
                         <div class="mb-3" id="bacis_lot_sec">
                             <label for="basic_lot" class="form-label">Basic Lot (2.0m  x 2.5m): </label>  {{--Only Table, Chair, and SSO 13 Amp--}}
                             <div class="input-group">
-                                <input type="text" class="form-control" name="basic_lot" placeholder="">
+                                <input type="text" class="form-control" name="basic_lot" id="basic_lot" placeholder="">
                                 <span class="input-group-text input-group-addon">Lot</span>
                             </div>
                             <div id="barredMsg" class="form-text">Only 1 Unit Table, 2 Unit Chair, SSO 13Amp</div>
@@ -118,23 +118,23 @@
                         </div>
 
                         <div class="mb-3" id="item_for_showoff">
-                            <label for="anw_item_for_sale" class="form-label">Describe what you want to show-off in the box below: </label>
+                            <label for="anw_item_for_sale" class="form-label">Describe what you want to show-off in the box below: <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('anw_item_for_showoff') is-invalid @enderror" name="anw_item_for_showoff" id="anw_item_for_showoff" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="item_for_sale">
-                            <label for="anw_item_for_sale" class="form-label">Describe your item for sale: </label>
+                            <label for="anw_item_for_sale" class="form-label">Describe your item for sale: <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('anw_item_for_sale') is-invalid @enderror" name="anw_item_for_sale" id="anw_item_for_sale" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="activities_explain">
-                            <label for="anw_activities_explain" class="form-label">Describe your activity, how many expected participant, etc. in the box below: </label>
+                            <label for="anw_activities_explain" class="form-label">Describe your activity, how many expected participant, etc. in the box below: <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('anw_activities_explain') is-invalid @enderror" name="anw_activities_explain" id="anw_activities_explain" cols="30" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3" id="activities_pic">
-                            <label for="anw_activities_pic" class="form-label activity_label">Attach activities photos: </label>
-                            <label for="anw_activities_pic" class="form-label hobby_label">Attach Hobby Group TT, Gathering photos: </label>
+                            <label for="anw_activities_pic" class="form-label activity_label">Attach activities photos: <span class="text-danger">*</span></label>
+                            <label for="anw_activities_pic" class="form-label hobby_label">Attach Hobby Group TT, Gathering photos: <span class="text-danger">*</span></label>
                             <input class="form-control @error('anw_activities_pic') is-invalid @enderror" type="file" name="anw_activities_pic[]" id="anw_activities_pic" multiple />
                             <div id="barredMsg" class="form-text">Please upload your activities events photos. Maximum 6 images and 2MB</div>
                         </div>
@@ -196,11 +196,11 @@
             $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
 
             // Attach a change event listener to the "Selection" dropdown
-            $("#selection_in").change(function() {
+            $("#selection_in").change(function () {
                 // Get the selected option value
                 var selectedValue = $(this).val();
 
-                // Hide all sections first
+                // Hide all sections first and remove 'required' attribute
                 $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
 
                 // Show sections based on the selected value
@@ -214,6 +214,9 @@
                     // User selected "Bobby Show Off Only"
                     $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic, .hobby_label").show();
                 }
+
+                // Clear data already set into fields
+                $("input[type='text'], textarea").val('');
             });
 
             // Add input validation for numeric fields in shell_scheme_sec and bacis_lot_sec

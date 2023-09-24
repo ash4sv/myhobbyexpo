@@ -7,10 +7,11 @@
     <meta content name="description" />
     <meta content name="author" />
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="{{ asset('assets/css/one-page-parallax/vendor.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/one-page-parallax/app.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+    <link rel="stylesheet" href="{{ asset('assets/css/one-page-parallax/vendor.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/one-page-parallax/app.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 
 </head>
 <body class="myhobbyexpo" data-bs-spy="scroll" data-bs-target="#header" data-bs-offset="120">
@@ -158,6 +159,63 @@
             </div>
         </div>
     </div>--}}
+
+    <div id="layout" class="content" data-scrollview="true">
+        <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
+            {{--<div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="" class="img-fluid mb-5">
+                </div>
+            </div>--}}
+            <div class="row row-space-10">
+                <div class="col-lg-6 col-md-6">
+                    <div class="work mb-30px">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/images/layout-1@2x-50.jpg') }}" alt="MHE Hall A" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">Layout MHE Hall A</span>
+                            {{--<span class="desc-text">30 & 31 July 2016</span>--}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work mb-30px">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/images/layout-2@2x-50.jpg') }}" alt="MHE Hall B" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">Layout MHE Hall B</span>
+                            {{--<span class="desc-text">25 & 26 November 2017</span>--}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/images/layout-3@2x-50.jpg') }}" alt="MHE Hall C" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">Layout MHE Hall C</span>
+                            {{--<span class="desc-text">6 & 7 October 2018</span>--}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="work">
+                        <div class="image">
+                            <a href="#"><img src="{{ asset('assets/images/layout-4@2x-50.jpg') }}" alt="MHE Hall D2" /></a>
+                        </div>
+                        <div class="desc">
+                            <span class="desc-title">Layout MHE Hall D2</span>
+                            {{--<span class="desc-text">5 & 6 October 2019</span>--}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <div id="faq" class="content bg-light" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
@@ -744,6 +802,7 @@
 
 
 <script src="{{ asset('assets/js/one-page-parallax/vendor.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
 <script src="{{ asset('assets/js/one-page-parallax/app.min.js') }}" type="text/javascript"></script>
 
 <script>
