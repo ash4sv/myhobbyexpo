@@ -20,10 +20,10 @@
                 <a href="javascript:;" class="dropdown-item">Calendar</a>
                 <a href="javascript:;" class="dropdown-item">Setting</a>
                 <div class="dropdown-divider"></div>--}}
-                <a href="javascript:;" class="dropdown-item" onclick="event.preventDefault(); $('#userlogout-form').submit();">Log Out</a>
+                <a href="javascript:;" class="dropdown-item" onclick="Apps.logoutConfirm('userlogout-form')">Log Out</a> {{--event.preventDefault(); $('#userlogout-form').submit();--}}
             </div>
         </div>
-        <form id="userlogout-form" action="#" method="POST" class="d-none">
+        <form id="userlogout-form" action="{{ route('apps.logout') }}" method="POST" class="d-none">
             @csrf
         </form>
     </div>

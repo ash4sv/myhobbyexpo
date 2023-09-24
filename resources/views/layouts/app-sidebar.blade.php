@@ -133,6 +133,35 @@
                 </div>
             </div>--}}
 
+            <div class="menu-header">Systems</div>
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="menu-text">A.C.L</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Permissions</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Roles</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Users</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">

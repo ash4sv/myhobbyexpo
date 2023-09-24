@@ -827,9 +827,9 @@
 </div>
 
 
-<script src="{{ asset('assets/js/one-page-parallax/vendor.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
-<script src="{{ asset('assets/js/one-page-parallax/app.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/js/one-page-parallax/vendor.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/one-page-parallax/app.min.js') }}"></script>
 @include('sweetalert::alert')
 
 <script>

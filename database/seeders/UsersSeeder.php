@@ -21,6 +21,14 @@ class UsersSeeder extends Seeder
 
         $users = [
             [
+                'name' => 'Systems Administrator',
+                'email' => 'sysadmin@myhobbyexpo.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('P@ssw0rd!@3'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'Super Administrator',
                 'email' => 'masteradmin@myhobbyexpo.com',
                 'email_verified_at' => now(),
