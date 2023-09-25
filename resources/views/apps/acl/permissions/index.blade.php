@@ -50,9 +50,9 @@
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->guard_name }}</td>
                         <td>
-                            <a href="{{ route('apps.acl.permissions.show', $permission) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('apps.acl.permissions.edit', $permission) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ route('apps.acl.permissions.destroy', $permission->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('apps.acl.permissions.show', $permission) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('apps.acl.permissions.edit', $permission) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('apps.acl.permissions.destroy', $permission->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 @endforeach

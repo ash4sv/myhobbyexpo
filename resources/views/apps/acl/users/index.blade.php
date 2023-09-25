@@ -50,9 +50,9 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <a href="{{ route('apps.acl.users.show', $user) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('apps.acl.users.edit', $user) }}" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="{{ route('apps.acl.users.destroy', $user->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{{ route('apps.acl.users.show', $user) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('apps.acl.users.edit', $user) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.acl.users.destroy', $user->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 @endforeach
