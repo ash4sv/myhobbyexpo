@@ -95,7 +95,7 @@
                     <tr>
                         <td> Shell Scheme (3.0m x 3.0m): </td>
                         <td>
-                            Shell Scheme: {{ $registered->shell_scheme }} Lot<br>
+                            {{ $registered->shell_scheme }} Lot<br>
                         </td>
                     </tr>
                     @endisset
@@ -103,7 +103,7 @@
                     <tr>
                         <td>Basic Lot (2.0m x 2.5m):</td>
                         <td>
-                            Basic Lot: {{ $registered->basic_lot }} Lot<br>
+                            {{ $registered->basic_lot }} Lot<br>
                         </td>
                     </tr>
                     @endisset
