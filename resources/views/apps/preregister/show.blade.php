@@ -26,59 +26,138 @@
         </div>
         <div class="panel-body">
 
-            @isset($registered->name_company)
-                {{ $registered->name_company }} <br>
-            @endisset
-            @isset($registered->person_in_charge)
-                {{ $registered->person_in_charge }} <br>
-            @endisset
-            @isset($registered->contact_no)
-                {{ $registered->contact_no }} <br>
-            @endisset
-            @isset($registered->email)
-                {{ $registered->email }} <br>
-            @endisset
-            @isset($registered->selection_in)
-                @if($registered->selection_in == 1)
-                    Selling Vendor <br>
-                @elseif($registered->selection_in == 2)
-                    Hobby Activity <br>
-                @elseif($registered->selection_in == 3)
-                    Hobby Show-off <br>
-                @endif
-            @endisset
-            @isset(json_decode($registered->bare_size)->length)
-                Length: {{ json_decode($registered->bare_size)->length }} x
-                Width: {{ json_decode($registered->bare_size)->width }} <br>
-            @endisset
-            @isset($registered->shell_scheme)
-                Shell Scheme: {{ $registered->shell_scheme }} Lot<br>
-            @endisset
-            @isset($registered->basic_lot)
-                Basic Lot: {{ $registered->basic_lot }} Lot<br>
-            @endisset
-            @isset($registered->item_for_sale)
-                {{ $registered->item_for_sale }} <br>
-            @endisset
-            @isset($registered->item_for_showoff)
-                {{ $registered->item_for_showoff }} <br>
-            @endisset
-            @isset($registered->activity)
-                {{ $registered->activity }} <br>
-            @endisset
-
-            @isset($registered->become_sponsors)
-                Become Sponsors
-                <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $registered->become_sponsors == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
-                <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $registered->become_sponsors == 1 ? 'Yes' : 'No' }}
-                </span>
-            @endisset
-
-            @isset($registered->activity_pic)
-                @foreach(json_decode($registered->activity_pic) as $picture)
-                    <img src="{{ asset('assets/upload/' . Str::slug($registered->name_company) . '/' . $picture) }}" alt=""> <br>
-                @endforeach
-            @endisset
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="table-success">
+                        <td colspan="2"><strong>Section A - Exhibitor Particulars</strong></td>
+                    </tr>
+                    @isset($registered->name_company)
+                    <tr>
+                        <td width="30%">Name of Company / Shop / Group / Association / Club / Society:</td>
+                        <td>
+                            {{ $registered->name_company }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->person_in_charge)
+                    <tr>
+                        <td>Name of Person in Charge:</td>
+                        <td>
+                            {{ $registered->person_in_charge }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->contact_no)
+                    <tr>
+                        <td>Contact No.: </td>
+                        <td>
+                            {{ $registered->contact_no }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->email)
+                    <tr>
+                        <td>Email:</td>
+                        <td>
+                            {{ $registered->email }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->selection_in)
+                    <tr class="table-success">
+                        <td colspan="2"><strong>Section B - Your Interest</strong></td>
+                    </tr>
+                    @endisset
+                    @isset($registered->selection_in)
+                    <tr>
+                        <td>Selection:</td>
+                        <td>
+                            @if($registered->selection_in == 1)
+                                Selling Vendor <br>
+                            @elseif($registered->selection_in == 2)
+                                Hobby Activity <br>
+                            @elseif($registered->selection_in == 3)
+                                Hobby Show-off <br>
+                            @endif
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset(json_decode($registered->bare_size)->length)
+                    <tr>
+                        <td>Bare Space Size (meter):</td>
+                        <td>
+                            Length: {{ json_decode($registered->bare_size)->length }} x
+                            Width: {{ json_decode($registered->bare_size)->width }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->shell_scheme)
+                    <tr>
+                        <td> Shell Scheme (3.0m x 3.0m): </td>
+                        <td>
+                            Shell Scheme: {{ $registered->shell_scheme }} Lot<br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->basic_lot)
+                    <tr>
+                        <td>Basic Lot (2.0m x 2.5m):</td>
+                        <td>
+                            Basic Lot: {{ $registered->basic_lot }} Lot<br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->item_for_sale)
+                    <tr>
+                        <td>Describe your item for sale:</td>
+                        <td>
+                            {{ $registered->item_for_sale }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->item_for_showoff)
+                    <tr>
+                        <td>Describe what you want to show-off in the box below:</td>
+                        <td>
+                            {{ $registered->item_for_showoff }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->activity)
+                    <tr>
+                        <td>Describe your activity, how many expected participant, etc. in the box below:</td>
+                        <td>
+                            {{ $registered->activity }} <br>
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->activity_pic)
+                    <tr>
+                        <td>Attach activities photos:</td>
+                        <td>
+                            @foreach(json_decode($registered->activity_pic) as $picture)
+                                <img src="{{ asset('assets/upload/' . Str::slug($registered->name_company) . '/' . $picture) }}" alt="" class="img-fluid h-200px"> <br>
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endisset
+                    @isset($registered->become_sponsors)
+                    <tr class="table-success">
+                        <td colspan="2"><strong>Section C - Sponsorship</strong></td>
+                    </tr>
+                    @endisset
+                    @isset($registered->become_sponsors)
+                    <tr>
+                        <td>Interested to become MHX 2023 sponsors?</td>
+                        <td>
+                            <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $registered->become_sponsors == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
+                            <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $registered->become_sponsors == 1 ? 'Yes' : 'No' }}
+                            </span>
+                        </td>
+                    </tr>
+                    @endisset
+                </tbody>
+            </table>
 
         </div>
     </div>

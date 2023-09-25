@@ -43,7 +43,7 @@
             </div>
 
             <div class="menu-header">Navigation</div>
-
+            @can('dashboard-access')
             <div class="menu-item {{ (request()->segment(1) == 'dashboard') ? 'active' : '' }}">
                 <a href="{{ route('apps.dashboard') }}" class="menu-link">
                     <div class="menu-icon">
@@ -52,7 +52,7 @@
                     <div class="menu-text">Dashboard</div>
                 </a>
             </div>
-
+            @endcan
             {{--<div class="menu-item {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="{{ route('apps.pre-register.index') }}" class="menu-link">
                     <div class="menu-icon">
@@ -61,7 +61,7 @@
                     <div class="menu-text">Pre-Register</div>
                 </a>
             </div>--}}
-
+            @can('pre-register-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -88,6 +88,7 @@
                     </div>
                 </div>
             </div>
+            @endcan
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
@@ -132,9 +133,9 @@
                     </div>
                 </div>
             </div>--}}
-
+            @can('system-access')
             <div class="menu-header">Systems</div>
-
+            @can('acl-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'acl') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -144,24 +145,32 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item">
+                    @can('permission-access')
+                    <div class="menu-item {{ (request()->segment(2) == 'permissions') ? 'active' : '' }}">
                         <a href="{{ route('apps.acl.permissions.index') }}" class="menu-link">
                             <div class="menu-text">Permissions</div>
                         </a>
                     </div>
-                    <div class="menu-item">
+                    @endcan
+                    @can('role-access')
+                    <div class="menu-item {{ (request()->segment(2) == 'roles') ? 'active' : '' }}">
                         <a href="{{ route('apps.acl.roles.index') }}" class="menu-link">
                             <div class="menu-text">Roles</div>
                         </a>
                     </div>
+                    @endcan
+                    @can('user-access')
                     <div class="menu-item {{ (request()->segment(2) == 'users') ? 'active' : '' }}">
                         <a href="{{ route('apps.acl.users.index') }}" class="menu-link">
                             <div class="menu-text">Users</div>
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
+            @endcan
 
+            @endcan
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">

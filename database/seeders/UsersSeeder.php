@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Role;
 
 class UsersSeeder extends Seeder
 {
@@ -49,5 +50,17 @@ class UsersSeeder extends Seeder
         foreach ($users as $user) {
             User::insert($user);
         }
+
+        $system = Role::where('name', 'system')->first();
+        $master = Role::where('name', 'master')->first();
+        $admin  = Role::where('name', 'admin')->first();
+
+        $systemUser = User::where('email', '=', 'sysadmin@myhobbyexpo.com')->first();
+        $masterUser = User::where('email', '=', 'masteradmin@myhobbyexpo.com')->first();
+        $adminUser = User::where('email', '=', 'admin@myhobbyexpo.com')->first();
+
+        $systemUser->assignRole($system->name);
+        $masterUser->assignRole($master->name);
+        $adminUser->assignRole($admin->name);
     }
 }

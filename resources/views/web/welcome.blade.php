@@ -58,7 +58,7 @@
         <div class="container home-content">
             <div class="row gx-3">
                 <div class="col-md-6">
-                    <img src="{{ asset('assets/images/left-image@4x.png') }}" alt="" class="img-fluid mb-sm-0 mb-5">
+                    <img src="{{ asset('assets/images/left-image@4x.webp') }}" alt="" class="img-fluid mb-sm-0 mb-5">
                 </div>
                 <div class="col-md-6">
                     <img src="{{ asset('assets/images/right-image@4x.png') }}" alt="" class="img-fluid d-sm-block d-none">
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-{{--    <div id="stats" class="content" data-scrollview="true">
+    <div id="stats" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
             <div class="row">
                 <div class="col-md-4">
@@ -114,7 +114,20 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="d-none">
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-02.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-03.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-04.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-05.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-05.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-06.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-06.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-07.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-07.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs9-01.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs9-01.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs9-02.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs9-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs9-03.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs9-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs9-04.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs9-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs9-05.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs9-05.webp') }}" /></a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">EVENT DATE</span>
@@ -125,7 +138,20 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="d-none">
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-02.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-03.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-04.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-05.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-05.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-06.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-06.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-01.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-01.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-02.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-03.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-04.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-05.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-05.webp') }}" /></a>
+                            <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs11-06.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs11-06.webp') }}" /></a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">EVENT DATE</span>
@@ -134,9 +160,20 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="work">
+                    <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs12-01.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs12-01.webp') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="d-none">
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs12-02.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs12-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs12-03.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs12-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs12-04.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs12-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-01.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-01.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-02.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-03.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-04.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-05.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-05.webp') }}" /></a>
+                            <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs13-06.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs13-06.webp') }}" /></a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">EVENT DATE</span>
@@ -145,9 +182,21 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="work">
+                    <div class="work mb-30px">
                         <div class="image">
-                            <a href="#"><img src="{{ asset('assets/img/work/work-img-1.jpg') }}" alt="Work 1" /></a>
+                            <a  data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-01.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-01.webp') }}" alt="Work 1" /></a>
+                        </div>
+                        <div class="d-none">
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-02.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-03.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-04.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-05.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-05.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-06.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-06.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs15-01.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs15-01.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs15-02.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs15-02.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs15-03.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs15-03.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs15-04.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs15-04.webp') }}" /></a>
+                            <a data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs15-05.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs15-05.webp') }}" /></a>
                         </div>
                         <div class="desc">
                             <span class="desc-title">EVENT DATE</span>
@@ -158,7 +207,7 @@
 
             </div>
         </div>
-    </div>--}}
+    </div>
 
     <div id="layout" class="content" data-scrollview="true">
         <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">

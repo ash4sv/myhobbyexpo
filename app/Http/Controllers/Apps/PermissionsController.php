@@ -4,17 +4,26 @@ namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
-    private string $view = 'apps.acl.permission.';
+    private string $view = 'apps.acl.permissions.';
+    private string $route = 'apps.acl.permissions.';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view($this->view.'index');
+        $title = 'Delete Permissions!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return view($this->view.'index', [
+            'permissions' => Permission::all(),
+        ]);
     }
 
     /**
@@ -22,7 +31,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->view.'create');
     }
 
     /**
@@ -30,7 +39,12 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request->permissions as $permission){
+            Permission::create(str_replace(' ', '-', $permission));
+        }
+
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return redirect()->route($this->route.'index');
     }
 
     /**
@@ -46,7 +60,9 @@ class PermissionsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view($this->view.'edit', [
+            'permission' => Permission::findOrFail($id)
+        ]);
     }
 
     /**
@@ -54,7 +70,12 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $permission = Permission::findOrFail($id);
+        $permission->fill(['name' => str_replace( ' ', '-',$request->permission)]);
+        $permission->update();
+
+        Alert::success('Successfully updated!', 'Record has been updated successfully');
+        return redirect()->route($this->route.'index');
     }
 
     /**
@@ -62,6 +83,10 @@ class PermissionsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = Permission::findOrFail($id);
+        $role->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->route($this->route.'index');
     }
 }

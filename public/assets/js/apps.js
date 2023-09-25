@@ -1,9 +1,10 @@
 var Apps = {
     init: function () {
-        /*Apps.datatable();*/
-        /*Apps.select2('.default-select2');*/
+        Apps.datatable();
+        Apps.select2('.hobby-select');
         /*Apps.summernote('.summernote');*/
         /*Apps.switchery('switchery-default');*/
+        Apps.permissionForm();
     },
 
     datatable: function () {
@@ -78,8 +79,27 @@ var Apps = {
         var switchery = new Switchery(elm, {
             color: '#00acac'
         });
-    }
+    },
 
+    permissionForm: function (){
+        var i = 0;
+        $('#fieldAdd').on('click', function(event) {
+            event.preventDefault();
+            ++i;
+            $('#permissionForm.table').append(
+                '<tr>' +
+                    '<td><input type="text" class="form-control" name="permissions[' + i + '][name]" value=""></td>' +
+                    '<td class="text-center">' +
+                        '<a id="fieldRemove" class="btn btn-danger" href="#"><i class="fa fa-minus-square"></i></a>' +
+                    '</td>' +
+                '</tr>'
+            );
+        });
+        $(document).on('click', '#fieldRemove.btn', function (event) {
+            event.preventDefault();
+            $(this).parents('tr').remove();
+        });
+    },
 }
 
 $(document).ready(function () {

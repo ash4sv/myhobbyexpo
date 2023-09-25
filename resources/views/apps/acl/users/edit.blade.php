@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'New User')
-@section('page-header', 'New User')
+@section('page-title', 'Edit User')
+@section('page-header', 'Edit User')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,10 @@
         </div>
         <div class="panel-body">
 
-
+            <form action="{{ route('apps.acl.users.update', $user) }}" method="post">
+                @method('PUT')
+                @include('apps.acl.users.form')
+            </form>
 
         </div>
     </div>

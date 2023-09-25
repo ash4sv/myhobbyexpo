@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Edit User')
-@section('page-header', 'Edit User')
+@section('page-title', 'New Permissions')
+@section('page-header', 'New Permissions')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,27 @@
         </div>
         <div class="panel-body">
 
-
+            <form action="{{ route('apps.acl.permissions.store') }}" method="POST">
+                @csrf
+                <table id="permissionForm" class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th width="3%" class="text-center">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control" name="permissions[0][name]" value=""></td>
+                        <td class="text-center">
+                            <a id="fieldAdd" class="btn btn-info" href="#"><i class="fa fa-plus-square"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-yellow w-100px" value="Save">
+                <input type="reset" class="btn btn-warning w-100px" value="Reset">
+            </form>
 
         </div>
     </div>

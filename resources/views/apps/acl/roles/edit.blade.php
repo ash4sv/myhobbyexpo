@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Permissions')
-@section('page-header', 'Permissions')
+@section('page-title', 'Edit Role')
+@section('page-header', 'Edit Role')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,10 @@
         </div>
         <div class="panel-body">
 
-
+            <form action="{{ route('apps.acl.roles.update', $role) }}" method="POST">
+            @method('PUT')
+            @include('apps.acl.roles.form', ['edit' => true])
+            </form>
 
         </div>
     </div>

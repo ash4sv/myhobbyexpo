@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Roles')
-@section('page-header', 'Roles')
+@section('page-title', 'New User')
+@section('page-header', 'New User')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,9 @@
         </div>
         <div class="panel-body">
 
-
+            <form action="{{ route('apps.acl.users.store') }}" method="post">
+                @include('apps.acl.users.form', ['create' => true])
+            </form>
 
         </div>
     </div>

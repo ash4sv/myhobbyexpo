@@ -26,6 +26,14 @@
         </div>
         <div class="panel-body">
 
+            <div class="d-flex align-items-center mb-3">
+                <div class="me-auto">
+                    <a href="{{ route('apps.acl.users.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add User
+                    </a>
+                </div>
+            </div>
+
             <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
                 <thead>
                 <tr>

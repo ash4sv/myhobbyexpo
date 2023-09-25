@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Apps;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    private string $view = 'apps.acl.user.';
+    private string $view = 'apps.acl.users.';
+    private string $route = 'apps.acl.users.';
 
     /**
      * Display a listing of the resource.
@@ -29,7 +34,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view($this->view.'create');
+        return view($this->view.'create', [
+            'user' => new User(),
+            'roles' => DB::table('roles')->pluck('name', 'id'),
+        ]);
     }
 
     /**
@@ -37,7 +45,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new CreateNewUser();
+        $user->create($request->only(['name', 'email', 'password', 'password_confirmation']));
+
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return redirect()->route($this->route.'index');
     }
 
     /**
@@ -53,7 +65,10 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit');
+        return view($this->view.'edit', [
+            'user' => User::findOrFail($id),
+            'roles' => DB::table('roles')->pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -61,7 +76,16 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $role = Role::where('name', '=', $request->name)->first();
+        $user = User::findOrFail($id);
+        $user->fill([
+            'name' => $request->name,
+            'email' => $request->email,
+        ])->assignRole($role->id);
+        $user->update();
+
+        Alert::success('Successfully updated!', 'Record has been updated successfully');
+        return redirect()->route($this->route.'index');
     }
 
     /**
@@ -69,6 +93,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->route($this->route.'index');
     }
 }
