@@ -136,7 +136,9 @@
                         <td>Attach activities photos:</td>
                         <td>
                             @foreach(json_decode($registered->activity_pic) as $picture)
-                                <img src="{{ asset('assets/upload/' . Str::slug($registered->name_company) . '/' . $picture) }}" alt="" class="img-fluid h-200px"> <br>
+                            <a href="{{ asset('assets/upload/' . Str::slug($registered->name_company) . '/' . $picture) }}" data-fancybox="gallery">
+                                <img src="{{ asset('assets/upload/' . Str::slug($registered->name_company) . '/' . $picture) }}" alt="" class="img-fluid h-200px">
+                            </a>
                             @endforeach
                         </td>
                     </tr>
@@ -163,3 +165,7 @@
     </div>
 
 @endsection
+
+@push('script')
+
+@endpush

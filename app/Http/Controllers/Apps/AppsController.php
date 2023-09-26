@@ -17,6 +17,8 @@ class AppsController extends Controller
 
     public function dashboard()
     {
+        $dailyCounts = PreRegistration::selectRaw('DATE(created_at) as date, COUNT(*) as count')->groupBy('date')->get();
+
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
@@ -25,7 +27,8 @@ class AppsController extends Controller
             'selling_vendor' => $selling_vendor,
             'hobby_activity' => $hobby_activity,
             'hobby_showoff'  => $hobby_showoff,
-            'sponsors'       => $sponsors
+            'sponsors'       => $sponsors,
+            'dailyCounts'    => $dailyCounts
         ]);
     }
 

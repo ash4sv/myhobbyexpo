@@ -9,7 +9,7 @@
             <h3 class="text-white text-center"><strong>MALAYSIA HOBBY EXPO 2023 5<sup>th</sup> ANNIVERSARY</strong></h3>
             <h4 class="text-white mb-30px text-center"><strong>PRE-REGISTRATION FOR EXHIBITOR ONLY</strong></h4>
 
-            <form action="{{ route('preregsubmit') }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+            <form action="{{ route('preregsubmit') }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data" data-parsley-validate="true">
                 @csrf
                 <div class="card mb-4 shadow rounded" id="section_a">
                     <div class="card-body">
@@ -19,28 +19,28 @@
 
                         <div class="mb-3">
                             <label for="name_company" class="form-label">Name of Company / Shop / Group / Association / Club / Society: <span class="text-danger">*</span></label>
-                            <input class="form-control @error('name_company') is-invalid @enderror" type="text" name="name_company" id="name_company" />
+                            <input class="form-control @error('name_company') is-invalid @enderror" type="text" name="name_company" id="name_company" required/>
                             @error('name_company')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="person_in_charge" class="form-label">Name of Person in Charge: <span class="text-danger">*</span></label>
-                            <input class="form-control @error('person_in_charge') is-invalid @enderror" type="text" name="person_in_charge" id="person_in_charge" />
+                            <input class="form-control @error('person_in_charge') is-invalid @enderror" type="text" name="person_in_charge" id="person_in_charge" required/>
                             @error('person_in_charge')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="contact_no" class="form-label">Contact No.: <span class="text-danger">*</span></label>
-                            <input class="form-control masked-input-phone @error('contact_no') is-invalid @enderror" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" />
+                            <input class="form-control masked-input-phone @error('contact_no') is-invalid @enderror" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" required/>
                             @error('contact_no')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-                            <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" />
+                            <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" required/>
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -62,8 +62,8 @@
 
                         <div class="mb-3">
                             <label for="selection_in" class="form-label">Selection: <span class="text-danger">*</span></label>
-                            <select class="form-control default-select2 @error('selection_in') is-invalid @enderror" name="selection_in" id="selection_in" required>
-                                <option value="0">Select</option>
+                            <select class="form-control default-select2 @error('selection_in') is-invalid @enderror" name="selection_in" id="selection_in" data-parsley-required="true">
+                                <option value="">Select</option>
                                 <option value="1">Selling Vendor</option>
                                 <option value="3">Hobby Show Off Only</option>
                                 <option value="2">Hobby Activity Only</option>
@@ -192,6 +192,7 @@
 @push('reg-script')
     <script>
         $(document).ready(function() {
+            $('form').parsley();
             // Initially hide all sections
             $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
 
@@ -200,19 +201,27 @@
                 // Get the selected option value
                 var selectedValue = $(this).val();
 
+                // Hide Parsley error messages
+                $('form').parsley().reset();
+
                 // Hide all sections first and remove 'required' attribute
                 $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #tnc_hobby_activity, #tnc_hobby_show_off, #item_for_sale, #activities_explain, #activities_pic, #item_for_showoff, .activity_label, .hobby_label").hide();
+                $("#shell_scheme, #basic_lot, #anw_item_for_sale, #anw_activities_explain, #anw_activities_pic, #anw_item_for_showoff, input[name*='bare_size']").prop('required', false);
+                $("#shell_scheme, #basic_lot, #anw_item_for_sale, #anw_activities_explain, #anw_activities_pic, #anw_item_for_showoff, input[name*='bare_size']").removeClass('parsley-error');
 
                 // Show sections based on the selected value
                 if (selectedValue === "1") {
                     // User selected "Selling Vendor"
                     $("#barred_size_sec, #shell_scheme_sec, #bacis_lot_sec, #tnc_selling_vendor, #item_for_sale").show();
+                    $("#anw_item_for_sale").attr("required", true)
                 } else if (selectedValue === "2") {
                     // User selected "Hobby Activity Only"
                     $("#barred_size_sec, #tnc_hobby_activity, #activities_explain, #activities_pic, .activity_label").show();
+                    $('#anw_activities_explain, #anw_activities_pic').attr("required", true);
                 } else if (selectedValue === "3") {
                     // User selected "Bobby Show Off Only"
                     $("#barred_size_sec, #tnc_hobby_show_off, #item_for_showoff, #activities_pic, .hobby_label").show();
+                    $("#anw_item_for_showoff, #anw_activities_pic").attr("required", true);
                 }
             });
 

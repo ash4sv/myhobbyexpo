@@ -7,18 +7,19 @@
     <meta content name="description" />
     <meta content name="author" />
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/default/app.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/default/app.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-icons/font/bootstrap-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
 
 </head>
 <body>
@@ -42,30 +43,38 @@
     <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 
-<script src="{{ asset('assets/js/vendor.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/js/vendor.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/app.min.js') }}"></script>
 
-<script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
-<script src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/pdfmake/build/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/pdfmake/build/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/plugins/jszip/dist/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.canvaswrapper.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.colorhelpers.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.flot.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.flot.saturated.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.flot.browser.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.flot.drawSeries.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/flot/source/jquery.flot.uiConstants.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/pdfmake/build/pdfmake.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/pdfmake/build/vfs_fonts.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/jszip/dist/jszip.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
 
-<script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/apps.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/apps.js') }}"></script>
 
 @include('sweetalert::alert')
 

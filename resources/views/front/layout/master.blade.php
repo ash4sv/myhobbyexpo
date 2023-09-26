@@ -47,6 +47,7 @@
 
     @stack('reg-script')
 
+    @production
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL2B81V05J"></script>
     <script>
@@ -56,6 +57,7 @@
 
       gtag('config', 'G-FL2B81V05J');
     </script>
+    @endproduction
 
 </body>
 </html>
