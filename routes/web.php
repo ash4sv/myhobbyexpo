@@ -54,6 +54,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
             'middleware'   => 'auth',
         ], function (){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
+           Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::group([
                'prefix'  => 'pre-register',
                'as'     => 'preregister.'

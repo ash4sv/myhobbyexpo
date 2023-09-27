@@ -170,6 +170,15 @@
             </div>
             @endcan
 
+            <div class="menu-item {{ (request()->segment(1) == 'route') ? 'active' : '' }}">
+                <a href="{{ route('apps.route') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-link"></i>
+                    </div>
+                    <div class="menu-text">Route list</div>
+                </a>
+            </div>
+
             @endcan
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
