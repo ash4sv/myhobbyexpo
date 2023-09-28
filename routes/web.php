@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\ExhibitController;
+use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Apps\RolesController;
@@ -55,6 +56,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
         ], function (){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
+           Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::group([
                'prefix'  => 'pre-register',
                'as'     => 'preregister.'
