@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Route List')
-@section('page-header', 'Route List')
+@section('page-title', 'Logs')
+@section('page-header', 'Logs')
 @section('description', '')
 
 @section('content')
@@ -16,7 +16,7 @@
 
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">Route List</h4>
+            <h4 class="panel-title">@yield('page-title')</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -29,20 +29,27 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>Method</td>
-                    <td>URL</td>
-                    <td>Name</td>
-                    <td>Action Name</td>
+                    <td>ID</td>
+                    <td>Log Name</td>
+                    <td>Description</td>
+                    <td>Subject Type</td>
+                    <td>Event</td>
+                    <td>Subject Id</td>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($routes as $route)
-                    <tr>
-                        <td>{{ json_encode($route->methods()) }}</td>
-                        <td>{{ $route->uri() }}</td>
-                        <td>{{ $route->getName() }}</td>
-                        <td>{{ $route->getActionName() }}</td>
-                    </tr>
+                @foreach($logs as $log)
+                <tr>
+                    <td>{{ $log->id }}</td>
+                    <td>{{ $log->log_name }}</td>
+                    <td>{{ $log->description }}</td>
+                    <td>{{ $log->subject_type }}</td>
+                    <td>{{ $log->event }}</td>
+                    <td>{{ $log->subject_id }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">{{ json_encode($log) }}</td>
+                </tr>
                 @endforeach
                 </tbody>
             </table>
