@@ -28,14 +28,12 @@ Route::group([
     Route::post('contactus', [WebController::class, 'submitContact'])->name('submit');
 });
 
-Route::domain('register.' . env('APP_URL'))->group(function(){
+Route::domain('vendor.' . env('APP_URL'))->group(function(){
     Route::group([
         'namespace' => 'Front',
         'as' => 'front.',
     ], function (){
-        Route::get('form', [RegisterController::class, 'register'])->name('registration');
-        Route::get('interest', [RegisterController::class, 'typeOfInterest'])->name('typeofinterest');
-        Route::post('submit', [RegisterController::class, 'submit'])->name('submit');
+        Route::get('register', [RegisterController::class, 'register']);
     });
 });
 

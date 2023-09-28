@@ -12,11 +12,11 @@
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                Web Admin
+                                {{ Auth::user()->name }}
                             </div>
                             <div class="menu-caret ms-auto"></div>
                         </div>
-                        <small>Administrator</small>
+                        <small class="text-capitalize">{{ Auth::user()->getRoleNames()->first() }}</small>
                     </div>
                 </a>
             </div>
@@ -89,6 +89,28 @@
                 </div>
             </div>
             @endcan
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="menu-text">Booths</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Location</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Menu 1.3</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
@@ -169,7 +191,7 @@
                 </div>
             </div>
             @endcan
-
+            @can('route-access')
             <div class="menu-item {{ (request()->segment(1) == 'route') ? 'active' : '' }}">
                 <a href="{{ route('apps.route') }}" class="menu-link">
                     <div class="menu-icon">
@@ -178,7 +200,7 @@
                     <div class="menu-text">Route list</div>
                 </a>
             </div>
-
+            @endcan
             @endcan
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">

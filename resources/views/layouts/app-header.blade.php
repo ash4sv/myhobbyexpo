@@ -12,7 +12,7 @@
         <div class="navbar-item navbar-user dropdown">
             <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                 <img src="{{ asset('assets/img/user/user-13.jpg') }}" alt="" />
-                <span> <span class="d-none d-md-inline">Web Admin</span> <b class="caret"></b> </span>
+                <span> <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> <b class="caret"></b> </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end me-1">
                 {{--<a href="javascript:;" class="dropdown-item">Edit Profile</a>

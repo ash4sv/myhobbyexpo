@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -45,6 +46,7 @@ class WebController extends Controller
             $message->subject('New Contact Form Submission');
         });
 
+        Log::info(['Sended', $mailData]);
         Alert::success('Thank you for enquiry', 'Our team will return contact you back.');
         return redirect()->back();
     }

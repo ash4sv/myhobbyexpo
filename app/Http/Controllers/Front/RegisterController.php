@@ -79,18 +79,11 @@ class RegisterController extends Controller
 
     public function register()
     {
-        $exhibits = TypeOfInterest::all();
-        return view('front.interest', [
-            'exhibits' => $exhibits
-        ]);
+        return view('front.register');
     }
 
     public function typeOfInterest(Request $request)
     {
-        $type = TypeOfInterest::where('slug', $request->key)->firstOrFail();
-        return view('front.booth', [
-            'type' => $type
-        ]);
     }
 
 }
