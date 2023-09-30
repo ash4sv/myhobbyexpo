@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Apps\AppsController;
+use App\Http\Controllers\Apps\BoothNumberController;
+use App\Http\Controllers\Apps\BoothTypeController;
 use App\Http\Controllers\Apps\ExhibitController;
 use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\PermissionsController;
@@ -73,10 +75,11 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('users', UserController::class);
            });
            Route::group([
-               'prefix'  => 'events',
-               'as'     => 'events.',
+               'prefix'  => 'exhibitor',
+               'as'     => 'exhibitor.',
            ], function (){
-               Route::resource('exhibit', ExhibitController::class);
+               Route::resource('category',BoothTypeController::class);
+               Route::resource('booths',BoothNumberController::class);
            });
         });
     });

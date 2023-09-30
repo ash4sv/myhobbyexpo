@@ -30,6 +30,33 @@ body.myhobbyexpo {
     background-color: rgba(255, 255, 255, .1);
 }
 
+.booth-area {
+    display: flex;
+    justify-content: space-between;
+}
+.booth-box {}
+.booth-box.selected input[type='checkbox'] ~ label.booth-label {
+    background-color: lightgray;
+}
+.booth-box.selected input[type='checkbox'] ~ label.booth-label:hover {
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+.booth-box input[type='checkbox'] ~ label.booth-label {
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    text-align: center;
+}
+.booth-box input[type='checkbox'] ~ label.booth-label:hover {
+    background-color: pink;
+}
+.booth-box input[type='checkbox'] {
+    display: none;
+}
+.booth-box input[type=checkbox]:checked ~ label.booth-label {
+    background-color: blue;
+}
 
 /*======one-page-parallax======*/
 #home .home-content {

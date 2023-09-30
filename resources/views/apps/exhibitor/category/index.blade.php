@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Logs')
-@section('page-header', 'Logs')
+@section('page-title', 'Booth Type')
+@section('page-header', 'Booth Type')
 @section('description', '')
 
 @section('content')
@@ -26,32 +26,32 @@
         </div>
         <div class="panel-body">
 
-            <table class="table table-striped">
+            <div class="d-flex align-items-center mb-3">
+                <div class="me-auto">
+                    <a href="{{ route('apps.exhibitor.category.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth Type
+                    </a>
+                </div>
+            </div>
+
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
                 <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Log Name</td>
-                    <td>Description</td>
-                    <td>Subject Type</td>
-                    <td>Event</td>
-                    <td>Subject Id</td>
-                    <td>Causer Type</td>
-                    <td>Causer Id</td>
-                    <td>Properties</td>}}
+                    <th width="1%">No.</th>
+                    <th>Name</th>
+                    <th width="1%">#</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($logs as $log)
+                @foreach($categories as $type)
                 <tr>
-                    <td>{{ $log->id }}</td>
-                    <td>{{ $log->log_name }}</td>
-                    <td>{{ $log->description }}</td>
-                    <td>{{ $log->subject_type }}</td>
-                    <td>{{ $log->event }}</td>
-                    <td>{{ $log->subject_id }}</td>
-                    <td>{{ $log->causer_type }}</td>
-                    <td>{{ $log->causer_id }}</td>
-                    <td>{{ json_encode($log->properties) }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $type->name }}</td>
+                    <td>
+                        <a href="{{ route('apps.exhibitor.category.show', $type) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('apps.exhibitor.category.edit', $type) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.exhibitor.category.destroy', $type->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>

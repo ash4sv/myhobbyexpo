@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booths', function (Blueprint $table) {
+        Schema::create('booth_types', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
+            $table->string('image')->nullable();
+            $table->string('layout_plan')->nullable();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->string('slug');
+            $table->longText('description')->nullable();
+            $table->integer('table')->nullable();
+            $table->integer('chair')->nullable();
+            $table->integer('sso')->nullable();
+            $table->double('price');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booths');
+        Schema::dropIfExists('booth_types');
     }
 };

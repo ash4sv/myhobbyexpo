@@ -3,22 +3,16 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apps\TypeOfInterest;
 use Illuminate\Http\Request;
 
-class ExhibitController extends Controller
+class BoothNumberController extends Controller
 {
-    private string $view = 'apps.exhibit.';
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $exhibits = TypeOfInterest::all();
-        return view($this->view.'index', [
-            'exhibits' => $exhibits
-        ]);
+        //
     }
 
     /**
@@ -26,7 +20,7 @@ class ExhibitController extends Controller
      */
     public function create()
     {
-        return view($this->view.'create');
+        //
     }
 
     /**
@@ -50,7 +44,7 @@ class ExhibitController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit');
+        //
     }
 
     /**

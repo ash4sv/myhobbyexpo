@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Logs')
-@section('page-header', 'Logs')
+@section('page-title', 'Edit Booth Type')
+@section('page-header', 'Edit Booth Type')
 @section('description', '')
 
 @section('content')
@@ -26,36 +26,10 @@
         </div>
         <div class="panel-body">
 
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Log Name</td>
-                    <td>Description</td>
-                    <td>Subject Type</td>
-                    <td>Event</td>
-                    <td>Subject Id</td>
-                    <td>Causer Type</td>
-                    <td>Causer Id</td>
-                    <td>Properties</td>}}
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($logs as $log)
-                <tr>
-                    <td>{{ $log->id }}</td>
-                    <td>{{ $log->log_name }}</td>
-                    <td>{{ $log->description }}</td>
-                    <td>{{ $log->subject_type }}</td>
-                    <td>{{ $log->event }}</td>
-                    <td>{{ $log->subject_id }}</td>
-                    <td>{{ $log->causer_type }}</td>
-                    <td>{{ $log->causer_id }}</td>
-                    <td>{{ json_encode($log->properties) }}</td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <form action="{{ route('apps.exhibitor.category.update', $category) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
+                @include('apps.exhibitor.category.form')
+            </form>
 
         </div>
     </div>

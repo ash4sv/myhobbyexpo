@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'EVENT EXHIBIT')
-@section('page-header', 'EVENT EXHIBIT')
+@section('page-title', 'New Booth Type')
+@section('page-header', 'New Booth Type')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,9 @@
         </div>
         <div class="panel-body">
 
-
+            <form action="{{ route('apps.exhibitor.category.store') }}" method="post" enctype="multipart/form-data">
+                @include('apps.exhibitor.category.form')
+            </form>
 
         </div>
     </div>
