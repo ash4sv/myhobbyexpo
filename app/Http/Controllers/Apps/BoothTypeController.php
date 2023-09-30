@@ -23,6 +23,7 @@ class BoothTypeController extends Controller
         $title = 'Delete Roles!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
+
         return view($this->view.'index', [
             'categories' => BoothType::all(),
         ]);
@@ -47,49 +48,14 @@ class BoothTypeController extends Controller
             'layout_plan' => 'required|image|mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/webp|max:2048',
             'name' => 'required',
             'description' => 'required',
-            'table' => 'required|integer',
-            'chair' => 'required|integer',
-            'sso' => 'required|integer',
-            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'ffe_table' => 'required|integer',
+            'ffe_chair' => 'required|integer',
+            'ffe_sso' => 'required|integer',
+            'price' => 'required|regex:/^\\d+(\\.\\d{1,2})?$/',
         ]);
 
         $category = new BoothType();
-        if ($request->hasFile('layout_plan')) {
-            $boothCategoryImge = ImageUploader::uploadSingleImage($request->file('layout_plan'), 'assets/images', 'layout_plan');;
-        } else {
-            $boothCategoryImge = $category->image;
-        }
-
-        if ($request->hasFile('image')) {
-            $image = ImageUploader::uploadSingleImage($request->file('image'), 'assets/images', 'layout_plan');;
-        } else {
-            $image = $category->image;
-        }
-
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->description = $request->description;
-
-        $category->image = $image;
-        $category->layout_plan = $boothCategoryImge;
-        $category->table = $request->table;
-        $category->chair = $request->chair;
-        $category->sso = $request->sso;
-        $category->price = $request->price;
-        $category->save();
-
-        $numbers = $request->input('numbers', []);
-        $boothDescriptions = $request->input('booth_desp', []);
-
-        foreach ($numbers as $index => $number) {
-            $boothNumber = new BoothNumber();
-            $boothNumber->category_id = $category->id;
-            $boothNumber->name = $number;
-            $boothNumber->slug = Str::slug($number);
-            $boothNumber->description = $boothDescriptions[$index];
-            $boothNumber->status = false;
-            $boothNumber->save();
-        }
+        $category->saveBoothType($category, $request);
 
         Alert::success('Successfully saved!', 'Record has been saved successfully');
         return redirect()->route('apps.exhibitor.category.edit', $category->id);
@@ -122,19 +88,6 @@ class BoothTypeController extends Controller
     {
         $category = BoothType::findOrFail($id);
         $category->saveBoothType($category, $request);
-
-        $numbers = $request->input('numbers', []);
-        $boothDescriptions = $request->input('booth_desp', []);
-
-        foreach ($numbers as $index => $number) {
-            $boothNumber = new BoothNumber();
-            $boothNumber->category_id = $category->id;
-            $boothNumber->name = $number;
-            $boothNumber->slug = Str::slug($number);
-            $boothNumber->description = $boothDescriptions[$index];
-            $boothNumber->status = false;
-            $boothNumber->save();
-        }
 
         Alert::success('Successfully updated!', 'Record has been updated successfully');
         return redirect()->route($this->route.'index');

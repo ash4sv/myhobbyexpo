@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->longText('description')->nullable();
-            $table->integer('table')->nullable();
-            $table->integer('chair')->nullable();
-            $table->integer('sso')->nullable();
+            $table->integer('ffe_table')->nullable();
+            $table->integer('ffe_chair')->nullable();
+            $table->integer('ffe_sso')->nullable();
             $table->double('price');
             $table->softDeletes();
             $table->timestamps();

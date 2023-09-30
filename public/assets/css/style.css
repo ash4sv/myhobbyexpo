@@ -45,6 +45,7 @@ body.myhobbyexpo {
 .booth-box input[type='checkbox'] ~ label.booth-label {
     width: 60px;
     height: 60px;
+    line-height: 60px;
     background-color: red;
     text-align: center;
 }

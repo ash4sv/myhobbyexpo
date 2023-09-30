@@ -25,9 +25,9 @@ class BoothTypeSeeder extends Seeder
                 'name' => 'Premium',
                 'slug' => 'premium',
                 'description' => '',
-                'table' => 1,
-                'chair' => 2,
-                'sso' => 2,
+                'ffe_table' => 1,
+                'ffe_chair' => 2,
+                'ffe_sso' => 2,
                 'price' => '250.00',
             ],
             [
@@ -36,9 +36,9 @@ class BoothTypeSeeder extends Seeder
                 'name' => 'Normal',
                 'slug' => 'normal',
                 'description' => '',
-                'table' => 1,
-                'chair' => 2,
-                'sso' => 2,
+                'ffe_table' => 1,
+                'ffe_chair' => 2,
+                'ffe_sso' => 2,
                 'price' => '100.00',
             ],
             [
@@ -47,9 +47,9 @@ class BoothTypeSeeder extends Seeder
                 'name' => 'Bazaar',
                 'slug' => 'bazaar',
                 'description' => '',
-                'table' => 1,
-                'chair' => 2,
-                'sso' => 2,
+                'ffe_table' => 1,
+                'ffe_chair' => 2,
+                'ffe_sso' => 2,
                 'price' => '100.00',
             ]
         ];

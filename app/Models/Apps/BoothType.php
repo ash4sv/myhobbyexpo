@@ -26,48 +26,30 @@ class BoothType extends Model
         return $this->hasMany(BoothNumber::class, 'category_id', 'id');
     }
 
-    public static function createOrUpdate($id, $request)
+    public function saveBoothType($category, $request)
     {
-        // Validation rules (customize as needed)
-        $rules = [
-            'layout_plan' => 'required|image|mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/webp|max:2048',
-            'name' => 'required',
-            'description' => 'required',
-            'table' => 'required|integer',
-            'chair' => 'required|integer',
-            'sso' => 'required|integer',
-            'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-        ];
-
-        if ($id !== null) {
-            // If $id is not null, it means we are updating an existing record,
-            // so exclude unique validation rules that apply to new records.
-            $rules['name'] .= ',name,' . $id;
-        }
-
-        $request->validate($rules);
-
-        // Common code for both store and update
-        $category = BoothType::findOrNew($id);
-
         if ($request->hasFile('layout_plan')) {
-            $boothCategoryImage = ImageUploader::uploadSingleImage($request->file('layout_plan'), 'assets/images', 'layout_plan');
+            $boothCategoryImge = ImageUploader::uploadSingleImage($request->file('layout_plan'), 'assets/images', 'layout_plan');;
         } else {
-            $boothCategoryImage = $category->image;
+            $boothCategoryImge = $category->image;
         }
 
-        // Update category fields
+        if ($request->hasFile('image')) {
+            $image = ImageUploader::uploadSingleImage($request->file('image'), 'assets/images', 'image');;
+        } else {
+            $image = $category->image;
+        }
+
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
         $category->description = $request->description;
-        $category->image = $boothCategoryImage;
-        $category->layout_plan = $boothCategoryImage;
-        $category->table = $request->table;
-        $category->chair = $request->chair;
-        $category->sso = $request->sso;
+
+        $category->image = $image;
+        $category->layout_plan = $boothCategoryImge;
+        $category->ffe_table = $request->table;
+        $category->ffe_chair = $request->chair;
+        $category->ffe_sso = $request->sso;
         $category->price = $request->price;
         $category->save();
-
-        return $category;
     }
 }

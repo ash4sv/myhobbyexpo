@@ -12,6 +12,24 @@ class BoothNumber extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
+    protected $fillable = [
+        'category_id',
+        'vendor_id',
+        'name',
+        'slug',
+        'description',
+        'status',
+    ];
+
+    protected $guarded = [
+        'category_id',
+        'vendor_id',
+        'name',
+        'slug',
+        'description',
+        'status',
+    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
