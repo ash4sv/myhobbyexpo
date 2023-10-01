@@ -96,7 +96,7 @@
                                                 <div class="booth-area">
                                                     @foreach($category->numbers as $number)
                                                         <div class="booth-box {{ $number->status == 1? 'selected':'' }}">
-                                                            <input type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disable':'' }}>
+                                                            <input type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disable':'' }} class="number_booth_checkbox">
                                                             <label for="btn_{{ $number->id }}_{{ $number->slug }}" class="booth-label">{{ $number->name }}</label>
                                                         </div>
                                                     @endforeach
@@ -325,7 +325,7 @@
                 console.log(countCheckedCheckboxes);
 
                 if (countCheckedCheckboxes <= boothQtySelect.val()) {
-                    
+                    $('.booth-area > .booth-box').addClass('selected');
                 }
             });
 
