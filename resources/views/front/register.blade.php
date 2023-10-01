@@ -76,6 +76,7 @@
                                                     <option value="4">4</option>
                                                 </select>
                                                 <input type="text" aria-label="" class="form-control" name="booth_price" id="booth_price" readonly value="RM {{ $category->price }}">
+                                                <input type="hidden" name="booth_price_unit" id="booth_price_unit" value="{{ $category->price }}">
                                             </div>
                                             <div id="" class="form-text">Came with {{ $category->ffe_table }} Unit Table,
                                                 {{ $category->ffe_chair }} Unit Chair, {{ $category->ffe_sso }} Unit SSO 13Amp for 1 booths</div>
@@ -107,7 +108,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Table</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <input type="text" class="form-control" value="RM 1.00" id="table_TPrice" name="table_TPrice" readonly>
+                                                <input type="hidden" name="" id="add_on_table" value="1.00">
                                                 <select name="add_table" id="add_table" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -125,7 +127,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Chair</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <input type="text" class="form-control" value="RM 1.00" id="chair_TPrice" name="chair_TPrice" readonly>
+                                                <input type="hidden" name="" id="add_on_chair" value="1.00">
                                                 <select name="add_chair" id="add_chair" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -143,7 +146,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Switch Socket Outlet (13 amp)</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <input type="text" class="form-control" value="RM 1.00" id="sso_TPrice" name="sso_TPrice" readonly>
+                                                <input type="hidden" name="" id="add_on_sso" value="1.00">
                                                 <select name="add_sso" id="add_sso" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -226,5 +230,64 @@
             $('#activity_zone').show();
             $('#interest_in').hide();
         })
+
+        function priceUnit() {
+            var unitPrice = $('#booth_price_unit').val();
+            var qtyBooth = $('#booth_qty').val();
+            var totalBoothPrice = unitPrice * qtyBooth;
+
+            $('#booth_price').val('RM ' + parseFloat(totalBoothPrice).toFixed(2));
+
+            console.log('Total', totalBoothPrice);
+        }
+        function priceUnitTable() {
+            var unitPrice = $('#add_on_table').val();
+            var qtyTable = $('#add_table').val();
+            var totalTablePrice = unitPrice * qtyTable;
+
+            $('#table_TPrice').val('RM ' + parseFloat(totalTablePrice).toFixed(2));
+
+            console.log('Total', totalTablePrice);
+        }
+        function priceUnitChair() {
+            var unitPrice = $('#add_on_chair').val();
+            var qtyChair = $('#add_chair').val();
+            var totalTableChair = unitPrice * qtyChair;
+
+            $('#chair_TPrice').val('RM ' + parseFloat(totalTableChair).toFixed(2));
+
+            console.log('Total', totalTableChair);
+        }
+        function priceUnitSSO() {
+            var unitPrice = $('#add_on_sso').val();
+            var qtySSO = $('#add_sso').val();
+            var totalTableSSo = unitPrice * qtySSO;
+
+            $('#sso_TPrice').val('RM ' + parseFloat(totalTableSSo).toFixed(2));
+
+            console.log('Total', totalTableSSo);
+        }
+
+        $('#booth_qty').change(function () {
+            priceUnit();
+        });
+
+        $('#add_table').change(function () {
+            priceUnitTable();
+        });
+
+        $('#add_chair').change(function () {
+            priceUnitChair();
+        });
+
+        $('#add_sso').change(function () {
+            priceUnitSSO();
+        });
+
+        priceUnit();
+        priceUnitTable();
+        priceUnitChair();
+        priceUnitSSO();
+
     </script>
 @endpush

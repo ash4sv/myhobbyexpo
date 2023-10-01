@@ -89,6 +89,7 @@ class RegisterController extends Controller
 
     public function booth(Request $request)
     {
+        return $request;
         /*$request->session()->put([
             'booth_price' => $request->booth_price,
             'type_booth' => $request->type_booth,
@@ -97,7 +98,7 @@ class RegisterController extends Controller
             'add_chair' => $request->add_table,
             'add_sso' => $request->add_sso,
         ]);*/
-        return view('front.vendor');
+        /*return view('front.vendor');*/
     }
 
     public function vendorRegister(Request $request)
