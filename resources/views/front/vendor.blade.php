@@ -4,7 +4,9 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto mb-5">
-            <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
+            <a href="{{ route('front.register') }}">
+                <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
+            </a>
         </div>
     </div>
 
@@ -18,32 +20,62 @@
                         <div class="card-header bg-transparent border-bottom py-3 px-4">
                             <h5 class="font-size-16 mb-0">Order Summary {{--<span class="float-end">#MN0124</span>--}}</h5>
                         </div>
-                        <div class="card-body p-4 pt-2">
+                        <div class="card-body">
 
                             <div class="table-responsive">
-                                <table class="table mb-0 h3">
+                                <table class="table mb-0">
                                     <tbody>
                                     <tr>
-                                        <td>Sub Total :</td>
-                                        <td class="text-end">RM 780</td>
+                                        <td width="33%">Sub Total :</td>
+                                        <td width="33%"></td>
+                                        <td class="text-end">
+                                            {{ $subTotal }}
+                                            <input type="hidden" name="subtotal_val" value="{{ $subTotal }}">
+                                        </td>
                                     </tr>
-                                    {{--<tr>
-                                        <td>Discount : </td>
-                                        <td class="text-end">- $ 78</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping Charge :</td>
-                                        <td class="text-end">$ 25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Estimated Tax : </td>
-                                        <td class="text-end">$ 18.20</td>
-                                    </tr>--}}
+                                    @if($data['add_table'] > 0 || $data['add_chair'] > 0 || $data['add_sso'] > 0)
+                                        <tr>
+                                            <td colspan="3">
+                                                <span class="fw-bold">Add On :</span>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_table'] > 0)
+                                        <tr>
+                                            <td>Table :</td>
+                                            <td class="text-center">{{ $data['add_table'] }} x </td>
+                                            <td class="text-end">
+                                                {{ $data['table_TPrice'] }}
+                                                <input type="hidden" name="add_on_table" value="{{ $data['table_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_chair'] > 0)
+                                        <tr>
+                                            <td>Chair : </td>
+                                            <td class="text-center">{{ $data['add_chair'] }} x</td>
+                                            <td class="text-end">
+                                                {{ $data['chair_TPrice'] }}
+                                                <input type="hidden" name="add_on_chair" value="{{ $data['chair_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_sso'] > 0)
+                                        <tr>
+                                            <td>SSO : </td>
+                                            <td class="text-center">{{ $data['add_sso'] }} x</td>
+                                            <td class="text-end">
+                                                {{ $data['sso_TPrice'] }}
+                                                <input type="hidden" name="add_on_sso" value="{{ $data['sso_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr class="bg-light">
                                         <th>Total :</th>
-                                        <td class="text-end">
+                                        <td class="text-end" colspan="2">
                                             <span class="fw-bold">
-                                                RM 745
+                                                {{ $total }}
+                                                <input type="hidden" name="total_val" value="{{ $total }}">
                                             </span>
                                         </td>
                                     </tr>
@@ -153,9 +185,5 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 @endsection

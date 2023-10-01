@@ -89,16 +89,25 @@ class RegisterController extends Controller
 
     public function booth(Request $request)
     {
-        return $request;
-        /*$request->session()->put([
-            'booth_price' => $request->booth_price,
-            'type_booth' => $request->type_booth,
-            'booth_qty' => $request->booth_qty,
-            'add_table' => $request->add_table,
-            'add_chair' => $request->add_table,
-            'add_sso' => $request->add_sso,
-        ]);*/
-        /*return view('front.vendor');*/
+        $request->session()->put([
+            'booth_type'        => $request->booth_type,
+            'booth_qty'         => $request->booth_qty,
+            'booth_price'       => $request->booth_price,
+            'booth_price_unit'  => $request->booth_price_unit,
+            'table_TPrice'      => $request->table_TPrice,
+            'add_table'         => $request->add_table,
+            'chair_TPrice'      => $request->chair_TPrice,
+            'add_chair'         => $request->add_table,
+            'sso_TPrice'        => $request->sso_TPrice,
+            'add_sso'           => $request->add_sso,
+            'sub_total'         => $request->sub_total,
+            'total'             => $request->total,
+        ]);
+        return view('front.vendor', [
+            'data' => $request->all(),
+            'subTotal' => $request->sub_total,
+            'total' => $request->total
+        ]);
     }
 
     public function vendorRegister(Request $request)
