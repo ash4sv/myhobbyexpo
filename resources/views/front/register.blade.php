@@ -210,109 +210,132 @@
 
 @push('reg-script')
     <script>
-        $('#flea_market, #hobby_group_zone, #activity_zone, .dynamic-section').hide();
+        $(document).ready(function(){
 
-        $('#flea_market_btn').click(function () {
-            event.preventDefault();
-            $('#flea_market').show();
-            $('#interest_in').hide();
 
-            $('.section-toggle').click(function() {
+            $('#flea_market, #hobby_group_zone, #activity_zone, .dynamic-section').hide();
+
+            $('#flea_market_btn').click(function () {
                 event.preventDefault();
-                var targetId = $(this).data('target');
-                $('#' + targetId).show();
-                $('.dynamic-section').not('#' + targetId).remove(); // Hide other sections
+                $('#flea_market').show();
+                $('#interest_in').hide();
 
-                $('#booth_type').hide();
+                $('.section-toggle').click(function() {
+                    event.preventDefault();
+                    var targetId = $(this).data('target');
+                    $('#' + targetId).show();
+                    $('.dynamic-section').not('#' + targetId).remove(); // Hide other sections
+
+                    $('#booth_type').hide();
+                    calculatePrices();
+                });
+            })
+
+            $('#hobby_group_zone_btn').click(function () {
+                event.preventDefault();
+                $('#hobby_group_zone').show();
+                $('#interest_in').hide();
+            })
+
+            $('#activity_zone_zone_btn').click(function () {
+                event.preventDefault();
+                $('#activity_zone').show();
+                $('#interest_in').hide();
+            })
+
+            function priceUnit() {
+                var unitBoothPrice = parseFloat($('#booth_price_unit').val());
+                var qtyBooth = parseFloat($('#booth_qty').val());
+                var totalBoothPrice = unitBoothPrice * qtyBooth;
+
+                $('#booth_price').val('RM ' + totalBoothPrice.toFixed(2));
+            }
+
+            function priceUnitTable() {
+                var unitTablePrice = parseFloat($('#add_on_table').val());
+                var qtyTable = parseFloat($('#add_table').val());
+                var totalTablePrice = unitTablePrice * qtyTable;
+
+                $('#table_TPrice').val('RM ' + totalTablePrice.toFixed(2));
+            }
+
+            function priceUnitChair() {
+                var unitChairPrice = parseFloat($('#add_on_chair').val());
+                var qtyChair = parseFloat($('#add_chair').val());
+                var totalTableChair = unitChairPrice * qtyChair;
+
+                $('#chair_TPrice').val('RM ' + totalTableChair.toFixed(2));
+            }
+
+            function priceUnitSSO() {
+                var unitSsoPrice = parseFloat($('#add_on_sso').val());
+                var qtySSO = parseFloat($('#add_sso').val());
+                var totalTableSSo = unitSsoPrice * qtySSO;
+
+                $('#sso_TPrice').val('RM ' + totalTableSSo.toFixed(2));
+            }
+
+            function deSubTotal() {
+                var unitBoothPrice = parseFloat($('#booth_price_unit').val());
+                var qtyBooth = parseFloat($('#booth_qty').val());
+                var deSubTotal = unitBoothPrice * qtyBooth;
+                $('#sub_total').val('RM ' + deSubTotal.toFixed(2));
+            }
+
+            function deTotal() {
+                var unitBoothPrice  = parseFloat($('#booth_price_unit').val());
+                var qtyBooth        = parseFloat($('#booth_qty').val());
+                var totalBoothPrice = unitBoothPrice * qtyBooth;
+                var unitTablePrice  = parseFloat($('#add_on_table').val());
+                var qtyTable        = parseFloat($('#add_table').val());
+                var totalTablePrice = unitTablePrice * qtyTable;
+                var unitChairPrice  = parseFloat($('#add_on_chair').val());
+                var qtyChair        = parseFloat($('#add_chair').val());
+                var totalTableChair = unitChairPrice * qtyChair;
+                var unitSsoPrice    = parseFloat($('#add_on_sso').val());
+                var qtySSO          = parseFloat($('#add_sso').val());
+                var totalTableSSo   = unitSsoPrice * qtySSO;
+
+                var deTotal = totalBoothPrice + totalTablePrice + totalTableChair + totalTableSSo;
+
+                $('#total').val('RM ' + deTotal.toFixed(2));
+            }
+
+            function calculatePrices() {
+                priceUnit();
+                priceUnitTable();
+                priceUnitChair();
+                priceUnitSSO();
+                deSubTotal();
+                deTotal();
+            }
+
+            $('#booth_qty, #add_table, #add_chair, #add_sso').change(function () {
                 calculatePrices();
-            });
-        })
+            })
 
-        $('#hobby_group_zone_btn').click(function () {
-            event.preventDefault();
-            $('#hobby_group_zone').show();
-            $('#interest_in').hide();
-        })
-
-        $('#activity_zone_zone_btn').click(function () {
-            event.preventDefault();
-            $('#activity_zone').show();
-            $('#interest_in').hide();
-        })
-
-        function priceUnit() {
-            var unitBoothPrice = parseFloat($('#booth_price_unit').val());
-            var qtyBooth = parseFloat($('#booth_qty').val());
-            var totalBoothPrice = unitBoothPrice * qtyBooth;
-
-            $('#booth_price').val('RM ' + totalBoothPrice.toFixed(2));
-        }
-
-        function priceUnitTable() {
-            var unitTablePrice = parseFloat($('#add_on_table').val());
-            var qtyTable = parseFloat($('#add_table').val());
-            var totalTablePrice = unitTablePrice * qtyTable;
-
-            $('#table_TPrice').val('RM ' + totalTablePrice.toFixed(2));
-        }
-
-        function priceUnitChair() {
-            var unitChairPrice = parseFloat($('#add_on_chair').val());
-            var qtyChair = parseFloat($('#add_chair').val());
-            var totalTableChair = unitChairPrice * qtyChair;
-
-            $('#chair_TPrice').val('RM ' + totalTableChair.toFixed(2));
-        }
-
-        function priceUnitSSO() {
-            var unitSsoPrice = parseFloat($('#add_on_sso').val());
-            var qtySSO = parseFloat($('#add_sso').val());
-            var totalTableSSo = unitSsoPrice * qtySSO;
-
-            $('#sso_TPrice').val('RM ' + totalTableSSo.toFixed(2));
-        }
-
-        function deSubTotal() {
-            var unitBoothPrice = parseFloat($('#booth_price_unit').val());
-            var qtyBooth = parseFloat($('#booth_qty').val());
-            var deSubTotal = unitBoothPrice * qtyBooth;
-            $('#sub_total').val('RM ' + deSubTotal.toFixed(2));
-        }
-
-        function deTotal() {
-            var unitBoothPrice  = parseFloat($('#booth_price_unit').val());
-            var qtyBooth        = parseFloat($('#booth_qty').val());
-            var totalBoothPrice = unitBoothPrice * qtyBooth;
-            var unitTablePrice  = parseFloat($('#add_on_table').val());
-            var qtyTable        = parseFloat($('#add_table').val());
-            var totalTablePrice = unitTablePrice * qtyTable;
-            var unitChairPrice  = parseFloat($('#add_on_chair').val());
-            var qtyChair        = parseFloat($('#add_chair').val());
-            var totalTableChair = unitChairPrice * qtyChair;
-            var unitSsoPrice    = parseFloat($('#add_on_sso').val());
-            var qtySSO          = parseFloat($('#add_sso').val());
-            var totalTableSSo   = unitSsoPrice * qtySSO;
-
-            var deTotal = totalBoothPrice + totalTablePrice + totalTableChair + totalTableSSo;
-
-            $('#total').val('RM ' + deTotal.toFixed(2));
-            console.log(deTotal);
-        }
-
-        function calculatePrices() {
-            priceUnit();
-            priceUnitTable();
-            priceUnitChair();
-            priceUnitSSO();
-            deSubTotal();
-            deTotal();
-        }
-
-        $('#booth_qty, #add_table, #add_chair, #add_sso').change(function () {
             calculatePrices();
-        })
 
-        calculatePrices();
+            // Event handler for checkbox changes
+            var checkboxes = $('.booth-area input[type="checkbox"]');
+            var boothQtySelect = $("#booth_qty");
 
+            checkboxes.change(function () {
+                var countCheckedCheckboxes = checkboxes.filter(':checked').length;
+                console.log(countCheckedCheckboxes);
+
+                if (countCheckedCheckboxes <= boothQtySelect.val()) {
+                    
+                }
+            });
+
+            // Event handler for booth quantity select change
+            boothQtySelect.change(function () {
+                checkboxes.prop('checked', false);
+                checkboxes.prop('disabled', false);
+                $('.booth-area > .booth-box').removeClass('selected');
+            });
+
+        });
     </script>
 @endpush
