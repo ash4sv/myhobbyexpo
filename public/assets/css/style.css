@@ -32,9 +32,14 @@ body.myhobbyexpo {
 
 .booth-area {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-.booth-box {}
+.booth-box {
+    box-sizing: content-box;
+    margin-left: .25rem;
+    margin-bottom: .25rem;
+}
 .booth-box.selected input[type='checkbox'] ~ label.booth-label {
     background-color: lightgray;
 }
@@ -42,21 +47,26 @@ body.myhobbyexpo {
     background-color: lightgray;
     cursor: not-allowed;
 }
+:root {
+    --booth-size: 80px;
+}
 .booth-box input[type='checkbox'] ~ label.booth-label {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    background-color: red;
+    width: var(--booth-size);
+    height: var(--booth-size);
+    line-height: var(--booth-size);
+    background-color: #A13CC2;
+    color: #FFFFFF;
+    font-weight: 700;
     text-align: center;
 }
 .booth-box input[type='checkbox'] ~ label.booth-label:hover {
-    background-color: pink;
+    background-color: #8C0AA9;
 }
 .booth-box input[type='checkbox'] {
     display: none;
 }
 .booth-box input[type=checkbox]:checked ~ label.booth-label {
-    background-color: blue;
+    background-color: #4D0180;
 }
 
 /*======one-page-parallax======*/

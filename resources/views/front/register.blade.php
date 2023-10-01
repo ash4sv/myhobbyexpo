@@ -4,7 +4,9 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto mb-5">
-            <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
+            <a href="{{ route('front.register') }}">
+                <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
+            </a>
         </div>
     </div>
 
@@ -16,7 +18,7 @@
                     <input type="hidden" name="" class="form-control">
                 </a>
             </div>
-            <div class="col-md-3 col-6">
+            {{--<div class="col-md-3 col-6">
                 <a href="" id="hobby_group_zone_btn">
                     <img src="{{ asset('assets/images/hobby-group-zone.png') }}" alt="" class="img-fluid">
                     <input type="hidden" name="" class="form-control">
@@ -27,7 +29,7 @@
                     <img src="{{ asset('assets/images/activity-zone.png') }}" alt="" class="img-fluid">
                     <input type="hidden" name="" class="form-control">
                 </a>
-            </div>
+            </div>--}}
         </div>
     </div>
 
@@ -36,7 +38,7 @@
             <div class="row justify-content-center g-4 pb-5">
                 @foreach($categories as $category)
                 <div class="col-md-3 col-6">
-                    <a href="" id="flea_market_{{ $category->slug }}_btn">
+                    <a href="" class="section-toggle" data-target="{{ $category->slug }}" id="flea_market_{{ $category->slug }}_btn">
                         <img src="{{ asset($category->image) }}" alt="" class="img-fluid">
                         <input type="hidden" name="" class="form-control">
                     </a>
@@ -46,7 +48,7 @@
         </div>
 
         @foreach($categories as $category)
-        <div id="{{ $category->slug }}_lot">
+        <div id="{{ $category->slug }}" class="dynamic-section">
             <div class="row justify-content-center g-4 pb-5">
                 <div class="col-md-9">
                     <div class="card mb-4 shadow-lg rounded">
@@ -58,7 +60,7 @@
                     <div class="card shadow-lg rounded">
                         <div class="card-body">
 
-                            <form action="" method="post">
+                            <form action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
                                 <hr class="my-10px">
@@ -67,16 +69,16 @@
                                         <div class="mb-3">
                                             <label class="form-label">Quantity Booths</label>
                                             <div class="input-group">
-                                                <select name="" id="" class="form-control default-select2">
+                                                <select name="booth_qty" id="booth_qty" class="form-control default-select2">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>
                                                 </select>
-                                                <input type="text" aria-label="" class="form-control" name="" id="" readonly value="RM {{ $category->price }}">
+                                                <input type="text" aria-label="" class="form-control" name="booth_price" id="booth_price" readonly value="RM {{ $category->price }}">
                                             </div>
-                                            <div id="" class="form-text">Came with {{ $category->table }} Unit Table,
-                                                {{ $category->chair }} Unit Chair, {{ $category->sso }} Unit SSO 13Amp for 1 booths</div>
+                                            <div id="" class="form-text">Came with {{ $category->ffe_table }} Unit Table,
+                                                {{ $category->ffe_chair }} Unit Chair, {{ $category->ffe_sso }} Unit SSO 13Amp for 1 booths</div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@
                                             <div class="booth-area">
                                                 @foreach($category->numbers as $number)
                                                 <div class="booth-box {{ $number->status == 1? 'selected':'' }}">
-                                                    <input type="checkbox" name="booth[][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disable':'' }}>
+                                                    <input type="checkbox" name="booths[{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disable':'' }}>
                                                     <label for="btn_{{ $number->id }}_{{ $number->slug }}" class="booth-label">{{ $number->name }}</label>
                                                 </div>
                                                 @endforeach
@@ -105,8 +107,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Table</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="">RM 1.00</span>
-                                                <select name="" id="" class="form-control">
+                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <select name="add_table" id="add_table" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -123,8 +125,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Chair</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon3">RM 1.00</span>
-                                                <select name="" id="" class="form-control">
+                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <select name="add_chair" id="add_chair" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -141,8 +143,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Switch Socket Outlet (13 amp)</label>
                                             <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon3">RM 1.00</span>
-                                                <select name="" id="" class="form-control">
+                                                <input type="text" class="form-control" value="RM 1.00" readonly>
+                                                <select name="add_sso" id="add_sso" class="form-control">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -155,7 +157,7 @@
 
                                 <div class="mb-0 text-center">
                                     <button type="submit" class="btn btn-indigo btn-lg w-300px">
-                                        Submit
+                                        Booking
                                     </button>
                                 </div>
                             </form>
@@ -166,140 +168,26 @@
             </div>
         </div>
         @endforeach
+    </div>
 
-        {{--<div id="normal_lot">
-            <div class="row justify-content-center g-4 pb-5">
-                <div class="col-md-9">
-                    <div class="card shadow-lg rounded">
-                        <div class="card-body">
-
-                            <img src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" class="card-img-top" alt="...">
-
-                        </div>
+    <div id="hobby_group_zone">
+        <div class="row justify-content-center g-4 pb-5">
+            <div class="col-md-9">
+                <div class="card mb-4 shadow-lg rounded">
+                    <div class="card-body">
+                        <h1>hobby_group_zone</h1>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="bazaar_lot">
-            <div class="row justify-content-center g-4 pb-5">
-                <div class="col-md-9">
-                    <div class="card shadow-lg rounded">
-                        <div class="card-body">
-
-                            <img src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" class="card-img-top" alt="...">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--}}
-    </div>
-
-    <div id="hobby_group_zone">
-        <h1 class="text-white">hobby_group_zone</h1>
     </div>
 
     <div id="activity_zone">
-        <h1 class="text-white">activity_zone</h1>
-    </div>
-
-    <div id="details">
         <div class="row justify-content-center g-4 pb-5">
             <div class="col-md-9">
-                <div class="card">
+                <div class="card mb-4 shadow-lg rounded">
                     <div class="card-body">
-
-                        <h4 class="card-title">1. Exhibitor Particulars</h4>
-                        <hr class="my-10px">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="company_name" class="form-label">Name of Company / Shop / Group / Club / Associate: <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="company_name" id="company_name" required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="person_in_charge" class="form-label">ROC / ROB / ROC: <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="person_in_charge" class="form-label">Name of Person in Charge: <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="contact_no" class="form-label">Contact No.: <span class="text-danger">*</span></label>
-                                    <input class="form-control masked-input-phone" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-                                    <input class="form-control" type="email" name="email" id="email" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="facebook_page" class="form-label">Facebook:</label>
-                                    <input class="form-control" type="text" name="facebook_page" id="facebook_page" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="instagram" class="form-label">Instagram:</label>
-                                    <input class="form-control" type="text" name="instagram" id="instagram" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="tiktok" class="form-label">TikTok:</label>
-                                    <input class="form-control" type="text" name="tiktok" id="tiktok" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="other" class="form-label">Other</label>
-                                    <input class="form-control" type="text" name="other" id="other" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="website" class="form-label">Website</label>
-                                    <input class="form-control" type="text" name="website" id="website" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="website" class="form-label">Image Gathering</label>
-                                    <input class="form-control" type="file" name="website" id="website" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-0">
-                            <button type="button" class="btn btn-primary px-5">
-                                Submit
-                            </button>
-                        </div>
-
+                        <h1>activity_zone</h1>
                     </div>
                 </div>
             </div>
@@ -310,28 +198,19 @@
 
 @push('reg-script')
     <script>
-        $('#flea_market, #hobby_group_zone, #activity_zone, #details, #premium_lot, #normal_lot, #bazaar_lot').hide();
+        $('#flea_market, #hobby_group_zone, #activity_zone, .dynamic-section').hide();
 
         $('#flea_market_btn').click(function () {
             event.preventDefault();
             $('#flea_market').show();
             $('#interest_in').hide();
 
-            $('#premium_lot, #normal_lot, #bazaar_lot').hide()
+            $('.section-toggle').click(function() {
+                event.preventDefault();
+                var targetId = $(this).data('target');
+                $('#' + targetId).show();
+                $('.dynamic-section').not('#' + targetId).hide(); // Hide other sections
 
-            $('#flea_market_premium_btn').click(function () {
-                event.preventDefault();
-                $('#premium_lot').show();
-                $('#booth_type').hide();
-            });
-            $('#flea_market_normal_btn').click(function () {
-                event.preventDefault();
-                $('#normal_lot').show();
-                $('#booth_type').hide();
-            });
-            $('#flea_market_bazaar_btn').click(function () {
-                event.preventDefault();
-                $('#bazaar_lot').show();
                 $('#booth_type').hide();
             });
         })

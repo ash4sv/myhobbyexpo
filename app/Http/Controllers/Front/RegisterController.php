@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\BoothNumber;
 use App\Models\Apps\BoothType;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\TypeOfInterest;
@@ -86,8 +87,22 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function typeOfInterest(Request $request)
+    public function booth(Request $request)
     {
+        /*$request->session()->put([
+            'booth_price' => $request->booth_price,
+            'type_booth' => $request->type_booth,
+            'booth_qty' => $request->booth_qty,
+            'add_table' => $request->add_table,
+            'add_chair' => $request->add_table,
+            'add_sso' => $request->add_sso,
+        ]);*/
+        return view('front.vendor');
+    }
+
+    public function vendorRegister(Request $request)
+    {
+        return $request;
     }
 
 }

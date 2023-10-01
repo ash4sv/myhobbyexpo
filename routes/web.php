@@ -36,7 +36,9 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         'namespace' => 'Front',
         'as' => 'front.',
     ], function (){
-        Route::get('register', [RegisterController::class, 'register']);
+        Route::get('register', [RegisterController::class, 'register'])->name('register');
+        Route::post('register', [RegisterController::class, 'booth'])->name('booth');
+        Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
     });
 });
 
