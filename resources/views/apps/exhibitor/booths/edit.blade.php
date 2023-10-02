@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
-@section('page-title', 'EVENT EXHIBIT')
-@section('page-header', 'EVENT EXHIBIT')
+@section('page-title', 'Edit Booth Number')
+@section('page-header', 'Edit Booth Number')
 @section('description', '')
 
 @section('content')
+
 
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
@@ -26,7 +27,28 @@
         </div>
         <div class="panel-body">
 
+            <form action="{{ route('apps.exhibitor.booths.edit', $booth) }}" method="post" enctype="multipart/form-data">
+                @csrf
 
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="hobby-select form-select @error('category') is-invalid @enderror" name="category" id="category">
+                        @foreach($categories as $key => $category)
+                            <option value="{{ $category->id  }}" {{ ($category->id == old('category', $booth->category_id)) ? 'selected' : '' }}>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+
+                <div class="mb-0">
+                    <button type="submit" class="btn btn-indigo w-100px">Save</button>
+                </div>
+
+            </form>
 
         </div>
     </div>

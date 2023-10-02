@@ -3,7 +3,7 @@ var Apps = {
         Apps.datatable();
         Apps.select2('.hobby-select');
         /*Apps.summernote('.summernote');*/
-        /*Apps.switchery('switchery-default');*/
+        Apps.switchery('switchery-default');
         Apps.permissionForm();
     },
 
@@ -75,7 +75,7 @@ var Apps = {
     },
 
     switchery: function (switchery) {
-        var elm = document.getElementById(switchery);
+        var elm = $('.switchery');
         var switchery = new Switchery(elm, {
             color: '#00acac'
         });

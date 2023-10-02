@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booths_maps', function (Blueprint $table) {
+        Schema::create('booth_types', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('images');
+            $table->string('image')->nullable();
+            $table->string('layout_plan')->nullable();
             $table->string('name');
+            $table->string('slug');
             $table->longText('description')->nullable();
+            $table->integer('ffe_table')->nullable();
+            $table->integer('ffe_chair')->nullable();
+            $table->integer('ffe_sso')->nullable();
+            $table->double('price');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booths_maps');
+        Schema::dropIfExists('booth_types');
     }
 };

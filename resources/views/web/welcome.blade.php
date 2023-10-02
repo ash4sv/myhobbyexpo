@@ -110,9 +110,9 @@
                         <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="" class="img-fluid mb-5">
                     </div>
                 </div>
-                <div class="row row-space-10">
+                <div class="row g-4">
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work">
                             <div class="image">
                                 <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}" alt="Work 1" /></a>
                             </div>
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work">
                             <div class="image">
                                 <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}" alt="Work 1" /></a>
                             </div>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work">
                             <div class="image">
                                 <a data-fancybox="mhx2018" href="{{ asset('assets/images/pvs_12/photo-pvs12-01.webp') }}"><img src="{{ asset('assets/images/pvs_12/photo-pvs12-01.webp') }}" alt="Work 1" /></a>
                             </div>
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work">
                             <div class="image">
                                 <a  data-fancybox="mhx2019" href="{{ asset('assets/images/pvs_14/photo-pvs14-01.webp') }}"><img src="{{ asset('assets/images/pvs_14/photo-pvs14-01.webp') }}" alt="Work 1" /></a>
                             </div>
@@ -216,9 +216,9 @@
                         <img src="{{ asset('assets/images/layout-floor-plan-title@2x.png') }}" alt="" class="img-fluid h-100px mb-5">
                     </div>
                 </div>
-                <div class="row row-space-10">
+                <div class="row g-4">
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work ">
                             <div class="image">
                                 <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" data-caption="MHE Hall A">
                                     <img src="{{ asset('assets/images/layout-1@2x-50.jpg') }}" alt="MHE Hall A" />
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work ">
                             <div class="image">
                                 <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-2@4x-50.jpg') }}" data-caption="MHE Hall B">
                                     <img src="{{ asset('assets/images/layout-2@2x-50.jpg') }}" alt="MHE Hall B" />
@@ -244,7 +244,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work ">
                             <div class="image">
                                 <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-3@4x-50.jpg') }}" data-caption="MHE Hall C">
                                     <img src="{{ asset('assets/images/layout-3@2x-50.jpg') }}" alt="MHE Hall C" />
@@ -257,7 +257,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <div class="work mb-30px">
+                        <div class="work ">
                             <div class="image">
                                 <a href="#" data-fancybox data-src="{{ asset('assets/images/layout-4@4x-50.jpg') }}" data-caption="MHE Hall D2">
                                     <img src="{{ asset('assets/images/layout-4@2x-50.jpg') }}" alt="MHE Hall D2" />

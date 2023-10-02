@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Apps\AppsController;
+use App\Http\Controllers\Apps\BoothNumberController;
+use App\Http\Controllers\Apps\BoothTypeController;
 use App\Http\Controllers\Apps\ExhibitController;
+use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Apps\RolesController;
@@ -28,14 +31,14 @@ Route::group([
     Route::post('contactus', [WebController::class, 'submitContact'])->name('submit');
 });
 
-Route::domain('register.' . env('APP_URL'))->group(function(){
+Route::domain('vendor.' . env('APP_URL'))->group(function(){
     Route::group([
         'namespace' => 'Front',
         'as' => 'front.',
     ], function (){
-        Route::get('form', [RegisterController::class, 'register'])->name('registration');
-        Route::get('interest', [RegisterController::class, 'typeOfInterest'])->name('typeofinterest');
-        Route::post('submit', [RegisterController::class, 'submit'])->name('submit');
+        Route::get('register', [RegisterController::class, 'register'])->name('register');
+        Route::post('register', [RegisterController::class, 'booth'])->name('booth');
+        Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
     });
 });
 
@@ -54,6 +57,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
             'middleware'   => 'auth',
         ], function (){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
+           Route::get('route', [AppsController::class, 'routeList'])->name('route');
+           Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::group([
                'prefix'  => 'pre-register',
                'as'     => 'preregister.'
@@ -72,10 +77,11 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('users', UserController::class);
            });
            Route::group([
-               'prefix'  => 'events',
-               'as'     => 'events.',
+               'prefix'  => 'exhibitor',
+               'as'     => 'exhibitor.',
            ], function (){
-               Route::resource('exhibit', ExhibitController::class);
+               Route::resource('category',BoothTypeController::class);
+               Route::resource('booths',BoothNumberController::class);
            });
         });
     });

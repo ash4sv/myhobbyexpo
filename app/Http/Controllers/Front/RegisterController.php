@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\BoothNumber;
+use App\Models\Apps\BoothType;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\TypeOfInterest;
 use Illuminate\Http\Request;
@@ -79,18 +81,38 @@ class RegisterController extends Controller
 
     public function register()
     {
-        $exhibits = TypeOfInterest::all();
-        return view('front.interest', [
-            'exhibits' => $exhibits
+        $categories = BoothType::orderBy("id", "asc")->get();
+        return view('front.register', [
+            'categories' => $categories
         ]);
     }
 
-    public function typeOfInterest(Request $request)
+    public function booth(Request $request)
     {
-        $type = TypeOfInterest::where('slug', $request->key)->firstOrFail();
-        return view('front.booth', [
-            'type' => $type
+        $request->session()->put([
+            'booth_type'        => $request->booth_type,
+            'booth_qty'         => $request->booth_qty,
+            'booth_price'       => $request->booth_price,
+            'booth_price_unit'  => $request->booth_price_unit,
+            'table_TPrice'      => $request->table_TPrice,
+            'add_table'         => $request->add_table,
+            'chair_TPrice'      => $request->chair_TPrice,
+            'add_chair'         => $request->add_table,
+            'sso_TPrice'        => $request->sso_TPrice,
+            'add_sso'           => $request->add_sso,
+            'sub_total'         => $request->sub_total,
+            'total'             => $request->total,
         ]);
+        return view('front.vendor', [
+            'data' => $request->all(),
+            'subTotal' => $request->sub_total,
+            'total' => $request->total
+        ]);
+    }
+
+    public function vendorRegister(Request $request)
+    {
+        return $request;
     }
 
 }

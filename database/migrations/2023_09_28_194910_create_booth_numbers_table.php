@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_of_interests', function (Blueprint $table) {
+        Schema::create('booth_numbers', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('image');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('booth_types')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('vendor_id')->nullable();
             $table->string('name');
+            $table->string('slug');
             $table->longText('description')->nullable();
+            $table->boolean('status');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_of_interests');
+        Schema::dropIfExists('booth_numbers');
     }
 };

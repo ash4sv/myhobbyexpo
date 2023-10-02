@@ -12,11 +12,11 @@
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                Web Admin
+                                {{ Auth::user()->name }}
                             </div>
                             <div class="menu-caret ms-auto"></div>
                         </div>
-                        <small>Administrator</small>
+                        <small class="text-capitalize">{{ Auth::user()->getRoleNames()->first() }}</small>
                     </div>
                 </a>
             </div>
@@ -90,6 +90,28 @@
             </div>
             @endcan
 
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'exhibitor') ? 'active' : '' }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="menu-text">Exhibitor</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->segment(2) == 'category') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibitor.category.index') }}" class="menu-link">
+                            <div class="menu-text">Booth Category</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'booths') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibitor.booths.index') }}" class="menu-link">
+                            <div class="menu-text">Booth Number</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -135,6 +157,7 @@
             </div>--}}
             @can('system-access')
             <div class="menu-header">Systems</div>
+
             @can('acl-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'acl') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
@@ -170,7 +193,30 @@
             </div>
             @endcan
 
+            @can('route-access')
+            <div class="menu-item {{ (request()->segment(1) == 'route') ? 'active' : '' }}">
+                <a href="{{ route('apps.route') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-link"></i>
+                    </div>
+                    <div class="menu-text">Route list</div>
+                </a>
+            </div>
             @endcan
+
+            @can('log-access')
+            <div class="menu-item {{ (request()->segment(1) == 'logs') ? 'active' : '' }}">
+                <a href="{{ route('apps.logs') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-history"></i>
+                    </div>
+                    <div class="menu-text">Logs</div>
+                </a>
+            </div>
+            @endcan
+
+            @endcan
+
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">

@@ -161,6 +161,8 @@
                 </tbody>
             </table>
 
+            <a href="" class="btn btn-indigo btn-lg w-150px">Back</a>
+
         </div>
     </div>
 

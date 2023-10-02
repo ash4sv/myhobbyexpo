@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\PreRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class AppsController extends Controller
 {
@@ -69,6 +70,13 @@ class AppsController extends Controller
         return view($this->view.'index', [
             'registers' => $hobby_showoff,
             'title' => 'Hobby Show-off',
+        ]);
+    }
+
+    public function routeList()
+    {
+        return view('apps.route.index', [
+            'routes' => Route::getRoutes()
         ]);
     }
 }
