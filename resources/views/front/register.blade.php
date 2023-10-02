@@ -94,9 +94,9 @@
                                             <div class="mb-3">
 
                                                 <div class="booth-area boxed-check-group boxed-check-indigo">
-                                                    @foreach($category->numbers as $number)
+                                                    @foreach($category->numbers->where('status', 0) as $number)
                                                     <label class="booth-box boxed-check" for="btn_{{ $number->id }}_{{ $number->slug }}">
-                                                        <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled=""':'' }}>
+                                                        <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled':'' }}>
                                                         <div class="boxed-check-label">{{ $number->name }}</div>
                                                     </label>
                                                     @endforeach
@@ -361,27 +361,36 @@
 
             sqmeter();
 
-            // Event handler for checkbox changes
+            // Get all checkboxes within the booth-area
             var checkboxes = $('.booth-area input[type="checkbox"]');
             var boothQtySelect = $("#booth_qty");
+            var lastCheckedCheckbox = null;
 
+            // Listen for changes on checkboxes
             checkboxes.change(function () {
                 var countCheckedCheckboxes = checkboxes.filter(':checked').length;
-                console.log(countCheckedCheckboxes);
-                console.log(checkboxes);
-                if (countCheckedCheckboxes === boothQtySelect.val()) {
+                var valQtySelect = parseInt(boothQtySelect.val());
 
-                    checkboxes.attr('disabled', true);
+                // Disable all checkboxes in the booth-area
+                checkboxes.attr('disabled', 'disabled');
+
+                // Enable only the checked checkboxes
+                checkboxes.filter(':checked').removeAttr('disabled');
+
+                // If the count of checked checkboxes is less than the selected quantity, enable the remaining checkboxes
+                if (countCheckedCheckboxes < valQtySelect) {
+                    checkboxes.filter(':not(:checked)').removeAttr('disabled');
                 }
-            });
 
-            // Event handler for booth quantity select change
-            boothQtySelect.change(function () {
-                checkboxes.prop('checked', false);
-                checkboxes.prop('disabled', false);
-                $('.booth-area > .booth-box').removeClass('selected');
+                // If a checkbox was unchecked, only enable that checkbox
+                if (lastCheckedCheckbox && !lastCheckedCheckbox.is(':checked')) {
+                    lastCheckedCheckbox.removeAttr('disabled');
+                }
+
+                lastCheckedCheckbox = $(this);
             });
 
         });
+
     </script>
 @endpush
