@@ -100,8 +100,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="person_in_charge" class="form-label">ROC / ROB / ROC: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" />
+                                        <label for="roc_rob" class="form-label">ROC / ROB / ROC: <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="roc_rob" id="roc_rob" />
                                     </div>
                                 </div>
                             </div>

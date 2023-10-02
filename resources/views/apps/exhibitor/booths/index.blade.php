@@ -55,7 +55,11 @@
                         @endisset
                     </td>
                     <td>{{ $number->name }}</td>
-                    <td>{{ $number->vendor_id }}</td>
+                    <td>
+                        @isset($number->vendor_id)
+                            {{ $number->vendor->company }} | {{ $number->vendor->pic_name }}
+                        @endisset
+                    </td>
                     <td>
                         <span class="badge border px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center {{ $number->status == 1 ? 'border-success text-success' : 'border-danger text-danger' }}">
                              <i class="fa fa-circle fs-9px fa-fw me-5px"></i> {{ $number->status == 1 ? 'Booked' : 'Empty' }}
