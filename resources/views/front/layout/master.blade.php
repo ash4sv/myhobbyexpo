@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/default/app.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/boxed-check/css/boxed-check.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
