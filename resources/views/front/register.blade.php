@@ -323,9 +323,8 @@
             checkboxes.change(function () {
                 var countCheckedCheckboxes = checkboxes.filter(':checked').length;
                 console.log(countCheckedCheckboxes);
-
-                if (countCheckedCheckboxes <= boothQtySelect.val()) {
-                    $('.booth-area > .booth-box').addClass('selected');
+                if (countCheckedCheckboxes === boothQtySelect.val()) {
+                    console.log(checkboxes);
                 }
             });
 

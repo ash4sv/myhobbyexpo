@@ -7,6 +7,8 @@ use App\Models\Apps\BoothNumber;
 use App\Models\Apps\BoothType;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\TypeOfInterest;
+use App\Models\Apps\Vendor;
+use App\Services\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -89,6 +91,9 @@ class RegisterController extends Controller
 
     public function booth(Request $request)
     {
+        $request->validate([
+            'booths.id.*' => 'required'
+        ]);
         $request->session()->put([
             'booth_type'        => $request->booth_type,
             'booth_qty'         => $request->booth_qty,
@@ -102,6 +107,7 @@ class RegisterController extends Controller
             'add_sso'           => $request->add_sso,
             'sub_total'         => $request->sub_total,
             'total'             => $request->total,
+            'booths'            => $request->booths,
         ]);
         return view('front.vendor', [
             'data' => $request->all(),
@@ -112,7 +118,62 @@ class RegisterController extends Controller
 
     public function vendorRegister(Request $request)
     {
-        return $request;
+        $dataPull = $request->session()->only([
+            'booth_type',
+            'booth_qty',
+            'booth_price',
+            'booth_price_unit',
+            'table_TPrice',
+            'add_table',
+            'chair_TPrice',
+            'add_chair',
+            'sso_TPrice',
+            'add_sso',
+            'sub_total',
+            'total',
+            'booths'
+        ]);
+
+        $socmed = json_encode([
+            'facebook' => $request->facebook_page,
+            'instagram' => $request->instagram,
+            'tiktok' => $request->tiktok,
+            'other' => $request->other,
+        ]);
+
+        $vendor = new Vendor();
+        $vendor->company = $request->company_name;
+        $vendor->roc_rob = $request->roc_rob;
+        $vendor->pic_name = $request->person_in_charge;
+        $vendor->phone_num = $request->contact_no;
+        $vendor->email = $request->email;
+        $vendor->social_media = $socmed;
+        $vendor->website = $request->website;
+
+        if ($request->hasFile('image')) {
+            $image = ImageUploader::uploadSingleImage($request->file('image'), 'assets/images', 'vendor');;
+        } else {
+            $image = $vendor->image;
+        }
+
+        $vendor->image = $image;
+        $vendor->save();
+
+        foreach ($dataPull["booths"]["id"] as $id => $status) {
+            if ($status === "on") {
+                try {
+                    $foundBooth = BoothNumber::findOrFail($id);
+                    $foundBooth->update([
+                        'vendor_id' => $vendor->id,
+                        'status'    => true
+                    ]);
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                }
+            }
+        }
+
+        Alert::success('Thank you for registration', 'We already received your registration');
+        return redirect()->back();
     }
 
 }

@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->string('company');
+            $table->string('roc_rob');
+            $table->string('pic_name');
+            $table->string('phone_num');
+            $table->string('email');
+            $table->longText('social_media')->nullable();
+            $table->string('website')->nullable();
+            $table->string('image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

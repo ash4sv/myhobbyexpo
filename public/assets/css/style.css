@@ -43,7 +43,8 @@ body.myhobbyexpo {
 .booth-box.selected input[type='checkbox'] ~ label.booth-label {
     background-color: lightgray;
 }
-.booth-box.selected input[type='checkbox'] ~ label.booth-label:hover {
+.booth-box.selected input[type='checkbox'] ~ label.booth-label:hover,
+.booth-box.selected input[type='checkbox'] ~ label.booth-label:disabled {
     background-color: lightgray;
     cursor: not-allowed;
 }

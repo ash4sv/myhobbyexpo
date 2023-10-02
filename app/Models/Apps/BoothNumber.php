@@ -41,4 +41,9 @@ class BoothNumber extends Model
     {
         return $this->belongsTo(BoothType::class, 'category_id', 'id');
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
 }
