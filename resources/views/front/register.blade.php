@@ -18,7 +18,7 @@
                     <input type="hidden" name="" class="form-control">
                 </a>
             </div>
-            {{--<div class="col-md-3 col-6">
+            <div class="col-md-3 col-6">
                 <a href="" id="hobby_group_zone_btn">
                     <img src="{{ asset('assets/images/hobby-group-zone.png') }}" alt="" class="img-fluid">
                     <input type="hidden" name="" class="form-control">
@@ -29,7 +29,7 @@
                     <img src="{{ asset('assets/images/activity-zone.png') }}" alt="" class="img-fluid">
                     <input type="hidden" name="" class="form-control">
                 </a>
-            </div>--}}
+            </div>
         </div>
     </div>
 
@@ -93,12 +93,12 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
 
-                                                <div class="booth-area">
-                                                    @foreach($category->numbers as $number)
-                                                        <div class="booth-box {{ $number->status == 1? 'selected':'' }}">
-                                                            <input type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disable':'' }} class="number_booth_checkbox">
-                                                            <label for="btn_{{ $number->id }}_{{ $number->slug }}" class="booth-label">{{ $number->name }}</label>
-                                                        </div>
+                                                <div class="booth-area boxed-check-group boxed-check-indigo">
+                                                    @foreach($category->numbers->where('status', 0) as $number)
+                                                    <label class="booth-box boxed-check" for="btn_{{ $number->id }}_{{ $number->slug }}">
+                                                        <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled':'' }}>
+                                                        <div class="boxed-check-label">{{ $number->name }}</div>
+                                                    </label>
                                                     @endforeach
                                                 </div>
 
@@ -187,7 +187,32 @@
             <div class="col-md-9">
                 <div class="card mb-4 shadow-lg rounded">
                     <div class="card-body">
-                        <h1>hobby_group_zone</h1>
+                        <img src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" class="img-fluid" alt="...">
+                    </div>
+                </div>
+
+                <div class="card mb-4 shadow-lg rounded">
+                    <div class="card-body">
+                        <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
+                        <hr class="my-10px">
+
+                        <div class="mb-3" id="barred_size_sec">
+                            <label for="bare_size" class="form-label">Bare Space Size (meter): </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="bare_length" id="bare_length" placeholder="Length">
+                                <span class="input-group-text input-group-addon">to</span>
+                                <input type="text" class="form-control" name="bare_width" id="bare_width" placeholder="Width">
+                                <input type="text" class="form-control" name="price_size" id="price_size" value="RM 100" readonly>
+                                <input type="hidden" name="price_pre_square" id="price_pre_square" value="50">
+                            </div>
+                        </div>
+
+                        <div class="mb-0 text-center">
+                            <button type="submit" class="btn btn-indigo btn-lg w-300px">
+                                Booking
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -199,7 +224,9 @@
             <div class="col-md-9">
                 <div class="card mb-4 shadow-lg rounded">
                     <div class="card-body">
-                        <h1>activity_zone</h1>
+                        <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
+
+
                     </div>
                 </div>
             </div>
@@ -316,25 +343,54 @@
 
             calculatePrices();
 
-            // Event handler for checkbox changes
-            var checkboxes = $('.booth-area input[type="checkbox"]');
-            var boothQtySelect = $("#booth_qty");
+            function sqmeter() {
+                var priceSQMeter = $('#price_pre_square').val();
+                var bare_length = $('input[name="bare_length"]').val();
+                var bare_width = $('input[name="bare_width"]').val();
 
-            checkboxes.change(function () {
-                var countCheckedCheckboxes = checkboxes.filter(':checked').length;
-                console.log(countCheckedCheckboxes);
-                if (countCheckedCheckboxes === boothQtySelect.val()) {
-                    console.log(checkboxes);
-                }
+                var squareMters = bare_length * bare_width;
+                var costSqMeter = squareMters * priceSQMeter;
+
+                $('#price_size').val('RM ' + costSqMeter.toFixed(2));
+                /*console.log('RM ' + costSqMeter.toFixed(2));*/
+            }
+
+            $('#bare_length, #bare_width').on('input change', function () {
+                sqmeter();
             });
 
-            // Event handler for booth quantity select change
-            boothQtySelect.change(function () {
-                checkboxes.prop('checked', false);
-                checkboxes.prop('disabled', false);
-                $('.booth-area > .booth-box').removeClass('selected');
+            sqmeter();
+
+            // Get all checkboxes within the booth-area
+            var checkboxes = $('.booth-area input[type="checkbox"]');
+            var boothQtySelect = $("#booth_qty");
+            var lastCheckedCheckbox = null;
+
+            // Listen for changes on checkboxes
+            checkboxes.change(function () {
+                var countCheckedCheckboxes = checkboxes.filter(':checked').length;
+                var valQtySelect = parseInt(boothQtySelect.val());
+
+                // Disable all checkboxes in the booth-area
+                checkboxes.attr('disabled', 'disabled');
+
+                // Enable only the checked checkboxes
+                checkboxes.filter(':checked').removeAttr('disabled');
+
+                // If the count of checked checkboxes is less than the selected quantity, enable the remaining checkboxes
+                if (countCheckedCheckboxes < valQtySelect) {
+                    checkboxes.filter(':not(:checked)').removeAttr('disabled');
+                }
+
+                // If a checkbox was unchecked, only enable that checkbox
+                if (lastCheckedCheckbox && !lastCheckedCheckbox.is(':checked')) {
+                    lastCheckedCheckbox.removeAttr('disabled');
+                }
+
+                lastCheckedCheckbox = $(this);
             });
 
         });
+
     </script>
 @endpush
