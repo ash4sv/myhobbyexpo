@@ -1,11 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Models\archive;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BoothsSeeder extends Seeder
+class BoothsMapsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

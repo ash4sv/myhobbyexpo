@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\Booth;
 use App\Models\Apps\BoothNumber;
 use App\Models\Apps\BoothType;
+use App\Models\Apps\Hall;
 use App\Models\Apps\PreRegistration;
+use App\Models\Apps\Section;
 use App\Models\Apps\TypeOfInterest;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
@@ -83,36 +86,73 @@ class RegisterController extends Controller
 
     public function register()
     {
-        $categories = BoothType::orderBy("id", "asc")->get();
+        $halls = Hall::where('status', true)->get();
+
         return view('front.register', [
-            'categories' => $categories
+            'halls' => $halls
         ]);
+    }
+
+    public function getBoothNumbers(Request $request)
+    {
+        $currenttime = date("Y-m-d H:i:s",time());
+
+        $boothTypeId = $request->input('boothTypes');
+        $booth = Booth::findOrFail($boothTypeId);
+        $availableNumbers = $booth->boothNumbers()->where('status', 0)->get();
+
+        $priceDisplay = $booth->early_bird_price;
+        if ($booth->early_bird_expiry_date < $currenttime){
+            $priceDisplay = $booth->normal_price;
+        }
+
+        return response()->json([$availableNumbers, $priceDisplay]);
     }
 
     public function booth(Request $request)
     {
+        /*return $request->all();*/
+
         $request->validate([
             'booths.id.*' => 'required'
         ]);
         $request->session()->put([
-            'booth_type'        => $request->booth_type,
-            'booth_qty'         => $request->booth_qty,
-            'booth_price'       => $request->booth_price,
-            'booth_price_unit'  => $request->booth_price_unit,
-            'table_TPrice'      => $request->table_TPrice,
-            'add_table'         => $request->add_table,
-            'chair_TPrice'      => $request->chair_TPrice,
-            'add_chair'         => $request->add_table,
-            'sso_TPrice'        => $request->sso_TPrice,
-            'add_sso'           => $request->add_sso,
-            'sub_total'         => $request->sub_total,
-            'total'             => $request->total,
-            'booths'            => $request->booths,
+            'booth_type'                    => $request->booth_type,
+            'booth_qty'                     => $request->booth_qty,
+            'booth_price'                   => $request->booth_price,
+            'booth_price_unit'              => $request->booth_price_unit,
+
+            'table_TPrice'                  => $request->table_TPrice,
+            'add_on_table'                  => $request->add_on_table,
+            'add_table'                     => $request->add_table,
+            'chair_TPrice'                  => $request->chair_TPrice,
+            'add_on_chair'                  => $request->add_on_chair,
+            'add_chair'                     => $request->add_chair,
+            'sso_TPrice'                    => $request->sso_TPrice,
+            'add_on_sso'                    => $request->add_on_sso,
+            'add_sso'                       => $request->add_sso,
+            'ssoamp15_TPrice'               => $request->ssoamp15_TPrice,
+            'add_on_sso_15amp'              => $request->add_on_sso_15amp,
+            'add_sso_15amp'                 => $request->add_sso_15amp,
+            'steel_barricade_TPrice'        => $request->steel_barricade_TPrice,
+            'add_on_steel_barricade'        => $request->add_on_steel_barricade,
+            'add_steel_barricade'           => $request->add_steel_barricade,
+            'shell_scheme_barricade_TPrice' => $request->shell_scheme_barricade_TPrice,
+            'add_on_shell_scheme_barricade' => $request->add_on_shell_scheme_barricade,
+            'add_shell_scheme_barricade'    => $request->add_shell_scheme_barricade,
+
+            'sub_total'                     => $request->sub_total_push,
+            'total'                         => $request->total_push,
+            'booths'                        => $request->booths,
         ]);
+
+        $sections = Section::all();
+
         return view('front.vendor', [
-            'data' => $request->all(),
-            'subTotal' => $request->sub_total,
-            'total' => $request->total
+            'data'      => $request->all(),
+            'subTotal'  => $request->sub_total_push,
+            'total'     => $request->total_push,
+            'sections'  => $sections
         ]);
     }
 
@@ -131,7 +171,10 @@ class RegisterController extends Controller
             'add_sso',
             'sub_total',
             'total',
-            'booths'
+            'booths',
+            'sso_15amp',
+            'steel_barricade',
+            'shell_scheme_barricade',
         ]);
 
         $socmed = json_encode([

@@ -33,14 +33,14 @@
                                             <input type="hidden" name="subtotal_val" value="{{ $subTotal }}">
                                         </td>
                                     </tr>
-                                    @if($data['add_table'] > 0 || $data['add_chair'] > 0 || $data['add_sso'] > 0)
+                                    @if($data['add_table'] || $data['add_chair'] || $data['add_sso'] || $data['add_sso_15amp'] || $data['add_steel_barricade'] || $data['add_shell_scheme_barricade'] )
                                         <tr>
                                             <td colspan="3">
                                                 <span class="fw-bold">Add On :</span>
                                             </td>
                                         </tr>
                                     @endif
-                                    @if($data['add_table'] > 0)
+                                    @if($data['add_table'])
                                         <tr>
                                             <td>Table :</td>
                                             <td class="text-center">{{ $data['add_table'] }} x </td>
@@ -50,7 +50,7 @@
                                             </td>
                                         </tr>
                                     @endif
-                                    @if($data['add_chair'] > 0)
+                                    @if($data['add_chair'])
                                         <tr>
                                             <td>Chair : </td>
                                             <td class="text-center">{{ $data['add_chair'] }} x</td>
@@ -60,13 +60,43 @@
                                             </td>
                                         </tr>
                                     @endif
-                                    @if($data['add_sso'] > 0)
+                                    @if($data['add_sso'])
                                         <tr>
-                                            <td>SSO : </td>
+                                            <td>SSO (13 amp) : </td>
                                             <td class="text-center">{{ $data['add_sso'] }} x</td>
                                             <td class="text-end">
                                                 {{ $data['sso_TPrice'] }}
                                                 <input type="hidden" name="add_on_sso" value="{{ $data['sso_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_sso_15amp'])
+                                        <tr>
+                                            <td>SSO (15 amp) : </td>
+                                            <td class="text-center">{{ $data['add_sso_15amp'] }} x</td>
+                                            <td class="text-end">
+                                                {{ $data['ssoamp15_TPrice'] }}
+                                                <input type="hidden" name="add_on_sso_15amp" value="{{ $data['ssoamp15_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_steel_barricade'])
+                                        <tr>
+                                            <td>Steel Barricade : </td>
+                                            <td class="text-center">{{ $data['add_steel_barricade'] }} x</td>
+                                            <td class="text-end">
+                                                {{ $data['steel_barricade_TPrice'] }}
+                                                <input type="hidden" name="add_on_steel_barricade" value="{{ $data['steel_barricade_TPrice'] }}">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if($data['add_shell_scheme_barricade'])
+                                        <tr>
+                                            <td>Shell Scheme Barricade : </td>
+                                            <td class="text-center">{{ $data['add_shell_scheme_barricade'] }} x</td>
+                                            <td class="text-end">
+                                                {{ $data['shell_scheme_barricade_TPrice'] }}
+                                                <input type="hidden" name="add_on_shell_scheme_barricade" value="{{ $data['shell_scheme_barricade_TPrice'] }}">
                                             </td>
                                         </tr>
                                     @endif
@@ -168,6 +198,21 @@
                                     <div class="mb-3">
                                         <label for="website" class="form-label">Image Gathering</label>
                                         <input class="form-control" type="file" name="website" id="website" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="website" class="form-label">Sales Agents</label>
+                                        <select name="" id="" class="form-control default-select2">
+                                            <option value="">Please Select Your Sales Agent</option>
+                                            @foreach($sections as $section)
+                                                 <optgroup label="{{ $section->name }}">
+                                                     @foreach($section->agents as $agent)
+                                                         <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                                     @endforeach
+                                                 </optgroup>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

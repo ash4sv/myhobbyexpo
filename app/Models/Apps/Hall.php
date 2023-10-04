@@ -8,17 +8,17 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BoothNumber extends Model
+class Hall extends Model
 {
-    use HasFactory, SoftDeletes,  LogsActivity;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $guarded = [];
 
     protected $fillable = [
-        'section_id',
-        'vendor_id',
-        'booth_number',
+        'name',
+        'slug',
         'description',
+        'poster',
         'status',
     ];
 
@@ -31,16 +31,11 @@ class BoothNumber extends Model
 
     public function sections()
     {
-        return $this->belongsTo(Section::class, 'section_id', 'id');
+        return $this->hasMany(Section::class, 'hall_id', 'id');
     }
 
-    public function booths()
+    public function agents()
     {
-        return $this->belongsToMany(Booth::class)->withTimestamps();
+        return $this->hasMany(SalesAgent::class, 'hall_id', 'id');
     }
-
-    /*public function vendor()
-    {
-        return $this->hasMany( 'vendor_id', 'id');
-    }*/
 }

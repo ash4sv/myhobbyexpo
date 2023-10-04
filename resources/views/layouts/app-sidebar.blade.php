@@ -90,7 +90,7 @@
             </div>
             @endcan
 
-            <div class="menu-item has-sub {{ (request()->segment(1) == 'exhibitor') ? 'active' : '' }}">
+            {{--<div class="menu-item has-sub {{ (request()->segment(1) == 'exhibitor') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -110,7 +110,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">

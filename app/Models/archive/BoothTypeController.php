@@ -1,30 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Apps;
+namespace App\Models\archive;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apps\BoothNumber;
 use App\Models\Apps\BoothType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class BoothNumberController extends Controller
+class BoothTypeController extends Controller
 {
-    protected $view = 'apps.exhibitor.booths.';
-    protected $route = 'apps.exhibitor.booths.';
+    protected $view = 'apps.exhibitor.category.';
+    protected $route = 'apps.exhibitor.category.';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = 'Delete Booths Numbers!';
+        $title = 'Delete Roles!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
         return view($this->view.'index', [
-            'numbers' => BoothNumber::all(),
+            'categories' => BoothType::all(),
         ]);
     }
 
@@ -34,7 +32,7 @@ class BoothNumberController extends Controller
     public function create()
     {
         return view($this->view.'create', [
-            'categories' => BoothType::all(),
+            'category' => new BoothType()
         ]);
     }
 
@@ -43,26 +41,21 @@ class BoothNumberController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'category' => 'required|integer',
-            'name.*' => 'required|string',
-            'booth_desp.*' => '',
+        $request->validate([
+            'layout_plan' => 'required|image|mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/webp|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+            'ffe_table' => 'required|integer',
+            'ffe_chair' => 'required|integer',
+            'ffe_sso' => 'required|integer',
+            'price' => 'required|regex:/^\\d+(\\.\\d{1,2})?$/',
         ]);
 
-        foreach ($validatedData['name'] as $key => $name) {
-            $description = $validatedData['booth_desp'][$key];
-
-            BoothNumber::create([
-                'category_id' => $request->category,
-                'name' => $name,
-                'slug' => Str::slug($name),
-                'description' => $description,
-                'status' => false,
-            ]);
-        }
+        $category = new BoothType();
+        $category->saveBoothType($category, $request);
 
         Alert::success('Successfully saved!', 'Record has been saved successfully');
-        return redirect()->route($this->route.'index');
+        return redirect()->route('apps.exhibitor.category.edit', $category->id);
     }
 
     /**
@@ -78,9 +71,10 @@ class BoothNumberController extends Controller
      */
     public function edit(string $id)
     {
+        $category = BoothType::where('id', $id)->first();
+
         return view($this->view.'edit', [
-            'categories' => BoothType::all(),
-            'booth' => BoothNumber::findOrFail($id),
+            'category' => $category
         ]);
     }
 
@@ -89,8 +83,8 @@ class BoothNumberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $booth = BoothNumber::findOrFail($id);
-
+        $category = BoothType::findOrFail($id);
+        $category->saveBoothType($category, $request);
 
         Alert::success('Successfully updated!', 'Record has been updated successfully');
         return redirect()->route($this->route.'index');
@@ -101,8 +95,8 @@ class BoothNumberController extends Controller
      */
     public function destroy(string $id)
     {
-        $booth = BoothNumber::findOrFail($id);
-        $booth->delete();
+        $category = BoothType::findOrFail($id);
+        $category->delete();
 
         Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
         return redirect()->route($this->route.'index');
