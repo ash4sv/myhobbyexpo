@@ -141,8 +141,8 @@ class RegisterController extends Controller
             'add_on_shell_scheme_barricade' => $request->add_on_shell_scheme_barricade,
             'add_shell_scheme_barricade'    => $request->add_shell_scheme_barricade,
 
-            'sub_total'                     => $request->sub_total_push,
-            'total'                         => $request->total_push,
+            'sub_total'                     => $request->sub_total,
+            'total'                         => $request->total,
             'booths'                        => $request->booths,
         ]);
 
@@ -150,8 +150,8 @@ class RegisterController extends Controller
 
         return view('front.vendor', [
             'data'      => $request->all(),
-            'subTotal'  => $request->sub_total_push,
-            'total'     => $request->total_push,
+            'subTotal'  => $request->sub_total,
+            'total'     => $request->total,
             'sections'  => $sections
         ]);
     }
@@ -194,7 +194,7 @@ class RegisterController extends Controller
         $vendor->website = $request->website;
 
         if ($request->hasFile('image')) {
-            $image = ImageUploader::uploadSingleImage($request->file('image'), 'assets/images', 'vendor');;
+            $image = ImageUploader::uploadSingleImage($request->file('image'), 'assets/upload', 'vendor');;
         } else {
             $image = $vendor->image;
         }
@@ -215,8 +215,6 @@ class RegisterController extends Controller
             }
         }
 
-        Alert::success('Thank you for registration', 'We already received your registration');
-        return redirect()->back();
-    }
 
+    }
 }

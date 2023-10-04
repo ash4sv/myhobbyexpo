@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('sections', function (Blueprint $table) {
+            $table->boolean('coming_soon')->nullable()->after('status');
+        });
     }
 
     /**
@@ -19,11 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booth_numbers');
-        Schema::dropIfExists('booth_types');
-        Schema::dropIfExists('booths');
-        Schema::dropIfExists('booths_maps');
-        Schema::dropIfExists('sections');
-        Schema::dropIfExists('type_of_interests');
+        Schema::table('sections', function (Blueprint $table) {
+            $table->dropColumn('coming_soon');
+        });
     }
 };

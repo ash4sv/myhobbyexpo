@@ -37,6 +37,7 @@ class BoothBoothNumberSeeder extends Seeder
         $boothLightGreen->boothNumbers()->attach($boothNumbersLightGreenAssign);
         $boothLightYello->boothNumbers()->attach($boothNumbersLightYelloAssign);
 
-
+        // [1, 11]
+        // [1, 7]
     }
 }

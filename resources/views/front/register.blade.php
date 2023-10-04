@@ -19,7 +19,7 @@
         <div class="row justify-content-center g-4 pb-5">
             @foreach($halls as $hall)
                 <div class="col-md-3 col-6">
-                    <a href="" id="{{ $hall->slug }}_btn">
+                    <a href="" id="{{ $hall->slug }}_btn" aria-disabled="true">
                         <img src="{{ asset($hall->poster) }}" alt="" class="img-fluid">
                         <input type="hidden" name="hall_id" value="{{ $hall->id }}">
                     </a>
@@ -63,7 +63,9 @@
 
                             <div class="card mb-4 shadow-lg rounded">
                                 <div class="card-body">
-                                    <img src="{{ asset($section->layout) }}" class="img-fluid" alt="...">
+                                    <a data-fancybox data-src="{{ asset($section->layout) }}" data-caption="{{ $hall->name }}" href="">
+                                        <img src="{{ asset($section->layout) }}" class="img-fluid" alt="...">
+                                    </a>
                                 </div>
                             </div>
 
@@ -383,24 +385,23 @@
                 ];
 
                 let subTotal = 0;
+                let total = 0;
 
                 items.forEach(item => {
                     const totalItemPrice = item.unitPrice * item.qty;
                     $(`#${item.targetId}`).val('RM ' + totalItemPrice.toFixed(2));
-                    subTotal += totalItemPrice;
+
+                    if (item.id === 'booth' && !isNaN(totalItemPrice)) {
+                        subTotal += totalItemPrice;
+                    }
+
+                    if (!isNaN(totalItemPrice)) {
+                        total += totalItemPrice;
+                    }
                 });
 
                 $('#sub_total').val('RM ' + subTotal.toFixed(2));
-
-                let total = 0;
-
-                items.forEach(item => {
-                    total += item.unitPrice * item.qty;
-                });
-
                 $('#total').val('RM ' + total.toFixed(2));
-                console.log(subTotal);
-                console.log(total);
             }
 
             $('#booth_qty, #add_table, #add_chair, #add_sso, #add_sso_15amp, #add_steel_barricade, #add_shell_scheme_barricade').change(function () {
