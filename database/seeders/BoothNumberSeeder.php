@@ -68,6 +68,44 @@ class BoothNumberSeeder extends Seeder
             ];
         }
 
+        //$concourse
+        for ($i = 1; $i <= 5; $i++) {
+            $numbers[] = [
+                'section_id'    => $concourse->id,
+                'booth_number'  => 'N' . str_pad($i, 2, '0', STR_PAD_LEFT), // This will generate MH01, MH02, ..., MH16
+                'description'   => null,
+                'status'        => false,
+            ];
+        }
+        for ($i = 1; $i <= 27; $i++) {
+            $numbers[] = [
+                'section_id'    => $concourse->id,
+                'booth_number'  => 'NH' . str_pad($i, 2, '0', STR_PAD_LEFT), // This will generate MH01, MH02, ..., MH16
+                'description'   => null,
+                'status'        => false,
+            ];
+        }
+
+        //$exotic_zone
+        for ($i = 1; $i <= 43; $i++) {
+            $numbers[] = [
+                'section_id'    => $concourse->id,
+                'booth_number'  => 'EA' . str_pad($i, 2, '0', STR_PAD_LEFT), // This will generate MH01, MH02, ..., MH16
+                'description'   => null,
+                'status'        => false,
+            ];
+        }
+
+        //$aqua_zone
+        for ($i = 1; $i <= 19; $i++) {
+            $numbers[] = [
+                'section_id'    => $concourse->id,
+                'booth_number'  => 'AZ' . str_pad($i, 2, '0', STR_PAD_LEFT), // This will generate MH01, MH02, ..., MH16
+                'description'   => null,
+                'status'        => false,
+            ];
+        }
+
         BoothNumber::insert($numbers);
     }
 }
