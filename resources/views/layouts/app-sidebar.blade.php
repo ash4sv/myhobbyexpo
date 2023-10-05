@@ -215,6 +215,15 @@
             </div>
             @endcan
 
+            <div class="menu-item {{ (request()->segment(1) == 'logs') ? 'active' : '' }}">
+                <a href="{{ url('apps-logs') }}" class="menu-link" target="_blank">
+                    <div class="menu-icon">
+                        <i class="fa fa-history"></i>
+                    </div>
+                    <div class="menu-text">Apps Logs</div>
+                </a>
+            </div>
+
             @endcan
 
             {{--<div class="menu-item has-sub">
