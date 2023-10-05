@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'New Booth Type')
-@section('page-header', 'New Booth Type')
+@section('page-title', 'Exhibition Booth Number')
+@section('page-header', 'Exhibition Booth Number')
 @section('description', '')
 
 @section('content')
@@ -16,7 +16,7 @@
 
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">@yield('page-title')</h4>
+            <h4 class="panel-title"></h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -26,9 +26,7 @@
         </div>
         <div class="panel-body">
 
-            <form action="{{ route('apps.exhibitor.category.store') }}" method="post" enctype="multipart/form-data">
-                @include('apps.exhibitor.category.form')
-            </form>
+
 
         </div>
     </div>
