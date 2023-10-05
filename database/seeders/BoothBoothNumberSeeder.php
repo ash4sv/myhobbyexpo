@@ -53,8 +53,8 @@ class BoothBoothNumberSeeder extends Seeder
         $space3->boothNumbers()->attach($sec3);
         $space4->boothNumbers()->attach($sec4);
 
-        $spacePet1 = Booth::findOrFail();
+        /*$spacePet1 = Booth::findOrFail();
 
-        $secPet1 = BoothNumber::whereBetween('id', [42, 54])->get();
+        $secPet1 = BoothNumber::whereBetween('id', [42, 54])->get();*/
     }
 }
