@@ -8,6 +8,7 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "guzzlehttp/psr7": "^2.6",
+        "haruncpi/laravel-id-generator": "^1.1",
         "jomweb/billplz": "^4.1",
         "laravel/fortify": "^1.18",
         "laravel/framework": "^10.10",
@@ -16,6 +17,7 @@
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/message": "^1.16",
         "php-http/message-factory": "^1.1",
+        "rap2hpoutre/laravel-log-viewer": "^2.3",
         "realrashid/sweet-alert": "^7.1",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-permission": "^5.11"

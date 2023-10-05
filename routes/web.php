@@ -42,6 +42,10 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths'); // Submit booking and redirect to payment gateway
         Route::get('booth-redirect', [RegisterController::class, 'billplzHandleRedirect'])->name('billplzhandle');
         Route::post('webhook', [RegisterController::class, 'webhook'])->name('webhook');
+
+        Route::get('invoice', function (){
+            return view('front.confimation-bill');
+        });
     });
 });
 
@@ -79,6 +83,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('roles', RolesController::class);
                Route::resource('users', UserController::class);
            });
+           Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
            /*Route::group([
                'prefix'  => 'exhibitor',
                'as'     => 'exhibitor.',
