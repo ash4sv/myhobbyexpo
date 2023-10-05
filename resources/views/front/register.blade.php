@@ -18,7 +18,7 @@
         </div>
         <div class="row justify-content-center g-4 pb-5">
             @foreach($halls as $hall)
-                <div class="col-md-3 col-6">
+                <div class="col-md-3 col-6 {{ $hall->coming_soon == 1? 'disabled-prop-btn':'' }}">
                     <a href="" id="{{ $hall->slug }}_btn">
                         <img src="{{ asset($hall->poster) }}" alt="" class="img-fluid">
                         <input type="hidden" name="hall_id" value="{{ $hall->id }}">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="row justify-content-center g-4 pb-5">
                     @foreach($hall->sections as $section)
-                        <div class="col-md-3 col-6">
+                        <div class="col-md-3 col-6  {{ $section->coming_soon == 1? 'disabled-prop-btn':'' }}">
                             <a href="" class="section-toggle" data-target="{{ $section->slug }}" id="{{ $section->slug }}_btn">
                                 <img src="{{ asset($section->poster) }}" alt="" class="img-fluid">
                                 <input type="hidden" name="" class="form-control">
