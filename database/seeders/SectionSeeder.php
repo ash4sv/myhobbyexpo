@@ -101,7 +101,7 @@ class SectionSeeder extends Seeder
                 'slug'        => 'camping-exhibition-zone',
                 'description' => null,
                 'poster'      => 'assets/images/hall-c-01.png',
-                'layout'      => 'assets/images/camping.png',
+                'layout'      => 'assets/images/map-hall-c-camping.png',
                 'status'      => true,
             ],
             [
@@ -110,7 +110,7 @@ class SectionSeeder extends Seeder
                 'slug'        => 'fishing-exhibition-zone',
                 'description' => null,
                 'poster'      => 'assets/images/hall-c-02.png',
-                'layout'      => 'assets/images/fishing.png',
+                'layout'      => 'assets/images/map-hall-c-fishing.png',
                 'status'      => true,
             ],
 
