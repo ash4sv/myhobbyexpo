@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/default/app.min.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/boxed-check/css/boxed-check.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -38,7 +38,7 @@
     <script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
     <script src="{{ asset('assets/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/parsleyjs/dist/parsley.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
     <script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
     @include('sweetalert::alert')
     <script>

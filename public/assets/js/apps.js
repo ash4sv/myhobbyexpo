@@ -5,6 +5,7 @@ var Apps = {
         /*Apps.summernote('.summernote');*/
         Apps.switchery('switchery-default');
         Apps.permissionForm();
+        Apps.toolTipImg();
     },
 
     datatable: function () {
@@ -100,6 +101,14 @@ var Apps = {
             $(this).parents('tr').remove();
         });
     },
+
+    toolTipImg: function () {
+        $('#boothtype [data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'bottom',
+            html: true
+        });
+    }
 }
 
 $(document).ready(function () {

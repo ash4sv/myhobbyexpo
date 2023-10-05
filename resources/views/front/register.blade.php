@@ -3,235 +3,312 @@
 @section('reg-form')
 
     <div class="row">
-        <div class="col-md-6 mx-auto mb-5">
+        <div class="col-md-6 mx-auto mb-4">
             <a href="{{ route('front.register') }}">
-                <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
+                <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-10px img-fluid">
             </a>
         </div>
     </div>
 
     <div id="interest_in">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY HALL</h4>
+            </div>
+        </div>
         <div class="row justify-content-center g-4 pb-5">
-            <div class="col-md-3 col-6">
-                <a href="" id="flea_market_btn">
-                    <img src="{{ asset('assets/images/flea-market.png') }}" alt="" class="img-fluid">
-                    <input type="hidden" name="" class="form-control">
-                </a>
-            </div>
-            <div class="col-md-3 col-6">
-                <a href="" id="hobby_group_zone_btn">
-                    <img src="{{ asset('assets/images/hobby-group-zone.png') }}" alt="" class="img-fluid">
-                    <input type="hidden" name="" class="form-control">
-                </a>
-            </div>
-            <div class="col-md-3 col-6">
-                <a href="" id="activity_zone_zone_btn">
-                    <img src="{{ asset('assets/images/activity-zone.png') }}" alt="" class="img-fluid">
-                    <input type="hidden" name="" class="form-control">
-                </a>
-            </div>
+            @foreach($halls as $hall)
+                <div class="col-md-3 col-6">
+                    <a href="" id="{{ $hall->slug }}_btn" aria-disabled="true">
+                        <img src="{{ asset($hall->poster) }}" alt="" class="img-fluid">
+                        <input type="hidden" name="hall_id" value="{{ $hall->id }}">
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 
-    <div id="flea_market">
-        <div id="booth_type">
-            <div class="row justify-content-center g-4 pb-5">
-                @foreach($categories as $category)
-                    <div class="col-md-3 col-6">
-                        <a href="" class="section-toggle" data-target="{{ $category->slug }}" id="flea_market_{{ $category->slug }}_btn">
-                            <img src="{{ asset($category->image) }}" alt="" class="img-fluid">
-                            <input type="hidden" name="" class="form-control">
-                        </a>
+    @foreach($halls as $hall)
+        <div id="{{ $hall->slug }}" class="hall-body">
+            {{--Section Btn--}}
+            <div id="booth_type">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY HALL</h4>
                     </div>
-                @endforeach
-            </div>
-        </div>
-
-        @foreach($categories as $category)
-            <div id="{{ $category->slug }}" class="dynamic-section">
+                </div>
                 <div class="row justify-content-center g-4 pb-5">
-                    <div class="col-md-9">
-                        <div class="card mb-4 shadow-lg rounded">
-                            <div class="card-body">
-                                <img src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" class="img-fluid" alt="...">
-                            </div>
+                    @foreach($hall->sections as $section)
+                        <div class="col-md-3 col-6">
+                            <a href="" class="section-toggle" data-target="{{ $section->slug }}" id="{{ $section->slug }}_btn">
+                                <img src="{{ asset($section->poster) }}" alt="" class="img-fluid">
+                                <input type="hidden" name="" class="form-control">
+                            </a>
                         </div>
-
-                        <div class="card shadow-lg rounded">
-                            <div class="card-body">
-
-                                <form action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-
-                                    <input type="hidden" name="booth_type" value="{{ $category->id }}">
-                                    <input type="hidden" name="sub_total" id="sub_total" value="">
-                                    <input type="hidden" name="total" id="total" value="">
-
-                                    <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
-                                    <hr class="my-10px">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Quantity Booths</label>
-                                                <div class="input-group">
-                                                    <select name="booth_qty" id="booth_qty" class="form-control default-select2">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                    <input type="text" aria-label="" class="form-control" name="booth_price" id="booth_price" readonly value="RM {{ $category->price }}">
-                                                    <input type="hidden" name="booth_price_unit" id="booth_price_unit" value="{{ $category->price }}">
-                                                </div>
-                                                <div id="" class="form-text">Came with {{ $category->ffe_table }} Unit Table,
-                                                    {{ $category->ffe_chair }} Unit Chair, {{ $category->ffe_sso }} Unit SSO 13Amp for 1 booths</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-
-                                                <div class="booth-area boxed-check-group boxed-check-indigo">
-                                                    @foreach($category->numbers->where('status', 0) as $number)
-                                                    <label class="booth-box boxed-check" for="btn_{{ $number->id }}_{{ $number->slug }}">
-                                                        <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled':'' }}>
-                                                        <div class="boxed-check-label">{{ $number->name }}</div>
-                                                    </label>
-                                                    @endforeach
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="card-title">2. Additional Furniture, Fixtures and Equipment</h4>
-                                    <hr class="my-10px">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">Table</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" value="RM 1.00" id="table_TPrice" name="table_TPrice" readonly>
-                                                    <input type="hidden" name="" id="add_on_table" value="1.00">
-                                                    <select name="add_table" id="add_table" class="form-control">
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">Chair</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" value="RM 1.00" id="chair_TPrice" name="chair_TPrice" readonly>
-                                                    <input type="hidden" name="" id="add_on_chair" value="1.00">
-                                                    <select name="add_chair" id="add_chair" class="form-control">
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">Switch Socket Outlet (13 amp)</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" value="RM 1.00" id="sso_TPrice" name="sso_TPrice" readonly>
-                                                    <input type="hidden" name="" id="add_on_sso" value="1.00">
-                                                    <select name="add_sso" id="add_sso" class="form-control">
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-0 text-center">
-                                        <button type="submit" class="btn btn-indigo btn-lg w-300px">
-                                            Booking
-                                        </button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-        @endforeach
-    </div>
+            {{--Section Btn--}}
 
-    <div id="hobby_group_zone">
-        <div class="row justify-content-center g-4 pb-5">
-            <div class="col-md-9">
-                <div class="card mb-4 shadow-lg rounded">
-                    <div class="card-body">
-                        <img src="{{ asset('assets/images/layout-1@4x-50.jpg') }}" class="img-fluid" alt="...">
-                    </div>
-                </div>
+            @foreach($hall->sections as $section)
+                <div id="{{ $section->slug }}" class="dynamic-section">
+                    <div class="row justify-content-center g-4 pb-5">
+                        <div class="col-md-9">
 
-                <div class="card mb-4 shadow-lg rounded">
-                    <div class="card-body">
-                        <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
-                        <hr class="my-10px">
-
-                        <div class="mb-3" id="barred_size_sec">
-                            <label for="bare_size" class="form-label">Bare Space Size (meter): </label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="bare_length" id="bare_length" placeholder="Length">
-                                <span class="input-group-text input-group-addon">to</span>
-                                <input type="text" class="form-control" name="bare_width" id="bare_width" placeholder="Width">
-                                <input type="text" class="form-control" name="price_size" id="price_size" value="RM 100" readonly>
-                                <input type="hidden" name="price_pre_square" id="price_pre_square" value="50">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY ZONE</h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-0 text-center">
-                            <button type="submit" class="btn btn-indigo btn-lg w-300px">
-                                Booking
-                            </button>
-                        </div>
+                            <div class="card mb-4 shadow-lg rounded">
+                                <div class="card-body">
+                                    <a data-fancybox data-src="{{ asset($section->layout) }}" data-caption="{{ $hall->name }}" href="">
+                                        <img src="{{ asset($section->layout) }}" class="img-fluid" alt="...">
+                                    </a>
+                                </div>
+                            </div>
 
+                            <div class="card shadow-lg rounded">
+                                <div class="card-body">
+
+                                    <form action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" name="section_id" value="{{ $section->id }}">
+                                        <input type="hidden" name="sub_total" id="sub_total" value="">
+                                        <input type="hidden" name="total" id="total" value="">
+
+                                        <h4 class="card-title">1. Lot / Booths</h4>
+
+                                        <hr class="my-10px">
+
+                                        <div class="row" id="boothtype">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Booths Types </label>
+                                                    <div class="input-group">
+                                                        <select name="boothTypes" id="boothTypes" class="form-control default-select2">
+                                                            @foreach($section->booths as $booth)
+                                                                <option value="{{ $booth->id }}">{{ $booth->booth_type }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <a data-toggle="tooltip" title="<img src='https://getbootstrap.com/apple-touch-icon.png' />" href="" class="btn btn-outline-secondary">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Quantity Booths</label>
+                                                    <div class="input-group">
+                                                        <select name="booth_qty" id="booth_qty" class="form-control default-select2">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                        <input type="text" aria-label="" class="form-control" name="booth_price" id="booth_price" readonly value="RM ">
+                                                        <input type="hidden" name="booth_price_unit" id="booth_price_unit" value="">
+                                                    </div>
+                                                    {{--<div id="" class="form-text">Came with {{ $category->ffe_table }} Unit Table,
+                                                        {{ $category->ffe_chair }} Unit Chair, {{ $category->ffe_sso }} Unit SSO 13Amp for 1 booths</div>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+
+                                                    <div class="booth-area boxed-check-group boxed-check-indigo">
+                                                        {{--@foreach($section->numbers->where('status', '=', 0) as $number)
+                                                            <label class="booth-box boxed-check" for="btn_{{ $number->id }}_{{ $number->slug }}">
+                                                                <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled':'' }}>
+                                                                <div class="boxed-check-label">{{ $number->booth_number }}</div>
+                                                            </label>
+                                                        @endforeach--}}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="card-title">2. Additional Furniture, Fixtures and Equipment</h4>
+                                        <hr class="my-10px">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Table (RM 45.00 / Unit)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 45.00" id="table_TPrice" name="table_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_table" id="add_on_table" value="45.00">
+                                                        <select name="add_table" id="add_table" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Chair (RM RM 9.00 / Unit)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 9.00" id="chair_TPrice" name="chair_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_chair" id="add_on_chair" value="9.00">
+                                                        <select name="add_chair" id="add_chair" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">SSO (13 amp) (RM 70.00 / Point)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 70.00" id="sso_TPrice" name="sso_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_sso" id="add_on_sso" value="70.00">
+                                                        <select name="add_sso" id="add_sso" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">SSO (15 amp) (RM 150.00 / Point)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 150.00" id="ssoamp15_TPrice" name="ssoamp15_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_sso_15amp" id="add_on_sso_15amp" value="150.00">
+                                                        <select name="add_sso_15amp" id="add_sso_15amp" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Steel Barricade (RM 55.00 / Unit)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 55.00" id="steel_barricade_TPrice" name="steel_barricade_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_steel_barricade" id="add_on_steel_barricade" value="55.00">
+                                                        <select name="add_steel_barricade" id="add_steel_barricade" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Shell Scheme Barricade (RM 35.00 / meter)</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" value="RM 35.00" id="shell_scheme_barricade_TPrice" name="shell_scheme_barricade_TPrice" readonly>
+                                                        <input type="hidden" name="add_on_shell_scheme_barricade" id="add_on_shell_scheme_barricade" value="35.00">
+                                                        <select name="add_shell_scheme_barricade" id="add_shell_scheme_barricade" class="form-control">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-0 text-center">
+                                            <button type="submit" class="btn btn-indigo btn-lg w-300px">
+                                                Booking
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+
         </div>
-    </div>
-
-    <div id="activity_zone">
-        <div class="row justify-content-center g-4 pb-5">
-            <div class="col-md-9">
-                <div class="card mb-4 shadow-lg rounded">
-                    <div class="card-body">
-                        <h4 class="card-title">1. Additional Furniture, Fixtures and Equipment</h4>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
 
 @endsection
 
@@ -239,13 +316,13 @@
     <script>
         $(document).ready(function(){
 
+            $('.hall-body, .dynamic-section').hide();
 
-            $('#flea_market, #hobby_group_zone, #activity_zone, .dynamic-section').hide();
-
-            $('#flea_market_btn').click(function () {
+            @foreach($halls as $hall)$('#{{ $hall->slug }}_btn').click(function () {
                 event.preventDefault();
-                $('#flea_market').show();
-                $('#interest_in').hide();
+                $('#{{ $hall->slug }}').show();
+                $('#interest_in').remove();
+                $('.hall-body').not('#{{ $hall->slug }}').remove();
 
                 $('.section-toggle').click(function() {
                     event.preventDefault();
@@ -253,142 +330,162 @@
                     $('#' + targetId).show();
                     $('.dynamic-section').not('#' + targetId).remove(); // Hide other sections
 
-                    $('#booth_type').hide();
+                    $('#booth_type').remove();
                     calculatePrices();
+                    checkBox();
+                    boothTypeDependency();
                 });
             })
-
-            $('#hobby_group_zone_btn').click(function () {
-                event.preventDefault();
-                $('#hobby_group_zone').show();
-                $('#interest_in').hide();
-            })
-
-            $('#activity_zone_zone_btn').click(function () {
-                event.preventDefault();
-                $('#activity_zone').show();
-                $('#interest_in').hide();
-            })
-
-            function priceUnit() {
-                var unitBoothPrice = parseFloat($('#booth_price_unit').val());
-                var qtyBooth = parseFloat($('#booth_qty').val());
-                var totalBoothPrice = unitBoothPrice * qtyBooth;
-
-                $('#booth_price').val('RM ' + totalBoothPrice.toFixed(2));
-            }
-
-            function priceUnitTable() {
-                var unitTablePrice = parseFloat($('#add_on_table').val());
-                var qtyTable = parseFloat($('#add_table').val());
-                var totalTablePrice = unitTablePrice * qtyTable;
-
-                $('#table_TPrice').val('RM ' + totalTablePrice.toFixed(2));
-            }
-
-            function priceUnitChair() {
-                var unitChairPrice = parseFloat($('#add_on_chair').val());
-                var qtyChair = parseFloat($('#add_chair').val());
-                var totalTableChair = unitChairPrice * qtyChair;
-
-                $('#chair_TPrice').val('RM ' + totalTableChair.toFixed(2));
-            }
-
-            function priceUnitSSO() {
-                var unitSsoPrice = parseFloat($('#add_on_sso').val());
-                var qtySSO = parseFloat($('#add_sso').val());
-                var totalTableSSo = unitSsoPrice * qtySSO;
-
-                $('#sso_TPrice').val('RM ' + totalTableSSo.toFixed(2));
-            }
-
-            function deSubTotal() {
-                var unitBoothPrice = parseFloat($('#booth_price_unit').val());
-                var qtyBooth = parseFloat($('#booth_qty').val());
-                var deSubTotal = unitBoothPrice * qtyBooth;
-                $('#sub_total').val('RM ' + deSubTotal.toFixed(2));
-            }
-
-            function deTotal() {
-                var unitBoothPrice  = parseFloat($('#booth_price_unit').val());
-                var qtyBooth        = parseFloat($('#booth_qty').val());
-                var totalBoothPrice = unitBoothPrice * qtyBooth;
-                var unitTablePrice  = parseFloat($('#add_on_table').val());
-                var qtyTable        = parseFloat($('#add_table').val());
-                var totalTablePrice = unitTablePrice * qtyTable;
-                var unitChairPrice  = parseFloat($('#add_on_chair').val());
-                var qtyChair        = parseFloat($('#add_chair').val());
-                var totalTableChair = unitChairPrice * qtyChair;
-                var unitSsoPrice    = parseFloat($('#add_on_sso').val());
-                var qtySSO          = parseFloat($('#add_sso').val());
-                var totalTableSSo   = unitSsoPrice * qtySSO;
-
-                var deTotal = totalBoothPrice + totalTablePrice + totalTableChair + totalTableSSo;
-
-                $('#total').val('RM ' + deTotal.toFixed(2));
-            }
+            @endforeach
 
             function calculatePrices() {
-                priceUnit();
-                priceUnitTable();
-                priceUnitChair();
-                priceUnitSSO();
-                deSubTotal();
-                deTotal();
+                const items = [
+                    {
+                        id: 'booth',
+                        unitPrice: parseFloat($('#booth_price_unit').val()),
+                        qty: parseFloat($('#booth_qty').val()),
+                        targetId: 'booth_price'
+                    },
+                    {
+                        id: 'table',
+                        unitPrice: parseFloat($('#add_on_table').val()),
+                        qty: parseFloat($('#add_table').val()),
+                        targetId: 'table_TPrice'
+                    },
+                    {
+                        id: 'chair',
+                        unitPrice: parseFloat($('#add_on_chair').val()),
+                        qty: parseFloat($('#add_chair').val()),
+                        targetId: 'chair_TPrice'
+                    },
+                    {
+                        id: 'sso',
+                        unitPrice: parseFloat($('#add_on_sso').val()),
+                        qty: parseFloat($('#add_sso').val()),
+                        targetId: 'sso_TPrice'
+                    },
+                    {
+                        id: 'sso_15amp',
+                        unitPrice: parseFloat($('#add_on_sso_15amp').val()),
+                        qty: parseFloat($('#add_sso_15amp').val()),
+                        targetId: 'ssoamp15_TPrice'
+                    },
+                    {
+                        id: 'steel_barricade',
+                        unitPrice: parseFloat($('#add_on_steel_barricade').val()),
+                        qty: parseFloat($('#add_steel_barricade').val()),
+                        targetId: 'steel_barricade_TPrice'
+                    },
+                    {
+                        id: 'shell_scheme_barricade',
+                        unitPrice: parseFloat($('#add_on_shell_scheme_barricade').val()),
+                        qty: parseFloat($('#add_shell_scheme_barricade').val()),
+                        targetId: 'shell_scheme_barricade_TPrice'
+                    }
+                ];
+
+                let subTotal = 0;
+                let total = 0;
+
+                items.forEach(item => {
+                    const totalItemPrice = item.unitPrice * item.qty;
+                    $(`#${item.targetId}`).val('RM ' + totalItemPrice.toFixed(2));
+
+                    if (item.id === 'booth' && !isNaN(totalItemPrice)) {
+                        subTotal += totalItemPrice;
+                    }
+
+                    if (!isNaN(totalItemPrice)) {
+                        total += totalItemPrice;
+                    }
+                });
+
+                $('#sub_total').val('RM ' + subTotal.toFixed(2));
+                $('#total').val('RM ' + total.toFixed(2));
             }
 
-            $('#booth_qty, #add_table, #add_chair, #add_sso').change(function () {
+            $('#booth_qty, #add_table, #add_chair, #add_sso, #add_sso_15amp, #add_steel_barricade, #add_shell_scheme_barricade').change(function () {
                 calculatePrices();
-            })
+            });
 
+            // Initial calculation
             calculatePrices();
 
-            function sqmeter() {
-                var priceSQMeter = $('#price_pre_square').val();
-                var bare_length = $('input[name="bare_length"]').val();
-                var bare_width = $('input[name="bare_width"]').val();
-
-                var squareMters = bare_length * bare_width;
-                var costSqMeter = squareMters * priceSQMeter;
-
-                $('#price_size').val('RM ' + costSqMeter.toFixed(2));
-                /*console.log('RM ' + costSqMeter.toFixed(2));*/
+            function checkBox() {
+                // Get all checkboxes within the booth-area
+                var checkboxes = $('.booth-area input[type="checkbox"]');
+                var boothQtySelect = $("#booth_qty");
+                var lastCheckedCheckbox = null;
+                // Listen for changes on checkboxes
+                checkboxes.change(function () {
+                    var countCheckedCheckboxes = checkboxes.filter(':checked').length;
+                    var valQtySelect = parseInt(boothQtySelect.val());
+                    // Disable all checkboxes in the booth-area
+                    checkboxes.attr('disabled', 'disabled');
+                    // Enable only the checked checkboxes
+                    checkboxes.filter(':checked').removeAttr('disabled');
+                    // If the count of checked checkboxes is less than the selected quantity, enable the remaining checkboxes
+                    if (countCheckedCheckboxes < valQtySelect) {
+                        checkboxes.filter(':not(:checked)').removeAttr('disabled');
+                    }
+                    // If a checkbox was unchecked, only enable that checkbo
+                    if (lastCheckedCheckbox && !lastCheckedCheckbox.is(':checked')) {
+                        lastCheckedCheckbox.removeAttr('disabled');
+                    }
+                    lastCheckedCheckbox = $(this);
+                });
             }
 
-            $('#bare_length, #bare_width').on('input change', function () {
-                sqmeter();
-            });
+            checkBox();
 
-            sqmeter();
+            function boothTypeDependency() {
+                // Function to fetch booth numbers and update the checkboxes
+                function fetchBoothNumbers() {
+                    var selectedBoothType = $('#boothTypes').val();
+                    $.ajax({
+                        url: '/get-booth-numbers', // Replace with the actual URL to your controller function
+                        method: 'GET',
+                        data: {
+                            boothTypes: selectedBoothType,
+                        },
+                        success: function (response) {
+                            var boothArea = $('.booth-area');
+                            boothArea.empty(); // Clear existing checkboxes
+                            // Loop through the response and create checkboxes
+                            $.each(response[0], function (index, boothNumber) {
+                                var checkbox = $('<label class="booth-box boxed-check" for="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
+                                    <input class="boxed-check-input" type="checkbox" name="booths[id][' + boothNumber.id + ']" id="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
+                                    <div class="boxed-check-label">' + boothNumber.booth_number + '</div>\
+                                </label>');
 
-            // Get all checkboxes within the booth-area
-            var checkboxes = $('.booth-area input[type="checkbox"]');
-            var boothQtySelect = $("#booth_qty");
-            var lastCheckedCheckbox = null;
+                                // Append the checkbox to the container
+                                boothArea.append(checkbox);
+                                checkBox(); // Assuming this function is used for handling checkboxes
+                            });
 
-            // Listen for changes on checkboxes
-            checkboxes.change(function () {
-                var countCheckedCheckboxes = checkboxes.filter(':checked').length;
-                var valQtySelect = parseInt(boothQtySelect.val());
-
-                // Disable all checkboxes in the booth-area
-                checkboxes.attr('disabled', 'disabled');
-
-                // Enable only the checked checkboxes
-                checkboxes.filter(':checked').removeAttr('disabled');
-
-                // If the count of checked checkboxes is less than the selected quantity, enable the remaining checkboxes
-                if (countCheckedCheckboxes < valQtySelect) {
-                    checkboxes.filter(':not(:checked)').removeAttr('disabled');
+                            // Update the booth price and price unit inputs
+                            var priceDisplay = response[1]; // Price from the controller
+                            $('#booth_price').val('RM ' + priceDisplay);
+                            $('#booth_price_unit').val(priceDisplay);
+                        },
+                        error: function (error) {
+                            /*console.error('Error:', error);*/
+                        },
+                    });
                 }
 
-                // If a checkbox was unchecked, only enable that checkbox
-                if (lastCheckedCheckbox && !lastCheckedCheckbox.is(':checked')) {
-                    lastCheckedCheckbox.removeAttr('disabled');
-                }
+                // Trigger the fetchBoothNumbers function when the page loads
+                $(document).ready(function () {
+                    fetchBoothNumbers();
+                });
 
-                lastCheckedCheckbox = $(this);
-            });
+                // Listen for changes in the 'Booth Types' select
+                $('#boothTypes').change(function () {
+                    fetchBoothNumbers(); // Call the function when the select changes
+                });
+            }
+
+            boothTypeDependency();
 
         });
 

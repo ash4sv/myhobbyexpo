@@ -8,17 +8,19 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BoothNumber extends Model
+class Booth extends Model
 {
-    use HasFactory, SoftDeletes,  LogsActivity;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $guarded = [];
 
     protected $fillable = [
         'section_id',
-        'vendor_id',
-        'booth_number',
-        'description',
+        'booth_number_id',
+        'booth_type',
+        'normal_price',
+        'early_bird_price',
+        'early_bird_expiry_date',
         'status',
     ];
 
@@ -34,13 +36,23 @@ class BoothNumber extends Model
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
 
-    public function booths()
+    public function numbers()
     {
-        return $this->belongsToMany(Booth::class)->withTimestamps();
+        return $this->hasMany(BoothNumber::class, 'booth_number_id', 'id');
     }
 
-    /*public function vendor()
+    public function boothNumbers()
     {
-        return $this->hasMany( 'vendor_id', 'id');
+        return $this->belongsToMany(BoothNumber::class)->withTimestamps();
+    }
+
+    /*public function getNormalPriceAttribute($value) {
+    	$newform = "RM".$value;
+    	return $newform;
+    }
+
+    public function getEarlyBirdPriceAttribute($value) {
+    	$newform = "RM".$value;
+    	return $newform;
     }*/
 }

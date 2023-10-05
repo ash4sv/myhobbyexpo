@@ -10,14 +10,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BoothNumber extends Model
 {
-    use HasFactory, SoftDeletes,  LogsActivity;
-
-    protected $guarded = [];
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $fillable = [
-        'section_id',
+        'category_id',
         'vendor_id',
-        'booth_number',
+        'name',
+        'slug',
+        'description',
+        'status',
+    ];
+
+    protected $guarded = [
+        'category_id',
+        'vendor_id',
+        'name',
+        'slug',
         'description',
         'status',
     ];
@@ -25,22 +33,17 @@ class BoothNumber extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+        /*->logOnly(['name'])*/;
         // Chain fluent methods for configuration options
     }
 
-    public function sections()
+    public function type()
     {
-        return $this->belongsTo(Section::class, 'section_id', 'id');
+        return $this->belongsTo(BoothType::class, 'category_id', 'id');
     }
 
-    public function booths()
+    public function vendor()
     {
-        return $this->belongsToMany(Booth::class)->withTimestamps();
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
     }
-
-    /*public function vendor()
-    {
-        return $this->hasMany( 'vendor_id', 'id');
-    }*/
 }

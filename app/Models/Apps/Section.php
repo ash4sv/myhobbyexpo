@@ -7,18 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function Symfony\Component\Translation\t;
 
-class BoothNumber extends Model
+class Section extends Model
 {
-    use HasFactory, SoftDeletes,  LogsActivity;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     protected $guarded = [];
 
     protected $fillable = [
-        'section_id',
-        'vendor_id',
-        'booth_number',
+        'hall_id',
+        'name',
+        'slug',
         'description',
+        'poster',
+        'layout',
         'status',
     ];
 
@@ -29,18 +32,23 @@ class BoothNumber extends Model
         // Chain fluent methods for configuration options
     }
 
-    public function sections()
+    public function hall()
     {
-        return $this->belongsTo(Section::class, 'section_id', 'id');
+        return $this->belongsTo(Hall::class, 'hall_id', 'id');
     }
 
     public function booths()
     {
-        return $this->belongsToMany(Booth::class)->withTimestamps();
+        return $this->hasMany(Booth::class, 'section_id', 'id');
     }
 
-    /*public function vendor()
+    public function numbers()
     {
-        return $this->hasMany( 'vendor_id', 'id');
-    }*/
+        return $this->hasMany(BoothNumber::class, 'section_id', 'id');
+    }
+
+    public function agents()
+    {
+        return $this->hasMany(SalesAgent::class, 'section_id', 'id');
+    }
 }
