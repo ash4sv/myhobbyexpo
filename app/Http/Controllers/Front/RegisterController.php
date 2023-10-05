@@ -117,8 +117,8 @@ class RegisterController extends Controller
 
     public function booth(Request $request)
     {
-        return $request->all();
-
+        /*return $request->all();*/
+        
         $request->validate([
             'booths.*' => 'required'
         ]);
