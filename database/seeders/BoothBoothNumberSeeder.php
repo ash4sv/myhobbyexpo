@@ -53,8 +53,53 @@ class BoothBoothNumberSeeder extends Seeder
         $space3->boothNumbers()->attach($sec3);
         $space4->boothNumbers()->attach($sec4);
 
-        /*$spacePet1 = Booth::findOrFail();
+        $spacePet1 = Booth::where('booth_type', 'Pet Fiesta (Premium) - (6m x 6m)')->first();
+        $spacePet2 = Booth::where('booth_type', 'Pet Fiesta (Normal) - (6m x 6m)')->first();
+        $spacePet3 = Booth::where('booth_type', 'Pet Fiesta With Shell Scheme (Premium) - (3m x 3m)')->first();
+        $spacePet4 = Booth::where('booth_type', 'Pet Fiesta With Shell Scheme (Normal) - (3m x 3m)')->first();
+        $spacePet5 = Booth::where('booth_type', 'Bare Space - (3m x 3m)')->first();
+        $spaceSec2Pet5 = Booth::where('booth_type', 'Bare Space - Pet & Exotic Zone (2m x 2.5m)')->first();
 
-        $secPet1 = BoothNumber::whereBetween('id', [42, 54])->get();*/
+        $secPet1 = BoothNumber::where('id', 85)->first();
+        $secPet11 = BoothNumber::where('id', 87)->first();
+        $secPet2 = BoothNumber::where('id', 86)->first();
+        $secPet22 = BoothNumber::where('id', 88)->first();
+        $secPet3 = BoothNumber::where('id', 90)->first();
+        $secPet31 = BoothNumber::where('id', 91)->first();
+        $secPet32 = BoothNumber::whereBetween('id', [96, 99])->get();
+        $secPet33 = BoothNumber::whereBetween('id', [104, 110])->get();
+
+        $secPet4 = BoothNumber::whereBetween('id', [92, 95])->get();
+        $secPet41 = BoothNumber::whereBetween('id', [100, 103])->get();
+
+        $secPet5 = BoothNumber::whereBetween('id', [111, 116, ])->get();
+
+        $spacePet1->boothNumbers()->attach($secPet1);
+        $spacePet1->boothNumbers()->attach($secPet11);
+        $spacePet2->boothNumbers()->attach($secPet2);
+        $spacePet2->boothNumbers()->attach($secPet22);
+
+        $spacePet4->boothNumbers()->attach($secPet3);
+        $spacePet4->boothNumbers()->attach($secPet31);
+        $spacePet4->boothNumbers()->attach($secPet32);
+        $spacePet4->boothNumbers()->attach($secPet33);
+
+        $spacePet3->boothNumbers()->attach($secPet4);
+        $spacePet3->boothNumbers()->attach($secPet41);
+
+        $spacePet5->boothNumbers()->attach($secPet5);
+
+        $sec2Pet1 = BoothNumber::whereBetween('id', [117, 159])->get();
+
+        $spaceSec2Pet5->boothNumbers()->attach($sec2Pet1);
+
+        $spaceSec3Pet = Booth::where('booth_type', 'Shell Scheme - Aquatic Zone (2m x 2.5m)')->first();
+        $spaceSec3Pet2 = Booth::where('booth_type', 'Bare Space - Aquatic Zone (2m x 2.5m)')->first();
+
+        $secSec3Pet5 = BoothNumber::whereBetween('id', [160, 172, ])->get();
+        $secSec3Pet6 = BoothNumber::whereBetween('id', [173, 178, ])->get();
+
+        $spaceSec3Pet->boothNumbers()->attach($secSec3Pet5);
+        $spaceSec3Pet2->boothNumbers()->attach($secSec3Pet6);
     }
 }

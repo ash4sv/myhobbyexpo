@@ -116,9 +116,41 @@ class BoothSeeder extends Seeder
 
             [
                 'section_id'                => $concourse->id,
-                'booth_type'                => 'Bare Space (3m x 3m) - ',
+                'booth_type'                => 'Pet Fiesta (Premium) - (6m x 6m)',
+                'normal_price'              => '3000',
+                'early_bird_price'          => '2700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+            [
+                'section_id'                => $concourse->id,
+                'booth_type'                => 'Pet Fiesta (Normal) - (6m x 6m)',
+                'normal_price'              => '2500',
+                'early_bird_price'          => '2200',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+            [
+                'section_id'                => $concourse->id,
+                'booth_type'                => 'Pet Fiesta With Shell Scheme (Premium) - (3m x 3m)',
+                'normal_price'              => '2000',
+                'early_bird_price'          => '1700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+            [
+                'section_id'                => $concourse->id,
+                'booth_type'                => 'Pet Fiesta With Shell Scheme (Normal) - (3m x 3m)',
                 'normal_price'              => '800',
                 'early_bird_price'          => '700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+            [
+                'section_id'                => $concourse->id,
+                'booth_type'                => 'Bare Space - (3m x 3m)',
+                'normal_price'              => '650',
+                'early_bird_price'          => '555',
                 'early_bird_expiry_date'    => '231031',
                 'status'                    => true,
             ],
@@ -127,20 +159,29 @@ class BoothSeeder extends Seeder
 
             [
                 'section_id'                => $exotic_zone->id,
-                'booth_type'                => 'Bare Space (3m x 3m) - ',
-                'normal_price'              => '800',
-                'early_bird_price'          => '700',
+                'booth_type'                => 'Bare Space - Pet & Exotic Zone (2m x 2.5m)',
+                'normal_price'              => '650',
+                'early_bird_price'          => '555',
                 'early_bird_expiry_date'    => '231031',
                 'status'                    => true,
             ],
 
             // $aqua_zone
 
+
             [
                 'section_id'                => $aqua_zone->id,
-                'booth_type'                => 'Bare Space (3m x 3m) - ',
-                'normal_price'              => '800',
-                'early_bird_price'          => '700',
+                'booth_type'                => 'Shell Scheme - Aquatic Zone (2m x 2.5m)',
+                'normal_price'              => '1500',
+                'early_bird_price'          => '1300',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+            [
+                'section_id'                => $aqua_zone->id,
+                'booth_type'                => 'Bare Space - Aquatic Zone (2m x 2.5m)',
+                'normal_price'              => '650',
+                'early_bird_price'          => '555',
                 'early_bird_expiry_date'    => '231031',
                 'status'                    => true,
             ],
