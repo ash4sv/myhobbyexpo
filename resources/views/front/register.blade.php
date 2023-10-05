@@ -75,7 +75,7 @@
                                     <form action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="hidden" name="booth_type" value="{{ $section->id }}">
+                                        <input type="hidden" name="section_id" value="{{ $section->id }}">
                                         <input type="hidden" name="sub_total" id="sub_total" value="">
                                         <input type="hidden" name="total" id="total" value="">
 

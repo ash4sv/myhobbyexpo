@@ -39,7 +39,9 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         Route::get('register', [RegisterController::class, 'register'])->name('register');
         Route::post('register', [RegisterController::class, 'booth'])->name('booth');
         Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
-        Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths');
+        Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths'); // Submit booking and redirect to payment gateway
+        Route::get('booth-redirect', [RegisterController::class, 'billplzHandleRedirect'])->name('billplzhandle');
+        Route::post('webhook', [RegisterController::class, 'webhook'])->name('webhook');
     });
 });
 
