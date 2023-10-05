@@ -19,7 +19,7 @@
         <div class="row justify-content-center g-4 pb-5">
             @foreach($halls as $hall)
                 <div class="col-md-3 col-6">
-                    <a href="" id="{{ $hall->slug }}_btn" aria-disabled="true" onclick="event.preventDefault();">
+                    <a href="" id="{{ $hall->slug }}_btn">
                         <img src="{{ asset($hall->poster) }}" alt="" class="img-fluid">
                         <input type="hidden" name="hall_id" value="{{ $hall->id }}">
                     </a>
@@ -93,7 +93,7 @@
                                                                 <option value="{{ $booth->id }}">{{ $booth->booth_type }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <a data-toggle="tooltip" title="<img src='https://getbootstrap.com/apple-touch-icon.png' />" href="" class="btn btn-outline-secondary">
+                                                        <a data-fancybox data-src="{{ asset('assets/images/booths-types.jpeg') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
                                                             <i class="fas fa-info-circle"></i>
                                                         </a>
                                                     </div>
@@ -107,6 +107,7 @@
                                                     <label class="form-label">Quantity Booths</label>
                                                     <div class="input-group">
                                                         <select name="booth_qty" id="booth_qty" class="form-control default-select2">
+                                                            <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -320,6 +321,7 @@
 
             @foreach($halls as $hall)$('#{{ $hall->slug }}_btn').click(function () {
                 event.preventDefault();
+
                 $('#{{ $hall->slug }}').show();
                 $('#interest_in').remove();
                 $('.hall-body').not('#{{ $hall->slug }}').remove();
@@ -454,9 +456,9 @@
                             // Loop through the response and create checkboxes
                             $.each(response[0], function (index, boothNumber) {
                                 var checkbox = $('<label class="booth-box boxed-check" for="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
-                                    <input class="boxed-check-input" type="checkbox" name="booths[id][' + boothNumber.id + ']" id="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
-                                    <div class="boxed-check-label">' + boothNumber.booth_number + '</div>\
-                                </label>');
+                                                    <input class="boxed-check-input" type="checkbox" name="booths[id][' + boothNumber.id + ']" id="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
+                                                    <div class="boxed-check-label">' + boothNumber.booth_number + '</div>\
+                                                </label>');
 
                                 // Append the checkbox to the container
                                 boothArea.append(checkbox);
@@ -465,18 +467,18 @@
 
                             // Update the booth price and price unit inputs
                             var priceDisplay = response[1]; // Price from the controller
-                            $('#booth_price').val('RM ' + priceDisplay);
+                            $('#booth_price').val('RM ' + parseFloat(priceDisplay).toFixed(2));
                             $('#booth_price_unit').val(priceDisplay);
                         },
                         error: function (error) {
-                            /*console.error('Error:', error);*/
+                            console.error('Error:', error);
                         },
                     });
                 }
 
                 // Trigger the fetchBoothNumbers function when the page loads
                 $(document).ready(function () {
-                    fetchBoothNumbers();
+                    fetchBoothNumbers(); // Call the function when the page loads
                 });
 
                 // Listen for changes in the 'Booth Types' select
