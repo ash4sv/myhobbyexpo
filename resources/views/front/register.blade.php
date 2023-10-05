@@ -19,7 +19,7 @@
         <div class="row justify-content-center g-4 pb-5">
             @foreach($halls as $hall)
                 <div class="col-md-3 col-6">
-                    <a href="" id="{{ $hall->slug }}_btn" aria-disabled="true">
+                    <a href="" id="{{ $hall->slug }}_btn" aria-disabled="true" onclick="event.preventDefault();">
                         <img src="{{ asset($hall->poster) }}" alt="" class="img-fluid">
                         <input type="hidden" name="hall_id" value="{{ $hall->id }}">
                     </a>
@@ -34,7 +34,7 @@
             <div id="booth_type">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY HALL</h4>
+                        <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY ZONE</h4>
                     </div>
                 </div>
                 <div class="row justify-content-center g-4 pb-5">
@@ -57,7 +57,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4 class="text-white text-center mb-5">PLEASE SELECT YOUR HOBBY ZONE</h4>
+                                    <h4 class="text-white text-center mb-5">BOOTH & FFE SELECTIONS</h4>
                                 </div>
                             </div>
 
