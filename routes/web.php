@@ -83,7 +83,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('roles', RolesController::class);
                Route::resource('users', UserController::class);
            });
-           Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+           Route::get('apps-logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
            /*Route::group([
                'prefix'  => 'exhibitor',
                'as'     => 'exhibitor.',
