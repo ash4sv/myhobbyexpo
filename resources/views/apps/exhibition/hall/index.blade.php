@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Booth Type')
-@section('page-header', 'Booth Type')
+@section('page-title', 'Exhibition Hall')
+@section('page-header', 'Exhibition Hall')
 @section('description', '')
 
 @section('content')
@@ -16,7 +16,7 @@
 
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">@yield('page-title')</h4>
+            <h4 class="panel-title"></h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -28,8 +28,8 @@
 
             <div class="d-flex align-items-center mb-3">
                 <div class="me-auto">
-                    <a href="{{ route('apps.exhibitor.category.create') }}" class="btn btn-primary px-4">
-                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth Type
+                    <a href="{{ route('apps.exhibition.hall.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Hall
                     </a>
                 </div>
             </div>
@@ -38,19 +38,29 @@
                 <thead>
                 <tr>
                     <th width="1%">No.</th>
-                    <th>Name</th>
+                    <th width="1%"></th>
+                    <th width="50%">Name</th>
+                    <th width="50%"></th>
+                    <th width="1%"></th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $type)
+                @foreach($halls as $hall)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $type->name }}</td>
+                    <td><img src="{{ asset($hall->poster) }}" alt="" class="h-60px"></td>
+                    <td>{{ $hall->name }}</td>
+                    <td>{!! $hall->description !!}</td>
                     <td>
-                        <a href="{{ route('apps.exhibitor.category.show', $type) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('apps.exhibitor.category.edit', $type) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="{{ route('apps.exhibitor.category.destroy', $type->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        <span class="badge {{ $hall->status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                            {{ $hall->status == 1 ? 'Enable' : 'Disable' }}
+                        </span>
+                    </td>
+                    <td>
+                        {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        <a href="{{ route('apps.exhibition.hall.edit', $hall) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.exhibition.hall.destroy', $hall->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 @endforeach

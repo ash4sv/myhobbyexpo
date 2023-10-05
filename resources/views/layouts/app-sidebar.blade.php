@@ -90,27 +90,37 @@
             </div>
             @endcan
 
-            {{--<div class="menu-item has-sub {{ (request()->segment(1) == 'exhibitor') ? 'active' : '' }}">
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'exhibition') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
                     </div>
-                    <div class="menu-text">Exhibitor</div>
+                    <div class="menu-text">Exhibition</div>
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item {{ (request()->segment(2) == 'category') ? 'active' : '' }}">
-                        <a href="{{ route('apps.exhibitor.category.index') }}" class="menu-link">
-                            <div class="menu-text">Booth Category</div>
+                    <div class="menu-item {{ (request()->segment(2) == 'hall') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibition.hall.index') }}" class="menu-link">
+                            <div class="menu-text">Hall</div>
                         </a>
                     </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'booths') ? 'active' : '' }}">
-                        <a href="{{ route('apps.exhibitor.booths.index') }}" class="menu-link">
+                    <div class="menu-item {{ (request()->segment(2) == 'section') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibition.section.index') }}" class="menu-link">
+                            <div class="menu-text">Section</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'booth') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibition.booth.index') }}" class="menu-link">
+                            <div class="menu-text">Booth</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'booth-number') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibition.booth-number.index') }}" class="menu-link">
                             <div class="menu-text">Booth Number</div>
                         </a>
                     </div>
                 </div>
-            </div>--}}
+            </div>
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">

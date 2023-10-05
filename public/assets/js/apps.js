@@ -2,8 +2,9 @@ var Apps = {
     init: function () {
         Apps.datatable();
         Apps.select2('.hobby-select');
-        /*Apps.summernote('.summernote');*/
+        Apps.summernote('.summernote');
         Apps.switchery('switchery-default');
+        Apps.switchery('switchery-default2');
         Apps.permissionForm();
         Apps.toolTipImg();
     },
@@ -76,7 +77,7 @@ var Apps = {
     },
 
     switchery: function (switchery) {
-        var elm = $('.switchery');
+        var elm = document.getElementById(switchery);
         var switchery = new Switchery(elm, {
             color: '#00acac'
         });

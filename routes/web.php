@@ -1,16 +1,18 @@
 <?php
 
 use App\Http\Controllers\Apps\AppsController;
+use App\Http\Controllers\Apps\BoothController;
+use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\ExhibitController;
+use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Apps\RolesController;
+use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
-use App\Models\archive\BoothNumberController;
-use App\Models\archive\BoothTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +68,15 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
+           Route::group([
+               'prefix'  => 'exhibition',
+               'as'     => 'exhibition.'
+           ], function (){
+               Route::resource('hall', HallController::class);
+               Route::resource('section', SectionController::class);
+               Route::resource('booth', BoothController::class);
+               Route::resource('booth-number', BoothNumberController::class);
+           });
            Route::group([
                'prefix'  => 'pre-register',
                'as'     => 'preregister.'

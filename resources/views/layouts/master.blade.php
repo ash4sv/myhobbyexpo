@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/switchery/dist/switchery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
@@ -74,6 +75,7 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/switchery/dist/switchery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/summernote/dist/summernote-lite.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/apps.js') }}"></script>
