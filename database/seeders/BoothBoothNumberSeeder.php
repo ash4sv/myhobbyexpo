@@ -37,7 +37,24 @@ class BoothBoothNumberSeeder extends Seeder
         $boothLightGreen->boothNumbers()->attach($boothNumbersLightGreenAssign);
         $boothLightYello->boothNumbers()->attach($boothNumbersLightYelloAssign);
 
-        // [1, 11]
-        // [1, 7]
+
+        $space1 = Booth::findOrFail(5);
+        $space2 = Booth::findOrFail(6);
+        $space3 = Booth::findOrFail(8);
+        $space4 = Booth::findOrFail(7);
+
+        $sec1 = BoothNumber::whereBetween('id', [42, 54])->get();
+        $sec2 = BoothNumber::whereBetween('id', [53, 58])->get();
+        $sec3 = BoothNumber::whereBetween('id', [59, 68])->get();
+        $sec4 = BoothNumber::whereBetween('id', [69, 84])->get();
+
+        $space1->boothNumbers()->attach($sec1);
+        $space2->boothNumbers()->attach($sec2);
+        $space3->boothNumbers()->attach($sec3);
+        $space4->boothNumbers()->attach($sec4);
+
+        $spacePet1 = Booth::findOrFail();
+
+        $secPet1 = BoothNumber::whereBetween('id', [42, 54])->get();
     }
 }

@@ -79,7 +79,6 @@ class BoothSeeder extends Seeder
 
             // $fishing_exhibition_zone
 
-
             [
                 'section_id'                => $fishing_exhibition_zone->id,
                 'booth_type'                => 'Premium Space (6m x 6m) - ',
@@ -106,6 +105,39 @@ class BoothSeeder extends Seeder
             ],
             [
                 'section_id'                => $fishing_exhibition_zone->id,
+                'booth_type'                => 'Bare Space (3m x 3m) - ',
+                'normal_price'              => '800',
+                'early_bird_price'          => '700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+
+            // $concourse
+
+            [
+                'section_id'                => $concourse->id,
+                'booth_type'                => 'Bare Space (3m x 3m) - ',
+                'normal_price'              => '800',
+                'early_bird_price'          => '700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+
+            // $exotic_zone
+
+            [
+                'section_id'                => $exotic_zone->id,
+                'booth_type'                => 'Bare Space (3m x 3m) - ',
+                'normal_price'              => '800',
+                'early_bird_price'          => '700',
+                'early_bird_expiry_date'    => '231031',
+                'status'                    => true,
+            ],
+
+            // $aqua_zone
+
+            [
+                'section_id'                => $aqua_zone->id,
                 'booth_type'                => 'Bare Space (3m x 3m) - ',
                 'normal_price'              => '800',
                 'early_bird_price'          => '700',
