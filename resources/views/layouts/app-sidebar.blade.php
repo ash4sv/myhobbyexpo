@@ -215,7 +215,7 @@
             </div>
             @endcan
 
-            <div class="menu-item {{ (request()->segment(1) == 'logs') ? 'active' : '' }}">
+            <div class="menu-item {{ (request()->segment(1) == 'apps-logs') ? 'active' : '' }}">
                 <a href="{{ url('apps-logs') }}" class="menu-link" target="_blank">
                     <div class="menu-icon">
                         <i class="fa fa-history"></i>
