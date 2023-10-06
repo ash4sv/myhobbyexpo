@@ -117,10 +117,9 @@ class RegisterController extends Controller
 
     public function booth(Request $request)
     {
-        /*return $request->all();*/
-
         $request->validate([
-            'booths.*' => 'required'
+            'booth_qty' => 'required',
+            'booths'    => 'required',
         ]);
         $request->session()->put([
             'section_id'                    => $request->section_id,
@@ -164,8 +163,6 @@ class RegisterController extends Controller
 
     public function vendorRegister(Request $request)
     {
-        /*return $request;*/
-
         $dataPull = $request->session()->only([
             'section_id',
             'booth_qty',
@@ -250,6 +247,15 @@ class RegisterController extends Controller
             ],
         ]);
 
+        $vendorPut = $request->validate([
+            'company_name'      => 'required',
+            'roc_rob'           => 'required',
+            'person_in_charge'  => 'required',
+            'contact_no'        => 'required',
+            'email'             => 'required',
+            'sales_agent'       => 'required',
+        ]);
+
         $vendor = new Vendor();
         $vendor->company = $request->company_name;
         $vendor->roc_rob = $request->roc_rob;
@@ -325,7 +331,7 @@ class RegisterController extends Controller
         );
 
         $cacheCheckout = Cache::put('checkoutdata', $vendorData, now()->addMinute(20));
-        $vendorCache = Cache::put('vendor', $vendor, now()->addMinute(20));
+        $vendorCache = Cache::put('vendor', $vendorPut, now()->addMinute(20));
 
         return redirect($bill->toArray()['url']);
     }

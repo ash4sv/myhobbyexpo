@@ -107,7 +107,7 @@
                                                     <label class="form-label">Quantity Booths</label>
                                                     <div class="input-group">
                                                         <select name="booth_qty" id="booth_qty" class="form-control default-select2">
-                                                            <option value="0">0</option>
+                                                            <option value="">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>

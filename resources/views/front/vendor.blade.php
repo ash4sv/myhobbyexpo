@@ -203,7 +203,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="website" class="form-label">Sales Agents <span class="text-danger">*</span></label>
-                                        <select name="sales_agent" id="sales_agent" class="form-control default-select2">
+                                        <select name="sales_agent" id="sales_agent" class="form-control @error('sales_agent') is-invalid @enderror default-select2">
                                             <option value="">Please Select Your Sales Agent</option>
                                             @foreach($sections as $section)
                                                 @foreach($section->agents->where('section_id', $data['section_id']) as $agent)
@@ -211,6 +211,9 @@
                                                 @endforeach
                                             @endforeach
                                         </select>
+                                        @error('sales_agent')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
