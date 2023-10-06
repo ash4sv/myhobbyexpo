@@ -386,9 +386,9 @@ class RegisterController extends Controller
         $booth = Cache::pull('booths');
         $data = $request->all();
 
-        /*Log::info('Booth', $booth);
+        Log::info('Booth', $booth);
         Log::info('Checkout', $checkout);
-        Log::info('Vendor', $vendor);*/
+        Log::info('Vendor', $vendor);
 
         Log::info('This webhook data');
         Log::info($data);
