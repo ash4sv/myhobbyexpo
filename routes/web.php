@@ -12,6 +12,7 @@ use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Apps\RolesController;
 use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
+use App\Http\Controllers\Apps\VendorController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::resource('agent', AgentController::class);
+           Route::resource('sales-agents', VendorController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'

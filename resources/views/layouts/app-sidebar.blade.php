@@ -128,6 +128,15 @@
                 </div>
             </div>
 
+            <div class="menu-item {{ (request()->segment(1) == 'sales-agents') ? 'active' : '' }}">
+                <a href="{{ route('apps.sales-agents.index') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="menu-text">Vendors</div>
+                </a>
+            </div>
+
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
