@@ -39,8 +39,8 @@ class BoothNumber extends Model
         return $this->belongsToMany(Booth::class)->withTimestamps();
     }
 
-    /*public function vendor()
+    public function vendor()
     {
-        return $this->hasMany( 'vendor_id', 'id');
-    }*/
+        return $this->belongsTo( Vendor::class,'vendor_id', 'id');
+    }
 }

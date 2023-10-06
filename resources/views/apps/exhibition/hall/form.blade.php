@@ -53,4 +53,3 @@
     <button type="reset" class="btn btn-lime w-90px">Reset</button>
     <a href="{{ route('apps.exhibition.hall.index') }}" class="btn btn-yellow w-90px">Back</a>
 </div>
-
