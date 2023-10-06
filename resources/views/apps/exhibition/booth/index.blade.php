@@ -26,7 +26,48 @@
         </div>
         <div class="panel-body">
 
+            <div class="d-flex align-items-center mb-3">
+                <div class="me-auto">
+                    <a href="{{ route('apps.exhibition.booth.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth
+                    </a>
+                </div>
+            </div>
 
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                <thead>
+                <tr>
+                    <th class="text-center" width="1%">No.</th>
+                    <th>Booth Type</th>
+                    <th>Normal Price</th>
+                    <th>Early Bird Price</th>
+                    <th>Early Bird Expiry Date</th>
+                    <th width="1%">Status</th>
+                    <th width="1%">#</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($booths as $booth)
+                <tr>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td>{{ $booth->booth_type }}</td>
+                    <td>{{ $booth->normal_price }}</td>
+                    <td>{{ $booth->early_bird_price }}</td>
+                    <td>{{ $booth->early_bird_expiry_date }}</td>
+                    <td>
+                        <span class="badge {{ $booth->status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                            {{ $booth->status == 1 ? 'Enable' : 'Disable' }}
+                        </span>
+                    </td>
+                    <td>
+                        {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        <a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.exhibition.booth.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
 
         </div>
     </div>

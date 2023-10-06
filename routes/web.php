@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Apps\AgentController;
 use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\BoothController;
 use App\Http\Controllers\Apps\BoothNumberController;
@@ -68,6 +69,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('dashboard', [AppsController::class, 'dashboard'])->name('dashboard');
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
+           Route::resource('agent', AgentController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'

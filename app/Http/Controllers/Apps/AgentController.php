@@ -3,28 +3,19 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apps\Booth;
-use App\Models\Apps\BoothNumber;
-use App\Models\Apps\Section;
 use Illuminate\Http\Request;
 
-class BoothController extends Controller
+class AgentController extends Controller
 {
-    protected $view     = 'apps.exhibition.booth.';
-    protected $route    = 'apps.exhibition.booth.';
+    protected $view = 'apps.agents.';
+    protected $route = 'apps.agent.';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = 'Delete Permissions!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
-        return view($this->view.'index', [
-            'booths' => Booth::all(),
-        ]);
+        return view($this->view.'index');
     }
 
     /**
@@ -32,11 +23,7 @@ class BoothController extends Controller
      */
     public function create()
     {
-        return view($this->view.'create', [
-            'booth'     => new Booth(),
-            'sections'  => Section::all(),
-            'numbers'   => BoothNumber::all(),
-        ]);
+        return view($this->view.'create');
     }
 
     /**
@@ -60,11 +47,7 @@ class BoothController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit', [
-            'booth'     => Booth::findOrFail($id),
-            'sections'  => Section::all(),
-            'numbers'   => BoothNumber::all(),
-        ]);
+        return view($this->view.'edit');
     }
 
     /**
