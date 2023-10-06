@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\Hall;
 use App\Models\Apps\Section;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SectionController extends Controller
 {
@@ -32,6 +34,7 @@ class SectionController extends Controller
     {
         return view($this->view.'create', [
             'section' => new Section(),
+            'halls' => Hall::all(),
         ]);
     }
 
@@ -40,7 +43,20 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'poster'        => 'required',
+            'layout'        => 'required',
+            'hall'          => 'required',
+            'name'          => 'required',
+            'description'   => '',
+            'status'        => '',
+            'coming_soon'   => '',
+        ]);
+
+        $section = new Section();
+        $section->saveSection($section, $request);
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return redirect()->route($this->route.'edit', $section);
     }
 
     /**
@@ -56,9 +72,11 @@ class SectionController extends Controller
      */
     public function edit(string $id)
     {
+        $halls = Hall::all();
         $section = Section::findOrFail($id);
         return view($this->view.'edit', [
-            'section' => $section
+            'section' => $section,
+            'halls'   => $halls
         ]);
     }
 
@@ -67,7 +85,11 @@ class SectionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $section = Section::findOrFail($id);
+        $section->saveSection($section, $request);
+
+        Alert::success('Successfully updated!', 'Record has been updated successfully');
+        return redirect()->route($this->route.'index');
     }
 
     /**
@@ -75,6 +97,10 @@ class SectionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $section = Section::findOrFail($id);
+        $section->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->back();
     }
 }

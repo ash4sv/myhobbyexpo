@@ -51,6 +51,7 @@ class HallController extends Controller
         $hall->saveHall($hall, $request);
 
         Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return redirect()->route('apps.exhibition.hall.edit', $hall);
     }
 
     /**
