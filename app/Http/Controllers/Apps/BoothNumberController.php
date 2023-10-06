@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\BoothNumber;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BoothNumberController extends Controller
 {
@@ -19,7 +21,9 @@ class BoothNumberController extends Controller
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view($this->view.'index');
+        return view($this->view.'index', [
+            'booths' => BoothNumber::all(),
+        ]);
     }
 
     /**
@@ -27,7 +31,7 @@ class BoothNumberController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->view.'create');
     }
 
     /**
@@ -35,6 +39,9 @@ class BoothNumberController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
         return view($this->view.'create');
     }
 
@@ -59,7 +66,10 @@ class BoothNumberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+        Alert::success('Successfully updated!', 'Record has been updated successfully');
+
     }
 
     /**
@@ -67,6 +77,10 @@ class BoothNumberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $number = BoothNumber::findOrFail($id);
+        $number->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->back();
     }
 }

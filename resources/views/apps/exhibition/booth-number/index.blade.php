@@ -26,7 +26,62 @@
         </div>
         <div class="panel-body">
 
+            <div class="d-flex align-items-center mb-3">
+                <div class="me-auto">
+                    <a href="{{ route('apps.exhibition.booth-number.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth Number
+                    </a>
+                </div>
+            </div>
 
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                <thead>
+                <tr>
+                    <th width="1%">No.</th>
+                    <th>Zone</th>
+                    <th>Booth Numbers</th>
+                    <th></th>
+                    <th width="1%">Status</th>
+                    <th width="1%">#</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($booths as $booth)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $booth->sections->name }}</td>
+                        <td>{{ $booth->booth_number }}</td>
+                        <td>
+                            @isset($booth->vendor->company)
+                                {{ $booth->vendor->company }} |
+                            @endisset
+                            @isset($booth->vendor->roc_rob)
+                                {{ $booth->vendor->roc_rob }} |
+                            @endisset
+                            @isset($booth->vendor->pic_name)
+                                {{ $booth->vendor->pic_name }} |
+                            @endisset
+                            @isset($booth->vendor->phone_num)
+                                <a href="tel:{{ $booth->vendor->phone_num }}">{{ $booth->vendor->phone_num }}</a> |
+                            @endisset
+                            @isset($booth->vendor->email)
+                                <a href="mailto:{{ $booth->vendor->email }}">{{ $booth->vendor->email }}</a>
+                            @endisset
+                        </td>
+                        <td>
+                        <span class="badge {{ $booth->status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                            {{ $booth->status == 1 ? 'Booked' : 'Available' }}
+                        </span>
+                        </td>
+                        <td>
+                            {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                            <a href="{{ route('apps.exhibition.booth-number.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('apps.exhibition.booth-number.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
 
         </div>
     </div>
