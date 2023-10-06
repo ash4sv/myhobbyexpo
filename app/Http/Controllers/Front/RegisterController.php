@@ -386,7 +386,11 @@ class RegisterController extends Controller
     public function webhook(Request $request)
     {
         $checkout = Cache::pull('checkoutdata');
+        $vendor = Cache::pull('vendor');
         $data = $request->all();
+
+        Log::info('Checkout', $checkout);
+        Log::info('Vendor', $vendor);
 
         Log::info('This webhook data');
         Log::info($data);
