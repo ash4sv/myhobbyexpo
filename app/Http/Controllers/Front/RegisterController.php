@@ -332,6 +332,7 @@ class RegisterController extends Controller
 
         $cacheCheckout = Cache::put('checkoutdata', $vendorData, now()->addMinute(20));
         $vendorCache = Cache::put('vendor', $vendorPut, now()->addMinute(20));
+        $shopReference = Cache::put('ref', $shopRef, now()->addMinute(20));
 
         return redirect($bill->toArray()['url']);
     }
@@ -393,6 +394,7 @@ class RegisterController extends Controller
     {
         $checkout = Cache::pull('checkoutdata');
         $vendor = Cache::pull('vendor');
+        $ref = Cache::pull('ref');
         $data = $request->all();
 
         Log::info('Checkout', $checkout);
@@ -400,27 +402,26 @@ class RegisterController extends Controller
 
         Log::info('This webhook data');
         Log::info($data);
-        Log::info('=================');
         Log::info('-------- webhook ' . date('Ymd/m/y H:i') . ' ---------');
 
         if ($data['paid'] == 'true') {
             DB::table('billplz_webhook')->insert([
-                'shopref' => $checkout['shop_ref'],
-                'billplz_id' => $data['id'],
+                'shopref'       => $ref,
+                'billplz_id'    => $data['id'],
                 'collection_id' => $data['collection_id'],
-                'paid' => $data['paid'],
-                'state' => $data['state'],
-                'amount' => $data['amount'],
-                'paid_amount' => $data['paid_amount'],
-                'due_at' => $data['due_at'],
-                'email' => $data['email'],
-                'mobile' => $data['mobile'],
-                'name' => $data['name'],
-                'url' => $data['url'],
-                'paid_at' => $data['paid_at'],
-                'x_signature' => $data['x_signature'],
-                'created_at' => now(),
-                'updated_at' => now(),
+                'paid'          => $data['paid'],
+                'state'         => $data['state'],
+                'amount'        => $data['amount'],
+                'paid_amount'   => $data['paid_amount'],
+                'due_at'        => $data['due_at'],
+                'email'         => $data['email'],
+                'mobile'        => $data['mobile'],
+                'name'          => $data['name'],
+                'url'           => $data['url'],
+                'paid_at'       => $data['paid_at'],
+                'x_signature'   => $data['x_signature'],
+                'created_at'    => now(),
+                'updated_at'    => now(),
             ]);
         }
 
