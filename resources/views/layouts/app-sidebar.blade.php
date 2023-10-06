@@ -101,22 +101,26 @@
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->segment(2) == 'hall') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.hall.index') }}" class="menu-link">
-                            <div class="menu-text">Hall</div>
+                            <div class="menu-text">Hall </div>
+                            <div class="menu-badge">Step 1</div>
                         </a>
                     </div>
                     <div class="menu-item {{ (request()->segment(2) == 'section') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.section.index') }}" class="menu-link">
                             <div class="menu-text">Zone</div>
-                        </a>
-                    </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'booth') ? 'active' : '' }}">
-                        <a href="{{ route('apps.exhibition.booth.index') }}" class="menu-link">
-                            <div class="menu-text">Booth</div>
+                             <div class="menu-badge">Step 2</div>
                         </a>
                     </div>
                     <div class="menu-item {{ (request()->segment(2) == 'booth-number') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.booth-number.index') }}" class="menu-link">
-                            <div class="menu-text">Booth Number</div>
+                            <div class="menu-text">Booth Number </div>
+                            <div class="menu-badge">Step 3</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'booth') ? 'active' : '' }}">
+                        <a href="{{ route('apps.exhibition.booth.index') }}" class="menu-link">
+                            <div class="menu-text">Booth </div>
+                            <div class="menu-badge">Step 4</div>
                         </a>
                     </div>
                 </div>

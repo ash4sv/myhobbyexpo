@@ -49,8 +49,16 @@
                 @foreach($booths as $booth)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $booth->sections->name }}</td>
-                        <td>{{ $booth->booth_number }}</td>
+                        <td>
+                            @isset($booth->sections)
+                            {{ $booth->sections->name }}
+                            @endisset
+                        </td>
+                        <td>
+                            @isset($booth->booth_number)
+                            {{ $booth->booth_number }}
+                            @endisset
+                        </td>
                         <td>
                             @isset($booth->vendor->company)
                                 {{ $booth->vendor->company }} |
