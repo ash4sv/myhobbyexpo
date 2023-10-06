@@ -26,7 +26,32 @@
         </div>
         <div class="panel-body">
 
-
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                <thead>
+                <tr>
+                    <th class="text-center" width="1%">No.</th>
+                    <th>Booth Type</th>
+                    <th>Normal Price</th>
+                    <th>Early Bird Price</th>
+                    <th width="1%">#</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($agents as $agent)
+                <tr>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td>{{ $agent->hall->name }}</td>
+                    <td>{{ $agent->section->name }}</td>
+                    <td>{{ $agent->name }}</td>
+                    <td>
+                        {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        <a href="{{ route('apps.agent.edit', $agent) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.agent.destroy', $agent->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
 
         </div>
     </div>

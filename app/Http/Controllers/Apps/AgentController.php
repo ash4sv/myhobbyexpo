@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\SalesAgent;
 use Illuminate\Http\Request;
 
 class AgentController extends Controller
@@ -15,7 +16,9 @@ class AgentController extends Controller
      */
     public function index()
     {
-        return view($this->view.'index');
+        return view($this->view.'index', [
+            'agents'  => SalesAgent::all(),
+        ]);
     }
 
     /**
