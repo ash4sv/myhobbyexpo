@@ -274,6 +274,19 @@ class RegisterController extends Controller
         $vendor->image = $image;
         $vendor->save();
 
+        foreach ($dataPull["booths"]["id"] as $id => $status) {
+            if ($status === "on") {
+                try {
+                    $foundBooth = BoothNumber::findOrFail($id);
+                    $foundBooth->update([
+                        'vendor_id' => $vendor->id,
+                        'status'    => true
+                    ]);
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                }
+            }
+        }
+
         $total_val = str_replace("RM ", "", $request->total_val);
         $total_val = 1.00;
         $amount = ($total_val * 100);
@@ -395,20 +408,6 @@ class RegisterController extends Controller
         Log::info('-------- webhook ' . date('Ymd/m/y H:i') . ' ---------');
 
         if ($data['paid'] == 'true') {
-            /*foreach ($booth["booths"]["id"] as $id => $status) {*/
-            foreach ($booth["id"] as $id => $status) {
-                if ($status === "on") {
-                    try {
-                        $foundBooth = BoothNumber::findOrFail($id);
-                        $foundBooth->update([
-                            'vendor_id' => $vendor->id,
-                            'status'    => true
-                        ]);
-                    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-                    }
-                }
-            }
-
             $bookedData = BoothExhibitionBooked::where('inv_number', $ref)->first();
             $bookedData->update(['payment_status' => true]);
 

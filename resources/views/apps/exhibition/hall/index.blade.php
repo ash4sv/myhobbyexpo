@@ -39,9 +39,10 @@
                 <tr>
                     <th width="1%">No.</th>
                     <th width="1%"></th>
-                    <th width="50%">Name</th>
-                    <th width="50%"></th>
-                    <th width="1%"></th>
+                    <th>Name</th>
+                    <th></th>
+                    <th width="10%">Status</th>
+                    <th width="10%">Coming Soon</th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -55,6 +56,11 @@
                     <td>
                         <span class="badge {{ $hall->status == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $hall->status == 1 ? 'Enable' : 'Disable' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {{ $hall->coming_soon == 1 ? 'bg-primary' : 'bg-danger' }}">
+                            {{ $hall->coming_soon == 1 ? 'Enable' : 'Disable' }}
                         </span>
                     </td>
                     <td>

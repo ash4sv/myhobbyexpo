@@ -106,7 +106,7 @@
                     </div>
                     <div class="menu-item {{ (request()->segment(2) == 'section') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.section.index') }}" class="menu-link">
-                            <div class="menu-text">Section</div>
+                            <div class="menu-text">Zone</div>
                         </a>
                     </div>
                     <div class="menu-item {{ (request()->segment(2) == 'booth') ? 'active' : '' }}">
