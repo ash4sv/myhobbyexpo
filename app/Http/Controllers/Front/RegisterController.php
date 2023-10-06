@@ -333,6 +333,7 @@ class RegisterController extends Controller
         $cacheCheckout = Cache::put('checkoutdata', $vendorData, now()->addMinute(20));
         $vendorCache = Cache::put('vendor', $vendorPut, now()->addMinute(20));
         $shopReference = Cache::put('ref', $shopRef, now()->addMinute(20));
+        $boothsData = Cache::put('booths', $dataPull["booths"], now()->addMinute(20));
 
         return redirect($bill->toArray()['url']);
     }
@@ -395,8 +396,10 @@ class RegisterController extends Controller
         $checkout = Cache::pull('checkoutdata');
         $vendor = Cache::pull('vendor');
         $ref = Cache::pull('ref');
+        $booth = Cache::pull('booths');
         $data = $request->all();
 
+        Log::info('Booth', $booth);
         Log::info('Checkout', $checkout);
         Log::info('Vendor', $vendor);
 
@@ -405,6 +408,9 @@ class RegisterController extends Controller
         Log::info('-------- webhook ' . date('Ymd/m/y H:i') . ' ---------');
 
         if ($data['paid'] == 'true') {
+            $bookedData = BoothExhibitionBooked::where('inv_number', $ref)->first();
+            $bookedData->update(['payment_status' => true]);
+
             DB::table('billplz_webhook')->insert([
                 'shopref'       => $ref,
                 'billplz_id'    => $data['id'],
