@@ -324,7 +324,6 @@ class RegisterController extends Controller
             ['redirect_url' => route('front.billplzhandle')]
         );
 
-        Log::info($bill);
         $cacheCheckout = Cache::put('checkoutdata', $vendorData, now()->addMinute(20));
         $vendorCache = Cache::put('vendor', $vendor, now()->addMinute(20));
 
