@@ -395,7 +395,8 @@ class RegisterController extends Controller
         Log::info('-------- webhook ' . date('Ymd/m/y H:i') . ' ---------');
 
         if ($data['paid'] == 'true') {
-            foreach ($booth["booths"]["id"] as $id => $status) {
+            /*foreach ($booth["booths"]["id"] as $id => $status) {*/
+            foreach ($booth["id"] as $id => $status) {
                 if ($status === "on") {
                     try {
                         $foundBooth = BoothNumber::findOrFail($id);
