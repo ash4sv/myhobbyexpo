@@ -39,7 +39,13 @@ class BoothNumberController extends Controller
      */
     public function store(Request $request)
     {
-
+        foreach ($request->booth_number as $key => $boothNumber) {
+            BoothNumber::create([
+                'booth_number' => $boothNumber,
+                'description' => $request->description[$key],
+                'status' => false
+            ]);
+        }
 
         Alert::success('Successfully saved!', 'Record has been saved successfully');
         return view($this->view.'create');
@@ -58,7 +64,10 @@ class BoothNumberController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit');
+        $number = BoothNumber::findOrFail($id);
+        return view($this->view.'edit', [
+            'number' => $number
+        ]);
     }
 
     /**
