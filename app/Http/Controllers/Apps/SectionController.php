@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\Section;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -15,7 +16,13 @@ class SectionController extends Controller
      */
     public function index()
     {
-        return view($this->view.'index');
+        $title = 'Delete Permissions!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return view($this->view.'index', [
+            'sections' => Section::all(),
+        ]);
     }
 
     /**
@@ -23,11 +30,9 @@ class SectionController extends Controller
      */
     public function create()
     {
-        $title = 'Delete Permissions!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
-        return view($this->view.'create');
+        return view($this->view.'create', [
+            'section' => new Section(),
+        ]);
     }
 
     /**
@@ -51,7 +56,10 @@ class SectionController extends Controller
      */
     public function edit(string $id)
     {
-        return view($this->view.'edit');
+        $section = Section::findOrFail($id);
+        return view($this->view.'edit', [
+            'section' => $section
+        ]);
     }
 
     /**
