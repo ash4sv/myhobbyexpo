@@ -53,19 +53,21 @@
                 </a>
             </div>
             @endcan
-            {{--<div class="menu-item {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
-                <a href="{{ route('apps.pre-register.index') }}" class="menu-link">
+
+            <div class="menu-item {{ (request()->segment(1) == 'agent') ? 'active' : '' }}">
+                <a href="{{ route('apps.agent.index') }}" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fa fa-square-full"></i>
+                        <i class="fa fa-users"></i>
                     </div>
-                    <div class="menu-text">Pre-Register</div>
+                    <div class="menu-text">Agents</div>
                 </a>
-            </div>--}}
+            </div>
+
             @can('pre-register-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fa fa-align-left"></i>
+                        <i class="fa fa-file-alt"></i>
                     </div>
                     <div class="menu-text">Pre-Register</div>
                     <div class="menu-caret"></div>
