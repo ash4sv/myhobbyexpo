@@ -282,6 +282,7 @@ class RegisterController extends Controller
         }
 
         $total_val = str_replace("RM ", "", $request->total_val);
+        $total_val = 1.00;
         $amount = ($total_val * 100);
         $serviceFee = $total_val * 0.035;
 
