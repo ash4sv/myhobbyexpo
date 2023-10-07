@@ -172,15 +172,18 @@ class RegisterController extends Controller
         ]);
 
         $dataPull = $request->session()->only([
-            'section_id', 'booth_qty', 'booth_price', 'booth_price_unit',
-            'table_TPrice', 'add_on_table', 'add_table', 'chair_TPrice', 'add_on_chair', 'add_chair', 'sso_TPrice', 'add_on_sso', 'add_sso', 'ssoamp15_TPrice', 'add_on_sso_15amp', 'add_sso_15amp',
-            'steel_barricade_TPrice', 'add_on_steel_barricade', 'add_steel_barricade', 'shell_scheme_barricade_TPrice', 'add_on_shell_scheme_barricade', 'add_shell_scheme_barricade', 'sub_total', 'booths'
+            'section_id', 'booth_qty',
+            'booth_price', 'booth_price_unit',
+            'table_TPrice', 'add_on_table',
+            'add_table', 'chair_TPrice', 'add_on_chair', 'add_chair', 'sso_TPrice', 'add_on_sso',
+            'add_sso', 'ssoamp15_TPrice', 'add_on_sso_15amp', 'add_sso_15amp', 'steel_barricade_TPrice', 'add_on_steel_barricade', 'add_steel_barricade',
+            'shell_scheme_barricade_TPrice',
+            'add_on_shell_scheme_barricade',
+            'add_shell_scheme_barricade',
+            'sub_total', 'total', 'booths',
         ]);
 
         $vendorSubmitedData = [
-            'subtotal_val'      => $request->subtotal_val,
-            'add_on_table'      => $request->add_on_table,
-            'total_val'         => $request->total_val,
             'company_name'      => $request->company_name,
             'roc_rob'           => $request->roc_rob,
             'person_in_charge'  => $request->person_in_charge,
@@ -215,12 +218,20 @@ class RegisterController extends Controller
         $vendor->save();
 
         $shopRef = IdGenerator::generate(['table' => 'booth_exhibition_bookeds', 'field' => 'inv_number', 'length' => 15, 'prefix' => 'MHX-23-']);
+        $invDate = now();
+
+        /*$total_val = str_replace("RM ", "", $request->total_val);*/
+        $total_val = 1.00;
+        $amount = ($total_val * 100);
+        $serviceFee = $total_val * 0.035;
 
         $request->session()->put([
             'dataPull'         =>  $dataPull,
             'vendorSubmitData' => $vendorSubmitedData,
             'vendor'           => $vendor,
             'ref'              => $shopRef,
+            'invDate'          => $invDate,
+            'servicesFee'      => $serviceFee,
         ]);
 
         $passingData = [
@@ -228,18 +239,11 @@ class RegisterController extends Controller
             'vendorSubmitData' => $vendorSubmitedData,
             'vendor'           => $vendor,
             'ref'              => $shopRef,
+            'invDate'          => $invDate,
+            'servicesFee'      => $serviceFee,
         ];
 
         $passWebhook = Cache::put('WebHook', $passingData, now()->addMinute(20));
-
-        return [
-            $request->all()
-        ];
-
-        /*$total_val = str_replace("RM ", "", $request->total_val);
-        $total_val = 1.00;
-        $amount = ($total_val * 100);
-        $serviceFee = $total_val * 0.035;
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
         if(config('billplz.billplz_sandbox')) {
@@ -248,28 +252,42 @@ class RegisterController extends Controller
         $bill = $billplz->bill();
         $bill = $bill->create(
             config('billplz.billplz_collection_id'),
-            $vendorData['email'],
-            $vendorData['contact_no'],
-            $vendorData['company_name'],
+            $vendorSubmitedData['email'],
+            $vendorSubmitedData['contact_no'],
+            $vendorSubmitedData['company_name'],
             \Duit\MYR::given($amount),
             route('front.webhook'),
-            'Register of Vendor MHX2023' . $vendorData['company_name'] . ' ' . $vendorData['email'] . ' ' . $vendorData['company_name'] ,
-            ['redirect_url' => route('front.billplzhandle')]
+            'Register of Vendor MHX2023',
+            ['redirect_url' => route('front.redirect')]
         );
 
-        return redirect($bill->toArray()['url']);*/
+        return redirect($bill->toArray()['url']);
     }
 
     public function billplzHandleRedirect(Request $request)
     {
-        $dataPull         = $request->session()->pull('dataPull');
-        $vendorSubmitData = $request->session()->pull('vendorSubmitData');
-        $vendor           = $request->session()->pull('vendor');
-        $ref              = $request->session()->pull('ref');
+        $dataPull           = $request->session()->pull('dataPull');
+        $vendorSubmitData   = $request->session()->pull('vendorSubmitData');
+        $vendor             = $request->session()->pull('vendor');
+        $ref                = $request->session()->pull('ref');
+        $invDate            = $request->session()->pull('invDate');
+        $agent              = SalesAgent::findOrFail($vendorSubmitData['sales_agent']);
 
-        $vendorDetails    = Vendor::findOrFail($vendor['id']);
-        $booths           = BoothNumber::where('vendor_id', $vendor->id)->get();
-        $salesAgent       = SalesAgent::findOrFail($vendor['sales_agent']);
+        $boothIds = collect($dataPull['booths']['id'])
+        ->filter(function ($value, $key) {
+            return $value === 'on';
+        })->keys()->toArray();
+        $booths             = BoothNumber::whereBetween('id', $boothIds)->get();
+
+        Log::info('================');
+        Log::info($dataPull);
+        Log::info($booths);
+        Log::info($vendorSubmitData);
+        Log::info($vendor);
+        Log::info($ref);
+        Log::info($invDate);
+        Log::info($agent);
+        Log::info('================');
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
         if(config('billplz.billplz_sandbox')) {
@@ -284,28 +302,84 @@ class RegisterController extends Controller
         $bill['data'] = $billplz->bill()->get($bill['id'])->toArray();
 
         if ($bill['data']['paid'] == 'true'){
+            DB::table('billplz_status')->insert([
+                'shopref'             => $ref,
+                'billplz_id'          => $bill['id'],
+                'billplz_paid'        => $bill['paid'],
+                'billplz_paid_at'     => $bill['paid_at'],
+                'billplz_x_signature' => $bill['x_signature'],
+                'created_at'          => now(),
+                'updated_at'          => now(),
+            ]);
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confimation-bill', [
-                'dataPull'          => $dataPull,
-                'vendorSubmitData'  => $vendorSubmitData,
-                'vendor'            => $vendor,
-                'ref'               => $ref,
+                'booths'           => $booths,
+                'dataPull'         => $dataPull,
+                'vendorSubmitData' => $vendorSubmitData,
+                'vendor'           => $vendor,
+                'ref'              => $ref,
+                'invDate'          => $invDate,
+                'agent'            => $agent->name,
             ]);
-
-        } elseif ($bill['data']['paid'] == 'false'){
-
-            Alert::warning('We are sorry', 'Your payment don\'t go through');
-            return redirect()->route('front.register');
-
         }
-
-        Alert::warning('We are sorry', 'Your payment don\'t go through');
-        return redirect()->back();
     }
 
-    public function webhook(Request $request)
+    public function billplzHandleWebhook(Request $request)
     {
+        $dataPull         = Cache::pull('dataPull');
+        $vendorSubmitData = Cache::pull('vendorSubmitData');
+        $vendor           = Cache::pull('vendor');
+        $ref              = Cache::pull('ref');
+        $invDate          = Cache::pull('invDate');
+        $servicesFee      = Cache::pull('servicesFee');
+        $data             = $request->all();
 
+        Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
+
+        if ($data['paid'] == 'true') {
+            $boothIds = collect($dataPull['booths']['id'])->filter(function ($value, $key) { return $value === 'on'; })->keys()->toArray();
+            $booths   = BoothNumber::whereBetween('id', $boothIds)->get();
+
+            BoothExhibitionBooked::create([
+                'inv_number'      => $ref,
+                'inv_date'        => $invDate,
+                'vendor_id'       => $vendor['id'],
+                'sales_agent_id'  => $vendorSubmitData['sales_agent'],
+                'inv_description' => json_encode($dataPull),
+                'add_on'          => 'data',
+                'total'           => $dataPull['total'],
+                'fee'             => $servicesFee,
+                'payment_status'  => true,
+            ]);
+
+            foreach ($booths as $booth) {
+                $booth->update([
+                    'vendor_id' => $vendor['id'],
+                    'status'    => true
+                ]);
+            }
+
+            DB::table('billplz_webhook')->insert([
+                'shopref'       => $ref,
+                'billplz_id'    => $data['id'],
+                'collection_id' => $data['collection_id'],
+                'paid'          => $data['paid'],
+                'state'         => $data['state'],
+                'amount'        => $data['amount'],
+                'paid_amount'   => $data['paid_amount'],
+                'due_at'        => $data['due_at'],
+                'email'         => $data['email'],
+                'mobile'        => $data['mobile'],
+                'name'          => $data['name'],
+                'url'           => $data['url'],
+                'paid_at'       => $data['paid_at'],
+                'x_signature'   => $data['x_signature'],
+                'created_at'    => now(),
+                'updated_at'    => now(),
+            ]);
+        }
+
+        Log::info('================= Successfully Booked webhook ' . date('Ymd/m/y H:i') . ' =================');
     }
 }

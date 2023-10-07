@@ -30,10 +30,10 @@
                                         <td width="33%"></td>
                                         <td class="text-end">
                                             {{ $subTotal }}
-                                            <input type="hidden" name="" value="{{ $subTotal }}">
+                                            <input type="hidden" name="sub_total" value="{{ $subTotal }}">
                                         </td>
                                     </tr>
-                                    @if($data['add_table'] || $data['add_chair'] || $data['add_sso'] || $data['add_sso_15amp'] || $data['add_steel_barricade'] || $data['add_shell_scheme_barricade'] )
+                                    @if($data['add_table'] || $data['add_chair'] || $data['add_sso'] || $data['add_sso_15amp'] || $data['add_steel_barricade'] || $data['add_shell_scheme_barricade'])
                                         <tr>
                                             <td colspan="3">
                                                 <span class="fw-bold">Add On :</span>
@@ -46,7 +46,7 @@
                                             <td class="text-center">{{ $data['add_table'] }} x </td>
                                             <td class="text-end">
                                                 {{ $data['table_TPrice'] }}
-                                                <input type="hidden" name="" value="{{ $data['table_TPrice'] }}">
+                                                <input type="hidden" name="add_on_table" value="{{ $data['table_TPrice'] }}">
                                             </td>
                                         </tr>
                                     @endif
@@ -105,7 +105,7 @@
                                         <td class="text-end" colspan="2">
                                             <span class="fw-bold">
                                                 {{ $total }}
-                                                <input type="hidden" name="" value="{{ $total }}">
+                                                <input type="hidden" name="total_val" value="{{ $total }}">
                                             </span>
                                         </td>
                                     </tr>

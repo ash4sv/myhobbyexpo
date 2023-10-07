@@ -95,6 +95,8 @@
 
                     <div id="interactive-chart" class="h-250px"></div>
 
+                    <div id="bar-chart" class="h-250px"></div>
+
                 </div>
             </div>
 
@@ -102,12 +104,21 @@
     </div>
 
 
+        @php
+            $index = 0;
+            $date = 0;
+        @endphp
+
+
+[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>
+[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>
+[@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach] <br>
+[[0, 'JAN'], [1, 'FEB'], [2, 'MAR'], [3, 'APR'], [4, 'MAY'], [5, 'JUN'],] <br>
 
 @endsection
 
 @push('script')
     <script>
-        @php $index = 0 @endphp
 
         var d1 = [
             @foreach($dailyCounts as $data) [
@@ -137,6 +148,39 @@
                 noColumns: 1,
                 show: true
             }
+        });
+
+
+        var data = [@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach];
+        var ticks = [@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach];
+        $.plot('#bar-chart', [{ label: 'Bounce Rate', data: data, color: 'rgb(73, 120, 207)' }], {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.6,
+                    align: 'center',
+                    fill: true,
+                    fillColor: 'rgba('+ '88, 94, 94' + ', .25)',
+                    zero: true
+                }
+            },
+            xaxis: {
+                tickColor: 'rgba('+ '88, 94, 94' + ', .15)',
+                autoscaleMargin: 0.05,
+                ticks: ticks
+            },
+            yaxis: {
+                tickColor: 'rgba('+ '88, 94, 94' + ', .15)'
+            },
+            grid: {
+                borderColor: 'rgba('+ '88, 94, 94' + ', .15)',
+                borderWidth: 1,
+                backgroundColor: 'rgba('+ '88, 94, 94'+ ', .035)',
+                tickColor: 'rgba('+ '88, 94, 94' + ', .15)'
+            },
+            legend: {
+                noColumns: 0
+            },
         });
     </script>
 

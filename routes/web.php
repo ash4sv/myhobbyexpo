@@ -6,7 +6,6 @@ use App\Http\Controllers\Apps\BillPlzStatusController;
 use App\Http\Controllers\Apps\BillPlzWebhookController;
 use App\Http\Controllers\Apps\BoothController;
 use App\Http\Controllers\Apps\BoothNumberController;
-use App\Http\Controllers\Apps\ExhibitController;
 use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\PermissionsController;
@@ -40,18 +39,18 @@ Route::group([
 Route::domain('vendor.' . env('APP_URL'))->group(function(){
     Route::group([
         'namespace' => 'Front',
-        'as' => 'front.',
+        'as'        => 'front.',
     ], function (){
         Route::get('register', [RegisterController::class, 'register'])->name('register');
         Route::post('register', [RegisterController::class, 'booth'])->name('booth');
         Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
-        Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths'); // Submit booking and redirect to payment gateway
-        Route::get('booth-redirect', [RegisterController::class, 'billplzHandleRedirect'])->name('billplzhandle');
-        Route::post('webhook', [RegisterController::class, 'webhook'])->name('webhook');
+        Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths');
+        Route::get('pay-redirect', [RegisterController::class, 'billplzHandleRedirect'])->name('redirect');
+        Route::post('pay-webhook', [RegisterController::class, 'billplzHandleWebhook'])->name('webhook');
 
-        Route::get('invoice', function (){
+        /*Route::get('invoice', function (){
             return view('front.confimation-bill');
-        });
+        });*/
     });
 });
 
