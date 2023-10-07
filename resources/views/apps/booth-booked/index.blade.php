@@ -51,7 +51,7 @@
                     <td>
                         @foreach($data->vendor->registerBooth as $booth)
                             {{ $booth->sections->hall->name }}
-                            {{ $booth->section_id }}
+                            {{ $booth->sections->name }}
                             {{ $booth->booth_number }}
                         @endforeach
                     </td>
