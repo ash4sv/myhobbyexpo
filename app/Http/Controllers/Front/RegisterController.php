@@ -308,7 +308,8 @@ class RegisterController extends Controller
         }
         $bill['data'] = $billplz->bill()->get($bill['id'])->toArray();
 
-        if ($bill['data']['paid'] == 'true'){
+        if ($bill['data']['paid'] == 'true')
+        {
             DB::table('billplz_status')->insert([
                 'shopref'             => $ref,
                 'billplz_id'          => $bill['id'],
@@ -329,7 +330,13 @@ class RegisterController extends Controller
                 'invDate'          => $invDate,
                 'agent'            => $agent->name,
             ]);
+        } elseif ($bill['data']['paid'] == 'false')
+        {
+            Alert::warning('We are sorry', 'Your payment don\'t go through');
+            return redirect()->route('front.register');
         }
+        Alert::warning('We are sorry', 'Your payment don\'t go through');
+        return redirect()->back();
     }
 
     public function billplzHandleWebhook(Request $request)
@@ -337,13 +344,13 @@ class RegisterController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
-        Log::info($webHook);
-
-        processAndUpdateBooths($webHook);
-
-        Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
+        /*Log::info($webHook);*/
+        Log::info('================= WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
+            processAndUpdateBooths($webHook);
+            Log::info('===PROCESS AND UPDATE BOOTHS SAVED===');
+
             BoothExhibitionBooked::insert([
                 'inv_number'      => $webHook['ref'],
                 'inv_date'        => $webHook['invDate'],
@@ -357,8 +364,7 @@ class RegisterController extends Controller
                 'created_at'      => now(),
                 'updated_at'      => now(),
             ]);
-
-            Log::info('===BoothExhibitionBooked Saved===');
+            Log::info('===BOOTH EXHIBITION BOOKED SAVED===');
 
             DB::table('billplz_webhook')->insert([
                 'shopref'       => $webHook['ref'],
@@ -378,11 +384,10 @@ class RegisterController extends Controller
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ]);
-
-            Log::info('===billplz_webhook Saved===');
+            Log::info('===BILLPLZ WEBHOOK SAVED===');
         }
 
-        Log::info('================= Successfully Booked webhook ' . date('Ymd/m/y H:i') . ' =================');
+        Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
     }
 }
 
