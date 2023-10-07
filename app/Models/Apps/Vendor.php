@@ -14,4 +14,14 @@ class Vendor extends Model
     {
         return $this->hasMany(BoothNumber::class, 'vendor_id', 'id');
     }
+
+    public function booked()
+    {
+        return $this->hasMany(BoothExhibitionBooked::class, 'vendor_id', 'id');
+    }
+
+    public function registerBooth()
+    {
+        return $this->hasMany(BoothNumber::class, 'vendor_id', 'id');
+    }
 }
