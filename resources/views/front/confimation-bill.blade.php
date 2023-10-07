@@ -26,13 +26,13 @@
         </tbody>
     </table>--}}
 
-    <div class="mx-auto" style="max-width: 800px;">
+    <div class="mx-auto form" style="max-width: 800px;">
         <div class="invoice">
 
             <div class="invoice-company">
                 <span class="float-end hidden-print">
-                <a href="javascript:;" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a>
-                <a href="javascript:;" onclick="if (!window.__cfRLUnblockHandlers) return false; window.print()" class="btn btn-sm btn-white mb-10px" data-cf-modified-f9fa0b3fe9a540ccd08b8edb-><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
+                <a id="create_pdf" href="javascript:;" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a>
+                {{--<a href="javascript:;" onclick="if (!window.__cfRLUnblockHandlers) return false; window.print()" class="btn btn-sm btn-white mb-10px" data-cf-modified-f9fa0b3fe9a540ccd08b8edb-><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>--}}
                 </span>
                 <a href="{{ route('front.register') }}">SPECTA Group Ventures</a>
             </div>
@@ -54,18 +54,18 @@
                 <div class="invoice-to">
                     <small>to</small>
                     <address class="mt-5px mb-5px">
-                        <strong class="text-dark">{{ $vendor->company }}</strong><br/>
-                        {{ $vendor->roc_rob }}<br/>
-                        {{ $vendor->pic_name }}<br/>
-                        {{ $vendor->phone_num }}<br/>
-                        {{ $vendor->email }}
+                        <strong class="text-dark">{{ $vendor['company'] }}</strong><br/>
+                        {{ $vendor['roc_rob'] }}<br/>
+                        {{ $vendor['pic_name'] }}<br/>
+                        {{ $vendor['phone_num'] }}<br/>
+                        {{ $vendor['email'] }}
                     </address>
                 </div>
                 <div class="invoice-date">
                     <small>Prove of Payment</small>
-                    <div class="date text-dark mt-5px">{{ date('d M Y', strtotime($bookedPull['inv_date'])) }}</div>
+                    <div class="date text-dark mt-5px">{{ date('d M Y', strtotime($invDate)) }}</div>
                     <div class="invoice-detail">
-                        <h5 class="my-5px">{{ $bookedPull['inv_number'] }}</h5>
+                        <h5 class="my-5px">{{ $ref }}</h5>
                         <h6>{{ $agent }}</h6>
                     </div>
                 </div>
@@ -79,49 +79,91 @@
                         <thead>
                         <tr>
                             <th>ITEMS DESCRIPTION</th>
-                            <th class="text-center" width="15%">RATE</th>
+                            <th class="text-end" width="15%">RATE</th>
                             <th class="text-center" width="15%">QUANTITY</th>
                             <th class="text-end" width="15%">TOTAL</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @isset($booths)
+                        @isset($dataPull['booths'])
                             <tr>
                                 <td>
                                     <span class="text-dark">Booths Booked:</span><br>
                                     @foreach($booths as $booth)
-                                        <small>{{ $booth->sections->name }} - {{ $booth->booth_number }}</small> <br>
+                                        <p class="small mb-0">{{ $booth->sections->name }} - {{ $booth->booth_number }}</p>
                                     @endforeach
                                 </td>
-                                <td class="text-center">RM{{ number_format($booth_price_unit) }}</td>
-                                <td class="text-center">{{ $booth_qty }}</td>
-                                <td class="text-end">{{ $booth_price }}</td>
+                                <td class="text-end">RM {{ $dataPull['booth_price_unit'] }}</td>
+                                <td class="text-center">{{ $dataPull['booth_qty'] }} x</td>
+                                <td class="text-end">{{ $dataPull['booth_price'] }}</td>
                             </tr>
                         @endisset
 
-                        @php
-                            $hasAddOnWithQuantity = false;
-                        @endphp
-
-                        @if ($hasAddOnWithQuantity)
+                        @if($dataPull['add_table'] || $dataPull['add_chair'] || $dataPull['add_sso'] || $dataPull['add_sso_15amp'] || $dataPull['add_steel_barricade'] || $dataPull['add_shell_scheme_barricade'])
                             <tr>
                                 <td colspan="4"><strong>Add On</strong></td>
                             </tr>
                         @endif
-
-                        @foreach (json_decode($bookedPull['add_on']) as $addOn)
-                            @if ($addOn->qty > 0)
-                                @php
-                                    $hasAddOnWithQuantity = true;
-                                @endphp
-                                <tr>
-                                    <td><span class="text-dark">{{ $addOn->item }}</span></td>
-                                    <td class="text-center">RM{{ number_format(str_replace("RM ", "", $addOn->unit) / $addOn->qty, 2, '.', '') }}</td>
-                                    <td class="text-center">{{ $addOn->qty }}</td>
-                                    <td class="text-end">{{ $addOn->unit }}</td>
-                                </tr>
-                            @endif
-                        @endforeach
+                        @if($dataPull['add_table'])
+                            <tr>
+                                <td>Table :</td>
+                                <td class="text-end">RM {{ $dataPull['add_on_table'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_table'] }} x </td>
+                                <td class="text-end">
+                                    {{ $dataPull['table_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($dataPull['add_chair'])
+                            <tr>
+                                <td>Chair : </td>
+                                <td class="text-end">RM {{ $dataPull['add_on_chair'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_chair'] }} x</td>
+                                <td class="text-end">
+                                    {{ $dataPull['chair_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($dataPull['add_sso'])
+                            <tr>
+                                <td>SSO (13 amp) : </td>
+                                <td class="text-end">RM {{ $dataPull['add_on_sso'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_sso'] }} x</td>
+                                <td class="text-end">
+                                    {{ $dataPull['sso_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($dataPull['add_sso_15amp'])
+                            <tr>
+                                <td>SSO (15 amp) : </td>
+                                <td class="text-end">RM {{ $dataPull['add_on_sso_15amp'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_sso_15amp'] }} x</td>
+                                <td class="text-end">
+                                    {{ $dataPull['ssoamp15_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($dataPull['add_steel_barricade'])
+                            <tr>
+                                <td>Steel Barricade : </td>
+                                <td class="text-end">RM {{ $dataPull['add_on_steel_barricade'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_steel_barricade'] }} x</td>
+                                <td class="text-end">
+                                    {{ $dataPull['steel_barricade_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if($dataPull['add_shell_scheme_barricade'])
+                            <tr>
+                                <td>Shell Scheme Barricade : </td>
+                                <td class="text-end">RM {{ $dataPull['add_on_shell_scheme_barricade'] }}</td>
+                                <td class="text-center">{{ $dataPull['add_shell_scheme_barricade'] }} x</td>
+                                <td class="text-end">
+                                    {{ $dataPull['shell_scheme_barricade_TPrice'] }}
+                                </td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -130,8 +172,8 @@
 
                 <div class="invoice-price">
                     <div class="invoice-price-left">
-                        {{--<div class="invoice-price-row">
-                            <div class="sub-price">
+                        <div class="invoice-price-row">
+                            {{--<div class="sub-price">
                                 <small>SUBTOTAL</small>
                                 <span class="text-dark">RM4,500.00</span>
                             </div>
@@ -141,11 +183,11 @@
                             <div class="sub-price">
                                 <small>PAYPAL FEE</small>
                                 <span class="text-dark">RM108.00</span>
-                            </div>
-                        </div>--}}
+                            </div>--}}
+                        </div>
                     </div>
                     <div class="invoice-price-right" style="min-width: 280px !important;">
-                        <small>TOTAL</small> <span class="fw-bold">RM {{ $bookedPull['total'] }}</span>
+                        <small>TOTAL</small> <span class="fw-bold">{{ $dataPull['total'] }}</span>
                     </div>
                 </div>
 
@@ -174,3 +216,42 @@
     </div>
 
 @endsection
+
+@push('reg-script')
+    <script>
+
+        $(document).ready(function () {
+            var form = $('.form'),
+                cache_width = form.width(),
+                a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+            $('#create_pdf').on('click', function () {
+                $('body').scrollTop(0);
+                createPDF();
+            });
+
+            function createPDF() {
+                getCanvas().then(function (canvas) {
+                    var
+                        img = canvas.toDataURL("image/png"),
+                        doc = new jsPDF({
+                            unit: 'px',
+                            format: 'a4'
+                        });
+                    doc.addImage(img, 'JPEG', 20, 20);
+                    doc.save('techsolutionstuff.pdf');
+                    form.width(cache_width);
+                });
+            }
+
+            function getCanvas() {
+                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                return html2canvas(form, {
+                    imageTimeout: 2000,
+                    removeContainer: true
+                });
+            }
+        });
+
+    </script>
+@endpush
