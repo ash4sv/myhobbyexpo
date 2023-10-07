@@ -339,59 +339,65 @@ class RegisterController extends Controller
 
         Log::info($webHook);
 
-//        $boothIds = collect($dataPull['booths']['id'])
-//            ->filter(function ($value, $key) {
-//                return $value === 'on';
-//            })
-//            ->keys()
-//            ->toArray();
-//
-//        $booths = [];
-//
-//        if (!empty($boothIds)) {
-//            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
-//        }
-//        Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
-//
-//        if ($data['paid'] == 'true') {
-//            BoothExhibitionBooked::create([
-//                'inv_number'      => $ref,
-//                'inv_date'        => $invDate,
-//                'vendor_id'       => $vendor['id'],
-//                'sales_agent_id'  => $vendorSubmitData['sales_agent'],
-//                'inv_description' => json_encode($dataPull),
-//                'add_on'          => 'data',
-//                'total'           => $dataPull['total'],
-//                'fee'             => $servicesFee,
-//                'payment_status'  => true,
-//            ]);
-//
-//            foreach ($booths as $booth) {
-//                $booth->update([
-//                    'vendor_id' => $vendor['id'],
-//                    'status'    => true
-//                ]);
-//            }
-//
-//            DB::table('billplz_webhook')->insert([
-//                'shopref'       => $ref,
-//                'billplz_id'    => $data['id'],
-//                'collection_id' => $data['collection_id'],
-//                'paid'          => $data['paid'],
-//                'state'         => $data['state'],
-//                'amount'        => $data['amount'],
-//                'paid_amount'   => $data['paid_amount'],
-//                'due_at'        => $data['due_at'],
-//                'email'         => $data['email'],
-//                'mobile'        => $data['mobile'],
-//                'name'          => $data['name'],
-//                'url'           => $data['url'],
-//                'paid_at'       => $data['paid_at'],
-//                'x_signature'   => $data['x_signature'],
-//                'created_at'    => now(),
-//                'updated_at'    => now(),
-//            ]);
-//        }
+        $boothIds = collect($webHook['dataPull']['booths']['id'])
+            ->filter(function ($value, $key) {
+                return $value === 'on';
+            })
+            ->keys()
+            ->toArray();
+
+        $booths = [];
+
+        if (!empty($boothIds)) {
+            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
+        }
+        Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
+
+        if ($data['paid'] == 'true') {
+            BoothExhibitionBooked::insert([
+                'inv_number'      => $webHook['ref'],
+                'inv_date'        => date('Y-m-d', $webHook['invDate']),
+                'vendor_id'       => $webHook['vendor']['id'],
+                'sales_agent_id'  => $webHook['vendorSubmitData']['sales_agent'],
+                'inv_description' => json_encode($webHook['dataPull']),
+                'add_on'          => 'data',
+                'total'           => $webHook['dataPull']['total'],
+                'fee'             => $webHook['servicesFee'],
+                'payment_status'  => true,
+                'created_at'      => now(),
+                'updated_at'      => now(),
+            ]);
+
+            Log::info('===BoothExhibitionBooked Saved===');
+
+            foreach ($booths as $booth) {
+                $booth->update([
+                    'vendor_id' => $webHook['vendor']['id'],
+                    'status'    => true
+                ]);
+            }
+
+            DB::table('billplz_webhook')->insert([
+                'shopref'       => $webHook['ref'],
+                'billplz_id'    => $data['id'],
+                'collection_id' => $data['collection_id'],
+                'paid'          => $data['paid'],
+                'state'         => $data['state'],
+                'amount'        => $data['amount'],
+                'paid_amount'   => $data['paid_amount'],
+                'due_at'        => $data['due_at'],
+                'email'         => $data['email'],
+                'mobile'        => $data['mobile'],
+                'name'          => $data['name'],
+                'url'           => $data['url'],
+                'paid_at'       => $data['paid_at'],
+                'x_signature'   => $data['x_signature'],
+                'created_at'    => now(),
+                'updated_at'    => now(),
+            ]);
+
+            Log::info('===billplz_webhook Saved===');
+        }
 
         Log::info('================= Successfully Booked webhook ' . date('Ymd/m/y H:i') . ' =================');
     }
