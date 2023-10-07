@@ -37,4 +37,9 @@ class BoothExhibitionBooked extends Model
     {
         return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
     }
+
+    public function agent()
+    {
+        return $this->belongsTo(SalesAgent::class, 'sales_agent_id', 'id');
+    }
 }
