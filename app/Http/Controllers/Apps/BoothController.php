@@ -7,6 +7,7 @@ use App\Models\Apps\Booth;
 use App\Models\Apps\BoothNumber;
 use App\Models\Apps\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BoothController extends Controller
 {
@@ -61,9 +62,10 @@ class BoothController extends Controller
     public function edit(string $id)
     {
         return view($this->view.'edit', [
-            'booth'     => Booth::findOrFail($id),
-            'sections'  => Section::all(),
-            'numbers'   => BoothNumber::all(),
+            'booth'           => Booth::findOrFail($id),
+            'sections'        => Section::all(),
+            'numbers'         => BoothNumber::all(),
+            'boothSelected' => DB::table("booth_booth_number")->where("booth_booth_number.booth_id", $id)->pluck('booth_booth_number.booth_number_id','booth_booth_number.booth_number_id')->all()
         ]);
     }
 
