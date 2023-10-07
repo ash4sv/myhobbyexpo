@@ -1,0 +1,15 @@
+{
+    "open sans": {
+        "300": "\/Users\/muhamadashraf\/Documents\/00_Development\/myhobbyexpo\/storage\/fonts\/open_sans_300_38aaef3a6f81e0869aefd29fb43eb15a",
+        "normal": "\/Users\/muhamadashraf\/Documents\/00_Development\/myhobbyexpo\/storage\/fonts\/open_sans_normal_d26ccb22614ae36546477dab90017d0e",
+        "600": "\/Users\/muhamadashraf\/Documents\/00_Development\/myhobbyexpo\/storage\/fonts\/open_sans_600_624d6e61f7711aa5830c80aa3bba1264",
+        "bold": "open_sans_bold_4238b33012be0cc2f17eea1b2179dc6e"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_79152926cec463c5ee50a27118574e0f"
+    },
+    "font awesome 5 free": {
+        "normal": "\/Users\/muhamadashraf\/Documents\/00_Development\/myhobbyexpo\/storage\/fonts\/font_awesome_5_free_normal_801fbdbadcc4fb6663898f32247771bb",
+        "900": "font_awesome_5_free_900_6f0f93583fa2d757104e1815d72cb491"
+    }
+}
