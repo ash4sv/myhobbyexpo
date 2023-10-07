@@ -107,7 +107,13 @@
 
 @push('script')
     <script>
-        var d1 = [@foreach($dailyCounts as $data) [{{ date('d-m', strtotime($data->date)) }}, {{ $data->count }}], @endforeach];
+        @php $index = 0 @endphp
+
+        var d1 = [
+            @foreach($dailyCounts as $data) [
+                {{ $index++ }}, {{ $data->count }}],
+            @endforeach
+        ];
 
         $.plot($('#interactive-chart'), [{
             data: d1,
