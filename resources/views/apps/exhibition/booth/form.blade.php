@@ -67,16 +67,22 @@
 
 <div class="row">
     <div class="col-xl-12">
-        <div class="row">
-            <div class="col-md-12">
-                <button type="button" id="selectAll" class="btn btn-indigo me-2 text-truncate mb-3 selectAll">Select All</button>
+        <div class="row mb-2">
+            <div class="col-md-2 col-3">
+                <button type="button" id="selectAll" class="btn btn-indigo w-100 text-truncate mb-3 selectAll">Select All</button>
+            </div>
+            <div class="col-md-8 col-6">
+                <input type="text" class="form-control" name="booth_num_filter" id="booth_num_filter" placeholder="Filter">
+            </div>
+            <div class="col-md-2 col-3">
+                <button type="button" id="filterReset" class="btn btn-warning w-100 text-truncate mb-3 filterReset">Reset</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             @foreach($numbers as $key => $number)
-                <div class="col-xl-2 col-lg-3 col-md-4 col-md-5 col-2">
+                <div class="col-xl-1 col-lg-2 col-md-4 col-sm-5 col-6">
                     <div class="form-check form-check-inline mb-3">
-                        <span style="display:inline-block; width:28px;">{{ $loop->iteration }}.</span>
+                        <span style="display:inline-block;">{{ $loop->iteration }}.</span>
                         <input class="form-check-input selectPermission" type="checkbox" id="{{ $key }}" name="number[]" value="{{ $number->id }}" @if($edit) {{ in_array($number->id, $boothSelected) ? 'checked' : '' }} @endif />
                         <label class="form-check-label" for="{{ $number->id }}">{{ $number->booth_number }}</label>
                     </div>
@@ -95,11 +101,37 @@
 
 @push('script')
     <script>
-        var clicked = false;
-        $('#selectAll').on('click', function(event) {
-            $(".selectPermission").prop("checked", !clicked);
-            clicked = !clicked;
-            this.innerHTML = clicked ? 'Deselect' : 'Select All';
+        $(document).ready(function() {
+            var clicked = false;
+            $('#selectAll').on('click', function(event) {
+                $(".selectPermission").prop("checked", !clicked);
+                clicked = !clicked;
+                this.innerHTML = clicked ? 'Deselect' : 'Select All';
+            });
+
+
+            // Initialize the list of booth numbers
+            var boothNumbers = $('.form-check');
+
+            // Filter function
+            $('#booth_num_filter').on('input', function() {
+                var filterValue = $(this).val().toLowerCase();
+
+                boothNumbers.each(function() {
+                    var boothLabel = $(this).find('.form-check-label').text().toLowerCase();
+                    if (boothLabel.includes(filterValue)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            // Reset function
+            $('#filterReset').click(function() {
+                $('#booth_num_filter').val('');
+                boothNumbers.show();
+            });
         });
     </script>
 @endpush
