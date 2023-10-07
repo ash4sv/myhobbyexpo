@@ -25,9 +25,10 @@ class DatabaseSeeder extends Seeder
 
         /*$this->call(HallSeeder::class);*/
         /*$this->call(SectionSeeder::class);*/
-        $this->call(BoothNumberSeeder::class);
-        $this->call(BoothSeeder::class);
-        $this->call(BoothBoothNumberSeeder::class);
+        /*$this->call(BoothNumberSeeder::class);*/
+        /*$this->call(BoothSeeder::class);*/
+        /*$this->call(BoothBoothNumberSeeder::class);*/
         /*$this->call(SalesAgentSeeder::class);*/
+        $this->call(DbTruncateSeeder::class);
     }
 }

@@ -138,7 +138,7 @@
             </div>
 
             <div class="menu-item {{ (request()->segment(1) == 'booth-booked') ? 'active' : '' }}">
-                <a href="{{ route('apps.booth-booked.index') }}" class="menu-link" target="_blank">
+                <a href="{{ route('apps.booth-booked.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-book"></i>
                     </div>
