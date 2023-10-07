@@ -6,15 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Apps\Booth;
 use App\Models\Apps\BoothExhibitionBooked;
 use App\Models\Apps\BoothNumber;
-use App\Models\Apps\BoothType;
 use App\Models\Apps\Hall;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\SalesAgent;
 use App\Models\Apps\Section;
-use App\Models\Apps\TypeOfInterest;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -321,8 +319,17 @@ class RegisterController extends Controller
                 'updated_at'          => now(),
             ]);
 
+            $pdfData = [
+                'booths'           => $booths,
+                'dataPull'         => $dataPull,
+                'vendorSubmitData' => $vendorSubmitData,
+                'vendor'           => $vendor,
+                'ref'              => $ref,
+                'invDate'          => $invDate,
+                'agent'            => $agent->name,
+            ];
             $customPaper = [0, 0, 595.28, 841.89];
-            /*$receipt = PDF::loadView('front.confirmation-bill', $dataPull)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/'.$ref.'-receipt'.'.pdf'));*/
+            $pdf = PDF::loadView('front.confirmation-bill', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref.'.pdf'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [

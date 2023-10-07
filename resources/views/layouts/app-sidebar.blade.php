@@ -71,6 +71,15 @@
                     <div class="menu-text">Vendors</div>
                 </a>
             </div>
+            
+            <div class="menu-item {{ (request()->segment(1) == 'booth-booked') ? 'active' : '' }}">
+                <a href="{{ route('apps.booth-booked.index') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-book"></i>
+                    </div>
+                    <div class="menu-text">Booth Booked</div>
+                </a>
+            </div>
 
             @can('pre-register-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
@@ -135,15 +144,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <div class="menu-item {{ (request()->segment(1) == 'booth-booked') ? 'active' : '' }}">
-                <a href="{{ route('apps.booth-booked.index') }}" class="menu-link">
-                    <div class="menu-icon">
-                        <i class="fa fa-book"></i>
-                    </div>
-                    <div class="menu-text">Booth Booked</div>
-                </a>
             </div>
 
             {{--<div class="menu-item has-sub">
