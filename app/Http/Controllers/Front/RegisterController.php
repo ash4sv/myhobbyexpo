@@ -391,7 +391,7 @@ class RegisterController extends Controller
 //                'created_at'    => now(),
 //                'updated_at'    => now(),
 //            ]);
-        }
+//        }
 
         Log::info('================= Successfully Booked webhook ' . date('Ymd/m/y H:i') . ' =================');
     }
