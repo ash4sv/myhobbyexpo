@@ -31,7 +31,7 @@
 
             <div class="invoice-company">
                 <span class="float-end hidden-print">
-                <a id="create_pdf" href="javascript:;" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a>
+                <button id="create_pdf" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</button>
                 {{--<a href="javascript:;" onclick="if (!window.__cfRLUnblockHandlers) return false; window.print()" class="btn btn-sm btn-white mb-10px" data-cf-modified-f9fa0b3fe9a540ccd08b8edb-><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>--}}
                 </span>
                 <a href="{{ route('front.register') }}">SPECTA Group Ventures</a>
@@ -221,36 +221,51 @@
     <script>
 
         $(document).ready(function () {
-            var form = $('.form'),
-                cache_width = form.width(),
-                a4 = [595.28, 841.89]; // for a4 size paper width and height
+            // Function to create and trigger the download of a PDF document
+            function createAndDownloadPDF() {
+                // Define the A4 paper size in pixels
+                const a4 = [595.28, 841.89];
 
-            $('#create_pdf').on('click', function () {
-                $('body').scrollTop(0);
-                createPDF();
-            });
+                // Select the form element
+                const form = $('.form');
 
-            function createPDF() {
-                getCanvas().then(function (canvas) {
-                    var
-                        img = canvas.toDataURL("image/png"),
-                        doc = new jsPDF({
+                // Store the original width of the form
+                const cache_width = form.width();
+
+                // Function to get the canvas of the form
+                function getCanvas() {
+                    form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                    return html2canvas(form, {
+                        imageTimeout: 2000,
+                        removeContainer: true
+                    });
+                }
+
+                // Triggered when the "Export as PDF" button is clicked
+                $('#create_pdf').on('click', function () {
+                    $('body').scrollTop(0);
+                    createPDF();
+                });
+
+                // Function to create the PDF document
+                function createPDF() {
+                    getCanvas().then(function (canvas) {
+                        const img = canvas.toDataURL("image/png");
+                        const doc = new jsPDF({
                             unit: 'px',
                             format: 'a4'
                         });
-                    doc.addImage(img, 'JPEG', 20, 20);
-                    doc.save('techsolutionstuff.pdf');
-                    form.width(cache_width);
-                });
+                        doc.addImage(img, 'JPEG', 20, 20);
+                        doc.save('techsolutionstuff.pdf'); // This line triggers the download
+                        form.width(cache_width);
+                    });
+                }
             }
 
-            function getCanvas() {
-                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
-                return html2canvas(form, {
-                    imageTimeout: 2000,
-                    removeContainer: true
-                });
-            }
+            // Call the createAndDownloadPDF function when the document is ready
+            $(document).ready(function () {
+                createAndDownloadPDF();
+            });
         });
 
     </script>
