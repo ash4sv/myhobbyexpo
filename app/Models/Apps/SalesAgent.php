@@ -28,4 +28,9 @@ class SalesAgent extends Model
     {
         return $this->belongsTo(Section::class, 'section_id', 'id');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(BoothExhibitionBooked::class, 'sales_agent_id', 'id');
+    }
 }
