@@ -274,10 +274,17 @@ class RegisterController extends Controller
         $agent              = SalesAgent::findOrFail($vendorSubmitData['sales_agent']);
 
         $boothIds = collect($dataPull['booths']['id'])
-        ->filter(function ($value, $key) {
-            return $value === 'on';
-        })->keys()->toArray();
-        $booths             = BoothNumber::whereBetween('id', $boothIds)->get();
+            ->filter(function ($value, $key) {
+                return $value === 'on';
+            })
+            ->keys()
+            ->toArray();
+
+        $booths = [];
+
+        if (!empty($boothIds)) {
+            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
+        }
 
         /*Log::info('================');
         Log::info($dataPull);
@@ -335,12 +342,14 @@ class RegisterController extends Controller
         $servicesFee      = Cache::pull('servicesFee');
         $data             = $request->all();
 
+        $boothIds = collect($dataPull['booths']['id'])->filter(function ($value, $key) { return $value === 'on'; })->keys()->toArray();
+        $booths   = DB::table('booth_numbers')->whereBetween('id', $boothIds)->get();
+
+        Log::info($boothIds);
+        Log::info($booths);
         Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
-            $boothIds = collect($dataPull['booths']['id'])->filter(function ($value, $key) { return $value === 'on'; })->keys()->toArray();
-            $booths   = BoothNumber::whereBetween('id', $boothIds)->get();
-
             BoothExhibitionBooked::create([
                 'inv_number'      => $ref,
                 'inv_date'        => $invDate,
