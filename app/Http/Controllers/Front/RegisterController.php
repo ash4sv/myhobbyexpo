@@ -342,8 +342,18 @@ class RegisterController extends Controller
         $servicesFee      = Cache::pull('servicesFee');
         $data             = $request->all();
 
-        $boothIds = collect($dataPull['booths']['id'])->filter(function ($value, $key) { return $value === 'on'; })->keys()->toArray();
-        $booths   = DB::table('booth_numbers')->whereBetween('id', $boothIds)->get();
+        $boothIds = collect($dataPull['booths']['id'])
+            ->filter(function ($value, $key) {
+                return $value === 'on';
+            })
+            ->keys()
+            ->toArray();
+
+        $booths = [];
+
+        if (!empty($boothIds)) {
+            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
+        }
 
         Log::info($boothIds);
         Log::info($booths);
