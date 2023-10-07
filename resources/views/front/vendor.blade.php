@@ -18,7 +18,7 @@
                     @csrf
                     <div class="card shadow-lg rounded mb-4">
                         <div class="card-header bg-transparent border-bottom py-3 px-4">
-                            <h5 class="font-size-16 mb-0">Order Summary {{--<span class="float-end">#MN0124</span>--}}</h5>
+                            {{--<h5 class="font-size-16 mb-0">Order Summary <span class="float-end">#MN0124</span></h5>--}}
                         </div>
                         <div class="card-body">
 
@@ -30,7 +30,7 @@
                                         <td width="33%"></td>
                                         <td class="text-end">
                                             {{ $subTotal }}
-                                            <input type="hidden" name="subtotal_val" value="{{ $subTotal }}">
+                                            <input type="hidden" name="" value="{{ $subTotal }}">
                                         </td>
                                     </tr>
                                     @if($data['add_table'] || $data['add_chair'] || $data['add_sso'] || $data['add_sso_15amp'] || $data['add_steel_barricade'] || $data['add_shell_scheme_barricade'] )
@@ -46,7 +46,7 @@
                                             <td class="text-center">{{ $data['add_table'] }} x </td>
                                             <td class="text-end">
                                                 {{ $data['table_TPrice'] }}
-                                                <input type="hidden" name="add_on_table" value="{{ $data['table_TPrice'] }}">
+                                                <input type="hidden" name="" value="{{ $data['table_TPrice'] }}">
                                             </td>
                                         </tr>
                                     @endif
@@ -105,7 +105,7 @@
                                         <td class="text-end" colspan="2">
                                             <span class="fw-bold">
                                                 {{ $total }}
-                                                <input type="hidden" name="total_val" value="{{ $total }}">
+                                                <input type="hidden" name="" value="{{ $total }}">
                                             </span>
                                         </td>
                                     </tr>

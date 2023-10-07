@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Apps\AgentController;
 use App\Http\Controllers\Apps\AppsController;
+use App\Http\Controllers\Apps\BillPlzStatusController;
+use App\Http\Controllers\Apps\BillPlzWebhookController;
 use App\Http\Controllers\Apps\BoothController;
 use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\ExhibitController;
@@ -97,6 +99,13 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('permissions', PermissionsController::class);
                Route::resource('roles', RolesController::class);
                Route::resource('users', UserController::class);
+           });
+           Route::group([
+               'prefix'  => 'billplz',
+               'as'     => 'billplz.'
+           ], function (){
+               Route::resource('status', BillPlzStatusController::class);
+               Route::resource('webhook', BillPlzWebhookController::class);
            });
            Route::get('apps-logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
            /*Route::group([
