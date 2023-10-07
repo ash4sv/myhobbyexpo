@@ -256,7 +256,7 @@
                             unit: 'px',
                             format: 'a4'
                         });
-                        doc.addImage(img, 'JPEG', 10, 10);
+                        doc.addImage(img, 'SLOW', 10, 10);
                         doc.save('{{ $ref }}.pdf'); // This line triggers the download
                         form.width(cache_width);
                     });
