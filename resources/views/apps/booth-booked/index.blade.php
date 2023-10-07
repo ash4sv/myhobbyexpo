@@ -50,9 +50,7 @@
                     <td>{{ $data->vendor->phone_num }}</td>
                     <td>
                         @foreach($data->vendor->registerBooth as $booth)
-                            {{ $booth->sections->hall->name }}
-                            {{ $booth->sections->name }}
-                            {{ $booth->booth_number }}
+                            <p class="my-0">{{ $booth->sections->hall->name }} | {{ $booth->sections->name }} | {{ $booth->booth_number }}</p>
                         @endforeach
                     </td>
                     <td>
