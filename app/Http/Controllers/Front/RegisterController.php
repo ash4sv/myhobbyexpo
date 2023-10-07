@@ -339,18 +339,8 @@ class RegisterController extends Controller
 
         Log::info($webHook);
 
-        $boothIds = collect($webHook['dataPull']['booths']['id'])
-            ->filter(function ($value, $key) {
-                return $value === 'on';
-            })
-            ->keys()
-            ->toArray();
+        processAndUpdateBooths($webHook);
 
-        $booths = [];
-
-        if (!empty($boothIds)) {
-            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
-        }
         Log::info('================= webhook ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
@@ -369,13 +359,6 @@ class RegisterController extends Controller
             ]);
 
             Log::info('===BoothExhibitionBooked Saved===');
-
-            foreach ($booths as $booth) {
-                $booth->update([
-                    'vendor_id' => $webHook['vendor']['id'],
-                    'status'    => true
-                ]);
-            }
 
             DB::table('billplz_webhook')->insert([
                 'shopref'       => $webHook['ref'],
@@ -400,5 +383,24 @@ class RegisterController extends Controller
         }
 
         Log::info('================= Successfully Booked webhook ' . date('Ymd/m/y H:i') . ' =================');
+    }
+}
+
+function processAndUpdateBooths($webHook)
+{
+    // Extract booth IDs from the dataPull array
+    $boothIds = collect($webHook['dataPull']['booths']['id'])
+        ->filter(function ($value) {
+            return $value === 'on';
+        })
+        ->keys()
+        ->toArray();
+
+    // If there are selected booths, update them
+    if (!empty($boothIds)) {
+        BoothNumber::whereIn('id', $boothIds)->update([
+            'vendor_id' => $webHook['vendor']['id'],
+            'status'    => true
+        ]);
     }
 }
