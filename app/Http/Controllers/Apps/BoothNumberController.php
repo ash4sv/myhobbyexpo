@@ -75,10 +75,15 @@ class BoothNumberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        $number = BoothNumber::findOrFail($id);
+        $number->fill([
+            'booth_number'  => $request->booth_number,
+            'description'   => $request->description,
+        ]);
+        $number->update();
 
         Alert::success('Successfully updated!', 'Record has been updated successfully');
-
+        return redirect()->route($this->route.'edit', $number);
     }
 
     /**
