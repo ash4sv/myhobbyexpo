@@ -14,6 +14,7 @@ use App\Models\Apps\Section;
 use App\Models\Apps\TypeOfInterest;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
+use Barryvdh\DomPDF\PDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -320,8 +321,11 @@ class RegisterController extends Controller
                 'updated_at'          => now(),
             ]);
 
+            $customPaper = [0, 0, 595.28, 841.89];
+            /*$receipt = PDF::loadView('front.confirmation-bill', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/'.$ref.'-receipt'.'.pdf'));*/
+
             Alert::success('Thank you for registration', 'We will send an email for your reference');
-            return view('front.confimation-bill', [
+            return view('front.confirmation-bill', [
                 'booths'           => $booths,
                 'dataPull'         => $dataPull,
                 'vendorSubmitData' => $vendorSubmitData,
@@ -345,11 +349,11 @@ class RegisterController extends Controller
         $data    = $request->all();
 
         /*Log::info($webHook);*/
-        Log::info('================= WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+        Log::info('================= WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
             processAndUpdateBooths($webHook);
-            Log::info('===PROCESS AND UPDATE BOOTHS SAVED===');
+            Log::info('=== PROCESS AND UPDATE BOOTHS SAVED ===');
 
             BoothExhibitionBooked::insert([
                 'inv_number'      => $webHook['ref'],
@@ -364,7 +368,7 @@ class RegisterController extends Controller
                 'created_at'      => now(),
                 'updated_at'      => now(),
             ]);
-            Log::info('===BOOTH EXHIBITION BOOKED SAVED===');
+            Log::info('=== BOOTH EXHIBITION BOOKED SAVED ===');
 
             DB::table('billplz_webhook')->insert([
                 'shopref'       => $webHook['ref'],
@@ -384,7 +388,7 @@ class RegisterController extends Controller
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ]);
-            Log::info('===BILLPLZ WEBHOOK SAVED===');
+            Log::info('=== BILLPLZ WEBHOOK SAVED ===');
         }
 
         Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');

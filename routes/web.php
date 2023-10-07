@@ -5,6 +5,7 @@ use App\Http\Controllers\Apps\AppsController;
 use App\Http\Controllers\Apps\BillPlzStatusController;
 use App\Http\Controllers\Apps\BillPlzWebhookController;
 use App\Http\Controllers\Apps\BoothController;
+use App\Http\Controllers\Apps\BoothExhibitionBookedController;
 use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
@@ -106,6 +107,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('status', BillPlzStatusController::class);
                Route::resource('webhook', BillPlzWebhookController::class);
            });
+           Route::resource('booth-booked', BoothExhibitionBookedController::class);
            Route::get('apps-logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
            /*Route::group([
                'prefix'  => 'exhibitor',

@@ -32,4 +32,9 @@ class BoothExhibitionBooked extends Model
         /*->logOnly(['name', 'text'])*/;
         // Chain fluent methods for configuration options
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
 }

@@ -137,34 +137,16 @@
                 </div>
             </div>
 
-            {{--<div class="menu-item has-sub">
-                <a href="javascript:;" class="menu-link">
+            <div class="menu-item {{ (request()->segment(1) == 'booth-booked') ? 'active' : '' }}">
+                <a href="{{ route('apps.booth-booked.index') }}" class="menu-link" target="_blank">
                     <div class="menu-icon">
-                        <i class="fa fa-align-left"></i>
+                        <i class="fa fa-book"></i>
                     </div>
-                    <div class="menu-text">Registered Exhibitor</div>
-                    <div class="menu-caret"></div>
+                    <div class="menu-text">Booth Booked</div>
                 </a>
-                <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-text">Flea Market</div>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-text">Hobby Group Zone</div>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-text">Activity Zone</div>
-                        </a>
-                    </div>
-                </div>
             </div>
 
-            <div class="menu-item has-sub">
+            {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -180,6 +162,7 @@
                     </div>
                 </div>
             </div>--}}
+
             @can('system-access')
             <div class="menu-header">Systems</div>
 
