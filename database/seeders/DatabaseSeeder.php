@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         /*$this->call(UsersSeeder::class);*/
 
         /*$this->call(HallSeeder::class);*/
-        $this->call(SectionSeeder::class);
+        /*$this->call(SectionSeeder::class);*/
         $this->call(BoothNumberSeeder::class);
         $this->call(BoothSeeder::class);
         $this->call(BoothBoothNumberSeeder::class);
