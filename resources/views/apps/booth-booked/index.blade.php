@@ -48,7 +48,7 @@
                     <td>{{ $data->vendor->company }}</td>
                     <td>{{ $data->vendor->pic_name }}</td>
                     <td>{{ $data->vendor->phone_num }}</td>
-                    <td>{{ $data->registerBooth }}</td>
+                    <td>{{ $data->vendor->registerBooth }}</td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
