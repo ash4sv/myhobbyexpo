@@ -66,7 +66,7 @@ class BoothNumberController extends Controller
     {
         $number = BoothNumber::findOrFail($id);
         return view($this->view.'edit', [
-            'number' => $number
+            'number' => $number,
         ]);
     }
 

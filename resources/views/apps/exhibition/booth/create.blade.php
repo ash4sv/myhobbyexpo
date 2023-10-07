@@ -27,7 +27,7 @@
         <div class="panel-body">
 
             <form action="{{ route('apps.exhibition.booth.store') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                @include('apps.exhibition.booth.form')
+                @include('apps.exhibition.booth.form', ['edit' => false])
             </form>
 
         </div>

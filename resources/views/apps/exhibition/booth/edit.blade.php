@@ -28,7 +28,7 @@
 
             <form action="{{ route('apps.exhibition.booth.update', $booth) }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 @method('PUT')
-                @include('apps.exhibition.booth.form')
+                @include('apps.exhibition.booth.form', ['edit' => true])
             </form>
 
         </div>
