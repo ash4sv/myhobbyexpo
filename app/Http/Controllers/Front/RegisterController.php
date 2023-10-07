@@ -356,7 +356,7 @@ class RegisterController extends Controller
         if ($data['paid'] == 'true') {
             BoothExhibitionBooked::insert([
                 'inv_number'      => $webHook['ref'],
-                'inv_date'        => date('Y-m-d', $webHook['invDate']),
+                'inv_date'        => $webHook['invDate'],
                 'vendor_id'       => $webHook['vendor']['id'],
                 'sales_agent_id'  => $webHook['vendorSubmitData']['sales_agent'],
                 'inv_description' => json_encode($webHook['dataPull']),
