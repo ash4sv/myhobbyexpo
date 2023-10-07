@@ -218,6 +218,28 @@
             </div>
             @endcan
 
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'billplz') ? 'active' : '' }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-money-bill"></i>
+                    </div>
+                    <div class="menu-text">BillPlz</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->segment(2) == 'status') ? 'active' : '' }}">
+                        <a href="{{ route('apps.billplz.status.index') }}" class="menu-link">
+                            <div class="menu-text">Status</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'webhook') ? 'active' : '' }}">
+                        <a href="{{ route('apps.billplz.webhook.index') }}" class="menu-link">
+                            <div class="menu-text">Webhook</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             @can('route-access')
             <div class="menu-item {{ (request()->segment(1) == 'route') ? 'active' : '' }}">
                 <a href="{{ route('apps.route') }}" class="menu-link">

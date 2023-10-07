@@ -65,7 +65,8 @@
                     <small>Prove of Payment</small>
                     <div class="date text-dark mt-5px">{{ date('d M Y', strtotime($bookedPull['inv_date'])) }}</div>
                     <div class="invoice-detail">
-                        <h5 class="my-0">{{ $bookedPull['inv_number'] }}</h5>
+                        <h5 class="my-5px">{{ $bookedPull['inv_number'] }}</h5>
+                        <h6>{{ $agent }}</h6>
                     </div>
                 </div>
             </div>
