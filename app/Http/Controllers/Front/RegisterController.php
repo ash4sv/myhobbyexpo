@@ -334,8 +334,8 @@ class RegisterController extends Controller
 
     public function billplzHandleWebhook(Request $request)
     {
-        $webHook         = Cache::pull('WebHook');
-        $data             = $request->all();
+        $webHook = Cache::pull('WebHook');
+        $data    = $request->all();
 
         Log::info($webHook);
 
@@ -361,7 +361,7 @@ class RegisterController extends Controller
                 'sales_agent_id'  => $webHook['vendorSubmitData']['sales_agent'],
                 'inv_description' => json_encode($webHook['dataPull']),
                 'add_on'          => 'data',
-                'total'           => $webHook['dataPull']['total'],
+                'total'           => str_replace("RM ", "", $webHook['dataPull']['total']),
                 'fee'             => $webHook['servicesFee'],
                 'payment_status'  => true,
                 'created_at'      => now(),
