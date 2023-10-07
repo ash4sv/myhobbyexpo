@@ -48,7 +48,13 @@
                     <td>{{ $data->vendor->company }}</td>
                     <td>{{ $data->vendor->pic_name }}</td>
                     <td>{{ $data->vendor->phone_num }}</td>
-                    <td>{{ $data->vendor->registerBooth }}</td>
+                    <td>
+                        @foreach($data->vendor->registerBooth as $booth)
+                            {{ $booth->sections->hall->name }}
+                            {{ $booth->section_id }}
+                            {{ $booth->booth_number }}
+                        @endforeach
+                    </td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
