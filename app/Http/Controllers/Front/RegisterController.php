@@ -322,7 +322,7 @@ class RegisterController extends Controller
             ]);
 
             $customPaper = [0, 0, 595.28, 841.89];
-            /*$receipt = PDF::loadView('front.confirmation-bill', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/'.$ref.'-receipt'.'.pdf'));*/
+            /*$receipt = PDF::loadView('front.confirmation-bill', $dataPull)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/'.$ref.'-receipt'.'.pdf'));*/
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [

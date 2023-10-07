@@ -218,6 +218,7 @@
 @endsection
 
 @push('reg-script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -255,8 +256,8 @@
                             unit: 'px',
                             format: 'a4'
                         });
-                        doc.addImage(img, 'JPEG', 20, 20);
-                        doc.save('techsolutionstuff.pdf'); // This line triggers the download
+                        doc.addImage(img, 'JPEG', 10, 10);
+                        doc.save('{{ $ref }}.pdf'); // This line triggers the download
                         form.width(cache_width);
                     });
                 }
