@@ -235,7 +235,7 @@
 
                 // Function to get the canvas of the form
                 function getCanvas() {
-                    form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                    form.width((a4[0] * 1.33333) - 40).css('max-width', 'none');
                     return html2canvas(form, {
                         imageTimeout: 2000,
                         removeContainer: true
