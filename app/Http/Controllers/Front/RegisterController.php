@@ -279,7 +279,7 @@ class RegisterController extends Controller
         })->keys()->toArray();
         $booths             = BoothNumber::whereBetween('id', $boothIds)->get();
 
-        Log::info('================');
+        /*Log::info('================');
         Log::info($dataPull);
         Log::info($booths);
         Log::info($vendorSubmitData);
@@ -287,7 +287,7 @@ class RegisterController extends Controller
         Log::info($ref);
         Log::info($invDate);
         Log::info($agent);
-        Log::info('================');
+        Log::info('================');*/
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
         if(config('billplz.billplz_sandbox')) {
