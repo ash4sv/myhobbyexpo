@@ -53,7 +53,7 @@
                 </a>
             </div>
             @endcan
-
+            @can('agent-access')
             <div class="menu-item {{ (request()->segment(1) == 'agent') ? 'active' : '' }}">
                 <a href="{{ route('apps.agent.index') }}" class="menu-link">
                     <div class="menu-icon">
@@ -62,7 +62,8 @@
                     <div class="menu-text">Agents</div>
                 </a>
             </div>
-
+            @endcan
+            @can('vendor-access')
             <div class="menu-item {{ (request()->segment(1) == 'sales-agents') ? 'active' : '' }}">
                 <a href="{{ route('apps.sales-agents.index') }}" class="menu-link">
                     <div class="menu-icon">
@@ -71,7 +72,8 @@
                     <div class="menu-text">Vendors</div>
                 </a>
             </div>
-            
+            @endcan
+            @can('booth-booked-access')
             <div class="menu-item {{ (request()->segment(1) == 'booth-booked') ? 'active' : '' }}">
                 <a href="{{ route('apps.booth-booked.index') }}" class="menu-link">
                     <div class="menu-icon">
@@ -80,7 +82,7 @@
                     <div class="menu-text">Booth Booked</div>
                 </a>
             </div>
-
+            @endcan
             @can('pre-register-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
@@ -200,7 +202,7 @@
                 </div>
             </div>
             @endcan
-
+            @can('billplz-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'billplz') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -222,7 +224,7 @@
                     </div>
                 </div>
             </div>
-
+            @endcan
             @can('route-access')
             <div class="menu-item {{ (request()->segment(1) == 'route') ? 'active' : '' }}">
                 <a href="{{ route('apps.route') }}" class="menu-link">
@@ -244,7 +246,7 @@
                 </a>
             </div>
             @endcan
-
+            @can('apps-log-access')
             <div class="menu-item {{ (request()->segment(1) == 'apps-logs') ? 'active' : '' }}">
                 <a href="{{ url('apps-logs') }}" class="menu-link" target="_blank">
                     <div class="menu-icon">
@@ -253,7 +255,7 @@
                     <div class="menu-text">Apps Logs</div>
                 </a>
             </div>
-
+            @endcan
             @endcan
 
             {{--<div class="menu-item has-sub">
