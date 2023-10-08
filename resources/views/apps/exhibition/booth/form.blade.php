@@ -51,7 +51,7 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Early Bird Price Date</label>
-            <input class="form-control @error('early_bird_expiry_date') is-invalid @enderror" type="text" name="early_bird_expiry_date" value="{{ old('early_bird_expiry_date', $booth->early_bird_expiry_date) }}" />
+            <input class="form-control datepicker-auto-close @error('early_bird_expiry_date') is-invalid @enderror" type="text" name="early_bird_expiry_date" value="{{ old('early_bird_expiry_date', $booth->early_bird_expiry_date) }}" />
             @error('early_bird_expiry_date')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror

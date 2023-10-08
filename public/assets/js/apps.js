@@ -3,6 +3,7 @@ var Apps = {
         Apps.datatable();
         Apps.permissionForm();
         Apps.toolTipImg();
+        Apps.datePickerInt('.datepicker-auto-close');
         Apps.select2('.hobby-select');
         Apps.summernote('.summernote');
         Apps.switchery('switchery-default');
@@ -108,6 +109,14 @@ var Apps = {
             animated: 'fade',
             placement: 'bottom',
             html: true
+        });
+    },
+
+    datePickerInt: function (selector) {
+        $(selector).datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
         });
     }
 }
