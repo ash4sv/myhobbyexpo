@@ -235,7 +235,6 @@
                 </a>
             </div>
             @endcan
-
             @can('log-access')
             <div class="menu-item {{ (request()->segment(1) == 'logs') ? 'active' : '' }}">
                 <a href="{{ route('apps.logs') }}" class="menu-link">
@@ -256,6 +255,7 @@
                 </a>
             </div>
             @endcan
+
             @endcan
 
             {{--<div class="menu-item has-sub">
