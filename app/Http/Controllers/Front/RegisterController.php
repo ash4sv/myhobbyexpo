@@ -329,7 +329,7 @@ class RegisterController extends Controller
                 'agent'            => $agent->name,
             ];
             $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('front.confirmation-bill', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref.'.pdf'));
+            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref.'.pdf'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
@@ -396,6 +396,8 @@ class RegisterController extends Controller
                 'updated_at'    => now(),
             ]);
             Log::info('=== BILLPLZ WEBHOOK SAVED ===');
+
+
         }
 
         Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');

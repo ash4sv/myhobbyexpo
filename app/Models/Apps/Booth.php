@@ -55,4 +55,22 @@ class Booth extends Model
     	$newform = "RM".$value;
     	return $newform;
     }*/
+
+    public function saveBooth($booth, $request)
+    {
+        $booth->section_id             = $request->section;
+        $booth->booth_type             = $request->booth_type;
+        $booth->normal_price           = $request->normal_price;
+        $booth->early_bird_price       = $request->early_bird_price;
+        $booth->early_bird_expiry_date = $request->early_bird_expiry_date;
+
+        $status = false;
+        if ($request->status == 'on') {
+            $status = true;
+        }
+
+        $booth->status                 = $status;
+        $booth->save();
+        $booth->boothNumbers()->sync($request->number);
+    }
 }

@@ -5,8 +5,9 @@
         <div class="mb-3">
             <label for="section" class="form-label">Section</label>
             <select class="hobby-select form-select @error('section') is-invalid @enderror" name="section" id="section">
+                <option value="">Select</option>
                 @foreach($sections as $key => $section)
-                    <option value="{{ $section->id  }}">{{ $section->name }}</option>
+                    <option value="{{ $section->id }}" {{ $booth->section_id == $section->id ? 'selected' : '' }}>{{ $section->name }}</option>
                 @endforeach
             </select>
             @error('section')
@@ -49,7 +50,7 @@
     </div>
     <div class="col-md-6">
         <div class="mb-3">
-            <label class="form-label">Early Bird Price</label>
+            <label class="form-label">Early Bird Price Date</label>
             <input class="form-control @error('early_bird_expiry_date') is-invalid @enderror" type="text" name="early_bird_expiry_date" value="{{ old('early_bird_expiry_date', $booth->early_bird_expiry_date) }}" />
             @error('early_bird_expiry_date')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -82,9 +83,8 @@
             @foreach($numbers as $key => $number)
                 <div class="col-xl-1 col-lg-2 col-md-4 col-sm-5 col-6">
                     <div class="form-check form-check-inline mb-3">
-                        <span style="display:inline-block;">{{ $loop->iteration }}.</span>
-                        <input class="form-check-input selectPermission" type="checkbox" id="{{ $key }}" name="number[]" value="{{ $number->id }}" @if($edit) {{ in_array($number->id, $boothSelected) ? 'checked' : '' }} @endif />
-                        <label class="form-check-label" for="{{ $number->id }}">{{ $number->booth_number }}</label>
+                        <input class="form-check-input selectPermission" type="checkbox" id="b{{ $number->id }}" name="number[]" value="{{ $number->id }}" @if($edit) {{ in_array($number->id, $boothSelected) ? 'checked' : '' }} @endif />
+                        <label class="form-check-label" for="b{{ $number->id }}">{{ $loop->iteration }}. {{ $number->booth_number }}</label>
                     </div>
                 </div>
             @endforeach
