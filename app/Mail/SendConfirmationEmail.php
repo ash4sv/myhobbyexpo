@@ -44,7 +44,6 @@ class SendConfirmationEmail extends Mailable
                 'vendor'  => $this->pdfData['vendor'],
                 'invDate' => $this->pdfData['invDate'],
                 'ref'     => $this->pdfData['ref'],
-                'agent'   => $this->pdfData['agent'],
             ]
         );
     }
