@@ -14,7 +14,7 @@
         <div class="row justify-content-center g-4 pb-5">
             <div class="col-md-9">
 
-                <form action="{{ route('front.submit') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('front.submit') }}" method="POST" enctype="multipart/form-data" data-parsley-validate="true">
                     @csrf
                     <div class="card shadow-lg rounded mb-4">
                         <div class="card-header bg-transparent border-bottom py-3 px-4">
@@ -125,13 +125,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="company_name" class="form-label">Name of Company / Shop / Group / Club / Associate: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="company_name" id="company_name" />
+                                        <input class="form-control" type="text" name="company_name" id="company_name" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="roc_rob" class="form-label">ROC / ROB / ROC: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="roc_rob" id="roc_rob" />
+                                        <input class="form-control" type="text" name="roc_rob" id="roc_rob" required />
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="person_in_charge" class="form-label">Name of Person in Charge: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" />
+                                        <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" required />
                                     </div>
                                 </div>
                             </div>
@@ -149,13 +149,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="contact_no" class="form-label">Contact No.: <span class="text-danger">*</span></label>
-                                        <input class="form-control masked-input-phone" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" />
+                                        <input class="form-control masked-input-phone" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email" id="email" />
+                                        <input class="form-control" type="email" name="email" id="email" required />
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="website" class="form-label">Sales Agents <span class="text-danger">*</span></label>
-                                        <select name="sales_agent" id="sales_agent" class="form-control @error('sales_agent') is-invalid @enderror default-select2">
+                                        <select name="sales_agent" id="sales_agent" class="form-control @error('sales_agent') is-invalid @enderror default-select2" required>
                                             <option value="">Please Select Your Sales Agent</option>
                                             @foreach($sections as $section)
                                                 @foreach($section->agents->where('section_id', $data['section_id']) as $agent)

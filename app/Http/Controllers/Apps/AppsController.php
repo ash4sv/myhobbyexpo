@@ -79,4 +79,9 @@ class AppsController extends Controller
             'routes' => Route::getRoutes()
         ]);
     }
+
+    public function massboothNumber(Request $request)
+    {
+        return $request->all();
+    }
 }
