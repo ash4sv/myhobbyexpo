@@ -72,7 +72,7 @@
                             <div class="card shadow-lg rounded">
                                 <div class="card-body">
 
-                                    <form action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
+                                    <form id="form-booth-fee-section" action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
                                         <input type="hidden" name="section_id" value="{{ $section->id }}">
@@ -86,9 +86,9 @@
                                         <div class="row" id="boothtype">
                                             <div class="col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Booths Types </label>
+                                                    <label class="form-label">Booths Types <span class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <select name="boothTypes" id="boothTypes" class="form-control default-select2">
+                                                        <select name="boothTypes" id="boothTypes" class="form-control default-select2" required>
                                                             @foreach($section->booths as $booth)
                                                                 <option value="{{ $booth->id }}">{{ $booth->booth_type }}</option>
                                                             @endforeach
@@ -104,9 +104,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Quantity Booths</label>
+                                                    <label class="form-label">Quantity Booths <span class="text-danger">*</span></label>
                                                     <div class="input-group">
-                                                        <select name="booth_qty" id="booth_qty" class="form-control default-select2">
+                                                        <select name="booth_qty" id="booth_qty" class="form-control default-select2" required>
                                                             <option value="">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -122,6 +122,8 @@
                                                         <input type="text" aria-label="" class="form-control" name="booth_price" id="booth_price" readonly value="RM ">
                                                         <input type="hidden" name="booth_price_unit" id="booth_price_unit" value="">
                                                     </div>
+                                                    <div class="invalid-feedback boothQtyUnit"></div>
+
                                                     {{--<div id="" class="form-text">Came with {{ $category->ffe_table }} Unit Table,
                                                         {{ $category->ffe_chair }} Unit Chair, {{ $category->ffe_sso }} Unit SSO 13Amp for 1 booths</div>--}}
                                                 </div>
@@ -132,7 +134,7 @@
                                             <div class="col-md-12">
                                                 <div class="mb-3">
 
-                                                    <div class="booth-area boxed-check-group boxed-check-indigo">
+                                                    <div class="booth-area boxed-check-group boxed-check-indigo mb-0">
                                                         {{--@foreach($section->numbers->where('status', '=', 0) as $number)
                                                             <label class="booth-box boxed-check" for="btn_{{ $number->id }}_{{ $number->slug }}">
                                                                 <input class="boxed-check-input" type="checkbox" name="booths[id][{{$number->id}}]" id="btn_{{ $number->id }}_{{ $number->slug }}" {{ $number->status == 1? 'disabled':'' }}>
@@ -140,6 +142,7 @@
                                                             </label>
                                                         @endforeach--}}
                                                     </div>
+                                                    <div id="invalid-booth-select" class="invalid-feedback text-center"></div>
 
                                                 </div>
                                             </div>
@@ -293,9 +296,7 @@
                                         </div>
 
                                         <div class="mb-0 text-center">
-                                            <button type="submit" class="btn btn-indigo btn-lg w-300px">
-                                                Booking
-                                            </button>
+                                             <input class="btn btn-indigo btn-lg w-300px" type="submit" value="Booking">
                                         </div>
 
                                     </form>
@@ -336,6 +337,7 @@
                     calculatePrices();
                     checkBox();
                     boothTypeDependency();
+                    validateForm();
                 });
             })
             @endforeach
@@ -471,7 +473,7 @@
                             $('#booth_price_unit').val(priceDisplay);
                         },
                         error: function (error) {
-                            console.error('Error:', error);
+                            /*console.error('Error:', error);*/
                         },
                     });
                 }
@@ -488,6 +490,33 @@
             }
 
             boothTypeDependency();
+
+            function validateForm() {
+                $("#form-booth-fee-section").validate({
+                    errorElement: "div",
+                    errorClass: "is-invalid",
+                    errorLabelContainer: $("#form-booth-fee-section div.boothQtyUnit"),
+                    rules: {
+                        booth_qty: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        booth_qty: "Please select a valid quantity of booths",
+                    },
+                    submitHandler: function (form) {
+                        var checkedCount = $(".boxed-check-input:checked").length;
+                        if (checkedCount < 1) {
+                            // Display an error message or take any other desired action
+                            $("#invalid-booth-select").text("Please select at least one booth.").show();
+                        } else {
+                            // Clear error message and submit the form
+                            $("#invalid-booth-select").text("");
+                            form.submit();
+                        }
+                    },
+                });
+            }
 
         });
 

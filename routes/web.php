@@ -82,6 +82,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('section', SectionController::class);
                Route::resource('booth', BoothController::class);
                Route::resource('booth-number', BoothNumberController::class);
+               Route::get('mass-booth-number', [AppsController::class, 'massboothNumber'])->name('massbooth');
            });
            Route::group([
                'prefix'  => 'pre-register',

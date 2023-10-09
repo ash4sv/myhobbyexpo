@@ -32,14 +32,15 @@
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
     </div>
 
-    <script src="{{ asset('assets/js/vendor.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
-    <script src="{{ asset('assets/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/parsleyjs/dist/parsley.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendor.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/parsleyjs/dist/parsley.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
-    <script src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/jquery-validate/jquery-validate.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
     @include('sweetalert::alert')
     <script>
         $(".default-select2").select2();
