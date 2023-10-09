@@ -358,7 +358,7 @@ class RegisterController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
-        Log::info($webHook);
+        /*Log::info($webHook);*/
         Log::info('================= WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
