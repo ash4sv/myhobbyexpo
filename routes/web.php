@@ -49,9 +49,9 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         Route::get('pay-redirect', [RegisterController::class, 'billplzHandleRedirect'])->name('redirect');
         Route::post('pay-webhook', [RegisterController::class, 'billplzHandleWebhook'])->name('webhook');
 
-        /*Route::get('invoice', function (){
-            return view('front.confimation-bill');
-        });*/
+        Route::get('invoice', function (){
+            return view('front.confirmation-email');
+        });
     });
 });
 

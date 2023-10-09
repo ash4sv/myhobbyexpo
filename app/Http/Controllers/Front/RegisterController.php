@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendConfirmationEmail;
 use App\Models\Apps\Booth;
 use App\Models\Apps\BoothExhibitionBooked;
 use App\Models\Apps\BoothNumber;
@@ -12,6 +13,7 @@ use App\Models\Apps\SalesAgent;
 use App\Models\Apps\Section;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -219,8 +221,8 @@ class RegisterController extends Controller
         $shopRef = IdGenerator::generate(['table' => 'booth_exhibition_bookeds', 'field' => 'inv_number', 'length' => 15, 'prefix' => 'MHX-23-']);
         $invDate = now();
 
-        $total_val = str_replace("RM ", "", $request->total_val);
-        /*$total_val = 1.00;*/
+        /*$total_val = str_replace("RM ", "", $request->total_val);*/
+        $total_val = 1.00;
         $amount = ($total_val * 100);
         $serviceFee = $total_val * 0.035;
 
@@ -329,7 +331,8 @@ class RegisterController extends Controller
                 'agent'            => $agent->name,
             ];
             $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref.'.pdf'));
+            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait');
+            $pdf->save(public_path('assets/upload/' . $ref.'.pdf'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
@@ -397,7 +400,8 @@ class RegisterController extends Controller
             ]);
             Log::info('=== BILLPLZ WEBHOOK SAVED ===');
 
-
+            Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
+            Log::info('=== EMAIL SENT ===');
         }
 
         Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
