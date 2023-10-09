@@ -334,8 +334,6 @@ class RegisterController extends Controller
             $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait');
             $pdf->save(public_path('assets/upload/' . $ref.'.pdf'));
 
-            Mail::to($vendor['email'])->send(new SendConfirmationEmail($pdfData));
-
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
                 'booths'           => $booths,
@@ -402,7 +400,8 @@ class RegisterController extends Controller
             ]);
             Log::info('=== BILLPLZ WEBHOOK SAVED ===');
 
-
+            Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
+            Log::info('=== EMAIL SENT ===');
         }
 
         Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
