@@ -42,7 +42,7 @@ class WebController extends Controller
 
         // Send the email using Postmark API
         Mail::send('web.emails.contact', ['mailData' => $mailData], function ($message) use ($mailData) {
-            $message->to('myhobbyexpo@gmail.com'); // Replace with the recipient's email address
+            $message->to('cuzpcdev@gmail.com'); // Replace with the recipient's email address   myhobbyexpo@gmail.com
             $message->subject('New Contact Form Submission');
         });
 
