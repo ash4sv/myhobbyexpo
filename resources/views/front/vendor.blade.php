@@ -14,7 +14,7 @@
         <div class="row justify-content-center g-4 pb-5">
             <div class="col-md-9">
 
-                <form action="{{ route('front.submit') }}" method="POST" enctype="multipart/form-data" data-parsley-validate="true">
+                <form id="vendor-form" action="{{ route('front.submit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow-lg rounded mb-4">
                         <div class="card-header bg-transparent border-bottom py-3 px-4">
@@ -125,13 +125,15 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="company_name" class="form-label">Name of Company / Shop / Group / Club / Associate: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="company_name" id="company_name" required />
+                                        <input class="form-control" type="text" name="company_name" id="company_name" />
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="roc_rob" class="form-label">ROC / ROB / ROC: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="roc_rob" id="roc_rob" required />
+                                        <input class="form-control" type="text" name="roc_rob" id="roc_rob" />
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +142,8 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="person_in_charge" class="form-label">Name of Person in Charge: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" required />
+                                        <input class="form-control" type="text" name="person_in_charge" id="person_in_charge" />
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                             </div>
@@ -149,13 +152,15 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="contact_no" class="form-label">Contact No.: <span class="text-danger">*</span></label>
-                                        <input class="form-control masked-input-phone" type="text" name="contact_no" id="contact_no" placeholder="+6019 999 9999" required />
+                                        <input class="form-control masked-input-phone" type="text" name="contact_no" id="contact_no" placeholder="6019 999 9999" />
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email" id="email" required />
+                                        <input class="form-control" type="email" name="email" id="email" />
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +208,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="website" class="form-label">Sales Agents <span class="text-danger">*</span></label>
-                                        <select name="sales_agent" id="sales_agent" class="form-control @error('sales_agent') is-invalid @enderror default-select2" required>
+                                        <select name="sales_agent" id="sales_agent" class="form-control @error('sales_agent') is-invalid @enderror default-select2">
                                             <option value="">Please Select Your Sales Agent</option>
                                             @foreach($sections as $section)
                                                 @foreach($section->agents->where('section_id', $data['section_id']) as $agent)
@@ -211,6 +216,7 @@
                                                 @endforeach
                                             @endforeach
                                         </select>
+                                        <div class="invalid-feedback"></div>
                                         @error('sales_agent')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -233,3 +239,67 @@
     </div>
 
 @endsection
+
+@push('reg-script')
+    <script>
+        $(document).ready(function(){
+            // =============================================
+            $("#contact_no").on("input", function() {
+                // Remove non-numeric characters using a regular expression
+                var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
+                $(this).val(sanitizedValue);
+            });
+            // =============================================
+            var maxNumber = 99999999999999; // Change this to your desired maximum number
+            // =============================================
+            $("#contact_no").on("input", function () {
+                var inputVal = $(this).val().replace(/\D/g, ''); // Remove non-numeric characters
+                if (inputVal.length > 0) {
+                    // If the input value is greater than the maximum number, truncate it
+                    if (parseInt(inputVal) > maxNumber) {
+                        inputVal = inputVal.substring(0, 10); // Keep only the first 10 digits
+                    }
+                    $(this).val(inputVal); // Set the input value
+                }
+                console.log(inputVal);
+            });
+
+            // =============================================
+            $('#vendor-form').validate({
+                errorElement: "span",
+                errorClass: "is-invalid",
+                rules: {
+                    company_name: {
+                        required: true,
+                    },
+                    roc_rob: {
+                        required: true,
+                    },
+                    person_in_charge: {
+                        required: true,
+                    },
+                    contact_no: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                    },
+                    sales_agent: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    company_name: "Please provide a valid company name.",
+                    roc_rob: "Please provide a valid ROC / ROB / ROC number.",
+                    person_in_charge: "Please provide a valid person in charge.",
+                    contact_no: "Please provide a valid contact number.",
+                    email: "Please provide a valid email address.",
+                    sales_agent: "Please select a sales agent.",
+                },
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.closest(".form-control").siblings(".invalid-feedback"));
+                }
+            });
+        });
+    </script>
+@endpush
