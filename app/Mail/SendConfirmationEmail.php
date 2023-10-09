@@ -58,7 +58,7 @@ class SendConfirmationEmail extends Mailable
         $attachment = $this->pdfData['ref'].'.pdf';
 
         return [
-            Attachment::fromPath(public_path('assets/upload/'.$attachment))->as($attachment)->withMime('application/pdf'),
+            Attachment::fromPath('assets/upload/'.$attachment)->as($attachment)->withMime('application/pdf'),
         ];
     }
 }
