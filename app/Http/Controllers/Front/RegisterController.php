@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendConfirmationEmail;
 use App\Models\Apps\Booth;
 use App\Models\Apps\BoothExhibitionBooked;
 use App\Models\Apps\BoothNumber;
@@ -12,6 +13,7 @@ use App\Models\Apps\SalesAgent;
 use App\Models\Apps\Section;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -329,7 +331,10 @@ class RegisterController extends Controller
                 'agent'            => $agent->name,
             ];
             $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref.'.pdf'));
+            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait');
+            $pdf->save(public_path('assets/upload/' . $ref.'.pdf'));
+
+            Mail::to($vendor['email'])->send(new SendConfirmationEmail($pdfData));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
