@@ -53,6 +53,36 @@
                 </a>
             </div>
             @endcan
+
+            @can('pre-register-access')
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-file-alt"></i>
+                    </div>
+                    <div class="menu-text">Pre-Register</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->segment(2) == 'selling-vendor') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.sellingvendor') }}" class="menu-link">
+                            <div class="menu-text">Selling Vendor</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'hobby-activity') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.hobbyactivity') }}" class="menu-link">
+                            <div class="menu-text">Hobby Activity</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'hobby-showoff') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.hobbyshowoff') }}" class="menu-link">
+                            <div class="menu-text">Hobby Show Off</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endcan
+
             @can('agent-access')
             <div class="menu-item {{ (request()->segment(1) == 'agent') ? 'active' : '' }}">
                 <a href="{{ route('apps.agent.index') }}" class="menu-link">
@@ -81,34 +111,6 @@
                     </div>
                     <div class="menu-text">Booth Booked</div>
                 </a>
-            </div>
-            @endcan
-            @can('pre-register-access')
-            <div class="menu-item has-sub {{ (request()->segment(1) == 'pre-register') ? 'active' : '' }}">
-                <a href="javascript:;" class="menu-link">
-                    <div class="menu-icon">
-                        <i class="fa fa-file-alt"></i>
-                    </div>
-                    <div class="menu-text">Pre-Register</div>
-                    <div class="menu-caret"></div>
-                </a>
-                <div class="menu-submenu">
-                    <div class="menu-item {{ (request()->segment(2) == 'selling-vendor') ? 'active' : '' }}">
-                        <a href="{{ route('apps.preregister.sellingvendor') }}" class="menu-link">
-                            <div class="menu-text">Selling Vendor</div>
-                        </a>
-                    </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'hobby-activity') ? 'active' : '' }}">
-                        <a href="{{ route('apps.preregister.hobbyactivity') }}" class="menu-link">
-                            <div class="menu-text">Hobby Activity</div>
-                        </a>
-                    </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'hobby-showoff') ? 'active' : '' }}">
-                        <a href="{{ route('apps.preregister.hobbyshowoff') }}" class="menu-link">
-                            <div class="menu-text">Hobby Show Off</div>
-                        </a>
-                    </div>
-                </div>
             </div>
             @endcan
 
