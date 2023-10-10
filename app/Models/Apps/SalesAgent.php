@@ -33,4 +33,21 @@ class SalesAgent extends Model
     {
         return $this->hasMany(BoothExhibitionBooked::class, 'sales_agent_id', 'id');
     }
+
+    public function saveSalesAgent($agent, $request)
+    {
+        $agent->hall_id = $request->hall;
+        $agent->section_id = $request->section;
+        $agent->name = $request->name;
+        $agent->description = $request->description;
+        $agent->group = null;
+
+        $status = false;
+        if ($request->status == 'on') {
+            $status = true;
+        }
+
+        $agent->status = $status;
+        $agent->save();
+    }
 }
