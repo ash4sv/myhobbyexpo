@@ -2,7 +2,7 @@
 
 Dear {{ $vendor['company'] }},
 
-Thank you for registering as a vendor for MYHOBBYEXPO 2023! We are excited to have you on board. This email serves as a confirmation of your registration.
+Thank you for registering as a vendor for MHX2023 Secretariat! We are excited to have you on board. This email serves as a confirmation of your registration.
 
 Here are the details of your registration:
 
@@ -22,6 +22,7 @@ Best regards,
 
 Thanks,
 
+MHX2023 Secretariat
 Sales Team <br>
-{{ config('app.name') }}
+
 </x-mail::message>
