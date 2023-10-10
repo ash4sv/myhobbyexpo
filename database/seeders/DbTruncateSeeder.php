@@ -16,19 +16,20 @@ class DbTruncateSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        DB::table('vendors')->truncate();
-        DB::table('billplz_webhook')->truncate();
-        DB::table('billplz_status')->truncate();
-        DB::table('booth_exhibition_bookeds')->truncate();
 
-        $booths = BoothNumber::all();
-
-        foreach ($booths as $booth) {
-            $booth->update([
-                'vendor_id' => null,
-                'status'    => false
-            ]);
-        }
+//        DB::table('vendors')->truncate();
+//        DB::table('billplz_webhook')->truncate();
+//        DB::table('billplz_status')->truncate();
+//        DB::table('booth_exhibition_bookeds')->truncate();
+//
+//        $booths = BoothNumber::all();
+//
+//        foreach ($booths as $booth) {
+//            $booth->update([
+//                'vendor_id' => null,
+//                'status'    => false
+//            ]);
+//        }
 
         Schema::enableForeignKeyConstraints();
     }

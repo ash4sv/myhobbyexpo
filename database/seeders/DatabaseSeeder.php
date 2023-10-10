@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(BoothSeeder::class);
 //        $this->call(BoothBoothNumberSeeder::class);
         /*$this->call(SalesAgentSeeder::class);*/
-        $this->call(DbTruncateSeeder::class);
+//        $this->call(DbTruncateSeeder::class);
     }
 }
