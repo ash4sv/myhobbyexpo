@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Apps\BoothNumber;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,16 @@ class DbTruncateSeeder extends Seeder
         DB::table('billplz_webhook')->truncate();
         DB::table('billplz_status')->truncate();
         DB::table('booth_exhibition_bookeds')->truncate();
+
+        $booths = BoothNumber::all();
+
+        foreach ($booths as $booth) {
+            $booth->update([
+                'vendor_id' => null,
+                'status'    => false
+            ]);
+        }
+
         Schema::enableForeignKeyConstraints();
     }
 }
