@@ -18,6 +18,8 @@ class AppsController extends Controller
 
     public function dashboard()
     {
+        $this->authorize('dashboard-access');
+
         $dailyCounts = PreRegistration::selectRaw('DATE(created_at) as date, COUNT(*) as count')->groupBy('date')->get();
 
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
@@ -35,6 +37,7 @@ class AppsController extends Controller
 
     public function sellingVendor()
     {
+        $this->authorize(['pre-register-access']);
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
 
         $title = 'Delete Registered!';
@@ -48,6 +51,7 @@ class AppsController extends Controller
     }
     public function hobbyActivity()
     {
+        $this->authorize(['pre-register-access']);
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
 
         $title = 'Delete Registered!';
@@ -61,6 +65,7 @@ class AppsController extends Controller
     }
     public function hobbyShowoff()
     {
+        $this->authorize(['pre-register-access']);
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
 
         $title = 'Delete Registered!';
@@ -75,6 +80,7 @@ class AppsController extends Controller
 
     public function routeList()
     {
+        $this->authorize('');
         return view('apps.route.index', [
             'routes' => Route::getRoutes()
         ]);
