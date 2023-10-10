@@ -47,6 +47,13 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         $this->authorize('agent-create');
+        $request->validate([
+            'hall'    => 'required',
+            'section' => 'required',
+            'name'    => 'required|string',
+            'status'  => 'required',
+        ]);
+
         $agent = new SalesAgent();
         $agent->saveSalesAgent($agent, $request);
 

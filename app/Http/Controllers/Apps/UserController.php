@@ -20,6 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('user-access');
         $title = 'Delete User!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -34,6 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('user-create');
         return view($this->view.'create', [
             'user' => new User(),
             'roles' => DB::table('roles')->pluck('name', 'id'),
@@ -45,6 +47,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('user-create');
         $user = new CreateNewUser();
         $user->create($request->only(['name', 'email', 'password', 'password_confirmation']))->assignRole($request->role);
 
@@ -57,6 +60,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('user-show');
         return view($this->view.'show');
     }
 
@@ -65,6 +69,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('user-edit');
         return view($this->view.'edit', [
             'user' => User::findOrFail($id),
             'roles' => DB::table('roles')->pluck('name', 'id')
@@ -76,6 +81,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('user-edit');
         $role = Role::where('name', $request->role)->first();
         $user = User::findOrFail($id);
         $user->fill([
@@ -93,6 +99,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('user-delete');
         $user = User::findOrFail($id);
         $user->delete();
 

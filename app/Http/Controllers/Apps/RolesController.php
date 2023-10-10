@@ -18,6 +18,7 @@ class RolesController extends Controller
      */
     public function index()
     {
+        $this->authorize('role-access');
         $title = 'Delete Roles!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -32,6 +33,7 @@ class RolesController extends Controller
      */
     public function create()
     {
+        $this->authorize('role-create');
         return view($this->view.'create', [
             'role' => new Role(),
             'permissions' => DB::table('permissions')->pluck('name', 'id')
@@ -43,6 +45,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('role-create');
         $role = new Role();
         $role->name = $request->name;
         $role->save();
@@ -57,7 +60,8 @@ class RolesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('role-show');
+
     }
 
     /**
@@ -65,6 +69,7 @@ class RolesController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('role-edit');
         return view($this->view.'edit', [
             'role' => Role::findOrFail($id),
             'permissions' => DB::table('permissions')->pluck('name', 'id'),
@@ -77,6 +82,7 @@ class RolesController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('role-edit');
         $role = Role::findOrFail($id);
         $role->name = $request->name;
         $role->save();
@@ -91,6 +97,7 @@ class RolesController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('role-delete');
         $role = Role::findOrFail($id);
         $role->delete();
 
