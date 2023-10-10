@@ -110,10 +110,10 @@
         @endphp
 
 
-[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>
-[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>
-[@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach] <br>
-[[0, 'JAN'], [1, 'FEB'], [2, 'MAR'], [3, 'APR'], [4, 'MAY'], [5, 'JUN'],] <br>
+{{--[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>--}}
+{{--[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>--}}
+{{--[@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach] <br>--}}
+{{--[[0, 'JAN'], [1, 'FEB'], [2, 'MAR'], [3, 'APR'], [4, 'MAY'], [5, 'JUN'],] <br>--}}
 
 @endsection
 
