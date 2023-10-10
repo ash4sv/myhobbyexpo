@@ -27,7 +27,14 @@ class Booth extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'section_id',
+                'booth_type',
+                'normal_price',
+                'early_bird_price',
+                'early_bird_expiry_date',
+                'status'
+            ]);
         // Chain fluent methods for configuration options
     }
 

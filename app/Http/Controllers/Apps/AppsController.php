@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apps\PreRegistration;
+use App\Models\Apps\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,12 +27,16 @@ class AppsController extends Controller
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
         $sponsors = PreRegistration::Where('become_sponsors', '=', 1)->get();
+
+        $section = Section::all();
+
         return view('apps.index', [
             'selling_vendor' => $selling_vendor,
             'hobby_activity' => $hobby_activity,
             'hobby_showoff'  => $hobby_showoff,
             'sponsors'       => $sponsors,
-            'dailyCounts'    => $dailyCounts
+            'dailyCounts'    => $dailyCounts,
+            'zones'          => $section
         ]);
     }
 

@@ -30,7 +30,15 @@ class Section extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'hall_id',
+                'name',
+                'slug',
+                'description',
+                'poster',
+                'layout',
+                'status',
+            ]);
         // Chain fluent methods for configuration options
     }
 

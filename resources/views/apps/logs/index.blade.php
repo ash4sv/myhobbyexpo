@@ -26,7 +26,7 @@
         </div>
         <div class="panel-body">
 
-            <table class="table table-striped">
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
                 <thead>
                 <tr>
                     <td>ID</td>

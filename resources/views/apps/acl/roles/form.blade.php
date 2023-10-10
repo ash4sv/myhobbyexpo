@@ -21,7 +21,7 @@
             @foreach($permissions as $key => $permission)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-md-5 col-2">
                     <div class="form-check form-check-inline mb-3">
-                        <span style="display:inline-block; width:28px;">{{ $loop->iteration }}.</span>
+                        <span style="display:inline-block;">{{ $loop->iteration }}.</span>
                         <input class="form-check-input selectPermission" type="checkbox" id="{{ $key }}" name="permissions[]" value="{{$permission}}" @if($edit) {{ in_array($key, $rolePermissions) ? 'checked' : '' }} @endif />
                         <label class="form-check-label" for="{{ $key }}">{{ $permission }}</label>
                     </div>
