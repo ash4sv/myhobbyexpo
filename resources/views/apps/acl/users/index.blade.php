@@ -40,6 +40,7 @@
                     <th width="1%">No.</th>
                     <th width="2%">Name</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -49,6 +50,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->getRoleNames()->first() }}</td>
                     <td>
                         <a href="{{ route('apps.acl.users.show', $user) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('apps.acl.users.edit', $user) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>

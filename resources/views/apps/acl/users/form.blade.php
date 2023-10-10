@@ -3,7 +3,7 @@
         <label for="identity" class="form-label">Role</label>
         <select class="hobby-select form-select @error('role') is-invalid @enderror" name="role" id="role">
             @foreach($roles as $key => $role)
-                <option value="{{ $role  }}" {{ (in_array($role, $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>{{ $role }}</option>
+                <option value="{{ $role }}" {{ (in_array($role, $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>{{ $role }}</option>
             @endforeach
         </select>
         @error('role')
