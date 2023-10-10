@@ -37,7 +37,7 @@ class AppsController extends Controller
 
     public function sellingVendor()
     {
-        $this->authorize(['pre-register-access']);
+        $this->authorize('pre-register-access', 'selling-vendor');
         $selling_vendor = PreRegistration::Where('selection_in', '=', 1)->get();
 
         $title = 'Delete Registered!';
@@ -51,7 +51,7 @@ class AppsController extends Controller
     }
     public function hobbyActivity()
     {
-        $this->authorize(['pre-register-access']);
+        $this->authorize('pre-register-access', 'hobby-showoff');
         $hobby_activity = PreRegistration::Where('selection_in', '=', 2)->get();
 
         $title = 'Delete Registered!';
@@ -65,7 +65,7 @@ class AppsController extends Controller
     }
     public function hobbyShowoff()
     {
-        $this->authorize(['pre-register-access']);
+        $this->authorize('pre-register-access', 'hobby-activity');
         $hobby_showoff = PreRegistration::Where('selection_in', '=', 3)->get();
 
         $title = 'Delete Registered!';
@@ -80,7 +80,7 @@ class AppsController extends Controller
 
     public function routeList()
     {
-        $this->authorize('');
+        $this->authorize('route-access');
         return view('apps.route.index', [
             'routes' => Route::getRoutes()
         ]);

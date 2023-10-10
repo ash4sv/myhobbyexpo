@@ -17,6 +17,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        $this->authorize('permission-access');
         $title = 'Delete Permissions!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -31,6 +32,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
+        $this->authorize('permission-create');
         return view($this->view.'create');
     }
 
@@ -39,6 +41,7 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('permission-create');
         foreach($request->permissions as $permission){
             Permission::create(str_replace(' ', '-', $permission));
         }
@@ -52,7 +55,8 @@ class PermissionsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('permission-show');
+
     }
 
     /**
@@ -60,6 +64,7 @@ class PermissionsController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('permission-edit');
         return view($this->view.'edit', [
             'permission' => Permission::findOrFail($id)
         ]);
@@ -70,6 +75,7 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('permission-edit');
         $permission = Permission::findOrFail($id);
         $permission->fill(['name' => str_replace( ' ', '-',$request->permission)]);
         $permission->update();
@@ -83,6 +89,7 @@ class PermissionsController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('permission-delete');
         $role = Permission::findOrFail($id);
         $role->delete();
 

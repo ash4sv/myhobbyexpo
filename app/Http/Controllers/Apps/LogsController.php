@@ -10,6 +10,7 @@ class LogsController extends Controller
 {
     public function index()
     {
+        $this->authorize('log-access');
         return view('apps.logs.index', [
             'logs' => Activity::all()
         ]);
