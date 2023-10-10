@@ -17,6 +17,7 @@ class BoothNumberController extends Controller
      */
     public function index()
     {
+        $this->authorize('booth-number-access');
         $title = 'Delete Permissions!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -31,6 +32,7 @@ class BoothNumberController extends Controller
      */
     public function create()
     {
+        $this->authorize('booth-number-create');
         return view($this->view.'create');
     }
 
@@ -39,6 +41,7 @@ class BoothNumberController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('booth-number-create');
         foreach ($request->booth_number as $key => $boothNumber) {
             BoothNumber::create([
                 'booth_number' => $boothNumber,
@@ -56,7 +59,8 @@ class BoothNumberController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('booth-number-show');
+
     }
 
     /**
@@ -64,6 +68,7 @@ class BoothNumberController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('booth-number-edit');
         $number = BoothNumber::findOrFail($id);
         return view($this->view.'edit', [
             'number' => $number,
@@ -75,6 +80,7 @@ class BoothNumberController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('booth-number-edit');
         $number = BoothNumber::findOrFail($id);
         $number->fill([
             'booth_number'  => $request->booth_number,
@@ -91,6 +97,7 @@ class BoothNumberController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('booth-number-delete');
         $number = BoothNumber::findOrFail($id);
         $number->delete();
 

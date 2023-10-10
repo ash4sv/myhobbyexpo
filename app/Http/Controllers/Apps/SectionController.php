@@ -18,6 +18,7 @@ class SectionController extends Controller
      */
     public function index()
     {
+        $this->authorize('zone-access');
         $title = 'Delete Permissions!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -32,6 +33,7 @@ class SectionController extends Controller
      */
     public function create()
     {
+        $this->authorize('zone-create');
         return view($this->view.'create', [
             'section' => new Section(),
             'halls' => Hall::all(),
@@ -43,6 +45,7 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('zone-create');
         $request->validate([
             'poster'        => 'required',
             'layout'        => 'required',
@@ -64,7 +67,8 @@ class SectionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('zone-show');
+
     }
 
     /**
@@ -72,6 +76,7 @@ class SectionController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('zone-edit');
         $halls = Hall::all();
         $section = Section::findOrFail($id);
         return view($this->view.'edit', [
@@ -85,6 +90,7 @@ class SectionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('zone-edit');
         $section = Section::findOrFail($id);
         $section->saveSection($section, $request);
 
@@ -97,6 +103,7 @@ class SectionController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('zone-delete');
         $section = Section::findOrFail($id);
         $section->delete();
 

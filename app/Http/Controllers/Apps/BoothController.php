@@ -20,6 +20,7 @@ class BoothController extends Controller
      */
     public function index()
     {
+        $this->authorize('booth-access');
         $title = 'Delete Permissions!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -34,6 +35,7 @@ class BoothController extends Controller
      */
     public function create()
     {
+        $this->authorize('booth-create');
         return view($this->view.'create', [
             'booth'     => new Booth(),
             'sections'  => Section::all(),
@@ -46,6 +48,7 @@ class BoothController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('booth-create');
         $request->validate([
             'section'                => 'required|numeric',
             'booth_type'             => 'required|string',
@@ -67,7 +70,8 @@ class BoothController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('booth-show');
+
     }
 
     /**
@@ -75,6 +79,7 @@ class BoothController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('booth-edit');
         return view($this->view.'edit', [
             'booth'           => Booth::findOrFail($id),
             'sections'        => Section::all(),
@@ -88,6 +93,7 @@ class BoothController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('booth-edit');
         $booth = Booth::findOrFail($id);
         $booth->saveBooth($booth, $request);
 
@@ -100,6 +106,7 @@ class BoothController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('booth-delete');
         $booth = Booth::findOrFail($id);
         $booth->boothNumbers()->detach();
         $booth->delete();
