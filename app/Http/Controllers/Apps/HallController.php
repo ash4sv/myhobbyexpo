@@ -17,6 +17,7 @@ class HallController extends Controller
      */
     public function index()
     {
+        $this->authorize('hall-access');
         $title = 'Delete Permissions!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
@@ -31,6 +32,7 @@ class HallController extends Controller
      */
     public function create()
     {
+        $this->authorize('hall-create');
         return view($this->view.'create', [
             'hall' => new Hall(),
         ]);
@@ -41,6 +43,7 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('hall-create');
         $request->validate([
             'name'          => 'required',
             'description'   => 'required',
@@ -59,7 +62,8 @@ class HallController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('hall-show');
+
     }
 
     /**
@@ -67,6 +71,7 @@ class HallController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('hall-edit');
         return view($this->view.'edit', [
             'hall' => Hall::findOrFail($id),
         ]);
@@ -77,6 +82,7 @@ class HallController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('hall-edit');
         $hall = Hall::findOrFail($id);
         $hall->saveHall($hall, $request);
 
@@ -89,6 +95,7 @@ class HallController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('hall-delete');
         $hall = Hall::findOrFail($id);
         $hall->delete();
 
