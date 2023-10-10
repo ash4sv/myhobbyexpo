@@ -46,7 +46,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new CreateNewUser();
-        $user->create($request->only(['name', 'email', 'password', 'password_confirmation']));
+        $user->create($request->only(['name', 'email', 'password', 'password_confirmation']))->assignRole($request->role);
 
         Alert::success('Successfully saved!', 'Record has been saved successfully');
         return redirect()->route($this->route.'index');
@@ -76,13 +76,13 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $role = Role::where('name', '=', $request->name)->first();
+        $role = Role::where('name', $request->role)->first();
         $user = User::findOrFail($id);
         $user->fill([
             'name' => $request->name,
             'email' => $request->email,
-        ])->assignRole($role->id);
-        $user->update();
+        ])->update();
+        $user->syncRoles($role);
 
         Alert::success('Successfully updated!', 'Record has been updated successfully');
         return redirect()->route($this->route.'index');
