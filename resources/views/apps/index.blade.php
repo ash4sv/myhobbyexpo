@@ -95,7 +95,7 @@
 
                     <div id="interactive-chart" class="h-250px"></div>
 
-                    <div id="bar-chart" class="h-250px"></div>
+                    {{--<div id="bar-chart" class="h-250px"></div>--}}
 
                 </div>
             </div>
@@ -103,17 +103,35 @@
         </div>
     </div>
 
+    {{--<div class="row">
+        @foreach($zones as $zone)
+        <div class="col-md-3">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">{{ $zone->name }}</div>
+                    <div class="stats-number">{{ count($zone->numbers) }} Booths</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: {{ (count($zone->numbers->where('status', 1)) / 100) * count($zone->numbers) }}%;"></div>
+                    </div>
+                    <div class="stats-desc">{{ count($zone->numbers->where('status', 1)) }}% Booked</div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>--}}
 
-        @php
-            $index = 0;
-            $date = 0;
-        @endphp
+
+    @php
+        $index = 0;
+        $date = 0;
+    @endphp
 
 
-{{--[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>--}}
-{{--[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>--}}
-{{--[@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach] <br>--}}
-{{--[[0, 'JAN'], [1, 'FEB'], [2, 'MAR'], [3, 'APR'], [4, 'MAY'], [5, 'JUN'],] <br>--}}
+    {{--[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>--}}
+    {{--[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>--}}
+    {{--[@foreach($dailyCounts as $data)[ {{ $date++ }}, '{{ date('d-M', strtotime($data->date)) }}'],@endforeach] <br>--}}
+    {{--[[0, 'JAN'], [1, 'FEB'], [2, 'MAR'], [3, 'APR'], [4, 'MAY'], [5, 'JUN'],] <br>--}}
 
 @endsection
 
@@ -121,7 +139,7 @@
     <script>
 
         var d1 = [
-            @foreach($dailyCounts as $data) [
+                @foreach($dailyCounts as $data) [
                 {{ $index++ }}, {{ $data->count }}],
             @endforeach
         ];

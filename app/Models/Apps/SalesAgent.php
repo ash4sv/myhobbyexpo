@@ -15,7 +15,13 @@ class SalesAgent extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'hall_id',
+                'section_id',
+                'name',
+                'description',
+                'status',
+            ]);
         // Chain fluent methods for configuration options
     }
 

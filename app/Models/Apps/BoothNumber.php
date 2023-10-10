@@ -25,7 +25,13 @@ class BoothNumber extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'section_id',
+                'vendor_id',
+                'booth_number',
+                'description',
+                'status',
+            ]);
         // Chain fluent methods for configuration options
     }
 

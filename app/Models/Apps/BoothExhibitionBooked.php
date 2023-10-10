@@ -12,6 +12,8 @@ class BoothExhibitionBooked extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
+    protected $guarded;
+
     protected $fillable = [
         'inv_number',
         'inv_date',
@@ -24,12 +26,20 @@ class BoothExhibitionBooked extends Model
         'payment_status',
     ];
 
-    protected $guarded;
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'inv_number',
+                'inv_date',
+                'vendor_id',
+                'sales_agent_id',
+                'inv_description',
+                'add_on',
+                'total',
+                'fee',
+                'payment_status',
+            ]);
         // Chain fluent methods for configuration options
     }
 

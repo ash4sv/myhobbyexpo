@@ -27,7 +27,13 @@ class Hall extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        /*->logOnly(['name', 'text'])*/;
+            ->logOnly([
+                'name',
+                'slug',
+                'description',
+                'poster',
+                'status',
+            ]);
         // Chain fluent methods for configuration options
     }
 
