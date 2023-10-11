@@ -3,7 +3,7 @@
         <label for="hall_id" class="form-label">Hall</label>
         <select class="hobby-select form-select @error('hall_id') is-invalid @enderror" name="hall" id="hall">
             @foreach($halls as $key => $hall)
-                <option value="{{ $hall->id  }}">{{ $hall->name }}</option>
+                <option value="{{ $hall->id  }}" {{ ($hall->id === $section->hall_id)? 'selected':'' }}>{{ $hall->name }}</option>
             @endforeach
         </select>
         @error('hall_id')

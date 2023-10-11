@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center g-4 pb-5">
-                    @foreach($hall->sections as $section)
+                    @foreach($hall->sections->where('status', true) as $section)
                         <div class="col-md-3 col-6  {{ $section->coming_soon == 1? 'disabled-prop-btn':'' }}">
                             <a href="" class="section-toggle" data-target="{{ $section->slug }}" id="{{ $section->slug }}_btn">
                                 <img src="{{ asset($section->poster) }}" alt="" class="img-fluid">
@@ -89,7 +89,7 @@
                                                     <label class="form-label">Booths Types <span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <select name="boothTypes" id="boothTypes" class="form-control default-select2" required>
-                                                            @foreach($section->booths as $booth)
+                                                            @foreach($section->booths->where('status', true) as $booth)
                                                                 <option value="{{ $booth->id }}">{{ $booth->booth_type }}</option>
                                                             @endforeach
                                                         </select>
