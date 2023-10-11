@@ -50,7 +50,11 @@
                 @foreach($halls as $hall)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td><img src="{{ asset($hall->poster) }}" alt="" class="h-60px"></td>
+                    <td>
+                        <a  href="{{ asset($hall->poster) }}" data-fancybox data-src="{{ asset($hall->poster) }}" data-caption="{{ $hall->name }}">
+                            <img src="{{ asset($hall->poster) }}" alt="" class="h-60px">
+                        </a>
+                    </td>
                     <td>{{ $hall->name }}</td>
                     <td>{!! $hall->description !!}</td>
                     <td>

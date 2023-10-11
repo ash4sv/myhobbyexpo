@@ -51,8 +51,16 @@
                 @foreach($sections as $section)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td><img src="{{ asset($section->poster) }}" alt="" class="h-60px"></td>
-                    <td><img src="{{ asset($section->layout) }}" alt="" class="h-60px"></td>
+                    <td>
+                        <a href="{{ asset($section->poster) }}" data-fancybox data-src="{{ asset($section->poster) }}" data-caption="{{ $section->name }}">
+                            <img src="{{ asset($section->poster) }}" alt="" class="h-60px">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ asset($section->layout) }}" data-fancybox data-src="{{ asset($section->layout) }}" data-caption="{{ $section->name }}">
+                            <img src="{{ asset($section->layout) }}" alt="" class="h-60px">
+                        </a>
+                    </td>
                     <td>{{ $section->hall->name }}</td>
                     <td>{{ $section->name }}</td>
                     <td>
