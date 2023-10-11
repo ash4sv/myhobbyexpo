@@ -14,7 +14,6 @@ use App\Models\Apps\Section;
 use App\Models\Apps\Vendor;
 use App\Services\ImageUploader;
 use Illuminate\Support\Facades\Mail;
-use PDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -23,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 use Billplz\Client;
+use PDF;
 
 class RegisterController extends Controller
 {
