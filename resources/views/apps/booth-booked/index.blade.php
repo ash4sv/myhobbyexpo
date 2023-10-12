@@ -36,7 +36,7 @@
                     <th width="14%">Name</th>
                     <th width="14%">Phone</th>
                     <th width="14%"></th>
-                    <th width="14%"></th>
+                    <th width="14%">Agent</th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>

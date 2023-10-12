@@ -84,9 +84,10 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('section', SectionController::class);
                Route::resource('booth', BoothController::class);
                Route::resource('booth-number', BoothNumberController::class);
+               Route::get('batch-booth-edit', [AppsController::class, 'batchboothEdit'])->name('batchboothedit');
+               Route::put('batch-booth-update', [AppsController::class, 'batchboothUpdate'])->name('batchboothupdate');
            });
            Route::post('batch-booth-add', [AppsController::class, 'batchStore'])->name('batchboothadd');
-           Route::get('batch-booth-number', [AppsController::class, 'batchboothNumber'])->name('massbooth');
            Route::delete('batch-booth-delete', [AppsController::class, 'batchboothNumberDelete'])->name('batchboothdelete');
            Route::group([
                'prefix'  => 'pre-register',

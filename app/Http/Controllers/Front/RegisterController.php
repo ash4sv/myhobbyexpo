@@ -94,11 +94,12 @@ class RegisterController extends Controller
 
     public function register()
     {
-        $halls = Hall::where('status', true)->get();
+        /*$halls = Hall::where('status', true)->get();
         return view('front.register', [
             'halls'  => $halls,
             'full'    => true
-        ]);
+        ]);*/
+        return redirect(env('APP_URL'));
     }
 
     public function registerHall($hall)
@@ -165,9 +166,9 @@ class RegisterController extends Controller
 
         return view('front.vendor' , [
             'sections' => Section::all(),
-            'data'      => $request->all(),
-            'subTotal'  => $request->sub_total,
-            'total'     => $request->total,
+            'data'     => $request->all(),
+            'subTotal' => $request->sub_total,
+            'total'    => $request->total,
         ]);
     }
 

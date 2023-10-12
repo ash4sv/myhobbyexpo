@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Edit Exhibition Booth Number')
-@section('page-header', 'Edit Exhibition Booth Number')
+@section('page-title', 'Batch Edit Booth Numbers')
+@section('page-header', 'Batch Edit Booth Numbers')
 @section('description', '')
 
 @section('content')
@@ -26,43 +26,37 @@
         </div>
         <div class="panel-body">
 
-            <form action="{{ route('apps.exhibition.booth-number.update', $number) }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                @method('PUT')
+            <form action="{{ route('apps.exhibition.batchboothupdate') }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
                 @csrf
-
+                @method('PUT')
                 <table class="table table-striped table-striped-columns align-middle">
                     <thead>
                     <tr>
                         <th width="1%">No.</th>
-                        <th width="33.33333333%"></th>
-                        <th width="33.33333333%">Booth Number</th>
-                        <th width="33.33333333%">Description</th>
-                        <th width="1%"></th>
-                        <th width="1%"></th>
+                        <th class="text-center" width="33.33333333%">Zone</th>
+                        <th class="text-center" width="33.33333333%">Booth Number</th>
+                        <th class="text-center" width="33.33333333%">Description</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($booths as $booth)
                     <tr>
-                        <td class="text-center">1</td>
+                        <td class="text-center">
+                            {{ $loop->iteration }}
+                            <input type="hidden" name="id[]" value="{{ $booth->id }}">
+                        </td>
                         <td>
-                            <select class="form-control hobby-select" name="zone" id="">
+                            <select class="form-control hobby-select" name="zone[]" id="">
                                 <option value="">Select Zone</option>
                                 @foreach($zones as $key => $zone)
-                                <option value="{{ $key }}" {{ ($key === $number->section_id) ? 'selected':'' }}>{{ $zone }}</option>
+                                <option value="{{ $key }}" {{ ($key === $booth->section_id) ? 'selected':'' }}>{{ $zone }}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number" value="{{ $number->booth_number }}"></td>
-                        <td><input type="text" class="form-control my-n1" placeholder="Description" name="description" value="{{ $number->description }}"></td>
-                        <td>
-                            <div>
-                                <input type="checkbox" name="status" id="switchery-default" @if(old('status', $number->status)) checked @endif/>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>
-                        </td>
+                        <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_numbers[]" id="booth_{{ $booth->id }}" value="{{ $booth->booth_number }}"></td>
+                        <td><input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value="{{ $booth->description }}"></td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
 

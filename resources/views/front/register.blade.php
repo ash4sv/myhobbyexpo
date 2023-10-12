@@ -1,5 +1,7 @@
 @extends('front.layout.master')
 
+@section('page-title', 'VENDOR REGISTRATION')
+
 @section('reg-form')
 
     <div class="row">

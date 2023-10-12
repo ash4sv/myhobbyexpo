@@ -85,6 +85,7 @@ class BoothNumberController extends Controller
         $number = BoothNumber::findOrFail($id);
         return view($this->view.'edit', [
             'number' => $number,
+            'zones'  => DB::table('sections')->pluck('name', 'id'),
         ]);
     }
 
@@ -96,6 +97,7 @@ class BoothNumberController extends Controller
         $this->authorize('booth-number-edit');
         $number = BoothNumber::findOrFail($id);
         $number->fill([
+            'section_id'    => $request->zone,
             'booth_number'  => $request->booth_number,
             'description'   => $request->description,
         ]);
