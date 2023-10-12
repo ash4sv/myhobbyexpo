@@ -117,7 +117,7 @@ class RegisterController extends Controller
 
         $boothTypeId = $request->input('boothTypes');
         $booth = Booth::findOrFail($boothTypeId);
-        $availableNumbers = $booth->boothNumbers()->where('status', 0)->get();
+        $availableNumbers = $booth->boothNumbers()->where('status', 0)->get()->sortBy('booth_number');
 
         $priceDisplay = $booth->early_bird_price;
         if ($booth->early_bird_expiry_date < $currenttime){
