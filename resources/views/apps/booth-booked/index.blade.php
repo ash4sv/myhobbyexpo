@@ -30,13 +30,13 @@
                 <thead>
                 <tr>
                     <th class="text-center" width="1%">No.</th>
-                    <th>Invoice Number</th>
-                    <th>Date</th>
-                    <th>Company</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th></th>
-                    <th></th>
+                    <th width="14%">Invoice Number</th>
+                    <th width="14%">Date</th>
+                    <th width="14%">Company</th>
+                    <th width="14%">Name</th>
+                    <th width="14%">Phone</th>
+                    <th width="14%"></th>
+                    <th width="14%"></th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -60,7 +60,7 @@
                             </p>
                         @endforeach--}}
                     </td>
-                    <td>{{ $data->agent }}</td>
+                    <td>{{ $data->agent->name }}</td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
