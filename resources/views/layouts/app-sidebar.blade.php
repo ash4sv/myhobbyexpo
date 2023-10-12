@@ -141,7 +141,7 @@
                     </div>
                     @endcan
                     @can('booth-number-access')
-                    <div class="menu-item {{ (request()->segment(2) == 'booth-number') ? 'active' : '' }}">
+                    <div class="menu-item {{ (request()->segment(2) == 'booth-number') ? 'active' : '' }} {{ (request()->segment(2) == 'batch-booth-edit') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.booth-number.index') }}" class="menu-link">
                             <div class="menu-text">Booth Number </div>
                             <div class="menu-badge">Step 3</div>
