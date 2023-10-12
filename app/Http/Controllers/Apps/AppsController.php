@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\BoothNumber;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AppsController extends Controller
 {
@@ -91,8 +93,40 @@ class AppsController extends Controller
         ]);
     }
 
-    public function massboothNumber(Request $request)
+    public function batchStore(Request $request)
+    {
+        $request->validate([
+            'zone'  => 'required',
+            'prefix' => 'required|string',
+            'start' => 'required|numeric',
+            'end'   => 'required|numeric',
+        ]);
+
+        for ($i = $request->start; $i <= $request->end; $i++) {
+            $numbers[] = [
+                'section_id'   => $request->zone,
+                'booth_number' => $request->prefix . str_pad($i, 2, '0', STR_PAD_LEFT), // This will generate MH01, MH02, ..., MH16
+                'description'  => null,
+                'status'       => false,
+                'created_at'   => now(),
+                'updated_at'   => now(),
+            ];
+        }
+        BoothNumber::insert($numbers);
+
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return redirect()->back();
+    }
+
+    public function batchboothNumber(Request $request)
     {
         return $request->all();
+    }
+
+    public function batchboothNumberDelete(Request $request)
+    {
+        $id = $request->id;
+        BoothNumber::whereIn('id', $id)->delete();
+        return response()->json(['success' => 'Record has been deleted successfully']);
     }
 }

@@ -3,11 +3,23 @@
 @section('reg-form')
 
     <div class="row">
+        @isset($full)
         <div class="col-md-6 mx-auto mb-4">
             <a href="{{ route('front.register') }}">
                 <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-10px img-fluid">
             </a>
         </div>
+        @endisset
+
+        @isset($direct)
+        @foreach($halls as $hall)
+            <div class="col-md-6 mx-auto mb-4">
+                <a href="{{ route('front.register.hall', $hall->slug) }}">
+                    <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-10px img-fluid">
+                </a>
+            </div>
+        @endforeach
+        @endisset
     </div>
 
     <div id="interest_in">

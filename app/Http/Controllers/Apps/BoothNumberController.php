@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apps\BoothNumber;
+use App\Models\Apps\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BoothNumberController extends Controller
@@ -24,6 +26,7 @@ class BoothNumberController extends Controller
 
         return view($this->view.'index', [
             'booths' => BoothNumber::all(),
+            'zones'  => DB::table('sections')->pluck('name', 'id'),
         ]);
     }
 
@@ -33,7 +36,9 @@ class BoothNumberController extends Controller
     public function create()
     {
         $this->authorize('booth-number-create');
-        return view($this->view.'create');
+        return view($this->view.'create', [
+            'zones' => DB::table('sections')->pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -42,16 +47,24 @@ class BoothNumberController extends Controller
     public function store(Request $request)
     {
         $this->authorize('booth-number-create');
+        $request->validate([
+            'booth_number.*' => 'required'
+        ]);
+
         foreach ($request->booth_number as $key => $boothNumber) {
             BoothNumber::create([
                 'booth_number' => $boothNumber,
-                'description' => $request->description[$key],
-                'status' => false
+                'section_id'   => $request->zone[$key],
+                'description'  => $request->description[$key],
+                'status'       => false
             ]);
         }
 
+        $zones = DB::table('sections')->pluck('name', 'id');
         Alert::success('Successfully saved!', 'Record has been saved successfully');
-        return view($this->view.'create');
+        return view($this->view.'create', [
+            'zones' => $zones
+        ]);
     }
 
     /**

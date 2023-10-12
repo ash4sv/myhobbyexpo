@@ -96,7 +96,17 @@ class RegisterController extends Controller
     {
         $halls = Hall::where('status', true)->get();
         return view('front.register', [
-            'halls' => $halls
+            'halls'  => $halls,
+            'full'    => true
+        ]);
+    }
+
+    public function registerHall($hall)
+    {
+        $halls = Hall::where('slug', $hall)->get();
+        return view('front.register', [
+            'halls'  => $halls,
+            'direct' => true
         ]);
     }
 
@@ -359,9 +369,10 @@ class RegisterController extends Controller
         $data    = $request->all();
 
         /*Log::info($webHook);*/
-        Log::info('================= WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
 
         if ($data['paid'] == 'true') {
+            Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
+
             processAndUpdateBooths($webHook);
             Log::info('=== PROCESS AND UPDATE BOOTHS SAVED ===');
 
@@ -402,9 +413,12 @@ class RegisterController extends Controller
 
             Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
             Log::info('=== EMAIL SENT ===');
-        }
+            Log::info('================= SUCCESSFULLY END WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+        } else {
 
-        Log::info('================= SUCCESSFULLY BOOKED WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+            Log::debug($data);
+            Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+        }
     }
 }
 

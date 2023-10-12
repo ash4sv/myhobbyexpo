@@ -31,83 +31,219 @@
                     <a href="{{ route('apps.exhibition.booth-number.create') }}" class="btn btn-primary px-4">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth Number
                     </a>
-                    <a href="#" class="btn btn-primary px-4" onclick="event.preventDefault(); $('#batch-update').submit()">
-                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Mass Edit Booth Number
+
+                    <a href="#batchAddBooth" class="btn btn-indigo px-4" id="batchAddBoothNumber" data-bs-toggle="modal">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Add Booth Number
+                    </a>
+                    <a href="#" class="btn btn-warning px-4" id="batchEditBoothNumber">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Edit Booth Number
+                    </a>
+                    <a href="#" class="btn btn-danger px-4" id="batchDeleteSelectedRecord">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Delete Booth Number
                     </a>
                 </div>
             </div>
 
-            <form id="batch-update" action="{{ route('apps.exhibition.massbooth') }}" method="GET">
-                <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
-                    <thead>
-                    <tr>
-                        <th width="1%">No.</th>
-                        <th width="1%">
+
+            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                <thead>
+                <tr>
+                    <th width="1%">No.</th>
+                    <th width="1%">
+                        <div class="form-check">
+                            <input type="checkbox" value="" id="check-all" class="form-check-input">
+                            <label for="" class="form-check-label">&nbsp;</label>
+                        </div>
+                    </th>
+                    <th width="20%">Booth Numbers</th>
+                    <th width="20%">Zone</th>
+                    <th></th>
+                    <th width="1%">Status</th>
+                    <th width="1%">#</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($booths as $booth)
+                    <tr id="booth_ids{{ $booth->id }}">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>
                             <div class="form-check">
-                                <input type="checkbox" value="" id="check-all" class="form-check-input">
-                                <label for="" class="form-check-label">&nbsp;</label>
+                                <input type="checkbox" value="{{ $booth->id }}" id="tab-check" name="id" class="form-check-input">
                             </div>
-                        </th>
-                        <th width="20%">Booth Numbers</th>
-                        <th width="20%">Zone</th>
-                        <th></th>
-                        <th width="1%">Status</th>
-                        <th width="1%">#</th>
+                        </td>
+                        <td>
+                            @isset($booth->booth_number)
+                                <label for="tab-check-{{ $booth->id }}" class="form-check-label">{{ $booth->booth_number }}</label>
+                            @endisset
+                        </td>
+                        <td>
+                            @isset($booth->sections)
+                                {{ $booth->sections->name }}
+                            @endisset
+                        </td>
+                        <td>
+                            @isset($booth->vendor->company)
+                                {{ $booth->vendor->company }} |
+                            @endisset
+                            @isset($booth->vendor->roc_rob)
+                                {{ $booth->vendor->roc_rob }} |
+                            @endisset
+                            @isset($booth->vendor->pic_name)
+                                {{ $booth->vendor->pic_name }} |
+                            @endisset
+                            @isset($booth->vendor->phone_num)
+                                <a href="tel:{{ $booth->vendor->phone_num }}">{{ $booth->vendor->phone_num }}</a> |
+                            @endisset
+                            @isset($booth->vendor->email)
+                                <a href="mailto:{{ $booth->vendor->email }}">{{ $booth->vendor->email }}</a>
+                            @endisset
+                        </td>
+                        <td>
+                    <span class="badge {{ $booth->status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                        {{ $booth->status == 1 ? 'Booked' : 'Available' }}
+                    </span>
+                        </td>
+                        <td>
+                            {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                            <a href="{{ route('apps.exhibition.booth-number.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('apps.exhibition.booth-number.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($booths as $booth)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" value="" id="tab-check-{{ $booth->id }}" name="id[{{ $booth->id }}]" class="form-check-input">
+                @endforeach
+                </tbody>
+        </table>
+
+            <div class="modal fade" id="batchAddBooth">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Batch Add Booth Numbers</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('apps.batchboothadd') }}" method="POST" id="saveBatch">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="batchZone" class="form-label">Zone</label>
+                                    <select class="form-control" name="zone" id="batchZone">
+                                        @foreach($zones as $key => $zone)
+                                            <option value="{{ $key }}">{{ $zone }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </td>
-                            <td>
-                                @isset($booth->booth_number)
-                                    <label for="tab-check-{{ $booth->id }}" class="form-check-label">{{ $booth->booth_number }}</label>
-                                @endisset
-                            </td>
-                            <td>
-                                @isset($booth->sections)
-                                    {{ $booth->sections->name }}
-                                @endisset
-                            </td>
-                            <td>
-                                @isset($booth->vendor->company)
-                                    {{ $booth->vendor->company }} |
-                                @endisset
-                                @isset($booth->vendor->roc_rob)
-                                    {{ $booth->vendor->roc_rob }} |
-                                @endisset
-                                @isset($booth->vendor->pic_name)
-                                    {{ $booth->vendor->pic_name }} |
-                                @endisset
-                                @isset($booth->vendor->phone_num)
-                                    <a href="tel:{{ $booth->vendor->phone_num }}">{{ $booth->vendor->phone_num }}</a> |
-                                @endisset
-                                @isset($booth->vendor->email)
-                                    <a href="mailto:{{ $booth->vendor->email }}">{{ $booth->vendor->email }}</a>
-                                @endisset
-                            </td>
-                            <td>
-                        <span class="badge {{ $booth->status == 1 ? 'bg-primary' : 'bg-danger' }}">
-                            {{ $booth->status == 1 ? 'Booked' : 'Available' }}
-                        </span>
-                            </td>
-                            <td>
-                                {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
-                                <a href="{{ route('apps.exhibition.booth-number.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="{{ route('apps.exhibition.booth-number.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </form>
+                                <div class="mb-3">
+                                    <label for="batchPrefix" class="form-label">Prefix</label>
+                                    <input type="text" name="prefix" id="batchPrefix" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Prefix</label>
+                                    <div class="input-group">
+                                        <input name="start" id="batchStart" type="text" class="form-control" placeholder="Start Number" aria-label="Start Number">
+                                        <span class="input-group-text">to</span>
+                                        <input name="end" id="batchEnd" type="text" class="form-control" placeholder="End Number" aria-label="End Number">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                            <a href="javascript:;" class="btn btn-success px-4" id="batchBoothStore">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('#check-all').click(function () {
+                $('.form-check-input').prop('checked', $(this).prop('checked'));
+            });
+
+            $('#batchBoothStore').click(function (g) {
+                g.preventDefault();
+                $('#saveBatch').submit();
+            });
+
+            $('#batchEditBoothNumber').click(function (f) {
+                f.preventDefault();
+                console.log(f);
+            });
+
+            $('#batchDeleteSelectedRecord').click(function (e) {
+                e.preventDefault();
+
+                var all_Ids = [];
+
+                $('input:checkbox[name="id"]:checked').each(function () {
+                    all_Ids.push($(this).val());
+                });
+
+                if (all_Ids.length === 0) {
+                    // No checkboxes are selected, you can handle this case as needed
+                    return;
+                }
+
+                // Show a SweetAlert confirmation dialog
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Delete this?',
+                    text: 'Are you sure you want to delete?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    confirmButtonColor: '#e3342f',
+                }).then((result) => {
+                    if (result.isConfirmed === true) {
+                        // Perform the AJAX delete operation
+                        $.ajax({
+                            url: '{{ route('apps.batchboothdelete') }}',
+                            type: 'DELETE',
+                            data: {
+                                id: all_Ids,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    // Handle success, e.g., remove the deleted records from the DOM
+                                    $.each(all_Ids, function (key, val) {
+                                        $('#booth_ids' + val).remove();
+                                    });
+                                    // Show a success SweetAlert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Deleted',
+                                        text: 'Selected records have been deleted successfully.',
+                                    });
+                                } else {
+                                    // Show an error SweetAlert
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'An error occurred while deleting records.',
+                                    });
+                                }
+                            },
+                            error: function (d) {
+                                console.log(d);
+                                // Show an error SweetAlert
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'An error occurred while sending the request.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+{{--Batch delete--}}
+{{--Batch update--}}
