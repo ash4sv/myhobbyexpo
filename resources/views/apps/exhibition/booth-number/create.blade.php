@@ -43,6 +43,7 @@
                         <th width="33.33333333%"></th>
                         <th width="33.33333333%">Booth Number</th>
                         <th width="33.33333333%">Description</th>
+                        th
                         <th width="1%"></th>
                     </tr>
                     </thead>
@@ -58,6 +59,9 @@
                         </td>
                         <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number[]" value=""></td>
                         <td><input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value=""></td>
+                        <td>
+                            <div><input type="checkbox" name="status[]" id="switchery-default"/></div>
+                        </td>
                         <td>
                             <a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>
                         </td>
@@ -110,7 +114,8 @@
 
                 const cell3 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number[]" value="">');
                 const cell4 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value="">');
-                const cell5 = $("<td>").append('<a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>');
+                const cell5 = $("<td>").append('<div><input type="checkbox" name="status[]" id="switchery-default"/></div>');
+                const cell6 = $("<td>").append('<a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>');
 
                 // Add an event listener to remove the row when the button is clicked
                 cell4.find('a').click(function () {
@@ -118,7 +123,7 @@
                 });
 
                 // Append cells to the row
-                newRow.append(cell1, cell2, cell3, cell4, cell5);
+                newRow.append(cell1, cell2, cell3, cell4, cell5, cell6);
 
                 // Append the row to the table body
                 tableBody.append(newRow);

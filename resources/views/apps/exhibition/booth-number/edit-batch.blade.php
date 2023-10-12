@@ -36,6 +36,7 @@
                         <th class="text-center" width="33.33333333%">Zone</th>
                         <th class="text-center" width="33.33333333%">Booth Number</th>
                         <th class="text-center" width="33.33333333%">Description</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,9 @@
                         </td>
                         <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_numbers[]" id="booth_{{ $booth->id }}" value="{{ $booth->booth_number }}"></td>
                         <td><input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value="{{ $booth->description }}"></td>
+                        <td>
+                            <div><input type="checkbox" name="status" id="switchery-default" @if(old('status', $booth->status)) checked @endif/></div>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>

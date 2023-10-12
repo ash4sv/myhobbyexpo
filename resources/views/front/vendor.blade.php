@@ -1,10 +1,12 @@
 @extends('front.layout.master')
 
+@section('page-title', 'VENDOR REGISTRATION')
+
 @section('reg-form')
 
     <div class="row">
         <div class="col-md-6 mx-auto mb-5">
-            <a href="{{ route('front.register') }}">
+            <a href="{{ route('front.register.hall', $section->hall->slug) }}">
                 <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-30px img-fluid">
             </a>
         </div>
@@ -17,16 +19,23 @@
                 <form id="vendor-form" action="{{ route('front.submit') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card shadow-lg rounded mb-4">
-                        <div class="card-header bg-transparent border-bottom py-3 px-4">
+                        {{--<div class="card-header bg-transparent border-bottom py-3 px-4">--}}
                             {{--<h5 class="font-size-16 mb-0">Order Summary <span class="float-end">#MN0124</span></h5>--}}
-                        </div>
+                        {{--</div>--}}
                         <div class="card-body">
 
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tbody>
                                     <tr>
-                                        <td width="33%">Sub Total :</td>
+                                        <td width="33%">
+                                            <p class="mb-5px">Sub Total :</p>
+                                            <p class="mb-5px">Booths Number:</p>
+                                            {{ $section->hall->name }}
+                                            @foreach($booths as $key => $booth)
+                                            <p class="mb-0">{{ $booth->sections->name }} | {{ $booth->booth_number }}</p>
+                                            @endforeach
+                                        </td>
                                         <td width="33%"></td>
                                         <td class="text-end">
                                             {{ $subTotal }}

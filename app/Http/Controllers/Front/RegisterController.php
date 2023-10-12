@@ -134,6 +134,11 @@ class RegisterController extends Controller
             'booths'    => 'required',
         ]);
 
+        $section = Section::where('id', $request->section_id)->first();
+        $boothData = $request->booths;
+        $boothIds = array_keys($boothData['id']);
+        $boothNumbers = BoothNumber::whereIn('id', $boothIds)->get();
+
         $request->session()->put([
             'section_id'                    => $request->section_id,
             'booth_qty'                     => $request->booth_qty,
@@ -165,10 +170,12 @@ class RegisterController extends Controller
         ]);
 
         return view('front.vendor' , [
+            'section' => $section,
             'sections' => Section::all(),
             'data'     => $request->all(),
             'subTotal' => $request->sub_total,
             'total'    => $request->total,
+            'booths'   => $boothNumbers
         ]);
     }
 

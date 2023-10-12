@@ -51,12 +51,17 @@ class BoothNumberController extends Controller
             'booth_number.*' => 'required'
         ]);
 
+        $status = false;
         foreach ($request->booth_number as $key => $boothNumber) {
+            if ($request->status[$key] == 'on') {
+                $status = true;
+            }
+
             BoothNumber::create([
                 'booth_number' => $boothNumber,
                 'section_id'   => $request->zone[$key],
                 'description'  => $request->description[$key],
-                'status'       => false
+                'status'       => $status
             ]);
         }
 
@@ -95,11 +100,18 @@ class BoothNumberController extends Controller
     public function update(Request $request, string $id)
     {
         $this->authorize('booth-number-edit');
+
+        $status = false;
+        if ($request->status == 'on') {
+            $status = true;
+        }
+
         $number = BoothNumber::findOrFail($id);
         $number->fill([
             'section_id'    => $request->zone,
             'booth_number'  => $request->booth_number,
             'description'   => $request->description,
+            'status'        => $status
         ]);
         $number->update();
 
