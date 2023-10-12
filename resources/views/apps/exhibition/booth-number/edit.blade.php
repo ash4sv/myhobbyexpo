@@ -55,9 +55,7 @@
                         <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number" value="{{ $number->booth_number }}"></td>
                         <td><input type="text" class="form-control my-n1" placeholder="Description" name="description" value="{{ $number->description }}"></td>
                         <td>
-                            <div>
-                                <input type="checkbox" name="status" id="switchery-default" @if(old('status', $number->status)) checked @endif/>
-                            </div>
+                            <div><input type="checkbox" name="status" id="switchery-default" @if(old('status', $number->status)) checked @endif/></div>
                         </td>
                         <td>
                             <a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>
