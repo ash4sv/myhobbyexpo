@@ -7,7 +7,9 @@ use App\Models\Apps\BoothNumber;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AppsController extends Controller
@@ -118,15 +120,53 @@ class AppsController extends Controller
         return redirect()->back();
     }
 
-    public function batchboothNumber(Request $request)
-    {
-        return $request->all();
-    }
-
     public function batchboothNumberDelete(Request $request)
     {
         $id = $request->id;
         BoothNumber::whereIn('id', $id)->delete();
         return response()->json(['success' => 'Record has been deleted successfully']);
+    }
+
+    public function batchboothEdit(Request $request)
+    {
+        $boothIds = $request->input('id');
+        // Ensure $boothIds is an array
+        if (!is_array($boothIds)) {
+            $boothIds = [$boothIds];
+        }
+        // Fetch the selected booths
+        $booths = BoothNumber::whereIn('id', $boothIds)->get();
+        $zones  = DB::table('sections')->pluck('name', 'id');
+        return view('apps.exhibition.booth-number.edit-batch', compact('booths'), compact('zones'));
+    }
+
+    public function batchboothUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'booth_numbers' => 'required|array',
+            'zone' => 'required|array',
+            'description' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $boothNumbers = $request->input('booth_numbers');
+        $boothIds = $request->input('id');
+        $zone = $request->input('zone');
+        $description = $request->input('description');
+
+        foreach ($boothIds as $key => $boothId) {
+            $booth = BoothNumber::find($boothId);
+            $booth->booth_number = $boothNumbers[$key];
+            $booth->section_id = $zone[$key];
+            $booth->description = $description[$key];
+            $booth->status = false; // Assuming you want to set status to false for all
+            $booth->save();
+        }
+
+        Alert::success('Successfully updated!', 'Record has been updated successfully');
+        return redirect()->route('apps.exhibition.booth-number.index');
     }
 }

@@ -114,6 +114,7 @@
             </div>
             @endcan
 
+            @can('exhibition-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'exhibition') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -123,32 +124,41 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
+                    @can('hall-access')
                     <div class="menu-item {{ (request()->segment(2) == 'hall') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.hall.index') }}" class="menu-link">
                             <div class="menu-text">Hall </div>
                             <div class="menu-badge">Step 1</div>
                         </a>
                     </div>
+                    @endcan
+                    @can('zone-access')
                     <div class="menu-item {{ (request()->segment(2) == 'section') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.section.index') }}" class="menu-link">
                             <div class="menu-text">Zone</div>
                              <div class="menu-badge">Step 2</div>
                         </a>
                     </div>
+                    @endcan
+                    @can('booth-number-access')
                     <div class="menu-item {{ (request()->segment(2) == 'booth-number') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.booth-number.index') }}" class="menu-link">
                             <div class="menu-text">Booth Number </div>
                             <div class="menu-badge">Step 3</div>
                         </a>
                     </div>
+                    @endcan
+                    @can('booth-access')
                     <div class="menu-item {{ (request()->segment(2) == 'booth') ? 'active' : '' }}">
                         <a href="{{ route('apps.exhibition.booth.index') }}" class="menu-link">
                             <div class="menu-text">Booth </div>
                             <div class="menu-badge">Step 4</div>
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
+            @endcan
 
             {{--<div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">

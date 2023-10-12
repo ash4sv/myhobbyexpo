@@ -55,9 +55,9 @@
                             <label for="" class="form-check-label">&nbsp;</label>
                         </div>
                     </th>
-                    <th width="20%">Booth Numbers</th>
-                    <th width="20%">Zone</th>
-                    <th></th>
+                    <th width="1%">Booth Numbers</th>
+                    <th width="47.5%">Zone</th>
+                    <th width="47.5%"></th>
                     <th width="1%">Status</th>
                     <th width="1%">#</th>
                 </tr>
@@ -170,9 +170,20 @@
                 $('#saveBatch').submit();
             });
 
-            $('#batchEditBoothNumber').click(function (f) {
-                f.preventDefault();
-                console.log(f);
+            $('#batchEditBoothNumber').click(function (e) {
+                e.preventDefault();
+
+                var selectedBooths = [];
+                $('input:checkbox[name="id"]:checked').each(function () {
+                    selectedBooths.push($(this).val());
+                });
+
+                if (selectedBooths.length === 0) {
+                    return;
+                }
+                // Redirect to the batch edit page with the selected booth IDs
+                var editUrl = '{{ route('apps.exhibition.batchboothedit') }}' + '?id[]=' + selectedBooths.join('&id[]=');
+                window.location.href = editUrl;
             });
 
             $('#batchDeleteSelectedRecord').click(function (e) {
@@ -245,5 +256,4 @@
     </script>
 @endpush
 
-{{--Batch delete--}}
 {{--Batch update--}}
