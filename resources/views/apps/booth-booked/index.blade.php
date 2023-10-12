@@ -50,9 +50,15 @@
                     <td>{{ $data->vendor->pic_name }}</td>
                     <td>{{ $data->vendor->phone_num }}</td>
                     <td>
-                        @foreach($data->vendor->registerBooth as $booth)
-                            <p class="my-0">{{ $booth->sections->hall->name }} | {{ $booth->sections->name }} | {{ $booth->booth_number }}</p>
-                        @endforeach
+                        {{--@foreach($data->vendor->registerBooth as $booth)
+                            <p class="my-0">
+                                @isset($booth->sections->hall)
+                                {{ $booth->sections->hall->name }}
+                                @endisset
+                                | {{ $booth->sections->name }}
+                                | {{ $booth->booth_number }}
+                            </p>
+                        @endforeach--}}
                     </td>
                     <td>{{ $data->agent }}</td>
                     <td>
