@@ -239,8 +239,8 @@ class RegisterController extends Controller
         $shopRef = IdGenerator::generate(['table' => 'booth_exhibition_bookeds', 'field' => 'inv_number', 'length' => 15, 'prefix' => 'MHX-23-']);
         $invDate = now();
 
-        $total_val = str_replace("RM ", "", $request->total_val);
-        /*$total_val = 1.00;*/
+        /*$total_val = str_replace("RM ", "", $request->total_val);*/
+        $total_val = 2.00;
         $amount = ($total_val * 100);
         $serviceFee = $total_val * 0.035;
 
