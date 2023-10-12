@@ -51,9 +51,11 @@ class BoothNumberController extends Controller
             'booth_number.*' => 'required'
         ]);
 
-        $status = false;
         foreach ($request->booth_number as $key => $boothNumber) {
-            if ($request->status[$key] == 'on') {
+            $status = false;
+
+            // Check if $request->status[$key] exists and is 'on'
+            if (isset($request->status[$key]) && $request->status[$key] === 'on') {
                 $status = true;
             }
 
