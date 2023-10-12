@@ -36,6 +36,7 @@
                     <th>Name</th>
                     <th>Phone</th>
                     <th></th>
+                    <th></th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -49,10 +50,17 @@
                     <td>{{ $data->vendor->pic_name }}</td>
                     <td>{{ $data->vendor->phone_num }}</td>
                     <td>
-                        @foreach($data->vendor->registerBooth as $booth)
-                            <p class="my-0">{{ $booth->sections->hall->name }} | {{ $booth->sections->name }} | {{ $booth->booth_number }}</p>
-                        @endforeach
+                        {{--@foreach($data->vendor->registerBooth as $booth)
+                            <p class="my-0">
+                                @isset($booth->sections->hall)
+                                {{ $booth->sections->hall->name }}
+                                @endisset
+                                | {{ $booth->sections->name }}
+                                | {{ $booth->booth_number }}
+                            </p>
+                        @endforeach--}}
                     </td>
+                    <td>{{ $data->agent }}</td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}

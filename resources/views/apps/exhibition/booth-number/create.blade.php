@@ -40,14 +40,22 @@
                     <thead>
                     <tr>
                         <th width="1%">No.</th>
-                        <th>Booth Number</th>
-                        <th>Description</th>
+                        <th width="33.33333333%"></th>
+                        <th width="33.33333333%">Booth Number</th>
+                        <th width="33.33333333%">Description</th>
                         <th width="1%"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td class="text-center">1</td>
+                        <td>
+                            <select class="form-control hobby-select" name="zone[]" id="">
+                                @foreach($zones as $key => $zone)
+                                <option value="{{ $key }}">{{ $zone }}</option>
+                                @endforeach
+                            </select>
+                        </td>
                         <td><input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number[]" value=""></td>
                         <td><input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value=""></td>
                         <td>
@@ -88,9 +96,21 @@
 
                 // Create table data cells
                 const cell1 = $("<td>").addClass("text-center").text(rowCount); // Add row number
-                const cell2 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number[]" value="">');
-                const cell3 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value="">');
-                const cell4 = $("<td>").append('<a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>');
+                const cell2 = $("<td>"); // Dropdown with options from PHP loop
+                const selectDropdown = $("<select class='form-control hobby-select' name='zone[]'>");
+
+                // Assuming you have a PHP array called $zones
+                @foreach($zones as $key => $zone)
+                selectDropdown.append('<option value="{{ $key }}">{{ $zone }}</option>');
+                @endforeach
+
+                cell2.append(selectDropdown);
+
+                selectDropdown.select2();
+
+                const cell3 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Booth Number" name="booth_number[]" value="">');
+                const cell4 = $("<td>").append('<input type="text" class="form-control my-n1" placeholder="Description" name="description[]" value="">');
+                const cell5 = $("<td>").append('<a href="" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>');
 
                 // Add an event listener to remove the row when the button is clicked
                 cell4.find('a').click(function () {
@@ -98,7 +118,7 @@
                 });
 
                 // Append cells to the row
-                newRow.append(cell1, cell2, cell3, cell4);
+                newRow.append(cell1, cell2, cell3, cell4, cell5);
 
                 // Append the row to the table body
                 tableBody.append(newRow);

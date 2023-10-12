@@ -43,6 +43,8 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         'as'        => 'front.',
     ], function (){
         Route::get('register', [RegisterController::class, 'register'])->name('register');
+        Route::get('register/{hall}', [RegisterController::class, 'registerHall'])->name('register.hall');
+
         Route::post('register', [RegisterController::class, 'booth'])->name('booth');
         Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
         Route::get('get-booth-numbers', [RegisterController::class ,'getBoothNumbers'])->name('getbooths');
@@ -82,8 +84,10 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('section', SectionController::class);
                Route::resource('booth', BoothController::class);
                Route::resource('booth-number', BoothNumberController::class);
-               Route::get('mass-booth-number', [AppsController::class, 'massboothNumber'])->name('massbooth');
            });
+           Route::post('batch-booth-add', [AppsController::class, 'batchStore'])->name('batchboothadd');
+           Route::get('batch-booth-number', [AppsController::class, 'batchboothNumber'])->name('massbooth');
+           Route::delete('batch-booth-delete', [AppsController::class, 'batchboothNumberDelete'])->name('batchboothdelete');
            Route::group([
                'prefix'  => 'pre-register',
                'as'     => 'preregister.'

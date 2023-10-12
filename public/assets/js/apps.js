@@ -74,9 +74,7 @@ var Apps = {
     },
 
     select2: function (select2) {
-        $(select2).select2({
-            theme: "bootstrap"
-        });
+        $(select2).select2();
     },
 
     switchery: function (switchery) {
