@@ -99,6 +99,7 @@ class RegisterController extends Controller
             'halls'  => $halls,
             'full'    => true
         ]);*/
+        return redirect(env('APP_URL'));
     }
 
     public function registerHall($hall)
