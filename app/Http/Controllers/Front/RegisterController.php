@@ -350,7 +350,7 @@ class RegisterController extends Controller
             ];
             $customPaper = [0, 0, 595.28, 841.89];
             $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref . '.pdf'));
-            Log::debug($pdf);
+            
             Log::info('PDF SAVED'. date('d-m-Y-H-i-s'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
