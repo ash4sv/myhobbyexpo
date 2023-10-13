@@ -62,6 +62,7 @@
                         @endisset
                     </td>
                     <td>
+                        @isset($data->vendor->registerBooth)
                         @foreach($data->vendor->registerBooth as $booth)
                             <p class="my-0">
                                 @isset($booth->sections->hall)
@@ -70,6 +71,7 @@
                                 {{ $booth->booth_number }}
                             </p>
                         @endforeach
+                        @endisset
                     </td>
                     <td>{{ $data->agent->name }}</td>
                     <td>
