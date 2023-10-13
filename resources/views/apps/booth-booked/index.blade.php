@@ -46,18 +46,30 @@
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td>{{ $data->inv_number }}</td>
                     <td>{{ $data->inv_date }}</td>
-                    <td>{{ $data->vendor->company }}</td>
-                    <td>{{ $data->vendor->pic_name }}</td>
-                    <td>{{ $data->vendor->phone_num }}</td>
                     <td>
-                        {{--@foreach($data->vendor->registerBooth as $booth)
+                        @isset($data->vendor)
+                        {{ $data->vendor->company }}
+                        @endisset
+                    </td>
+                    <td>
+                        @isset($data->vendor)
+                        {{ $data->vendor->pic_name }}
+                        @endisset
+                    </td>
+                    <td>
+                        @isset($data->vendor)
+                        {{ $data->vendor->phone_num }}
+                        @endisset
+                    </td>
+                    <td>
+                        @foreach($data->vendor->registerBooth as $booth)
                             <p class="my-0">
                                 @isset($booth->sections->hall)
                                 {{ $booth->sections->hall->name }} | {{ $booth->sections->name }} |
                                 @endisset
                                 {{ $booth->booth_number }}
                             </p>
-                        @endforeach--}}
+                        @endforeach
                     </td>
                     <td>{{ $data->agent->name }}</td>
                     <td>
