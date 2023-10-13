@@ -205,15 +205,6 @@
                                         <input class="form-control" type="text" name="website" id="website" />
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="website" class="form-label">Image Gathering</label>
-                                        <input class="form-control" type="file" name="website" id="website" />
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="website" class="form-label">Sales Agents <span class="text-danger">*</span></label>
@@ -231,6 +222,15 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                {{--<div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="website" class="form-label">Image Gathering</label>
+                                        <input class="form-control" type="file" name="website" id="website" />
+                                    </div>
+                                </div>--}}
                             </div>
 
                             <div class="mb-0 text-center">
