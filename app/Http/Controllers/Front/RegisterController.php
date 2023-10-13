@@ -349,8 +349,9 @@ class RegisterController extends Controller
                 'agent'            => $agent->name,
             ];
             $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait');
-            $pdf->save(public_path('assets/upload/' . $ref.'.pdf'));
+            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref . '.pdf'));
+            Log::debug($pdf);
+            Log::info('PDF SAVED'. date('d-m-Y-H-i-s'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
@@ -376,7 +377,13 @@ class RegisterController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
-        /*Log::info($webHook);*/
+        if (!empty($data)){
+            Log::info($webHook);
+            Log::info($data);
+        } else {
+            Log::info('NO RETURN');
+            Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+        }
 
         if ($data['paid'] == 'true') {
             Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
@@ -422,8 +429,7 @@ class RegisterController extends Controller
             Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
             Log::info('=== EMAIL SENT ===');
             Log::info('================= SUCCESSFULLY END WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
-        } else {
-
+        } elseif ($data['paid'] == 'false') {
             Log::debug($data);
             Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
         }
