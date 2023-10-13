@@ -30,13 +30,16 @@
                 <thead>
                 <tr>
                     <th class="text-center" width="1%">No.</th>
-                    <th width="14%">Invoice Number</th>
-                    <th width="14%">Date</th>
-                    <th width="14%">Company</th>
-                    <th width="14%">Name</th>
-                    <th width="14%">Phone</th>
-                    <th width="14%"></th>
-                    <th width="14%">Agent</th>
+                    <th width="10.88888889%">Invoice Number</th>
+                    <th width="10.88888889%">Date</th>
+                    <th width="10.88888889%">Company</th>
+                    <th width="10.88888889%">Name</th>
+                    <th width="10.88888889%">Phone</th>
+                    <th width="10.88888889%">Hall | Zone | Booth</th>
+                    <th width="10.88888889%">Agent</th>
+                    <th width="10.88888889%">Paid</th>
+                    <th width="10.88888889%"></th>
+
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -74,6 +77,7 @@
                         @endisset
                     </td>
                     <td>{{ $data->agent->name }}</td>
+                    <td>{{ $data->total }}</td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}

@@ -64,8 +64,8 @@
                         <td>{{ $data->collection_id }}</td>
                         <td>{{ $data->paid }}</td>
                         <td>{{ $data->state }}</td>
-                        <td>{{ $data->amount }}</td>
-                        <td>{{ $data->paid_amount }}</td>
+                        <td>{{ $data->amount * 100 }}</td>
+                        <td>{{ $data->paid_amount * 100 }}</td>
                         <td>{{ $data->due_at }}</td>
                         <td>{{ $data->email }}</td>
                         <td>{{ $data->mobile }}</td>
