@@ -378,10 +378,11 @@ class RegisterController extends Controller
         $data    = $request->all();
 
         if (!empty($data) || !empty($webHook)){
+
             Log::info($webHook);
-            Log::info($data);
 
             if ($data['paid'] == 'true') {
+                Log::info($data);
                 Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
 
                 processAndUpdateBooths($webHook);
@@ -425,10 +426,14 @@ class RegisterController extends Controller
                 Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
                 Log::info('=== EMAIL SENT ===');
                 Log::info('================= SUCCESSFULLY END WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+
             }
             elseif ($data['paid'] == 'false') {
+
+                Log::info('================= CANCEL OF PAYMENT =================');
                 Log::debug($data);
                 Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+
             }
 
         } else {
@@ -437,7 +442,7 @@ class RegisterController extends Controller
             Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
 
         }
-        
+
     }
 }
 
