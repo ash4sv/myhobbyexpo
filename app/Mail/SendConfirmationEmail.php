@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class SendConfirmationEmail extends Mailable
 {
@@ -57,27 +57,12 @@ class SendConfirmationEmail extends Mailable
     public function attachments(): array
     {
         $attachment = $this->pdfData['ref'].'.pdf';
-
-        // Function to open the PDF file
-        function openPdfFile($filePath) {
-            try {
-                return Storage::get($filePath);
-            } catch (\Exception $e) {
-                // Handle any exceptions, e.g., log or return an error message.
-                return $e->getMessage();
-            }
-        }
-        // Your code to attach the PDF to an email
-        $attachmentPath = 'assets/upload/'.$attachment; // This should be the full path to the PDF file.
-
-        $pdfContent = openPdfFile($attachmentPath);
-
-        if (is_string($pdfContent)) {
-            return $pdfContent;
-        }
+        $file = public_path('assets/upload/').$attachment;
+        Log::info($file);
 
         return [
-            Attachment::new($pdfContent, $attachment)->mimeType('application/pdf'),
+            /*Attachment::new('assets/upload/'. $attachment)->mimeType('application/pdf'),*/
+            Attachment::fromPath($file)->as($this->pdfData['ref'].'.pdf')->withMime('application/pdf'),
         ];
     }
 }
