@@ -350,7 +350,7 @@ class RegisterController extends Controller
             ];
             $customPaper = [0, 0, 595.28, 841.89];
             $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref . '.pdf'));
-            
+
             Log::info('PDF SAVED'. date('d-m-Y-H-i-s'));
 
             Alert::success('Thank you for registration', 'We will send an email for your reference');
@@ -377,62 +377,67 @@ class RegisterController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
-        if (!empty($data)){
+        if (!empty($data) || !empty($webHook)){
             Log::info($webHook);
             Log::info($data);
+
+            if ($data['paid'] == 'true') {
+                Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
+
+                processAndUpdateBooths($webHook);
+                Log::info('=== PROCESS AND UPDATE BOOTHS SAVED ===');
+
+                BoothExhibitionBooked::insert([
+                    'inv_number'      => $webHook['ref'],
+                    'inv_date'        => $webHook['invDate'],
+                    'vendor_id'       => $webHook['vendor']['id'],
+                    'sales_agent_id'  => $webHook['vendorSubmitData']['sales_agent'],
+                    'inv_description' => json_encode($webHook['dataPull']),
+                    'add_on'          => 'data',
+                    'total'           => str_replace("RM ", "", $webHook['dataPull']['total']),
+                    'fee'             => $webHook['servicesFee'],
+                    'payment_status'  => true,
+                    'created_at'      => now(),
+                    'updated_at'      => now(),
+                ]);
+                Log::info('=== BOOTH EXHIBITION BOOKED SAVED ===');
+
+                DB::table('billplz_webhook')->insert([
+                    'shopref'       => $webHook['ref'],
+                    'billplz_id'    => $data['id'],
+                    'collection_id' => $data['collection_id'],
+                    'paid'          => $data['paid'],
+                    'state'         => $data['state'],
+                    'amount'        => $data['amount'],
+                    'paid_amount'   => $data['paid_amount'],
+                    'due_at'        => $data['due_at'],
+                    'email'         => $data['email'],
+                    'mobile'        => $data['mobile'],
+                    'name'          => $data['name'],
+                    'url'           => $data['url'],
+                    'paid_at'       => $data['paid_at'],
+                    'x_signature'   => $data['x_signature'],
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ]);
+                Log::info('=== BILLPLZ WEBHOOK SAVED ===');
+
+                Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
+                Log::info('=== EMAIL SENT ===');
+                Log::info('================= SUCCESSFULLY END WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+            }
+            elseif ($data['paid'] == 'false') {
+                Log::debug($data);
+                Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+            }
+
         } else {
+
             Log::info('NO RETURN');
             Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
+
         }
-
-        if ($data['paid'] == 'true') {
-            Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
-
-            processAndUpdateBooths($webHook);
-            Log::info('=== PROCESS AND UPDATE BOOTHS SAVED ===');
-
-            BoothExhibitionBooked::insert([
-                'inv_number'      => $webHook['ref'],
-                'inv_date'        => $webHook['invDate'],
-                'vendor_id'       => $webHook['vendor']['id'],
-                'sales_agent_id'  => $webHook['vendorSubmitData']['sales_agent'],
-                'inv_description' => json_encode($webHook['dataPull']),
-                'add_on'          => 'data',
-                'total'           => str_replace("RM ", "", $webHook['dataPull']['total']),
-                'fee'             => $webHook['servicesFee'],
-                'payment_status'  => true,
-                'created_at'      => now(),
-                'updated_at'      => now(),
-            ]);
-            Log::info('=== BOOTH EXHIBITION BOOKED SAVED ===');
-
-            DB::table('billplz_webhook')->insert([
-                'shopref'       => $webHook['ref'],
-                'billplz_id'    => $data['id'],
-                'collection_id' => $data['collection_id'],
-                'paid'          => $data['paid'],
-                'state'         => $data['state'],
-                'amount'        => $data['amount'],
-                'paid_amount'   => $data['paid_amount'],
-                'due_at'        => $data['due_at'],
-                'email'         => $data['email'],
-                'mobile'        => $data['mobile'],
-                'name'          => $data['name'],
-                'url'           => $data['url'],
-                'paid_at'       => $data['paid_at'],
-                'x_signature'   => $data['x_signature'],
-                'created_at'    => now(),
-                'updated_at'    => now(),
-            ]);
-            Log::info('=== BILLPLZ WEBHOOK SAVED ===');
-
-            Mail::to($webHook['vendor']['email'])->send(new SendConfirmationEmail($webHook));
-            Log::info('=== EMAIL SENT ===');
-            Log::info('================= SUCCESSFULLY END WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
-        } elseif ($data['paid'] == 'false') {
-            Log::debug($data);
-            Log::info('================= UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' =================');
-        }
+        
     }
 }
 
