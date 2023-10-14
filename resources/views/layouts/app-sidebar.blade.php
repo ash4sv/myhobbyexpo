@@ -224,6 +224,11 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->segment(2) == 'debug-form') ? 'active' : '' }}">
+                        <a href="{{ route('apps.billplz.debug') }}" class="menu-link">
+                            <div class="menu-text">Debug Form</div>
+                        </a>
+                    </div>
                     <div class="menu-item {{ (request()->segment(2) == 'status') ? 'active' : '' }}">
                         <a href="{{ route('apps.billplz.status.index') }}" class="menu-link">
                             <div class="menu-text">Status</div>
