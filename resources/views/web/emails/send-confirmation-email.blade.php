@@ -11,7 +11,6 @@ Here are the details of your registration:
 - Person in Charge: {{ $vendor['pic_name'] }}
 - Contact Number: {{ $vendor['phone_num'] }}
 - Email: {{ $vendor['email'] }}
-
 - Hall: {{ $section->hall->name }}
 - Section: {{ $section->name }}
 
