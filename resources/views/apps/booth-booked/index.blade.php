@@ -79,8 +79,8 @@
                     <td>{{ $data->agent->name }}</td>
                     <td>{{ $data->total }}</td>
                     <td></td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
+                    <td nowrap="">
+                        <div class="btn-group btn-group-sm my-n1">
                             {{--<a href="#" class="btn btn-default"><i class="fa fa-cogs"></i></a>--}}
                             <a href="#" class="btn btn-indigo dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fa fa-caret-down"></i>
