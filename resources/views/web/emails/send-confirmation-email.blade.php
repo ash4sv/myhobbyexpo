@@ -12,6 +12,9 @@ Here are the details of your registration:
 - Contact Number: {{ $vendor['phone_num'] }}
 - Email: {{ $vendor['email'] }}
 
+- Hall: {{ $section->hall->name }}
+- Section: {{ $section->name }}
+
 Please note that the information provided during registration is preliminary and subject to verification. Our team will review your registration and contact you if any additional information or documents are required.
 
 We appreciate your interest in participating in our event and look forward to a successful collaboration. If you have any questions or need further assistance, please don't hesitate to reach out to us.

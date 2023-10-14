@@ -245,7 +245,7 @@ class RegisterController extends Controller
         $serviceFee = $total_val * 0.035;
 
         $request->session()->put([
-            'dataPull'         =>  $dataPull,
+            'dataPull'         => $dataPull,
             'vendorSubmitData' => $vendorSubmitedData,
             'vendor'           => $vendor,
             'ref'              => $shopRef,
@@ -339,20 +339,6 @@ class RegisterController extends Controller
                 'updated_at'          => now(),
             ]);
 
-            $pdfData = [
-                'booths'           => $booths,
-                'dataPull'         => $dataPull,
-                'vendorSubmitData' => $vendorSubmitData,
-                'vendor'           => $vendor,
-                'ref'              => $ref,
-                'invDate'          => $invDate,
-                'agent'            => $agent->name,
-            ];
-            $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $ref . '.pdf'));
-
-            Log::info('PDF SAVED'. date('d-m-Y-H-i-s'));
-
             Alert::success('Thank you for registration', 'We will send an email for your reference');
             return view('front.confirmation-bill', [
                 'booths'           => $booths,
@@ -382,8 +368,29 @@ class RegisterController extends Controller
             Log::info($webHook);
 
             if ($data['paid'] == 'true') {
+
+                Log::info("===");
                 Log::info($data);
                 Log::info('================= START WEBHOOK ' . $webHook['ref'] .' ' . date('Ymd/m/y H:i') . ' =================');
+
+                $agent  = SalesAgent::where('id', $webHook['vendorSubmitData']['sales_agent'])->first();
+                $booth = collect($webHook['dataPull']['booths']['id'])->filter(function ($value) {
+                        return $value === 'on';
+                    })->keys()->toArray();
+                $booths = BoothNumber::whereIn('id', $booth)->get();
+
+                $pdfData = [
+                    'booths'           => $booths,
+                    'dataPull'         => $webHook['dataPull'],
+                    'vendorSubmitData' => $webHook['vendorSubmitData'],
+                    'vendor'           => $webHook['vendor'],
+                    'ref'              => $webHook['ref'],
+                    'invDate'          => $webHook['invDate'],
+                    'agent'            => $agent->name,
+                ];
+                $customPaper = [0, 0, 595.28, 841.89];
+                $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $webHook['ref'] . '.pdf'));
+                Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
 
                 processAndUpdateBooths($webHook);
                 Log::info('=== PROCESS AND UPDATE BOOTHS SAVED ===');

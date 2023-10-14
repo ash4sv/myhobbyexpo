@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Apps\Section;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -42,9 +43,12 @@ class SendConfirmationEmail extends Mailable
         return new Content(
             markdown: 'web.emails.send-confirmation-email',
             with: [
-                'vendor'  => $this->pdfData['vendor'],
-                'invDate' => $this->pdfData['invDate'],
-                'ref'     => $this->pdfData['ref'],
+                'section'          => Section::where('id', $this->pdfData['dataPull']['section_id'])->first(),
+                'dataPull'         => $this->pdfData['dataPull'],
+                'vendorSubmitData' => $this->pdfData['vendorSubmitData'],
+                'vendor'           => $this->pdfData['vendor'],
+                'ref'              => $this->pdfData['ref'],
+                'invDate'          => $this->pdfData['invDate'],
             ]
         );
     }

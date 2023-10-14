@@ -110,6 +110,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                'prefix'  => 'billplz',
                'as'     => 'billplz.'
            ], function (){
+               Route::get('debug-form', [AppsController::class, 'debugBillplz'])->name('debug');
                Route::resource('status', BillPlzStatusController::class);
                Route::resource('webhook', BillPlzWebhookController::class);
            });

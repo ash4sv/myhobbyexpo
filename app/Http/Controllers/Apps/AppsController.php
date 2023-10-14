@@ -169,4 +169,9 @@ class AppsController extends Controller
         Alert::success('Successfully updated!', 'Record has been updated successfully');
         return redirect()->route('apps.exhibition.booth-number.index');
     }
+
+    public function debugBillplz(Request $request)
+    {
+        return view('apps.billplz.debug.form');
+    }
 }
