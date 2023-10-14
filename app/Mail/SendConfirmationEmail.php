@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Apps\BoothNumber;
 use App\Models\Apps\Section;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -40,10 +41,16 @@ class SendConfirmationEmail extends Mailable
      */
     public function content(): Content
     {
+        $booth = collect($this->pdfData['dataPull']['booths']['id'])->filter(function ($value) {
+            return $value === 'on';
+        })->keys()->toArray();
+        $booths = BoothNumber::whereIn('id', $booth)->get();
+
         return new Content(
             markdown: 'web.emails.send-confirmation-email',
             with: [
                 'section'          => Section::where('id', $this->pdfData['dataPull']['section_id'])->first(),
+                'booths'           => $booths,
                 'dataPull'         => $this->pdfData['dataPull'],
                 'vendorSubmitData' => $this->pdfData['vendorSubmitData'],
                 'vendor'           => $this->pdfData['vendor'],

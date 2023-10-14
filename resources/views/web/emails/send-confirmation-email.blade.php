@@ -12,7 +12,8 @@ Here are the details of your registration:
 - Contact Number: {{ $vendor['phone_num'] }}
 - Email: {{ $vendor['email'] }}
 - Hall: {{ $section->hall->name }}
-- Section: {{ $section->name }}
+- Zone: {{ $section->name }}
+- Booths @foreach($booths as $booth) {{ implode(',', $booth) }} @endforeach
 
 Please note that the information provided during registration is preliminary and subject to verification. Our team will review your registration and contact you if any additional information or documents are required.
 
