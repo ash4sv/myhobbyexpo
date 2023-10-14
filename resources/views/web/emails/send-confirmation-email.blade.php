@@ -13,7 +13,7 @@ Here are the details of your registration:
 - Email: {{ $vendor['email'] }}
 - Hall: {{ $section->hall->name }}
 - Zone: {{ $section->name }}
-- Booths @foreach($booths as $booth) {{ implode(',', $booth) }} @endforeach
+- Booths @foreach($booths as $booth) {{ $booth->booth_number }}@if (!$loop->last), @endif @endforeach
 
 Please note that the information provided during registration is preliminary and subject to verification. Our team will review your registration and contact you if any additional information or documents are required.
 
