@@ -251,7 +251,7 @@
                 <span style="color:#ffffff;">TOTAL</span>
             </td>
             <td style="background-color:#2d353c; padding:15px;" colspan="2">
-                <h1 class="font-weight-600" style="font-size:35px; text-align: right; color: #ffffff;">@isset($dataPull['total']){{--{{ $dataPull['total'] }}--}}@endisset RM 2500.00</h1>
+                <h1 class="font-weight-600" style="font-size:35px; text-align: right; color: #ffffff;">@isset($dataPull['total']){{ $dataPull['total'] }}@endisset</h1>
             </td>
         </tr>
         <tr>
