@@ -15,6 +15,10 @@ class VendorController extends Controller
      */
     public function index()
     {
+        $title = 'Delete Permissions!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view($this->view.'index', [
             'vendors' => Vendor::all(),
         ]);
