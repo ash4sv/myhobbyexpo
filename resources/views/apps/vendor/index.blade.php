@@ -30,13 +30,12 @@
                 <thead>
                 <tr>
                     <th class="text-center" width="1%">No.</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th width="16.33333333%">Company</th>
+                    <th width="16.33333333%">Register of Company</th>
+                    <th width="16.33333333%">Person in Charge</th>
+                    <th width="16.33333333%">Phone Number</th>
+                    <th width="16.33333333%">Social Media</th>
+                    <th width="16.33333333%">Booth Register</th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -48,8 +47,9 @@
                     <td>{{ $vendor->roc_rob }}</td>
                     <td>{{ $vendor->pic_name }}</td>
                     <td>{{ $vendor->phone_num }}</td>
-                    <td>{{ $vendor->email }}</td>
                     <td>
+                        Email: {{ $vendor->email }} <br>
+                        Website: {{ $vendor->website }} <br>
                         @isset($vendor->social_media)
                             @php
                                 $socialMediaData = json_decode($vendor->social_media);
@@ -60,7 +60,11 @@
                             @endforeach
                         @endisset
                     </td>
-                    <td>{{ $vendor->website }}</td>
+                    <td>
+                        @foreach($vendor->registerBooth as $register)
+                            {{ $register->booth_number }}
+                        @endforeach
+                    </td>
                     <td>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         <a href="{{ route('apps.sales-agents.edit', $vendor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
