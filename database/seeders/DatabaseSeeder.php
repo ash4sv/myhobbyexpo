@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(BoothBoothNumberSeeder::class);
         /*$this->call(SalesAgentSeeder::class);*/
 //        $this->call(DbTruncateSeeder::class);
-        $this->call(BoothSpecialPriceSeeder::class);
+//        $this->call(BoothSpecialPriceSeeder::class);
     }
 }

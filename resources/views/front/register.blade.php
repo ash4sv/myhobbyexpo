@@ -89,9 +89,9 @@
                                     <form id="form-booth-fee-section" action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="text" name="section_id" value="{{ $section->id }}" readonly>
-                                        <input type="text" name="sub_total" id="sub_total" value="" readonly>
-                                        <input type="text" name="total" id="total" value="" readonly>
+                                        <input type="hidden" name="section_id" value="{{ $section->id }}" readonly>
+                                        <input type="hidden" name="sub_total" id="sub_total" value="" readonly>
+                                        <input type="hidden" name="total" id="total" value="" readonly>
 
                                         <h4 class="card-title">1. Lot / Booths</h4>
 
