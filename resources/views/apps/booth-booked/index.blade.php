@@ -80,22 +80,9 @@
                     <td>{{ $data->total }}</td>
                     <td></td>
                     <td nowrap="">
-                        <div class="btn-group btn-group-sm my-n1">
-                            {{--<a href="#" class="btn btn-default"><i class="fa fa-cogs"></i></a>--}}
-                            <a href="#" class="btn btn-indigo dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end">
-                                <a href="javascript:;" class="dropdown-item">Action 1</a>
-                                <a href="javascript:;" class="dropdown-item">Action 2</a>
-                                <a href="javascript:;" class="dropdown-item">Action 3</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" class="dropdown-item">Action 4</a>
-                            </div>
-                        </div>
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
-                        {{--<a href="{{ route('apps.exhibition.booth.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>--}}
+                        <a href="{{ route('apps.booth-booked.destroy', $data->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 @endforeach

@@ -53,6 +53,11 @@ class Booth extends Model
         return $this->belongsToMany(BoothNumber::class)->withTimestamps();
     }
 
+    public function specialPrice()
+    {
+        return $this->hasMany(BoothSpecialPrice::class, 'booth_id', 'id');
+    }
+
     /*public function getNormalPriceAttribute($value) {
     	$newform = "RM".$value;
     	return $newform;

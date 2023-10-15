@@ -89,9 +89,9 @@
                                     <form id="form-booth-fee-section" action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="hidden" name="section_id" value="{{ $section->id }}">
-                                        <input type="hidden" name="sub_total" id="sub_total" value="">
-                                        <input type="hidden" name="total" id="total" value="">
+                                        <input type="text" name="section_id" value="{{ $section->id }}" readonly>
+                                        <input type="text" name="sub_total" id="sub_total" value="" readonly>
+                                        <input type="text" name="total" id="total" value="" readonly>
 
                                         <h4 class="card-title">1. Lot / Booths</h4>
 
@@ -110,6 +110,11 @@
                                                         <a data-fancybox data-src="{{ asset('assets/images/booths-types.jpeg') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
                                                             <i class="fas fa-info-circle"></i>
                                                         </a>
+                                                        @if((request()->segment(2) == 'hall-a') && $section->id === 2)
+                                                        <a data-fancybox data-src="{{ asset('assets/images/mhx2023-poster-pricing-02-hobby-show-off.png') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,8 +335,7 @@
 
 @push('reg-script')
     <script>
-        $(document).ready(function(){
-
+        $(document).ready(function () {
             $('.hall-body, .dynamic-section').hide();
 
             @foreach($halls as $hall)$('#{{ $hall->slug }}_btn').click(function () {
@@ -446,7 +450,7 @@
                     if (countCheckedCheckboxes < valQtySelect) {
                         checkboxes.filter(':not(:checked)').removeAttr('disabled');
                     }
-                    // If a checkbox was unchecked, only enable that checkbo
+                    // If a checkbox was unchecked, only enable that checkbox
                     if (lastCheckedCheckbox && !lastCheckedCheckbox.is(':checked')) {
                         lastCheckedCheckbox.removeAttr('disabled');
                     }
@@ -472,9 +476,9 @@
                             // Loop through the response and create checkboxes
                             $.each(response[0], function (index, boothNumber) {
                                 var checkbox = $('<label class="booth-box boxed-check" for="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
-                                                    <input class="boxed-check-input" type="checkbox" name="booths[id][' + boothNumber.id + ']" id="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
-                                                    <div class="boxed-check-label">' + boothNumber.booth_number + '</div>\
-                                                </label>');
+                                    <input class="boxed-check-input" type="checkbox" name="booths[id][' + boothNumber.id + ']" id="btn_' + boothNumber.id + '_' + boothNumber.slug + '">\
+                                    <div class="boxed-check-label">' + boothNumber.booth_number + '</div>\
+                                </label>');
 
                                 // Append the checkbox to the container
                                 boothArea.append(checkbox);
@@ -483,19 +487,45 @@
 
                             // Update the booth price and price unit inputs
                             var priceDisplay = response[1]; // Price from the controller
-                            $('#booth_price').val('RM ' + parseFloat(priceDisplay).toFixed(2));
-                            $('#booth_price_unit').val(priceDisplay);
+                            var specialPriceData = response[2]; // Special Price from the controller
+                            var boothQtySelect = $("#booth_qty");
+
+                            // Add an event listener to update the price when the select changes
+                            if (specialPriceData.length > 0) {
+                                boothQtySelect.on('change', function () {
+                                    var valQtySelect = parseInt(boothQtySelect.val()) || 0;
+                                    priceDisplay = findSpecialPrice(valQtySelect, specialPriceData);
+
+                                    $('#booth_price').val('RM ' + parseFloat(priceDisplay).toFixed(2));
+                                    $('#booth_price_unit').val(priceDisplay);
+
+                                    calculatePrices();
+                                });
+                            } else {
+                                $('#booth_price').val('RM ' + parseFloat(priceDisplay).toFixed(2));
+                                $('#booth_price_unit').val(priceDisplay);
+                            }
+
                         },
                         error: function (error) {
                             /*console.error('Error:', error);*/
                         },
                     });
+
+                }
+
+                function findSpecialPrice(boothQty, specialPriceData) {
+                    for (var i = 0; i < specialPriceData.length; i++) {
+                        var priceRange = specialPriceData[i];
+                        if (boothQty >= priceRange.min && (priceRange.max === null || boothQty <= priceRange.max)) {
+                            return priceRange.price;
+                        }
+                    }
+                    return null; // No special price found
                 }
 
                 // Trigger the fetchBoothNumbers function when the page loads
-                $(document).ready(function () {
-                    fetchBoothNumbers(); // Call the function when the page loads
-                });
+                fetchBoothNumbers(); // Call the function when the page loads
 
                 // Listen for changes in the 'Booth Types' select
                 $('#boothTypes').change(function () {
@@ -531,13 +561,6 @@
                     },
                 });
             }
-
         });
-
     </script>
 @endpush
-
-
-
-
-

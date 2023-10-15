@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\BoothExhibitionBooked;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BoothExhibitionBookedController extends Controller
 {
@@ -17,6 +18,10 @@ class BoothExhibitionBookedController extends Controller
      */
     public function index()
     {
+        $title = 'Delete Booked!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view($this->view.'index', [
             'booths' => BoothExhibitionBooked::all(),
         ]);
@@ -67,6 +72,10 @@ class BoothExhibitionBookedController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $booked = BoothExhibitionBooked::findOrFail($id);
+        $booked->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->back();
     }
 }

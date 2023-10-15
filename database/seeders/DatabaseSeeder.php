@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Apps\Section;
 use Illuminate\Database\Seeder;
+use function Symfony\Component\Translation\t;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,5 +31,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(BoothBoothNumberSeeder::class);
         /*$this->call(SalesAgentSeeder::class);*/
 //        $this->call(DbTruncateSeeder::class);
+        $this->call(BoothSpecialPriceSeeder::class);
     }
 }

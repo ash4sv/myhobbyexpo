@@ -118,13 +118,14 @@ class RegisterController extends Controller
         $boothTypeId = $request->input('boothTypes');
         $booth = Booth::findOrFail($boothTypeId);
         $availableNumbers = $booth->boothNumbers()->where('status', 0)->get()->sortBy('booth_number');
+        $specialPrice = $booth->specialPrice;
 
         $priceDisplay = $booth->early_bird_price;
         if ($booth->early_bird_expiry_date < $currenttime){
             $priceDisplay = $booth->normal_price;
         }
 
-        return response()->json([$availableNumbers, $priceDisplay]);
+        return response()->json([$availableNumbers, $priceDisplay, $specialPrice]);
     }
 
     public function booth(Request $request)

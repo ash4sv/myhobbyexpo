@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('booth_special_prices', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('booth_id');
+            $table->foreign('booth_id')->on('booths')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('min')->nullable();
+            $table->integer('max')->nullable();
+            $table->double('price')->nullable();
+            $table->longText('description')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('booth_special_prices');
+    }
+};
