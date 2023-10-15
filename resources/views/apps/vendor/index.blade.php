@@ -48,17 +48,24 @@
                     <td>{{ $vendor->pic_name }}</td>
                     <td>{{ $vendor->phone_num }}</td>
                     <td>
-                        Email: {{ $vendor->email }} <br>
-                        Website: {{ $vendor->website }} <br>
-                        @isset($vendor->social_media)
-                            @php
-                                $socialMediaData = json_decode($vendor->social_media);
-                            @endphp
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Social Media and Contact Details
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Email: {{ $vendor->email }}</a></li>
+                                <li><a class="dropdown-item" href="#">Website: {{ $vendor->website }}</a></li>
+                                @isset($vendor->social_media)
+                                    @php
+                                        $socialMediaData = json_decode($vendor->social_media);
+                                    @endphp
 
-                            @foreach ($socialMediaData as $platform => $value)
-                                {{ $platform }}: <a href="{{ $value }}">{{ $value }}</a> <br>
-                            @endforeach
-                        @endisset
+                                    @foreach ($socialMediaData as $platform => $value)
+                                        <li><a class="dropdown-item" href="{{ $value }}">{{ $platform }}: {{ $value }}</a></li>
+                                    @endforeach
+                                @endisset
+                            </ul>
+                        </div>
                     </td>
                     <td>
                         @foreach($vendor->registerBooth as $register)
