@@ -253,7 +253,7 @@
 
     <div id="terms-conditions" style="display:none; width:100%; max-width:850px;" class="p-10px">
 
-        <iframe style="width:100%; height:80vh; min-height:700px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
+        <iframe style="width:100%; height:80vh; min-height:550px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
 
     </div>
 
