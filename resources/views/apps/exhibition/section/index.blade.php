@@ -41,11 +41,12 @@
                 <tr>
                     <th width="1%">No.</th>
                     <th width="1%"></th>
-                    <th width="10%"></th>
-                    <th>Hall</th>
-                    <th>Name Section</th>
-                    <th width="10%">Status</th>
-                    <th width="10%">Coming Soon</th>
+                    <th width="1%"></th>
+                    <th width="31.33333333%">Hall</th>
+                    <th width="31.33333333%">Name Section</th>
+                    <th width="10%">Booths</th>
+                    <th width="1%">Status</th>
+                    <th width="1%">Coming Soon</th>
                     <th width="1%">#</th>
                 </tr>
                 </thead>
@@ -66,11 +67,17 @@
                     <td>{{ $section->hall->name }}</td>
                     <td>{{ $section->name }}</td>
                     <td>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar bg-warning" style="width: {{ (count($section->numbers->where('status', 1)) / 100) * count($section->numbers) }}%%"></div>
+                        </div>
+                        <p class="mb-0">{{ count($section->numbers->where('status', 1)) }} / {{ count($section->numbers->where('status', 0)) }}</p>
+                    </td>
+                    <td class="text-center">
                         <span class="badge {{ $section->status == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $section->status == 1 ? 'Enable' : 'Disable' }}
                         </span>
                     </td>
-                    <td>
+                    <td class="text-center">
                         <span class="badge {{ $section->coming_soon == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $section->coming_soon == 1 ? 'Enable' : 'Disable' }}
                         </span>
