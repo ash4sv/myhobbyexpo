@@ -68,7 +68,7 @@
                     <td>{{ $section->name }}</td>
                     <td>
                         <div class="progress progress-striped">
-                            <div class="progress-bar bg-warning" style="width: {{ (count($section->numbers->where('status', 1)) / 100) * count($section->numbers) }}%%"></div>
+                            <div class="progress-bar bg-warning" style="width: {{ (count($section->numbers->where('status', 1)) / 100) * count($section->numbers) }}%"></div>
                         </div>
                         <p class="mb-0">{{ count($section->numbers->where('status', 1)) }} / {{ count($section->numbers->where('status', 0)) }}</p>
                     </td>
