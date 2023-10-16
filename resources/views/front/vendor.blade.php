@@ -233,6 +233,10 @@
                                 </div>--}}
                             </div>
 
+                            <div class="mb-3">
+                                <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a href="" data-fancybox data-src="#terms-conditions">Terms & Conditions</a> of the event.</p>
+                            </div>
+
                             <div class="mb-0 text-center">
                                 <button type="submit" class="btn btn-indigo btn-lg w-300px">
                                     Proceed to Pay
@@ -245,6 +249,12 @@
 
             </div>
         </div>
+    </div>
+
+    <div id="terms-conditions" style="display:none; width:100%; max-width:850px;" class="p-10px">
+
+        <embed style="width:100%; height:80vh; min-height:700px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" type="application/pdf">
+
     </div>
 
 @endsection

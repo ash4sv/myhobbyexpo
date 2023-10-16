@@ -177,9 +177,15 @@
 
 
             <div class="invoice-note">
-                * Make all cheques payable to [Your Company Name]<br/>
-                * Payment is due within 30 days<br/>
-                * If you have any questions concerning this invoice, contact [Name, Phone Number, Email]
+                Thank you for your interest in participating Malaysia Hobby Expo 2023: 5th Anniversary <br>
+                <br>
+                Notes:
+                <ul class="ps-3">
+                    <li>Upon confirmation of payment, no cancellation is allowed and deposit is non-refundable.</li>
+                    <li>Please bring this invoice during setup day.</li>
+                    <li>Others Terms & Conditions applied.</li>
+                </ul>
+                <h6>Let's Celebrate MHX2023 with Passion!</h6>
             </div>
 
 

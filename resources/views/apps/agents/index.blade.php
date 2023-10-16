@@ -28,9 +28,11 @@
 
             <div class="d-flex align-items-center mb-3">
                 <div class="me-auto">
+                    @can('agent-create')
                     <a href="{{ route('apps.agent.create') }}" class="btn btn-primary px-4">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Agent
                     </a>
+                    @endcan
                 </div>
             </div>
 
@@ -51,10 +53,16 @@
                     <td>{{ $agent->hall->name }}</td>
                     <td>{{ $agent->section->name }}</td>
                     <td>{{ $agent->name }}</td>
-                    <td>
+                    <td nowrap="">
+                        @can('agent-show')
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        @endcan
+                        @can('agent-edit')
                         <a href="{{ route('apps.agent.edit', $agent) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        @endcan
+                        @can('agent-delete')
                         <a href="{{ route('apps.agent.destroy', $agent->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

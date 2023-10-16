@@ -28,19 +28,24 @@
 
             <div class="d-flex align-items-center mb-3">
                 <div class="me-auto">
+                    @can('booth-number-create')
                     <a href="{{ route('apps.exhibition.booth-number.create') }}" class="btn btn-primary px-4">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Booth Number
                     </a>
-
                     <a href="#batchAddBooth" class="btn btn-indigo px-4" id="batchAddBoothNumber" data-bs-toggle="modal">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Add Booth Number
                     </a>
+                    @endcan
+                    @can('booth-number-edit')
                     <a href="#" class="btn btn-warning px-4" id="batchEditBoothNumber">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Edit Booth Number
                     </a>
+                    @endcan
+                    @can('booth-number-delete')
                     <a href="#" class="btn btn-danger px-4" id="batchDeleteSelectedRecord">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Batch Delete Booth Number
                     </a>
+                    @endcan
                 </div>
             </div>
 
@@ -104,9 +109,15 @@
                     </span>
                         </td>
                         <td>
+                            @can('booth-number-show')
                             {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                            @endcan
+                            @can('booth-number-edit')
                             <a href="{{ route('apps.exhibition.booth-number.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                            @endcan
+                            @can('booth-number-delete')
                             <a href="{{ route('apps.exhibition.booth-number.destroy', $booth->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

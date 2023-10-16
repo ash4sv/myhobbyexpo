@@ -80,9 +80,15 @@
                     <td>{{ $data->total }}</td>
                     <td></td>
                     <td nowrap="">
+                        @can('booth-booked-show')
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        @endcan
+                        @can('booth-booked-edit')
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
+                        @endcan
+                        @can('booth-booked-delete')
                         <a href="{{ route('apps.booth-booked.destroy', $data->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

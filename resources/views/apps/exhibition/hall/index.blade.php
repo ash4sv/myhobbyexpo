@@ -28,9 +28,11 @@
 
             <div class="d-flex align-items-center mb-3">
                 <div class="me-auto">
+                    @can('hall-create')
                     <a href="{{ route('apps.exhibition.hall.create') }}" class="btn btn-primary px-4">
                         <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Hall
                     </a>
+                    @endcan
                 </div>
             </div>
 
@@ -68,9 +70,15 @@
                         </span>
                     </td>
                     <td>
+                        @can('hall-show')
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        @endcan
+                        @can('hall-edit')
                         <a href="{{ route('apps.exhibition.hall.edit', $hall) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        @endcan
+                        @can('hall-delete')
                         <a href="{{ route('apps.exhibition.hall.destroy', $hall->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach
