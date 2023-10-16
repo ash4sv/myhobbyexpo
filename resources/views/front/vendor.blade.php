@@ -251,9 +251,9 @@
         </div>
     </div>
 
-    <div id="terms-conditions" style="display:none; width:100%; max-width:850px;" class="p-10px">
+    <div id="terms-conditions" style="display:none; width:100%; max-width:850px; height: 100vh;" class="p-10px">
 
-        <iframe style="width:100%; height:80vh; min-height:550px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
+        <iframe style="width:100%; height:80vh; min-height:500px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
 
     </div>
 
@@ -319,6 +319,8 @@
                     error.appendTo(element.closest(".form-control").siblings(".invalid-feedback"));
                 }
             });
+            // ======
+
         });
     </script>
 @endpush
