@@ -234,7 +234,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a href="" data-fancybox data-src="#terms-conditions">Terms & Conditions</a> of the event.</p>
+                                <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a data-fancybox data-type="pdf" href="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}">Terms & Conditions</a> of the event.</p>
                             </div>
 
                             <div class="mb-0 text-center">
