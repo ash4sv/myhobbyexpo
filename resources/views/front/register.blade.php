@@ -89,9 +89,9 @@
                                     <form id="form-booth-fee-section" action="{{ route('front.booth') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="hidden" name="section_id" value="{{ $section->id }}" readonly>
-                                        <input type="hidden" name="sub_total" id="sub_total" value="" readonly>
-                                        <input type="hidden" name="total" id="total" value="" readonly>
+                                        <input type="text" name="section_id" value="{{ $section->id }}" readonly>
+                                        <input type="text" name="sub_total" id="sub_total" value="" readonly>
+                                        <input type="text" name="total" id="total" value="" readonly>
 
                                         <h4 class="card-title">1. Lot / Booths</h4>
 
@@ -107,11 +107,12 @@
                                                                 <option value="{{ $booth->id }}">{{ $booth->booth_type }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <a data-fancybox data-src="{{ asset('assets/images/booths-types.jpeg') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
-                                                            <i class="fas fa-info-circle"></i>
-                                                        </a>
                                                         @if((request()->segment(2) == 'hall-a') && $section->id === 2)
                                                         <a data-fancybox data-src="{{ asset('assets/images/mhx2023-poster-pricing-02-hobby-show-off.png') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </a>
+                                                        @else
+                                                        <a data-fancybox data-src="{{ asset('assets/images/booths-types.jpeg') }}" data-caption="Booths Type" href="" class="btn btn-outline-secondary">
                                                             <i class="fas fa-info-circle"></i>
                                                         </a>
                                                         @endif
@@ -424,6 +425,7 @@
 
                 $('#sub_total').val('RM ' + subTotal.toFixed(2));
                 $('#total').val('RM ' + total.toFixed(2));
+                console.log('calculatePrices')
             }
 
             $('#booth_qty, #add_table, #add_chair, #add_sso, #add_sso_15amp, #add_steel_barricade, #add_shell_scheme_barricade').change(function () {
@@ -456,6 +458,7 @@
                     }
                     lastCheckedCheckbox = $(this);
                 });
+                console.log('checkBox');
             }
 
             checkBox();
@@ -499,6 +502,8 @@
                                     $('#booth_price').val('RM ' + parseFloat(priceDisplay).toFixed(2));
                                     $('#booth_price_unit').val(priceDisplay);
 
+                                    console.log('specialPriceData');
+
                                     calculatePrices();
                                 });
                             } else {
@@ -531,6 +536,8 @@
                 $('#boothTypes').change(function () {
                     fetchBoothNumbers(); // Call the function when the select changes
                 });
+
+                console.log('boothTypeDependency');
             }
 
             boothTypeDependency();
