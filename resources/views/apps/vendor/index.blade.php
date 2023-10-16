@@ -69,7 +69,7 @@
                     </td>
                     <td>
                         @foreach($vendor->registerBooth as $register)
-                            {{ $register->booth_number }}
+                            {{ $register->booth_number }} @if (!$loop->last), @endif
                         @endforeach
                     </td>
                     <td nowrap="">
