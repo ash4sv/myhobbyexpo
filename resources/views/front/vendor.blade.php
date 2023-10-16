@@ -251,10 +251,9 @@
         </div>
     </div>
 
-    <div id="terms-conditions" style="display:none; width:100%; max-width:850px; height: 100vh;" class="p-10px">
-
-        <iframe style="width:100%; height:80vh; min-height:500px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
-
+    <div id="terms-conditions" style="display:none;" class="p-0">
+        {{--<iframe style="width:100%; height:80vh; min-height:500px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>--}}
+        <div id="pdfviewer"></div>
     </div>
 
 @endsection
@@ -320,7 +319,11 @@
                 }
             });
             // ======
-
+            const options = {
+                /*width: 960,
+                height: 650,*/
+            };
+            $('#pdfviewer').pdfViewer('{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}', options);
         });
     </script>
 @endpush

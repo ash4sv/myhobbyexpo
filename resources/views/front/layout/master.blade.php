@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/boxed-check/css/boxed-check.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/powerful-pdf-viewer/css/pdfviewer.jquery.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
@@ -40,7 +41,9 @@
     <script type="text/javascript" src="{{ asset('assets/plugins/parsleyjs/dist/parsley.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/fancyapps/fancybox.umd.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/jquery-validate/jquery-validate.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/powerful-pdf-viewer/js/pdfviewer.jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}"></script>
     @include('sweetalert::alert')
     <script>
         $(".default-select2").select2();
