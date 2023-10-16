@@ -234,7 +234,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a data-fancybox data-type="pdf" href="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}">Terms & Conditions</a> of the event.</p>
+                                <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a data-fancybox data-src="#terms-conditions" href="">Terms & Conditions</a> of the event.</p>
                             </div>
 
                             <div class="mb-0 text-center">
@@ -253,7 +253,7 @@
 
     <div id="terms-conditions" style="display:none; width:100%; max-width:850px;" class="p-10px">
 
-        <embed style="width:100%; height:80vh; min-height:700px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" type="application/pdf">
+        <iframe style="width:100%; height:80vh; min-height:700px;" src="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}" frameborder="0"></iframe>
 
     </div>
 
