@@ -303,7 +303,7 @@ class RegisterController extends Controller
         $booths = [];
 
         if (!empty($boothIds)) {
-            $booths = BoothNumber::whereBetween('id', [$boothIds[0], end($boothIds)])->get();
+            $booths = BoothNumber::whereIn('id', $boothIds)->get();
         }
 
         /*Log::info('================');
