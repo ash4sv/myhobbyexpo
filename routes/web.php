@@ -15,6 +15,7 @@ use App\Http\Controllers\Apps\RolesController;
 use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\VendorController;
+use App\Http\Controllers\Front\ParticipantController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,16 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         Route::get('invoice', function (){
             return view('front.confirmation-email');
         });
+    });
+});
+
+Route::domain('participant.' . env('APP_URL'))->group(function (){
+    Route::group([
+        'namespace' => 'Front',
+        'as'        => 'participant.',
+    ], function (){
+        Route::get('register', [ParticipantController::class, 'formView'])->name('form');
+
     });
 });
 
@@ -97,6 +108,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::get('selling-vendor', [AppsController::class, 'sellingVendor'])->name('sellingvendor');
                Route::get('hobby-activity', [AppsController::class, 'hobbyActivity'])->name('hobbyactivity');
                Route::get('hobby-showoff', [AppsController::class, 'hobbyShowoff'])->name('hobbyshowoff');
+               Route::get('sponsorship', [AppsController::class, 'sponsorship'])->name('sponsorship');
            });
            Route::group([
                'prefix'  => 'acl',

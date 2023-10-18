@@ -87,6 +87,16 @@ class AppsController extends Controller
         ]);
     }
 
+    public function sponsorship()
+    {
+        $sponsorships = PreRegistration::where('become_sponsors', '=', 1)->get();
+
+        return view($this->view.'index', [
+            'registers' => $sponsorships,
+            'title' => 'Hobby Show-off',
+        ]);
+    }
+
     public function routeList()
     {
         $this->authorize('route-access');

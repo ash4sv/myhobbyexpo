@@ -79,6 +79,11 @@
                             <div class="menu-text">Hobby Show Off</div>
                         </a>
                     </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'sponsorship') ? 'active' : '' }}">
+                        <a href="{{ route('apps.preregister.sponsorship') }}" class="menu-link">
+                            <div class="menu-text">Sponsorship</div>
+                        </a>
+                    </div>
                 </div>
             </div>
             @endcan
@@ -159,23 +164,6 @@
                 </div>
             </div>
             @endcan
-
-            {{--<div class="menu-item has-sub">
-                <a href="javascript:;" class="menu-link">
-                    <div class="menu-icon">
-                        <i class="fa fa-align-left"></i>
-                    </div>
-                    <div class="menu-text">Events Exhibitor</div>
-                    <div class="menu-caret"></div>
-                </a>
-                <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="{{ route('apps.events.exhibit.index') }}" class="menu-link">
-                            <div class="menu-text">Type of Exhibit</div>
-                        </a>
-                    </div>
-                </div>
-            </div>--}}
 
             @can('system-access')
             <div class="menu-header">Systems</div>
