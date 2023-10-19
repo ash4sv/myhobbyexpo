@@ -21,13 +21,34 @@
         <div id="header" class="header navbar navbar-transparent navbar-fixed-top navbar-expand-lg">
             <div class="container">
 
-                <a href="{{ url('/') }}" class="navbar-brand py-3">
+                <a href="{{ url('/') }}" class="navbar-brand py-3 pe-sm-3 pe-0 me-sm-3 me-0">
                     <img src="{{ asset('assets/images/logo-nav.png') }}" alt="" class="img-fluid h-80px" style="max-height:500px;">
                     {{--<span class="brand-logo"></span>--}}
                     {{--<span class="brand-text">
                         <span class="text-theme">Color</span> Admin
                     </span>--}}
                 </a>
+
+                <div class="mx-sm-auto mx-0">
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <span class="number" id="days"></span>
+                            <h4>Days</h4>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="hours"></span>
+                            <h4>Hours</h4>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="minutes"></span>
+                            <h4>Minutes</h4>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="seconds"></span>
+                            <h4>Seconds</h4>
+                        </div>
+                    </div>
+                </div>
 
                 <button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#header-navbar">
                     <span class="icon-bar"></span>
@@ -882,6 +903,68 @@
     @include('sweetalert::alert')
 
     <script>
+        // Function to calculate the remaining time until the end date
+        function calculateCountdown(endDate) {
+            // Get the current date
+            var currentDate = new Date();
+
+            // Calculate the difference in milliseconds between the current date and the end date
+            var timeRemaining = endDate.getTime() - currentDate.getTime();
+
+            // Calculate the remaining days, hours, minutes, and seconds
+            var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Return an object with the remaining time components
+            return {
+                days: days,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
+            };
+        }
+
+        // Function to update the countdown display
+        function updateCountdownDisplay(countdown) {
+            // Update the HTML elements with the countdown values
+            $("#days").text(countdown.days);
+            $("#hours").text(countdown.hours);
+            $("#minutes").text(countdown.minutes);
+            $("#seconds").text(countdown.seconds);
+        }
+
+        // Function to start the countdown
+        function startCountdown() {
+            // Set the end date (20th July 2023)
+            var endDate = new Date("Dec 20, 2023 10:00:00");
+
+            // Calculate the initial countdown values
+            var initialCountdown = calculateCountdown(endDate);
+
+            // Update the countdown display
+            updateCountdownDisplay(initialCountdown);
+
+            // Start the interval to update the countdown every second
+            setInterval(function() {
+                // Calculate the current countdown values
+                var currentCountdown = calculateCountdown(endDate);
+
+                // Update the countdown display
+                updateCountdownDisplay(currentCountdown);
+            }, 1000);
+        }
+
+        // Call the startCountdown function when the page is ready
+        $(document).ready(function() {
+            startCountdown();
+            setTimeout(function() {
+                // Show the wrap-container after a delay of 3 seconds (3000 milliseconds)
+                $(".wrap-container").fadeIn();
+            }, 2000);
+        });
+
         $('.accordion-toggle').click(function(e) {
             e.preventDefault();
 
