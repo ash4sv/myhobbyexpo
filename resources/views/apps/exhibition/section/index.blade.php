@@ -69,7 +69,7 @@
                     <td>
                         @if(count($section->numbers) > 0)
                             <div class="progress progress-striped">
-                                <div class="progress-bar bg-warning" style="width:{{ (count($section->numbers->where('status', 1)) / count($section->numbers)) * 100 }}%%"></div>
+                                <div class="progress-bar bg-warning" style="width:{{ (count($section->numbers->where('status', 1)) / count($section->numbers)) * 100 }}%">{{ (count($section->numbers->where('status', 1)) / count($section->numbers)) * 100 }}%</div>
                             </div>
                         @endif
                         <p class="mb-0">{{ count($section->numbers->where('status', 1)) }} / {{ count($section->numbers) }}</p>
