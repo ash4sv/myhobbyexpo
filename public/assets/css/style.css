@@ -230,6 +230,12 @@ ul.custom-accordion li a.accordion-toggle:hover {
     }
 }
 
+.header-bg-image {
+    background-repeat: repeat-x;
+    background-size: auto 30px;
+    background-position-y:bottom;
+}
+
 .extra-box {
     position: absolute;
     top:50%;
@@ -249,9 +255,56 @@ ul.custom-accordion li a.accordion-toggle:hover {
     height: 100%;
     width: 130%;
     top:50%;
-    right: -1rem;
+    right:0;
     -webkit-transform:translateY(-50%);
     -moz-transform:translateY(-50%);
     -ms-transform:translateY(-50%);
     transform:translateY(-50%);
+}
+
+@media only screen and (max-width: 600px) {
+    .extra-box {
+        position: absolute;
+        top:auto;
+        bottom:0;
+        right:0;
+        left:0;
+        -webkit-transform:translateY(0%);
+        -moz-transform:translateY(0%);
+        -ms-transform:translateY(0%);
+        transform:translateY(0%);
+    }
+    .extra-box:before {
+        height: 140%;
+        width: calc(100% + 2rem);
+        top:auto;
+        bottom:0;
+        right: -1rem;
+        left: -1rem;
+        -webkit-transform:translateY(0%);
+        -moz-transform:translateY(0%);
+        -ms-transform:translateY(0%);
+        transform:translateY(0%);
+    }
+}
+
+.z-9 {
+    z-index: 9 !important;
+}
+
+.shine {
+    position: relative;
+    background: linear-gradient(to right, transparent, #FFCB00, transparent); /* Set the gradient background color to #FFCB00 */
+    background-color: #EC3237;
+    background-size: 200% 100%;
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 }

@@ -1,5 +1,7 @@
 @extends('front.layout.mini4wp-master')
 
+@section('title-mini4wd', 'Racer Details')
+
 @section('page-minicup')
 <div class="container p-sm-5 p-3">
     <div class="row">
@@ -7,6 +9,8 @@
 
             <div class="card">
                 <div class="card-body">
+
+                    <input type="hidden" name="category" value="{{ $category['category'] }}">
 
                     <div class="mb-3">
                         <label for="" class="form-label">Full Name</label>

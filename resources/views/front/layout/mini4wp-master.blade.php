@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>MINI 4WD MHX CUP 2023 | Welcome</title>
+    <title>MINI 4WD MHX CUP 2023 | @yield('title-mini4wd')</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content name="description" />
     <meta content name="author" />
@@ -17,9 +17,9 @@
 <body>
 
 <div class="bg-mhx-grey">
-    <div style="background-image: url({{ asset('assets/images/mini-4wd/finish-flag@4x.png') }}); background-repeat: repeat-x; background-size: auto 30px; background-position-y:bottom;">
-        <div class="container p-sm-5 p-3 py-4">
-            <a href="{{ route('mhxcup.register') }}">
+    <div class="header-bg-image" style="background-image: url({{ asset('assets/images/mini-4wd/finish-flag@4x.png') }});">
+        <div class="container p-sm-5 px-3 pt-3 pb-5">
+            <a href="{{ route('mhxcup.welcome') }}">
                 <img src="{{ asset('assets/images/mini-4wd/mini-4wd-mhxcup@4x.png') }}" alt="" class="img-fluid d-block mx-auto">
             </a>
         </div>
@@ -28,7 +28,7 @@
 
 @yield('page-minicup')
 
-<div class="bg-mhx-red">
+<div class="bg-mhx-red pt-sm-0 pt-5 pb-sm-0 pb-5">
     <div class="container p-sm-5">
         <div class="row g-5 align-items-center">
             <div class="col-md-8">
@@ -48,6 +48,18 @@
 <script type="text/javascript" src="{{ asset('assets/js/blog/app.min.js') }}"></script>
 
 @stack('onpagescript')
+
+@production
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL2B81V05J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FL2B81V05J');
+    </script>
+@endproduction
 
 </body>
 </html>

@@ -100,7 +100,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::resource('agent', AgentController::class);
-           Route::resource('vendor', VendorController::class);
+           Route::resource('vendors', VendorController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'

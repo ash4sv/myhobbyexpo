@@ -13,13 +13,14 @@ class MHXCupController extends Controller
     {
         return view($this->view.'welcome');
     }
+
     public function register()
     {
         return view($this->view.'register');
     }
+
     public function categoryPost(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'category' => 'required',
         ]);
@@ -28,13 +29,17 @@ class MHXCupController extends Controller
         return response()->json(['message' => 'Category submitted successfully', 'redirect' => route('mhxcup.registerFrom')]);
     }
 
-    public function registerFrom()
+    public function registerFrom(Request $request)
     {
-
-        return view($this->view.'racer-register');
+        $category = $request->session()->only(['category']);
+        return view($this->view.'racer-register', [
+            'category' => $category
+        ]);
     }
+
     public function registerPost(Request $request)
     {
+
 
     }
 }

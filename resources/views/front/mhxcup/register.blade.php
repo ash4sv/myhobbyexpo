@@ -1,5 +1,7 @@
 @extends('front.layout.mini4wp-master')
 
+@section('title-mini4wd', 'Register Your Interest')
+
 @section('page-minicup')
 <div class="container p-sm-5 p-3">
     <div class="card-group">
