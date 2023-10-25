@@ -77,10 +77,10 @@
                         {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
                         @endcan
                         @can('vendor-edit')
-                        <a href="{{ route('apps.sales-agents.edit', $vendor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.vendor.edit', $vendor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
                         @endcan
                         @can('vendor-delete')
-                        <a href="{{ route('apps.sales-agents.destroy', $vendor->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{{ route('apps.vendor.destroy', $vendor->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
                         @endcan
                     </td>
                 </tr>

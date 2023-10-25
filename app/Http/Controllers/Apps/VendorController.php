@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\Vendor;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class VendorController extends Controller
 {
     protected $view = 'apps.vendor.';
+    protected string $route = 'apps.vendor.';
 
     /**
      * Display a listing of the resource.
@@ -69,6 +71,10 @@ class VendorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $vendor = Vendor::findOrFail($id);
+        $vendor->delete();
+
+        Alert::warning('Successfully deleted!', 'Record has been deleted successfully');
+        return redirect()->route($this->route.'index');
     }
 }

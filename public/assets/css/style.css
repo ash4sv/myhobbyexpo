@@ -5,6 +5,26 @@ body.myhobbyexpo {
     background-size: cover;
 }
 
+.font-weight-300 {
+    font-weight:300;
+}
+.font-weight-400 {
+    font-weight:400;
+}
+.font-weight-600 {
+    font-weight:600;
+}
+.font-weight-700 {
+    font-weight:700;
+}
+
+.text-mhx-blue {
+    color: #003398;
+}
+.text-mhx-red {
+    color: #EC3237;
+}
+
 .bg-white-08 {
     background-color: rgba(255, 255, 255, .8);
 }
@@ -30,6 +50,19 @@ body.myhobbyexpo {
     background-color: rgba(255, 255, 255, .1);
 }
 
+.bg-mhx-orange {
+    background-color: #FFCB00;
+}
+.bg-mhx-red {
+    background-color: #EC3237;
+}
+.bg-mhx-blue {
+    background-color: #003398;
+}
+.bg-mhx-grey {
+    background-color: #E5E5E5;
+}
+
 .booth-area {
     display: flex;
     flex-wrap: wrap;
@@ -42,6 +75,7 @@ body.myhobbyexpo {
 }
 :root {
     --booth-size: 80px;
+    --thirt-size: 135px;
 }
 .booth-area.boxed-check-group .boxed-check .boxed-check-label {
     padding:0rem;
@@ -51,6 +85,28 @@ body.myhobbyexpo {
     font-weight: 700;
     text-align: center;
 }
+
+.tshirt-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.tshirt-box {
+    box-sizing: content-box;
+    margin-left: .25rem;
+    margin-bottom: .25rem;
+}
+.tshirt-area.boxed-check-group .boxed-check .boxed-check-label {
+    padding:0rem;
+    width: var(--thirt-size);
+    height: var(--thirt-size);
+    line-height: 130px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+
 /*========*/
 .boxed-check-group.boxed-check-indigo .boxed-check .boxed-check-input:checked + .boxed-check-label *{
     color: #ffffff;
@@ -172,4 +228,30 @@ ul.custom-accordion li a.accordion-toggle:hover {
     .countdown-item .number {
         font-size: .9rem;
     }
+}
+
+.extra-box {
+    position: absolute;
+    top:50%;
+    right:0;
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    transform:translateY(-50%);
+}
+
+.extra-box:before {
+    content:'';
+    background-color: #E5E5E5;
+    border-radius: var(--bs-border-radius-2xl) !important;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 130%;
+    top:50%;
+    right: -1rem;
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    transform:translateY(-50%);
 }

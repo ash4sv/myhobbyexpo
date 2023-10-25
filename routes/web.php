@@ -15,6 +15,7 @@ use App\Http\Controllers\Apps\RolesController;
 use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\VendorController;
+use App\Http\Controllers\Front\MHXCupController;
 use App\Http\Controllers\Front\ParticipantController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
@@ -68,6 +69,19 @@ Route::domain('participant.' . env('APP_URL'))->group(function (){
     });
 });
 
+Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
+    Route::group([
+        'namespace' => 'Front',
+        'as'        => 'mhxcup.',
+    ], function (){
+        Route::get('welcome', [MHXCupController::class, 'welcome'])->name('welcome');
+        Route::get('register', [MHXCupController::class, 'register'])->name('register');
+        Route::post('category', [MHXCupController::class, 'categoryPost'])->name('categoryPost');
+        Route::get('racer-register', [MHXCupController::class, 'registerFrom'])->name('registerFrom');
+        Route::post('register', [MHXCupController::class, 'registerPost'])->name('registerPost');
+    });
+});
+
 Route::domain('pre-register.' . env('APP_URL'))->group(function (){
     Route::get('join', [RegisterController::class, 'preRegister'])->name('preregister');
     Route::post('join', [RegisterController::class, 'preRegSubmit'])->name('preregsubmit');
@@ -86,7 +100,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('route', [AppsController::class, 'routeList'])->name('route');
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::resource('agent', AgentController::class);
-           Route::resource('sales-agents', VendorController::class);
+           Route::resource('vendor', VendorController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'

@@ -99,8 +99,8 @@
             </div>
             @endcan
             @can('vendor-access')
-            <div class="menu-item {{ (request()->segment(1) == 'sales-agents') ? 'active' : '' }}">
-                <a href="{{ route('apps.sales-agents.index') }}" class="menu-link">
+            <div class="menu-item {{ (request()->segment(1) == 'vendor') ? 'active' : '' }}">
+                <a href="{{ route('apps.vendor.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-users"></i>
                     </div>
