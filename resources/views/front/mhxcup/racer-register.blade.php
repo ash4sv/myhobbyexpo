@@ -242,8 +242,9 @@
                 var selectedQuantity = parseInt($(this).val()); // Convert to integer
                 var nicknameInput = $("[name='nickname']");
                 var nickname = nicknameInput.val().toUpperCase();
-                var lastNum = {{ $lastNum->register }};
                 var category = $("[name='category']").val();
+                var lastNum = {{ $lastNum->register ?? 0 }}
+
 
                 // Clear the existing merchandise options
                 $("#merchandise_").empty();
@@ -280,7 +281,8 @@
                         var paddedNumber = ("00" + (i + 1 + lastNum)).slice(-3); // Ensure it has at least 3 digits
                         var separator = (i === selectedQuantity - 1) ? '.' : ',';
 
-                        merchandiseOptions += '<span for="merchandise_' + i + '" class="">' + nickname + paddedNumber + '</span>' + separator + ' ';
+                        merchandiseOptions += '<span for="merchandise_' + i + '" class="">' + nickname + paddedNumber + '</span>' +
+                            '<input type="hidden" name="runNum[' + i + ']" value="' + paddedNumber + '">' + separator + ' ';
                     }
                     $("#merchandise_").append(merchandiseOptions);
                 } else {

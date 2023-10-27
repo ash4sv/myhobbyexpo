@@ -9,6 +9,7 @@ use App\Models\Apps\MHXCup\RacerRegister;
 use App\Services\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -53,6 +54,8 @@ class MHXCupController extends Controller
 
     public function registerPost(MHXCupRequest $request)
     {
+        Log::info($request->all());
+
         if ($request->hasFile('receipt')) {
             $receipt = ImageUploader::uploadSingleImage($request->file('receipt'), 'assets/upload/', 'receipt_'.$request->identification_card_number);;
         } else {
@@ -74,36 +77,40 @@ class MHXCupController extends Controller
         $racer->approval                  = false;
         $racer->save();
 
-        if (!empty($request->merchandises)) {
+        if ($request->registration > 0) {
             $lastNum = RacerNickNameRegister::orderBy('id', 'DESC')->first();
             $number = 1;
             $uniq = Str::random(4);
 
-            $runNum = $request->runNum;
+            $runNum = $request->runNum; // Assuming "runNum" is in your request
+            $merchandises = $request->merchandises ?? [];
 
-            foreach ($request->merchandises as $merchandise) {
-                if ($lastNum) {
-                    $number = $lastNum->register + 1;
+            // Check if both arrays are not empty before combining
+            if (!empty($runNum)) {
+                // Merge the arrays to ensure that "runNum" is processed
+                $combinedData = array_map(null, $runNum, $merchandises);
+
+                foreach ($combinedData as $data) {
+                    $runNumber = $data[0];
+                    $merchandise = $data[1];
+
+                    if ($lastNum) {
+                        $number = $lastNum->register + 1;
+                    }
+
+                    $nickname = new RacerNickNameRegister();
+                    $nickname->racer_id  = $racer->id;
+                    $nickname->uniq      = $uniq;
+                    $nickname->nickname  = $racer->nickname;
+                    $nickname->register  = $number;
+                    $nickname->shirt_zie = $merchandise;
+                    $nickname->save();
+
+                    $lastNum = $nickname;
                 }
-
-                if (count($runNum) > 0) {
-                    $runNumber = array_shift($runNum); // Get the next runNum value
-                } else {
-                    // Handle the case where there are no more "runNum" values
-                    $runNumber = $lastNum ? $lastNum->register + 1 : 1;
-                }
-
-                $nickname = new RacerNickNameRegister();
-                $nickname->racer_id  = $racer->id;
-                $nickname->uniq      = $uniq;
-                $nickname->nickname  = $racer->nickname;
-                $nickname->register  = $runNumber;
-                $nickname->shirt_zie = $merchandise;
-                $nickname->save();
-
-                $lastNum = $nickname;
             }
         }
+
 
         Alert::success('Successfully send!', 'Your submission will be review, the email will be send to your registerd email');
         return redirect()->route('mhxcup.registerFrom');
