@@ -89,22 +89,22 @@
             </div>
         </div>
 
-{{--        <div id="about" class="content" data-scrollview="true">--}}
-{{--            <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">--}}
-{{--                <div class="row g-5 align-items-center">--}}
-{{--                    <div class="col-md-8">--}}
-{{--                        <img src="{{ asset('assets/images/mini-4wd/mini-4wd-mhxcup@4x.png') }}" alt="" class="img-fluid d-block mx-auto">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-md-4">--}}
-{{--                        <a href="{{ route('mhxcup.welcome') }}">--}}
-{{--                            <div class="py-sm-4 px-sm-4 py-3 px-3 rounded-pill mb-3 bg-mhx-red text-sm-center text-center shine shadow-lg">--}}
-{{--                                <h3 class="text-white text-uppercase font-weight-700 my-0">Read More!!!</h3>--}}
-{{--                            </div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div id="about" class="content" data-scrollview="true">
+            <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
+                <div class="row g-5 align-items-center">
+                    <div class="col-md-8">
+                        <img src="{{ asset('assets/images/mini-4wd/mini-4wd-mhxcup@4x.png') }}" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{ route('mhxcup.welcome') }}">
+                            <div class="py-sm-4 px-sm-4 py-3 px-3 rounded-pill mb-3 bg-mhx-red text-sm-center text-center shine shadow-lg">
+                                <h3 class="text-white text-uppercase font-weight-700 my-0">Read More!!!</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="about" class="content" data-scrollview="true">
             <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
