@@ -17,7 +17,7 @@
                 <input type="hidden" name="price_category" value="200">
             </div>
             <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
-                Rule & Regulation
+                Rules & Regulations
             </a>
         </div>
         <div class="card border-0">
@@ -30,7 +30,7 @@
                 <input type="hidden" name="price_category" value="120">
             </div>
             <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
-                Rule & Regulation
+                Rules & Regulations
             </a>
         </div>
         <div class="card border-0">
@@ -43,7 +43,7 @@
                 <input type="hidden" name="price_category" value="35">
             </div>
             <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
-                Rule & Regulation
+                Rules & Regulations
             </a>
         </div>
     </div>

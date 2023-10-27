@@ -57,7 +57,7 @@
 
                             <div class="mb-3">
                                 <label for="nickname" class="form-label">Nickname <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="" name="nickname" value="{{ old('nickname') }}">
+                                <input type="text" class="form-control text-uppercase" id="" name="nickname" value="{{ old('nickname') }}" maxlength="7">
                                 <div id="" class="form-text">
                                     Not more than 5 character, alphabet only, to be use as Called Up name.
                                 </div>
