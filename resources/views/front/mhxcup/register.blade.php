@@ -11,6 +11,7 @@
                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">SEMI-TECH</h3>
                 </a>
                 <input type="hidden" name="category" value="semi-tech">
+                <input type="hidden" name="price_category" value="200">
             </div>
         </div>
         <div class="card">
@@ -19,6 +20,7 @@
                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">B-MAX</h3>
                 </a>
                 <input type="hidden" name="category" value="b-max">
+                <input type="hidden" name="price_category" value="120">
             </div>
         </div>
         <div class="card">
@@ -27,6 +29,7 @@
                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>
                 </a>
                 <input type="hidden" name="category" value="stock-car">
+                <input type="hidden" name="price_category" value="35">
             </div>
         </div>
     </div>
@@ -39,6 +42,7 @@
         $('.category-select').on('click', function() {
             event.preventDefault(); // Prevent the default behavior of the anchor tag
             var category = $(this).siblings('input[name="category"]').val(); // Get the category value
+            var price_category = $(this).siblings('input[name="price_category"]').val(); // Get the category value
 
             // Make an AJAX POST request
             $.ajax({
@@ -46,7 +50,8 @@
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    category: category
+                    category: category,
+                    price_category: price_category
                 },
                 success: function(response) {
                     console.log(response.message);

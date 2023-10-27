@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\MHXCup\RacerNickNameRegister;
+use App\Models\Apps\MHXCup\RacerRegister;
+use App\Services\ImageUploader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MHXCupController extends Controller
 {
@@ -22,16 +27,21 @@ class MHXCupController extends Controller
     public function categoryPost(Request $request)
     {
         $request->validate([
-            'category' => 'required',
+            'category'       => 'required',
+            'price_category' => 'required'
         ]);
         $category = $request->input('category');
-        $request->session()->put('category', $category);
+        $price_category = $request->input('price_category');
+        $request->session()->put([
+            'category'       => $category,
+            'price_category' => $price_category
+        ]);
         return response()->json(['message' => 'Category submitted successfully', 'redirect' => route('mhxcup.registerFrom')]);
     }
 
     public function registerFrom(Request $request)
     {
-        $category = $request->session()->only(['category']);
+        $category = $request->session()->only(['category', 'price_category']);
         return view($this->view.'racer-register', [
             'category' => $category
         ]);
@@ -39,7 +49,51 @@ class MHXCupController extends Controller
 
     public function registerPost(Request $request)
     {
+        if ($request->hasFile('receipt')) {
+            $receipt = ImageUploader::uploadSingleImage($request->file('receipt'), 'assets/upload/', 'receipt_'.$request->identification_card_number);;
+        } else {
+            $receipt = null;
+        }
 
+        $racer = new RacerRegister();
+        $racer->category                  = $request->category;
+        $racer->price_category            = $request->price_category;
+        $racer->total_cost                = $request->total_cost;
+        $racer->full_name                 = $request->full_name;
+        $racer->identification_card_number = $request->identification_card_number;
+        $racer->phone_number              = $request->phone_number;
+        $racer->email                     = $request->email;
+        $racer->nickname                  = $request->nickname;
+        $racer->team_group                = $request->team_group;
+        $racer->registration              = $request->registration;
+        $racer->receipt                   = $receipt;
+        $racer->approval                  = false;
+        $racer->save();
 
+        if ($request->registration > 0) {
+            $lastNum = RacerNickNameRegister::orderBy('id', 'DESC')->first();
+            $number = 1;
+            $uniq = Str::random(4);
+
+            foreach ($request->merchandises as $merchandise) {
+                if ($lastNum) {
+                    $number = $lastNum->register + 1;
+                }
+
+                $nickname = new RacerNickNameRegister();
+                $nickname->racer_id  = $racer->id;
+                $nickname->uniq      = $uniq;
+                $nickname->nickname  = $racer->nickname;
+                $nickname->register  = $number;
+                $nickname->shirt_zie = $merchandise;
+                $nickname->save();
+
+                $lastNum = $nickname;
+                $number++; // Increment the number for the next iteration
+            }
+        }
+
+        Alert::success('Successfully send!', 'Your submission will be review, the email will be send to your registerd email');
+        return redirect()->route('mhxcup.registerFrom');
     }
 }

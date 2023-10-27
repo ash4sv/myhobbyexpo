@@ -9,6 +9,9 @@ use App\Http\Controllers\Apps\BoothExhibitionBookedController;
 use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
+use App\Http\Controllers\Apps\MHXCupCategoryController;
+use App\Http\Controllers\Apps\MHXCupRegisterController;
+use App\Http\Controllers\Apps\MHXCupTShirtController;
 use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
 use App\Http\Controllers\Apps\RolesController;
@@ -123,6 +126,14 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::get('hobby-activity', [AppsController::class, 'hobbyActivity'])->name('hobbyactivity');
                Route::get('hobby-showoff', [AppsController::class, 'hobbyShowoff'])->name('hobbyshowoff');
                Route::get('sponsorship', [AppsController::class, 'sponsorship'])->name('sponsorship');
+           });
+           Route::group([
+               'prefix'  => 'mhx-cup',
+               'as'     => 'mhx-cup.'
+           ], function (){
+               Route::resource('t-shirt', MHXCupTShirtController::class);
+               Route::resource('categories', MHXCupCategoryController::class);
+               Route::resource('register', MHXCupRegisterController::class);
            });
            Route::group([
                'prefix'  => 'acl',

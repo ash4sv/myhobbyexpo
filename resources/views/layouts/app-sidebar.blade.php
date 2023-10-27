@@ -88,6 +88,7 @@
             </div>
             @endcan
 
+            <div class="menu-header">Exhibition</div>
             @can('agent-access')
             <div class="menu-item {{ (request()->segment(1) == 'agent') ? 'active' : '' }}">
                 <a href="{{ route('apps.agent.index') }}" class="menu-link">
@@ -164,6 +165,22 @@
                 </div>
             </div>
             @endcan
+
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'mhx-cup') ? 'active' : '' }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-car-side"></i>
+                    </div>
+                    <div class="menu-text">MHX CUP 2023</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item {{ (request()->segment(2) == 'register') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.register.index') }}" class="menu-link"><div class="menu-text">Racer Registered</div></a></div>
+                    <div class="menu-item {{ (request()->segment(2) == 't-shirt') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.t-shirt.index') }}" class="menu-link"><div class="menu-text">T-Shirt</div></a></div>
+                    <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.categories.index') }}" class="menu-link"><div class="menu-text">Category</div></a></div>
+                </div>
+            </div>
+
 
             @can('system-access')
             <div class="menu-header">Systems</div>
