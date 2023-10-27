@@ -13,11 +13,11 @@
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
                             @if($category['category'] == 'semi-tech class a')
-                            <img src="{{ asset('assets/upload/semi-tech-layout.jpeg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('assets/images/mini-4wd/layout-semi-tech.jpeg') }}" alt="" class="img-fluid">
                             @elseif($category['category'] == 'b-max class b')
-                            <img src="{{ asset('assets/upload/b-max-layout.jpeg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('assets/images/mini-4wd/layout-b-max.jpeg') }}" alt="" class="img-fluid">
                             @else
-                            <img src="{{ asset('assets/upload/stock-layout.jpeg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('assets/images/mini-4wd/layout-stock.jpeg') }}" alt="" class="img-fluid">
                             @endif
                         </div>
                     </div>
@@ -140,12 +140,12 @@
                         <div class="card-body">
 
                             <div class="mb-3">
-                                <label for="total_cost" class="form-label">
+                                <label for="total_cost" class="form-label mb-1">
                                     Please remit the below total in RM, using bank transfer to <br>
-
                                     MAYBANK, INFINITY PULSE SDN BHD, <a id="copyLink" href="">564810562363</a>  <input type="hidden" value="564810562363" id="textToCopy">
                                 </label>
-                                <input type="text" name="total_cost" value="" class="form-control mb-3" readonly>
+                                <input type="text" name="total_cost" value="" class="form-control mb-1" readonly>
+                                <img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_qrcode.png') }}" alt="" class="img-fluid">
                             </div>
 
                             <div class="mb-3">
@@ -231,7 +231,7 @@
 
             // Function to initialize Select2 for merchandise options with 100% width
             function initializeSelect2ForMerchandise() {
-                for (var i = 0; i < 10; i++) { // Assuming a maximum of 10 merchandise options
+                for (var i = 0; i < 100; i++) { // Assuming a maximum of 10 merchandise options
                     $("#merchandise_" + i).select2({
                         width: '100%' // Set width to 100%
                     });
@@ -242,6 +242,8 @@
             $("#registrationSlot").change(function () {
                 // Get the selected quantity
                 var selectedQuantity = parseInt($(this).val()); // Convert to integer
+                var nickname = $("[name='nickname']").val();
+                var lastNum = {{ $lastNum->register }};
 
                 // Clear the existing merchandise options
                 $("#merchandise_").empty();
@@ -254,17 +256,19 @@
                     '<div class="card-body">' +
                     '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
                     '<hr class="my-10px">' +
+                    '<img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_cup_shirt.png') }}" alt="" class="img-fluid mb-3">' +
                     '<div id="merchandise_"></div>' +
                     '</div>'
                 );
 
                 // Add merchandise options based on the selected quantity
                 for (var i = 0; i < selectedQuantity; i++) {
+                    var paddedNumber = ("00" + (i + 1)).slice(-3); // Ensure it has at least 3 digits
                     var divWrapper = (i === selectedQuantity - 1) ? '<div class="mb-0">' : '<div class="mb-3">';
 
                     $("#merchandise_").append(
                         divWrapper +
-                        '<label for="merchandise_' + i + '" class="form-label">Select your shirt size ' + (i + 1) + '</label>' +
+                        '<label for="merchandise_' + i + '" class="form-label">Select your shirt size ' + nickname + paddedNumber + '</label>' +
                         '<select id="merchandise_' + i + '" class="form-control default-select2" name="merchandises[' + i + ']">' +
                         '<option value="">Select an option</option>' +  // Add an empty option for validation
                         '<option value="s">S</option>' +
@@ -276,9 +280,11 @@
                         '<option value="xxxxl">XXXXL (4XL)</option>' +
                         '<option value="xxxxxl">XXXXXL (5XL)</option>' +
                         '</select>' +
+                        '<input type="hidden" name="runNum[' + i + ']" value="' + paddedNumber + '">' +
                         '</div>'
                     );
                 }
+
 
                 // Initialize Select2 for merchandise options with 100% width
                 initializeSelect2ForMerchandise();

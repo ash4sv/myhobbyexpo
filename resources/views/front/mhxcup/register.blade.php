@@ -10,41 +10,41 @@
         <div class="card border-0">
             <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <img src="{{ asset('assets/upload/mhxc_001.png') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('assets/images/mini-4wd/mhxc_001.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">SEMI-TECH</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="semi-tech class a">
                 <input type="hidden" name="price_category" value="200">
             </div>
-            {{--<div class="card-footer">
-                Card footer
-            </div>--}}
+            <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
+                Rule & Regulation
+            </a>
         </div>
         <div class="card border-0">
             <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <img src="{{ asset('assets/upload/mhxc_002.png') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('assets/images/mini-4wd/mhxc_002.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">B-MAX</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="b-max class b">
                 <input type="hidden" name="price_category" value="120">
             </div>
-            {{--<div class="card-footer">
-                Card footer
-            </div>--}}
+            <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
+                Rule & Regulation
+            </a>
         </div>
         <div class="card border-0">
             <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <img src="{{ asset('assets/upload/mhxc_003.png') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('assets/images/mini-4wd/mhxc_003.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="stock-car class c">
                 <input type="hidden" name="price_category" value="35">
             </div>
-            {{--<div class="card-footer">
-                Card footer
-            </div>--}}
+            <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
+                Rule & Regulation
+            </a>
         </div>
     </div>
 </div>

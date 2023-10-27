@@ -43,9 +43,11 @@ class MHXCupController extends Controller
 
     public function registerFrom(Request $request)
     {
+        $lastNum = RacerNickNameRegister::orderBy('id', 'DESC')->first();
         $category = $request->session()->only(['category', 'price_category']);
         return view($this->view.'racer-register', [
-            'category' => $category
+            'category' => $category,
+            'lastNum'  => $lastNum
         ]);
     }
 
