@@ -59,7 +59,7 @@
                                 <label for="nickname" class="form-label">Nickname <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="" name="nickname" value="{{ old('nickname') }}">
                                 <div id="" class="form-text">
-                                    Nickname must not more than 5 character
+                                    Not more than 5 character, alphabet only, to be use as Called Up name.
                                 </div>
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -68,7 +68,7 @@
                                 <label for="team_group" class="form-label">Team / Group</label>
                                 <input type="text" class="form-control" id="" name="team_group" value="{{ old('team_group') }}">
                                 <div id="" class="form-text">
-                                    If not applicable, please write NA
+                                    If not applicable, please write NA.
                                 </div>
                             </div>
 
