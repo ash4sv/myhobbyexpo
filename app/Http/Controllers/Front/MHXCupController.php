@@ -79,21 +79,29 @@ class MHXCupController extends Controller
             $number = 1;
             $uniq = Str::random(4);
 
+            $runNum = $request->runNum;
+
             foreach ($request->merchandises as $merchandise) {
                 if ($lastNum) {
                     $number = $lastNum->register + 1;
+                }
+
+                if (count($runNum) > 0) {
+                    $runNumber = array_shift($runNum); // Get the next runNum value
+                } else {
+                    // Handle the case where there are no more "runNum" values
+                    $runNumber = $lastNum ? $lastNum->register + 1 : 1;
                 }
 
                 $nickname = new RacerNickNameRegister();
                 $nickname->racer_id  = $racer->id;
                 $nickname->uniq      = $uniq;
                 $nickname->nickname  = $racer->nickname;
-                $nickname->register  = $number;
+                $nickname->register  = $runNumber;
                 $nickname->shirt_zie = $merchandise;
                 $nickname->save();
 
                 $lastNum = $nickname;
-                $number++; // Increment the number for the next iteration
             }
         }
 

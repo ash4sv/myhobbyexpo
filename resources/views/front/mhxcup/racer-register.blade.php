@@ -13,11 +13,11 @@
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
                             @if($category['category'] == 'semi-tech class a')
-                            <img src="{{ asset('assets/images/mini-4wd/layout-semi-tech.jpeg') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('assets/images/mini-4wd/layout-semi-tech.jpeg') }}" alt="" class="img-fluid">
                             @elseif($category['category'] == 'b-max class b')
-                            <img src="{{ asset('assets/images/mini-4wd/layout-b-max.jpeg') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('assets/images/mini-4wd/layout-b-max.jpeg') }}" alt="" class="img-fluid">
                             @else
-                            <img src="{{ asset('assets/images/mini-4wd/layout-stock.jpeg') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('assets/images/mini-4wd/layout-stock.jpeg') }}" alt="" class="img-fluid">
                             @endif
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                 <label for="nickname" class="form-label">Nickname <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control text-uppercase" id="" name="nickname" value="{{ old('nickname') }}" maxlength="7">
                                 <div id="" class="form-text">
-                                    Not more than 5 character, alphabet only, to be use as Called Up name.
+                                    Not more than 7 character, alphabet only, to be use as Called Up name.
                                 </div>
                                 <div class="invalid-feedback"></div>
                             </div>
@@ -123,7 +123,6 @@
                         </div>
                     </div>
 
-                    @if($category['category'] == 'semi-tech class a' || $category['category'] == 'b-max class b')
                     <div class="card mb-4" id="section_c">
                         <div class="card-body">
                             <h5 class="font-weight-700">Section C - Merchandise</h5>
@@ -134,7 +133,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
 
                     <div class="card">
                         <div class="card-body">
@@ -242,8 +240,10 @@
             $("#registrationSlot").change(function () {
                 // Get the selected quantity
                 var selectedQuantity = parseInt($(this).val()); // Convert to integer
-                var nickname = $("[name='nickname']").val();
+                var nicknameInput = $("[name='nickname']");
+                var nickname = nicknameInput.val().toUpperCase();
                 var lastNum = {{ $lastNum->register }};
+                var category = $("[name='category']").val();
 
                 // Clear the existing merchandise options
                 $("#merchandise_").empty();
@@ -252,39 +252,62 @@
                 $("#section_c").empty();
 
                 // Add the Section C - Merchandise structure
-                $("#section_c").append(
-                    '<div class="card-body">' +
-                    '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
-                    '<hr class="my-10px">' +
-                    '<img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_cup_shirt.png') }}" alt="" class="img-fluid mb-3">' +
-                    '<div id="merchandise_"></div>' +
-                    '</div>'
-                );
-
-                // Add merchandise options based on the selected quantity
-                for (var i = 0; i < selectedQuantity; i++) {
-                    var paddedNumber = ("00" + (i + 1)).slice(-3); // Ensure it has at least 3 digits
-                    var divWrapper = (i === selectedQuantity - 1) ? '<div class="mb-0">' : '<div class="mb-3">';
-
-                    $("#merchandise_").append(
-                        divWrapper +
-                        '<label for="merchandise_' + i + '" class="form-label">Select your shirt size ' + nickname + paddedNumber + '</label>' +
-                        '<select id="merchandise_' + i + '" class="form-control default-select2" name="merchandises[' + i + ']">' +
-                        '<option value="">Select an option</option>' +  // Add an empty option for validation
-                        '<option value="s">S</option>' +
-                        '<option value="m">M</option>' +
-                        '<option value="l">L</option>' +
-                        '<option value="xl">XL</option>' +
-                        '<option value="xxl">XXL (2XL)</option>' +
-                        '<option value="xxxl">XXXL (3XL)</option>' +
-                        '<option value="xxxxl">XXXXL (4XL)</option>' +
-                        '<option value="xxxxxl">XXXXXL (5XL)</option>' +
-                        '</select>' +
-                        '<input type="hidden" name="runNum[' + i + ']" value="' + paddedNumber + '">' +
+                if (category !== "stock-car class c") {
+                    // Add the Section C - Merchandise structure with image
+                    $("#section_c").append(
+                        '<div class="card-body">' +
+                        '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
+                        '<hr class="my-10px">' +
+                        '<img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_cup_shirt.png') }}" alt="" class="img-fluid mb-3">' +
+                        '<div id="merchandise_"></div>' +
+                        '</div>'
+                    );
+                } else {
+                    // Add the Section C - Merchandise structure without image
+                    $("#section_c").append(
+                        '<div class="card-body">' +
+                        '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
+                        '<hr class="my-10px">' +
+                        '<div id="merchandise_"></div>' +
                         '</div>'
                     );
                 }
 
+                if (category === "stock-car class c") {
+                    // Add merchandise options based on the selected quantity with label elements only
+                    var merchandiseOptions = '';
+                    for (var i = 0; i < selectedQuantity; i++) {
+                        var paddedNumber = ("00" + (i + 1 + lastNum)).slice(-3); // Ensure it has at least 3 digits
+                        var separator = (i === selectedQuantity - 1) ? '.' : ',';
+
+                        merchandiseOptions += '<span for="merchandise_' + i + '" class="">' + nickname + paddedNumber + '</span>' + separator + ' ';
+                    }
+                    $("#merchandise_").append(merchandiseOptions);
+                } else {
+                    // Add merchandise options with select elements for other categories
+                    for (var i = 0; i < selectedQuantity; i++) {
+                        var paddedNumber = ("00" + (i + 1 + lastNum)).slice(-3); // Ensure it has at least 3 digits
+                        var divWrapper = (i === selectedQuantity - 1) ? '<div class="mb-0">' : '<div class="mb-3">';
+
+                        $("#merchandise_").append(
+                            divWrapper +
+                            '<label for="merchandise_' + i + '" class="form-label">Select your shirt size ' + nickname + paddedNumber + '</label>' +
+                            '<select id="merchandise_' + i + '" class="form-control default-select2" name="merchandises[' + i + ']">' +
+                            '<option value="">Select an option</option>' +  // Add an empty option for validation
+                            '<option value="s">S</option>' +
+                            '<option value="m">M</option>' +
+                            '<option value="l">L</option>' +
+                            '<option value="xl">XL</option>' +
+                            '<option value="xxl">XXL (2XL)</option>' +
+                            '<option value="xxxl">XXXL (3XL)</option>' +
+                            '<option value="xxxxl">XXXXL (4XL)</option>' +
+                            '<option value="xxxxxl">XXXXXL (5XL)</option>' +
+                            '</select>' +
+                            '<input type="hidden" name="runNum[' + i + ']" value="' + paddedNumber + '">' +
+                            '</div>'
+                        );
+                    }
+                }
 
                 // Initialize Select2 for merchandise options with 100% width
                 initializeSelect2ForMerchandise();
@@ -297,6 +320,7 @@
                 // Show Section C - Merchandise when the user selects a quantity
                 $("#section_c").show();
             });
+
 
             // Add custom validation method to ensure at least one merchandise option is selected
             $.validator.addMethod("select2Required", function (value, element) {
