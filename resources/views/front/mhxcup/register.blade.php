@@ -13,7 +13,7 @@
                     <img src="{{ asset('assets/upload/mhxc_001.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">SEMI-TECH</h3>--}}
                 </a>
-                <input type="hidden" name="category" value="semi-tech">
+                <input type="hidden" name="category" value="semi-tech class a">
                 <input type="hidden" name="price_category" value="200">
             </div>
             {{--<div class="card-footer">
@@ -26,7 +26,7 @@
                     <img src="{{ asset('assets/upload/mhxc_002.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">B-MAX</h3>--}}
                 </a>
-                <input type="hidden" name="category" value="b-max">
+                <input type="hidden" name="category" value="b-max class b">
                 <input type="hidden" name="price_category" value="120">
             </div>
             {{--<div class="card-footer">
@@ -39,7 +39,7 @@
                     <img src="{{ asset('assets/upload/mhxc_003.png') }}" alt="" class="img-fluid">
                     {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>--}}
                 </a>
-                <input type="hidden" name="category" value="stock-car">
+                <input type="hidden" name="category" value="stock-car class c">
                 <input type="hidden" name="price_category" value="35">
             </div>
             {{--<div class="card-footer">

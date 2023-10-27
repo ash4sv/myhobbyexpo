@@ -4,10 +4,24 @@
 
 @section('page-minicup')
     <div class="container p-sm-5 p-3">
+        <h2 class="text-center mt-sm-0 mb-sm-5 mt-4 mb-5 font-weight-700 text-uppercase">{{ $category['category'] }}</h2>
+
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
+                    <div class="card mb-4" id="section_a">
+                        <div class="card-body">
+                            @if($category['category'] == 'semi-tech class a')
+                            <img src="{{ asset('assets/upload/semi-tech-layout.jpeg') }}" alt="" class="img-fluid">
+                            @elseif($category['category'] == 'b-max class b')
+                            <img src="{{ asset('assets/upload/b-max-layout.jpeg') }}" alt="" class="img-fluid">
+                            @else
+                            <img src="{{ asset('assets/upload/stock-layout.jpeg') }}" alt="" class="img-fluid">
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
 
