@@ -114,7 +114,8 @@
                             <div class="mb-3">
                                 <label for="total_cost" class="form-label">
                                     Please remit the below total in RM, using bank transfer to <br>
-                                    MAYBANK, [Account Number], [Name of Account]
+
+                                    MAYBANK, INFINITY PULSE SDN BHD, <a id="copyLink" href="">564810562363</a>  <input type="hidden" value="564810562363" id="textToCopy">
                                 </label>
                                 <input type="text" name="total_cost" value="" class="form-control mb-3" readonly>
                             </div>
@@ -279,6 +280,31 @@
 
             // Initialize Select2 for merchandise options initially
             initializeSelect2ForMerchandise();
+
+            // ============================================================
+
+            // Initialize Clipboard.js
+            var clipboard = new ClipboardJS('#copyLink', {
+                text: function() {
+                    return document.getElementById('textToCopy').value;
+                }
+            });
+
+            // Prevent the link's default behavior (page refresh)
+            document.getElementById('copyLink').addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+
+            // Add a success event listener
+            clipboard.on('success', function(e) {
+                console.log('Text copied to clipboard: ' + e.text);
+                e.clearSelection();
+            });
+
+            // Add an error event listener
+            clipboard.on('error', function(e) {
+                console.error('Copy to clipboard failed: ' + e.action);
+            });
         });
     </script>
 @endpush
