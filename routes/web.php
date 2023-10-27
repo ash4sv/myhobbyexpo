@@ -82,6 +82,10 @@ Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
         Route::post('category', [MHXCupController::class, 'categoryPost'])->name('categoryPost');
         Route::get('racer-register', [MHXCupController::class, 'registerFrom'])->name('registerFrom');
         Route::post('register', [MHXCupController::class, 'registerPost'])->name('registerPost');
+
+        Route::post('mhx-payment', [MHXCupController::class, 'mhxPayment'])->name('mhxPayment');
+        Route::get('redirect', [MHXCupController::class, 'redirect'])->name('redirect');
+        Route::post('webhook', [MHXCupController::class, 'webhook'])->name('webHook');
     });
 });
 

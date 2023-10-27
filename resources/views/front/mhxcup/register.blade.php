@@ -4,33 +4,47 @@
 
 @section('page-minicup')
 <div class="container p-sm-5 p-3">
+    <h2 class="text-center mt-sm-0 mb-sm-5 mt-4 mb-5 font-weight-700 text-uppercase">Please select your race category</h2>
+
     <div class="card-group">
-        <div class="card">
-            <div class="card-body p-5 text-center">
+        <div class="card border-0">
+            <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">SEMI-TECH</h3>
+                    <img src="{{ asset('assets/upload/mhxc_001.png') }}" alt="" class="img-fluid">
+                    {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">SEMI-TECH</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="semi-tech">
                 <input type="hidden" name="price_category" value="200">
             </div>
+            {{--<div class="card-footer">
+                Card footer
+            </div>--}}
         </div>
-        <div class="card">
-            <div class="card-body p-5 text-center">
+        <div class="card border-0">
+            <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">B-MAX</h3>
+                    <img src="{{ asset('assets/upload/mhxc_002.png') }}" alt="" class="img-fluid">
+                    {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">B-MAX</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="b-max">
                 <input type="hidden" name="price_category" value="120">
             </div>
+            {{--<div class="card-footer">
+                Card footer
+            </div>--}}
         </div>
-        <div class="card">
-            <div class="card-body p-5 text-center">
+        <div class="card border-0">
+            <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
-                    <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>
+                    <img src="{{ asset('assets/upload/mhxc_003.png') }}" alt="" class="img-fluid">
+                    {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>--}}
                 </a>
                 <input type="hidden" name="category" value="stock-car">
                 <input type="hidden" name="price_category" value="35">
             </div>
+            {{--<div class="card-footer">
+                Card footer
+            </div>--}}
         </div>
     </div>
 </div>

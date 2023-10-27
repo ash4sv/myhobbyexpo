@@ -44,6 +44,11 @@
                 <img src="{{ asset('assets/images/mini-4wd/supported-by@4x.png') }}" alt="" class="d-block mx-auto h-50px">
             </div>
         </div>
+
+        <h6 class="mt-5 mb-0 text-center text-white">
+            &copy; Copyright of Malaysia Hobby Expo {{ date('Y') }} <br/>
+            {{--An admin & front end theme with serious impact.--}} Powered and designed by <a class="text-white" href="#">Ardia Nexus Sdn. Bhd.</a>
+        </h6>
     </div>
 </div>
 

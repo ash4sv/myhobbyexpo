@@ -6,12 +6,12 @@
     <div class="container p-sm-5 p-3">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="{{ route('mhxcup.registerPost') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
+                <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
 
-                            <h5>Section A - Racer Particular</h5>
+                            <h5 class="font-weight-700">Section A - Racer Particular</h5>
                             <hr class="my-10px">
 
                             <input type="hidden" name="category" value="{{ $category['category'] }}" class="form-control mb-3" readonly>
@@ -57,7 +57,7 @@
 
                     <div class="card mb-4" id="section_b">
                         <div class="card-body">
-                            <h5>Section B - Race Fee</h5>
+                            <h5 class="font-weight-700">Section B - Race Fee</h5>
                             <hr class="my-10px">
 
                             <div class="mb-3">
@@ -77,7 +77,7 @@
                                 </select>
                                 <div class="invalid-feedback"></div>
                                 <div id="" class="form-text">
-                                    RM 200 per registration
+                                    RM{{ $category['price_category'] }} per registration
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
 
                     <div class="card mb-4" id="section_c">
                         <div class="card-body">
-                            <h5>Section C - Merchandise</h5>
+                            <h5 class="font-weight-700">Section C - Merchandise</h5>
                             <hr class="my-10px">
 
                             <div id="merchandise_">
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="receipt" class="form-label">Please upload the receipt of payment</label>
+                                <label for="receipt" class="form-label">Please upload the receipt of payment <span class="text-danger">*</span></label>
                                 <input type="file" name="receipt" id="" class="form-control">
                                 <div id="" class="form-text">
                                     This method is temporary, it will update with the direct payment
@@ -209,7 +209,7 @@
                 // Add the Section C - Merchandise structure
                 $("#section_c").append(
                     '<div class="card-body">' +
-                    '<h5>Section C - Merchandise</h5>' +
+                    '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
                     '<hr class="my-10px">' +
                     '<div id="merchandise_"></div>' +
                     '</div>'

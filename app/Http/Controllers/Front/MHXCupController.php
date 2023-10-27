@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MHXCup\MHXCupRequest;
 use App\Models\Apps\MHXCup\RacerNickNameRegister;
 use App\Models\Apps\MHXCup\RacerRegister;
 use App\Services\ImageUploader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -47,7 +49,7 @@ class MHXCupController extends Controller
         ]);
     }
 
-    public function registerPost(Request $request)
+    public function registerPost(MHXCupRequest $request)
     {
         if ($request->hasFile('receipt')) {
             $receipt = ImageUploader::uploadSingleImage($request->file('receipt'), 'assets/upload/', 'receipt_'.$request->identification_card_number);;
@@ -95,5 +97,64 @@ class MHXCupController extends Controller
 
         Alert::success('Successfully send!', 'Your submission will be review, the email will be send to your registerd email');
         return redirect()->route('mhxcup.registerFrom');
+    }
+
+    public function mhxPayment(MHXCupRequest $request)
+    {
+        $passingData = [
+            'category'                  => $request->category,
+            'price_category'            => $request->price_category,
+            'total_cost'                => $request->total_cost,
+            'full_name'                 => $request->full_name,
+            'identification_card_number' => $request->identification_card_number,
+            'phone_number'              => $request->phone_number,
+            'email'                     => $request->email,
+            'nickname'                  => $request->nickname,
+            'team_group'                => $request->team_group,
+            'registration'              => $request->registration,
+            'merchandises'              => $request->merchandises,
+        ];
+
+        Cache::put('WebHook', $passingData, now()->addMinute(20));
+
+        /*$billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
+        if(config('billplz.billplz_sandbox')) {
+            $billplz->useSandbox();
+        }
+        $bill = $billplz->bill();
+        $bill = $bill->create(
+            config('billplz.billplz_mhx_collection_id'),
+            $request->email,
+            $request->phone_number,
+            $request->full_name,
+            \Duit\MYR::given($request->total_cost),
+            route('mhxcup.webhook'),
+            'Register for Mini 4WD MHX Cup 2023',
+            ['redirect_url' => route('mhxcup.redirect')]
+        );
+
+        return redirect($bill->toArray()['url']);*/
+    }
+
+    public function redirect(Request $request)
+    {
+    }
+
+    public function webhook(Request $request)
+    {
+        $webHook = Cache::pull('WebHook');
+        $data    = $request->all();
+
+        if (!empty($webHook))
+        {
+            return [
+                $webHook,
+                $data
+            ];
+        }
+        elseif ($data['paid'] == 'false')
+        {
+
+        }
     }
 }

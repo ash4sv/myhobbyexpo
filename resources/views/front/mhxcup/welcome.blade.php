@@ -30,7 +30,7 @@
                                         <h3 class="font-weight-700 mb-3">10:00 AM to 10:00 PM</h3>
                                     </li>
                                 </ul>
-                                <h4 class="text-sm-start text-center mb-0 text-uppercase font-weight-700 text-mhx-red px-3">Track Layout, Race Rules, Fees Will Be Release Soon!</h4>
+                                {{--<h4 class="text-sm-start text-center mb-0 text-uppercase font-weight-700 text-mhx-red px-3">Track Layout, Race Rules, Fees Will Be Release Soon!</h4>--}}
                             </div>
                         </div>
                     </div>
