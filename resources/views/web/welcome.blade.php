@@ -955,7 +955,7 @@
         // Function to start the countdown
         function startCountdown() {
             // Set the end date (20th July 2023)
-            var endDate = new Date("Dec 20, 2023 10:00:00");
+            var endDate = new Date("Dec 2, 2023 10:00:00");
 
             // Calculate the initial countdown values
             var initialCountdown = calculateCountdown(endDate);
