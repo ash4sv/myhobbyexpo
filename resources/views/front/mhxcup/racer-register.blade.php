@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
+                <form action="{{ route('mhxcup.registerPost') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
@@ -58,12 +58,18 @@
                             <div class="mb-3">
                                 <label for="nickname" class="form-label">Nickname <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="" name="nickname" value="{{ old('nickname') }}">
+                                <div id="" class="form-text">
+                                    Nickname must not more than 5 character
+                                </div>
                                 <div class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-0">
                                 <label for="team_group" class="form-label">Team / Group</label>
                                 <input type="text" class="form-control" id="" name="team_group" value="{{ old('team_group') }}">
+                                <div id="" class="form-text">
+                                    If not applicable, please write NA
+                                </div>
                             </div>
 
                         </div>
@@ -88,6 +94,26 @@
                                     <option value="8">8</option>
                                     <option value="9">9</option>
                                     <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
                                 </select>
                                 <div class="invalid-feedback"></div>
                                 <div id="" class="form-text">
@@ -97,6 +123,7 @@
                         </div>
                     </div>
 
+                    @if($category['category'] == 'semi-tech class a' || $category['category'] == 'b-max class b')
                     <div class="card mb-4" id="section_c">
                         <div class="card-body">
                             <h5 class="font-weight-700">Section C - Merchandise</h5>
@@ -107,6 +134,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="card">
                         <div class="card-body">
@@ -236,16 +264,17 @@
 
                     $("#merchandise_").append(
                         divWrapper +
-                        '<label for="merchandise_' + i + '" class="form-label">Select your shirt size for Team / Group ' + (i + 1) + '</label>' +
+                        '<label for="merchandise_' + i + '" class="form-label">Select your shirt size ' + (i + 1) + '</label>' +
                         '<select id="merchandise_' + i + '" class="form-control default-select2" name="merchandises[' + i + ']">' +
                         '<option value="">Select an option</option>' +  // Add an empty option for validation
-                        '<option value="xs">XS</option>' +
                         '<option value="s">S</option>' +
                         '<option value="m">M</option>' +
                         '<option value="l">L</option>' +
                         '<option value="xl">XL</option>' +
-                        '<option value="xxl">XXL</option>' +
-                        '<option value="xxxl">XXXL</option>' +
+                        '<option value="xxl">XXL (2XL)</option>' +
+                        '<option value="xxxl">XXXL (3XL)</option>' +
+                        '<option value="xxxxl">XXXXL (4XL)</option>' +
+                        '<option value="xxxxxl">XXXXXL (5XL)</option>' +
                         '</select>' +
                         '</div>'
                     );

@@ -72,7 +72,7 @@ class MHXCupController extends Controller
         $racer->approval                  = false;
         $racer->save();
 
-        if ($request->registration > 0) {
+        if (!empty($request->merchandises)) {
             $lastNum = RacerNickNameRegister::orderBy('id', 'DESC')->first();
             $number = 1;
             $uniq = Str::random(4);
