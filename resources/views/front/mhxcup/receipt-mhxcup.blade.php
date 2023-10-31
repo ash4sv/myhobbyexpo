@@ -11,21 +11,11 @@
 
     <!-- Invoice styling -->
     <style>
-        @page {
-            margin: 0 0;
-            size: 595.28px 841.89px;
-            size: portrait;
-        }
-
-        html {
-            margin: 0 0;
-        }
 
         body {
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             text-align: center;
             color: #777;
-            margin: 0 0;
         }
 
         body h1 {
@@ -194,7 +184,7 @@
             <td>Price</td>
         </tr>
         <tr class="item">
-            <td>Register of <span style="text-transform: capitalize !important;">{{ $category }}</span> <span style="font-weight: bold">( {{ $registration }} x RM{{ number_format($price_category, 2) }} )</span></td>
+            <td>Register of <span style="text-transform: capitalize !important;">{{ $category }}</span> <br> <span style="font-weight: bold">( {{ $registration }} x RM{{ number_format($price_category, 2) }} )</span></td>
             <td>RM{{ number_format($total_cost, 2) }}</td>
         </tr>
         <tr class="item">
