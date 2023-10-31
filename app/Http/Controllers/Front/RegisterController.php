@@ -427,7 +427,7 @@ class RegisterController extends Controller
                     'invDate'          => $webHook['invDate'],
                     'agent'            => $agent->name,
                 ];
-                $customPaper = [0, 0, 595.28, 841.89];
+                $customPaper = [0, 0, 473, 600];
                 $pdf = PDF::loadView('front.confirmation-email', $pdfData)->setPaper($customPaper, 'portrait')->save(public_path('assets/upload/' . $webHook['ref'] . '.pdf'));
                 Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
 

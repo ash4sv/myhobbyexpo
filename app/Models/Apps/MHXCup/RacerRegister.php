@@ -31,8 +31,8 @@ class RacerRegister extends Model
             ]);
     }
 
-    public function nickname()
+    public function numberRegister()
     {
-        $this->hasMany(RacerNickNameRegister::class, 'racer_id', 'id');
+        return $this->hasMany(RacerNickNameRegister::class, 'racer_id', 'id');
     }
 }

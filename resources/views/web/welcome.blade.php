@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>MHX2023 EXHIBITOR | WELCOME</title>
+    <title>MHX2023 EXHIBITOR | WELCOME to Discover Hobby Expo Malaysia 2023</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content name="description" />
-    <meta content name="author" />
+    <meta name="description" content="Explore the exciting world of Hobby Expo Malaysia 2023. Learn about the latest trends and attractions. Join us for a memorable experience!"  />
+    <meta name="keyword" content="Hobby Expo Malaysia"/>
+    <meta name="author" content="Hobby Expo Malaysia Secretariat"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
     <link rel="stylesheet" href="{{ asset('assets/css/one-page-parallax/vendor.min.css') }}" />
@@ -79,11 +80,11 @@
             <div class="container home-content">
                 <div class="row gx-3">
                     <div class="col-md-6">
-                        <img src="{{ asset('assets/images/left-image@4x.webp') }}" alt="" class="img-fluid mb-sm-0 mb-5">
+                        <img src="{{ asset('assets/images/left-image@4x.webp') }}" alt="My Hobby Expo hero" class="img-fluid mb-sm-0 mb-5">
                     </div>
                     <div class="col-md-6">
-                        <img src="{{ asset('assets/images/right-image@4x.png') }}" alt="" class="img-fluid d-sm-block d-none">
-                        <img src="{{ asset('assets/images/only-date@3x.png') }}" alt="" class="img-fluid d-sm-none d-block">
+                        <img src="{{ asset('assets/images/right-image@4x.png') }}" alt="My Hobby Expo Logo" class="img-fluid d-sm-block d-none">
+                        <img src="{{ asset('assets/images/only-date@3x.png') }}" alt="My Hobby Expo 2023 Date" class="img-fluid d-sm-none d-block">
                     </div>
                 </div>
             </div>
@@ -93,7 +94,7 @@
             <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
                 <div class="row g-5 align-items-center">
                     <div class="col-md-8">
-                        <img src="{{ asset('assets/images/mini-4wd/mini-4wd-mhxcup@4x.png') }}" alt="" class="img-fluid d-block mx-auto">
+                        <img src="{{ asset('assets/images/mini-4wd/mini-4wd-mhxcup@4x.png') }}" alt="MHX Mini Cup 2023" class="img-fluid d-block mx-auto">
                     </div>
                     <div class="col-md-4">
                         <a href="{{ route('mhxcup.welcome') }}">
@@ -111,7 +112,7 @@
                 <div class="row gx-5">
                     <div class="col-lg-4">
                         <div class="about text-white">
-                            <img src="{{ asset('assets/images/au-mission@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                            <img src="{{ asset('assets/images/au-mission@2x.png') }}" alt="Mission" class="img-fluid h-50px mb-10px">
                             <p>To invite youth in malaysia to enjoy the healthy and creative hobby instead of only socializing with social media. Helping to grow a very creative generations by involving in this kind of hobby scene.</p>
                             <p>Other than that, it is also motivated youth to startup a business that is so tiny in malaysia. What mhx can offer is a platform for malaysian to start entering new market of business which is hobby related!</p>
                         </div>
@@ -119,7 +120,7 @@
 
                     <div class="col-lg-4">
                         <div class="about text-white">
-                            <img src="{{ asset('assets/images/au-vission@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                            <img src="{{ asset('assets/images/au-vission@2x.png') }}" alt="Vision" class="img-fluid h-50px mb-10px">
                             <p>We believe that certain experiences help young people to develop fully and successfully from their passion of hobby. These include close relationships among friends, healthy competitions, engaging activities, opportunities to make a difference from creative mind, and continuity of support in every setting in which they live, work, and study.</p>
                             <p class="text-purple">“Hobby is not only about passion but, it is a part of enjoyment in life.”</p>
                         </div>
@@ -127,7 +128,7 @@
 
                     <div class="col-lg-4">
                         <div class="about text-white">
-                            <img src="{{ asset('assets/images/au-objective@2x.png') }}" alt="" class="img-fluid h-50px mb-10px">
+                            <img src="{{ asset('assets/images/au-objective@2x.png') }}" alt="Objective" class="img-fluid h-50px mb-10px">
                             <ul class="pl-1">
                                 <li>To host our own much needed public hobby exhibition.</li>
                                 <li>To build new connection between youth & senior under one roof</li>
@@ -145,14 +146,14 @@
             <div class="container py-5" data-animation="true" data-animation-type="animate__fadeInDown">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="" class="img-fluid mb-5">
+                        <img src="{{ asset('assets/images/prv-edition-portfolio@2x.png') }}" alt="MHX Portfolio" class="img-fluid mb-5">
                     </div>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-6 col-md-6">
                         <div class="work">
                             <div class="image">
-                                <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}" alt="Work 1" /></a>
+                                <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-01.webp') }}" alt="MHX 2016 Gallery" /></a>
                             </div>
                             <div class="d-none">
                                 <a data-fancybox="mhx2016" href="{{ asset('assets/images/pvs_8/photo-pvs8-02.webp') }}"><img src="{{ asset('assets/images/pvs_8/photo-pvs8-02.webp') }}" /></a>
@@ -176,7 +177,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="work">
                             <div class="image">
-                                <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}" alt="Work 1" /></a>
+                                <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-01.webp') }}" alt="MHX 2017 Gallery" /></a>
                             </div>
                             <div class="d-none">
                                 <a data-fancybox="mhx2017" href="{{ asset('assets/images/pvs_10/photo-pvs10-02.webp') }}"><img src="{{ asset('assets/images/pvs_10/photo-pvs10-02.webp') }}" /></a>

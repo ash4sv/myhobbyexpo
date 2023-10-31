@@ -84,8 +84,8 @@ Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
         Route::post('register', [MHXCupController::class, 'registerPost'])->name('registerPost');
 
         Route::post('mhx-payment', [MHXCupController::class, 'mhxPayment'])->name('mhxPayment');
-        Route::get('redirect', [MHXCupController::class, 'redirect'])->name('redirect');
-        Route::post('webhook', [MHXCupController::class, 'webhook'])->name('webHook');
+        Route::get('mhx-redirect', [MHXCupController::class, 'redirectUrl'])->name('redirectHook');
+        Route::post('mhx-webhook', [MHXCupController::class, 'webhook'])->name('webHook');
     });
 });
 

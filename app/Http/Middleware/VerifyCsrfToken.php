@@ -14,5 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'pay-redirect',
         'pay-webhook',
+        'mhx-redirect',
+        'mhx-webhook',
     ];
 }

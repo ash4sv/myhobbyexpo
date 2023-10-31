@@ -25,6 +25,6 @@ class RacerNickNameRegister extends Model
 
     public function racer()
     {
-        $this->belongsTo(RacerRegister::class, 'racer_id', 'id');
+        return $this->belongsTo(RacerRegister::class, 'racer_id', 'id');
     }
 }

@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="{{ route('mhxcup.registerPost') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
+                <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4" id="section_a">
                         <div class="card-body">
@@ -139,21 +139,22 @@
 
                             <div class="mb-3">
                                 <label for="total_cost" class="form-label mb-1">
-                                    Please remit the below total in RM, using bank transfer to <br>
-                                    MAYBANK, INFINITY PULSE SDN BHD, <a id="copyLink" href="">564810562363</a>  <input type="hidden" value="564810562363" id="textToCopy">
+                                    {{--Please remit the below total in RM, using bank transfer to <br>
+                                    MAYBANK, INFINITY PULSE SDN BHD, <a id="copyLink" href="">564810562363</a>  <input type="hidden" value="564810562363" id="textToCopy">--}}
+                                    Total Cost
                                 </label>
                                 <input type="text" name="total_cost" value="" class="form-control mb-1" readonly>
-                                <img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_qrcode.png') }}" alt="" class="img-fluid">
+                                {{--<img src="{{ asset('assets/images/mini-4wd/mhx2023_mini_4wd_qrcode.png') }}" alt="" class="img-fluid">--}}
                             </div>
 
-                            <div class="mb-3">
-                                <label for="receipt" class="form-label">Please upload the receipt of payment <span class="text-danger">*</span></label>
-                                <input type="file" name="receipt" id="" class="form-control">
-                                <div id="" class="form-text">
-                                    This method is temporary, it will update with the direct payment
-                                </div>
-                                <div class="invalid-feedback"></div>
-                            </div>
+{{--                            <div class="mb-3">--}}
+{{--                                <label for="receipt" class="form-label">Please upload the receipt of payment <span class="text-danger">*</span></label>--}}
+{{--                                <input type="file" name="receipt" id="" class="form-control">--}}
+{{--                                <div id="" class="form-text">--}}
+{{--                                    This method is temporary, it will update with the direct payment--}}
+{{--                                </div>--}}
+{{--                                <div class="invalid-feedback"></div>--}}
+{{--                            </div>--}}
 
                             <div class="mb-3">
                                 <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a target="_blank" href="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}">Terms & Conditions</a> of the event.</p>
@@ -200,9 +201,9 @@
                 registration: {
                     required: true
                 },
-                receipt: {
-                    required: true
-                }
+                // receipt: {
+                //     required: true
+                // }
             };
 
             var validationMessages = {
@@ -212,7 +213,7 @@
                 email: "Please provide a valid email address.",
                 nickname: "Please provide a nickname.",
                 registration: "Please select your registration.",
-                receipt: "Please upload the receipt here."
+                // receipt: "Please upload the receipt here."
             };
 
             // Initialize form validation
@@ -236,6 +237,9 @@
                 }
             }
 
+            var lastNum = {{ $lastNum ?? 0 }};
+            console.log('Last number for {{ $category['category'] }}', lastNum);
+
             // Listen for changes in the registration slot selection
             $("#registrationSlot").change(function () {
                 // Get the selected quantity
@@ -243,8 +247,6 @@
                 var nicknameInput = $("[name='nickname']");
                 var nickname = nicknameInput.val().toUpperCase();
                 var category = $("[name='category']").val();
-                var lastNum = {{ $lastNum->register ?? 0 }}
-
 
                 // Clear the existing merchandise options
                 $("#merchandise_").empty();
