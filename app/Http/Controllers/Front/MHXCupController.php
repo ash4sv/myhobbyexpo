@@ -153,7 +153,7 @@ class MHXCupController extends Controller
             'identification_card_number' => $request->identification_card_number,
             'phone_number'              => $request->phone_number,
             'email'                     => $request->email,
-            'nickname'                  => $request->nickname,
+            'nickname'                  => strtoupper($request->nickname),
             'team_group'                => $request->team_group,
             'registration'              => $request->registration,
             'merchandises'              => $request->merchandises,
@@ -318,7 +318,7 @@ class MHXCupController extends Controller
 
                 Log::info('== RACER RUNNING NUMBER ==');
 
-                /*DB::table('billplz_webhook')->insert([
+                DB::table('billplz_webhook')->insert([
                     'shopref'       => $webHook['uniq'],
                     'billplz_id'    => $data['id'],
                     'collection_id' => $data['collection_id'],
@@ -335,7 +335,7 @@ class MHXCupController extends Controller
                     'x_signature'   => $data['x_signature'],
                     'created_at'    => now(),
                     'updated_at'    => now(),
-                ]);*/
+                ]);
 
                 Log::info('=== BILLPLZ WEBHOOK SAVED ===');
 
@@ -359,6 +359,8 @@ class MHXCupController extends Controller
                 $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
                     ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
                 Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
+
+                Log::info('== MHX CUP REGISTER DONE ==');
 
             } elseif ($data['paid'] == 'false') {
 
