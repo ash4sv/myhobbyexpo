@@ -258,7 +258,7 @@ class MHXCupController extends Controller
     public function webhook(Request $request)
     {
         $webHook = Cache::pull('WebHook');
-        $data    = $request->all();
+        $data[]  = $request->all();
 
         if (!empty($data) || !empty($webHook)){
 
@@ -336,7 +336,7 @@ class MHXCupController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
-                
+
                 DB::table('billplz_webhook')->insert($billplzData);
 
                 Log::info('=== BILLPLZ WEBHOOK SAVED ===');
