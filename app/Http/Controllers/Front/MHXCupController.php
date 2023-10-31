@@ -178,8 +178,9 @@ class MHXCupController extends Controller
 
         Cache::put('WebHook', $passingData, now()->addMinute(20));
 
-        // $priceMyr = ($request->total_cost * 100);
-        $priceMyr = 100;
+        $priceMyr = ($request->total_cost * 100);
+        // $priceMyr = 100;
+
         $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
         if(config('billplz.billplz_mhx_sandbox')) {
             $billplz->useSandbox();
