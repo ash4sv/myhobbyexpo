@@ -173,7 +173,7 @@ class MHXCupController extends Controller
             'team_group'                => $request->team_group,
             'registration'              => $request->registration,
             'merchandises'              => $request->merchandises,
-            'runNum'                    => ltrim($request->runNum),
+            'runNum'                    => $request->runNum,
         ]);
 
         Cache::put('WebHook', $passingData, now()->addMinute(20));
@@ -307,7 +307,7 @@ class MHXCupController extends Controller
                             $nickname->racer_id  = $racer->id;
                             $nickname->uniq      = $uniq;
                             $nickname->nickname  = $racer->nickname;
-                            $nickname->register  = $runNumber;
+                            $nickname->register  = ltrim($runNumber, 0);
                             $nickname->shirt_zie = $merchandise;
                             $nickname->save();
 
