@@ -11,6 +11,10 @@
 
     <!-- Invoice styling -->
     <style>
+        @page {
+            margin: 15px;
+        }
+
         body {
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             text-align: center;
