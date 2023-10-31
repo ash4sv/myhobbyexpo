@@ -318,7 +318,7 @@ class MHXCupController extends Controller
 
                 Log::info('== RACER RUNNING NUMBER ==');
 
-                /*DB::table('billplz_webhook')->insert([
+                DB::table('billplz_webhook')->insert([
                     'shopref'       => $webHook['uniq'],
                     'billplz_id'    => $data['id'],
                     'collection_id' => $data['collection_id'],
@@ -335,7 +335,7 @@ class MHXCupController extends Controller
                     'x_signature'   => $data['x_signature'],
                     'created_at'    => now(),
                     'updated_at'    => now(),
-                ]);*/
+                ]);
 
                 Log::info('=== BILLPLZ WEBHOOK SAVED ===');
 
@@ -356,7 +356,7 @@ class MHXCupController extends Controller
                 ];
 
                 $customPaper = [0, 0, 595.28, 841.89];
-                $pdf = PDF::loadView('mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+                $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
                     ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
                 Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
 
