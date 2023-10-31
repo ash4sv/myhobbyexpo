@@ -173,7 +173,7 @@ class MHXCupController extends Controller
             'team_group'                => $request->team_group,
             'registration'              => $request->registration,
             'merchandises'              => $request->merchandises,
-            'runNum'                    => $request->runNum,
+            'runNum'                    => ltrim($request->runNum),
         ]);
 
         Cache::put('WebHook', $passingData, now()->addMinute(20));
@@ -318,7 +318,7 @@ class MHXCupController extends Controller
 
                 Log::info('== RACER RUNNING NUMBER ==');
 
-                DB::table('billplz_webhook')->insert([
+                /*DB::table('billplz_webhook')->insert([
                     'shopref'       => $webHook['uniq'],
                     'billplz_id'    => $data['id'],
                     'collection_id' => $data['collection_id'],
@@ -335,7 +335,7 @@ class MHXCupController extends Controller
                     'x_signature'   => $data['x_signature'],
                     'created_at'    => now(),
                     'updated_at'    => now(),
-                ]);
+                ]);*/
 
                 Log::info('=== BILLPLZ WEBHOOK SAVED ===');
 
