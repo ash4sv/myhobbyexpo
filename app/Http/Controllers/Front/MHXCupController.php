@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MHXCup\MHXCupRequest;
+use App\Mail\SendConfirmationMHXCupEmail;
 use App\Models\Apps\MHXCup\RacerNickNameRegister;
 use App\Models\Apps\MHXCup\RacerRegister;
 use App\Services\ImageUploader;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 use Billplz\Client;
@@ -363,6 +365,8 @@ class MHXCupController extends Controller
                     ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
                 Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
 
+                Mail::to($racer->email)->send(new SendConfirmationMHXCupEmail($pdfData));
+                Log::info('== EMAIL SENT ==');
                 Log::info('== MHX CUP REGISTER DONE ==');
 
             } elseif ($data['paid'] == 'false') {
