@@ -260,6 +260,9 @@ class MHXCupController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
+        $billplzId = data_get($request->all());
+        Log::info($billplzId);
+
         if (!empty($data) || !empty($webHook)){
 
             Log::info('== MHXCUP PAYMENT ==');
@@ -320,19 +323,19 @@ class MHXCupController extends Controller
 
                 $billplzData = [
                     'shopref'       => $webHook['uniq'],
-                    'billplz_id'    => $data[0]['id'],
-                    'collection_id' => $data[0]['collection_id'],
-                    'paid'          => $data[0]['paid'],
-                    'state'         => $data[0]['state'],
-                    'amount'        => $data[0]['amount'],
-                    'paid_amount'   => $data[0]['paid_amount'],
-                    'due_at'        => $data[0]['due_at'],
-                    'email'         => $data[0]['email'],
-                    'mobile'        => $data[0]['mobile'],
-                    'name'          => $data[0]['name'],
-                    'url'           => $data[0]['url'],
-                    'paid_at'       => $data[0]['paid_at'],
-                    'x_signature'   => $data[0]['x_signature'],
+                    'billplz_id'    => $data['id'],
+                    'collection_id' => $data['collection_id'],
+                    'paid'          => $data['paid'],
+                    'state'         => $data['state'],
+                    'amount'        => $data['amount'],
+                    'paid_amount'   => $data['paid_amount'],
+                    'due_at'        => $data['due_at'],
+                    'email'         => $data['email'],
+                    'mobile'        => $data['mobile'],
+                    'name'          => $data['name'],
+                    'url'           => $data['url'],
+                    'paid_at'       => $data['paid_at'],
+                    'x_signature'   => $data['x_signature'],
                     'created_at'    => now(),
                     'updated_at'    => now(),
                 ];
