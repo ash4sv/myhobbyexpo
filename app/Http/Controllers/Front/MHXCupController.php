@@ -24,8 +24,8 @@ class MHXCupController extends Controller
 
     public function welcome()
     {
-        /*return view($this->view.'welcome');*/
-        return view('front.maintenance');
+        return view($this->view.'welcome');
+        // return view('front.maintenance');
     }
 
     public function register()
