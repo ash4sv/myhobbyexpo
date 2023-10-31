@@ -29,7 +29,7 @@
                 <span class="logo"></span> <b>Our Site</b> Is Under Maintenance
             </div>
             <div class="desc">
-                Will back at 31 Oct 2023 23:59 <br>
+                Will back at 31 Oct 2023 01:00 <br>
                 <h4>Please be patient</h4>
             </div>
             <div class="h-500px"></div>
