@@ -251,7 +251,7 @@ class MHXCupController extends Controller
             }
         } elseif ($bill['data']['paid'] == 'false') {
             Alert::warning('We are sorry', 'Your payment don\'t go through');
-            return redirect()->route('front.register');
+            return 'payment cancel';
         }
     }
 
