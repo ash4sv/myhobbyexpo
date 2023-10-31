@@ -260,105 +260,118 @@ class MHXCupController extends Controller
         $webHook = Cache::pull('WebHook');
         $data    = $request->all();
 
-        if (!empty($webHook)) {
+        if (!empty($data) || !empty($webHook)){
+
             Log::info('== MHXCUP PAYMENT ==');
             Log::info($webHook);
-            Log::info($data);
-            Log::info('== MHXCUP PAYMENT PROSES START '. date('Ymd/m/y H:i') .' ==');
 
-            $racer = new RacerRegister();
-            $racer->category                  = $webHook['category'];
-            $racer->price_category            = $webHook['price_category'];
-            $racer->total_cost                = $webHook['total_cost'];
-            $racer->full_name                 = $webHook['full_name'];
-            $racer->identification_card_number = $webHook['identification_card_number'];
-            $racer->phone_number              = $webHook['phone_number'];
-            $racer->email                     = $webHook['email'];
-            $racer->nickname                  = $webHook['nickname'];
-            $racer->team_group                = $webHook['team_group'];
-            $racer->registration              = $webHook['registration'];
-            $racer->receipt                   = null;
-            $racer->approval                  = true;
-            $racer->save();
+            if ($data['paid'] == 'true') {
 
-            Log::info('== RACER REGISTER ==');
+                Log::info('==');
+                Log::info($data);
+                Log::info('== MHXCUP PAYMENT PROSES START '. date('Ymd/m/y H:i') .' ==');
 
-            if ($webHook['registration'] > 0) {
-                $uniq = $webHook['uniq'];
-                $runNum = $webHook['runNum'];
-                $merchandises = $webHook['merchandises'] ?? [];
+                $racer = new RacerRegister();
+                $racer->category                  = $webHook['category'];
+                $racer->price_category            = $webHook['price_category'];
+                $racer->total_cost                = $webHook['total_cost'];
+                $racer->full_name                 = $webHook['full_name'];
+                $racer->identification_card_number = $webHook['identification_card_number'];
+                $racer->phone_number              = $webHook['phone_number'];
+                $racer->email                     = $webHook['email'];
+                $racer->nickname                  = $webHook['nickname'];
+                $racer->team_group                = $webHook['team_group'];
+                $racer->registration              = $webHook['registration'];
+                $racer->receipt                   = null;
+                $racer->approval                  = true;
+                $racer->save();
 
-                // Check if both arrays are not empty before combining
-                if (!empty($runNum)) {
-                    // Merge the arrays to ensure that "runNum" is processed
-                    $combinedData = array_map(null, $runNum, $merchandises);
+                Log::info('== RACER REGISTER ==');
 
-                    foreach ($combinedData as $data) {
-                        $runNumber = $data[0];
-                        $merchandise = $data[1];
+                if ($webHook['registration'] > 0) {
+                    $uniq = $webHook['uniq'];
+                    $runNum = $webHook['runNum'];
+                    $merchandises = $webHook['merchandises'] ?? [];
 
-                        $nickname = new RacerNickNameRegister();
-                        $nickname->category  = $racer->category;
-                        $nickname->racer_id  = $racer->id;
-                        $nickname->uniq      = $uniq;
-                        $nickname->nickname  = $racer->nickname;
-                        $nickname->register  = $runNumber;
-                        $nickname->shirt_zie = $merchandise;
-                        $nickname->save();
+                    // Check if both arrays are not empty before combining
+                    if (!empty($runNum)) {
+                        // Merge the arrays to ensure that "runNum" is processed
+                        $combinedData = array_map(null, $runNum, $merchandises);
 
-                        $lastNum = $nickname;
+                        foreach ($combinedData as $data) {
+                            $runNumber = $data[0];
+                            $merchandise = $data[1];
+
+                            $nickname = new RacerNickNameRegister();
+                            $nickname->category  = $racer->category;
+                            $nickname->racer_id  = $racer->id;
+                            $nickname->uniq      = $uniq;
+                            $nickname->nickname  = $racer->nickname;
+                            $nickname->register  = $runNumber;
+                            $nickname->shirt_zie = $merchandise;
+                            $nickname->save();
+
+                            $lastNum = $nickname;
+                        }
                     }
                 }
+
+                Log::info('== RACER RUNNING NUMBER ==');
+
+                /*DB::table('billplz_webhook')->insert([
+                    'shopref'       => $webHook['uniq'],
+                    'billplz_id'    => $data['id'],
+                    'collection_id' => $data['collection_id'],
+                    'paid'          => $data['paid'],
+                    'state'         => $data['state'],
+                    'amount'        => $data['amount'],
+                    'paid_amount'   => $data['paid_amount'],
+                    'due_at'        => $data['due_at'],
+                    'email'         => $data['email'],
+                    'mobile'        => $data['mobile'],
+                    'name'          => $data['name'],
+                    'url'           => $data['url'],
+                    'paid_at'       => $data['paid_at'],
+                    'x_signature'   => $data['x_signature'],
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ]);*/
+
+                Log::info('=== BILLPLZ WEBHOOK SAVED ===');
+
+                $pdfData = [
+                    'uniq'                      => $webHook['uniq'],
+                    'full_name'                 => $webHook['full_name'],
+                    'identification_card_number' => $racer->identification_card_number,
+                    'group'                     => $racer->team_group,
+                    'email'                     => $racer->email,
+                    'phone_number'              => $racer->phone_number,
+                    'create_date'               => $racer->created_at,
+                    'category'                  => $racer->category,
+                    'registration'              => $racer->registration,
+                    'price_category'            => $racer->price_category,
+                    'total_cost'                => $racer->total_cost,
+                    'runNum'                    => $racer->numberRegister,
+                    'nickname'                  => $racer->nickname,
+                ];
+
+                $customPaper = [0, 0, 595.28, 841.89];
+                $pdf = PDF::loadView('mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+                    ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
+                Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
+
+            } elseif ($data['paid'] == 'false') {
+
+                Log::info('=== CANCEL OF PAYMENT MHXCUp ===');
+                Log::debug($data);
+                Log::info('=== UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
+
             }
+        } else {
 
-            Log::info('== RACER RUNNING NUMBER ==');
+            Log::info('NO RETURN');
+            Log::info('=== MHXCUP UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
 
-            DB::table('billplz_webhook')->insert([
-                'shopref'       => $webHook['uniq'],
-                'billplz_id'    => null,
-                'collection_id' => $data['collection_id'],
-                'paid'          => $data['paid'],
-                'state'         => $data['state'],
-                'amount'        => $data['amount'],
-                'paid_amount'   => $data['paid_amount'],
-                'due_at'        => $data['due_at'],
-                'email'         => $data['email'],
-                'mobile'        => $data['mobile'],
-                'name'          => $data['name'],
-                'url'           => $data['url'],
-                'paid_at'       => $data['paid_at'],
-                'x_signature'   => $data['x_signature'],
-                'created_at'    => now(),
-                'updated_at'    => now(),
-            ]);
-
-            Log::info('=== BILLPLZ WEBHOOK SAVED ===');
-
-            $pdfData = [
-                'uniq'                      => $webHook['uniq'],
-                'full_name'                 => $webHook['full_name'],
-                'identification_card_number' => $racer->identification_card_number,
-                'group'                     => $racer->team_group,
-                'email'                     => $racer->email,
-                'phone_number'              => $racer->phone_number,
-                'create_date'               => $racer->created_at,
-                'category'                  => $racer->category,
-                'registration'              => $racer->registration,
-                'price_category'            => $racer->price_category,
-                'total_cost'                => $racer->total_cost,
-                'runNum'                    => $racer->numberRegister,
-                'nickname'                  => $racer->nickname,
-            ];
-
-            $customPaper = [0, 0, 595.28, 841.89];
-            $pdf = PDF::loadView('mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
-                ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
-            Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
-
-        } elseif ($data['paid'] == 'false') {
-            Log::info('=== CANCEL OF PAYMENT MHXCUp ===');
-            Log::debug($data);
-            Log::info('=== UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
         }
     }
 }
