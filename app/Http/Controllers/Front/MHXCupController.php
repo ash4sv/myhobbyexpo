@@ -315,7 +315,7 @@ class MHXCupController extends Controller
 
             DB::table('billplz_webhook')->insert([
                 'shopref'       => $webHook['uniq'],
-                'billplz_id'    => $data['id'],
+                'billplz_id'    => null,
                 'collection_id' => $data['collection_id'],
                 'paid'          => $data['paid'],
                 'state'         => $data['state'],

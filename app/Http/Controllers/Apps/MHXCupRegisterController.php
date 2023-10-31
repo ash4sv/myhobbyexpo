@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\MHXCup\RacerRegister;
 use Illuminate\Http\Request;
 
 class MHXCupRegisterController extends Controller
@@ -15,7 +16,10 @@ class MHXCupRegisterController extends Controller
      */
     public function index()
     {
-        return view($this->view.'index');
+        $registers = RacerRegister::where('category', 'b-max class b')->get();
+        return view($this->view.'index', [
+            'registers' => $registers
+        ]);
     }
 
     /**

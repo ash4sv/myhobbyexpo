@@ -6,4 +6,11 @@
 
 @section('content')
 
+    @foreach($registers as $register)
+        {{ $register->full_name }} <br> {{ $register->nickname }}<br>
+        @foreach($register->numberRegister as $number)
+            {{ $number->register }} <br>
+        @endforeach
+    @endforeach
+
 @endsection
