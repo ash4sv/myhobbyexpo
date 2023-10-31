@@ -125,7 +125,7 @@
 
                     <div class="card mb-4" id="section_c">
                         <div class="card-body">
-                            <h5 class="font-weight-700">Section C - Merchandise</h5>
+                            <h5 class="font-weight-700">Section C - Race ID</h5>
                             <hr class="my-10px">
 
                             <div id="merchandise_">
@@ -269,7 +269,7 @@
                     // Add the Section C - Merchandise structure without image
                     $("#section_c").append(
                         '<div class="card-body">' +
-                        '<h5 class="font-weight-700">Section C - Merchandise</h5>' +
+                        '<h5 class="font-weight-700">Section C - Race ID</h5>' +
                         '<hr class="my-10px">' +
                         '<div id="merchandise_"></div>' +
                         '</div>'
