@@ -12,13 +12,18 @@
     <!-- Invoice styling -->
     <style>
         @page {
-            margin: 15px;
+            margin: 0px;
+        }
+
+        html {
+            margin: 0px
         }
 
         body {
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             text-align: center;
             color: #777;
+            margin: 0px;
         }
 
         body h1 {
