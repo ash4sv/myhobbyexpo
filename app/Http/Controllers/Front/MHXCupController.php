@@ -258,7 +258,7 @@ class MHXCupController extends Controller
     public function webhook(Request $request)
     {
         $webHook = Cache::pull('WebHook');
-        $data[0] = $request->all();
+        $data    = $request->all();
 
         if (!empty($data) || !empty($webHook)){
 
