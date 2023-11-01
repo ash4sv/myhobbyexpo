@@ -170,7 +170,7 @@ class MHXCupController extends Controller
             'full_name'                 => strtoupper($request->full_name),
             'identification_card_number' => $request->identification_card_number,
             'phone_number'              => $request->phone_number,
-            'email'                     => $request->email,
+            'email'                     => strtolower($request->email),
             'nickname'                  => strtoupper($request->nickname),
             'team_group'                => $request->team_group,
             'registration'              => $request->registration,
