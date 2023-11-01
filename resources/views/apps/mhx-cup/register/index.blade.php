@@ -111,8 +111,11 @@
                         console.log(item.number_register);
 
                         raceID += item.nickname + number.register.toString().padStart(3, '0');
-                        if (key !== item.number_register.length - 1) {
+                        if (key !== item.number_register.length - 1 && key % 4 !== 3) {
                             raceID += ', ';
+                        }
+                        if (key % 4 === 3) {
+                            raceID += '<br>';
                         }
                     });
                     tr.append('<td class="text-uppercase">' + raceID + '</td>');
@@ -135,6 +138,8 @@
                         '</td>');
 
                     targetTable.append(tr);
+
+                    $('.data-table').DataTable();
                 });
             });
         });

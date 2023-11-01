@@ -167,7 +167,7 @@ class MHXCupController extends Controller
             'category'                  => $request->category,
             'price_category'            => $request->price_category,
             'total_cost'                => $request->total_cost,
-            'full_name'                 => $request->full_name,
+            'full_name'                 => strtoupper($request->full_name),
             'identification_card_number' => $request->identification_card_number,
             'phone_number'              => $request->phone_number,
             'email'                     => $request->email,
