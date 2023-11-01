@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendConfirmationMHXCupEmail;
 use App\Models\Apps\BoothNumber;
+use App\Models\Apps\MHXCup\RacerRegister;
 use App\Models\Apps\PreRegistration;
 use App\Models\Apps\Section;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -183,5 +187,56 @@ class AppsController extends Controller
     public function debugBillplz(Request $request)
     {
         return view('apps.billplz.debug.form');
+    }
+
+    public function categoryCup(Request $request)
+    {
+        $categoryLoad = $request->input('category');
+        $data = RacerRegister::where('category', $categoryLoad)->get();
+        return response()->json($data);
+    }
+
+    public function approveRegister(Request $request)
+    {
+        $registered = RacerRegister::where('id', $request->id)->first();
+        $registered->update([
+            'approval' => true
+        ]);
+
+        if ($registered) {
+            $lastNumberRegister = $registered->numberRegister->last();
+            if ($lastNumberRegister) {
+                $register = $lastNumberRegister->uniq;
+            } else {
+                // Handle the case where no 'numberRegister' records exist for the given 'RacerRegister'.
+            }
+        } else {
+            // Handle the case where no 'RacerRegister' records were found for the given category.
+        }
+
+        $pdfData = [
+            'uniq'                      => '',
+            'full_name'                 => $registered->full_name,
+            'identification_card_number' => $registered->identification_card_number,
+            'group'                     => $registered->team_group,
+            'email'                     => $registered->email,
+            'phone_number'              => $registered->phone_number,
+            'create_date'               => $registered->created_at,
+            'category'                  => $registered->category,
+            'registration'              => $registered->registration,
+            'price_category'            => $registered->price_category,
+            'total_cost'                => $registered->total_cost,
+            'runNum'                    => $registered->numberRegister,
+            'nickname'                  => $registered->nickname,
+        ];
+
+        $customPaper = [0, 0, 595.28, 841.89];
+        $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+            ->save(public_path('assets/upload/' . $register.'_'.strtoupper($registered->nickname) . '.pdf'));
+
+        Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
+
+        Alert::success('Racer already approve!!', 'System will send the email to the racer');
+        return redirect()->back();
     }
 }

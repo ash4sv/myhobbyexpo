@@ -1,8 +1,10 @@
 <x-mail::message>
 
+#CONFIRMATION OF REGISTRATION MINI 4WD MXH CUP 2023
+
 Dear {{ $full_name }},
 
-Thank you for registering for the Mini 4WD MHX 2023 racer event. We are excited to have you join us for this thrilling competition!
+Thank you for registering for the MINI 4WD MHX CUP 2023 racer event. We are excited to have you join us for this thrilling competition!
 
 You have registered for the <span style="text-transform: capitalize;">{{ $category }}</span>. Below are your registration details.
 
@@ -26,6 +28,6 @@ Best regards,
 
 Thanks,
 
-Mini 4WD MHX CUP 2023 Organizer
+MINI 4WD MHX CUP 2023 ORGANIZER
 
 </x-mail::message>

@@ -138,6 +138,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('t-shirt', MHXCupTShirtController::class);
                Route::resource('categories', MHXCupCategoryController::class);
                Route::resource('register', MHXCupRegisterController::class);
+               Route::get('registered-recer', [AppsController::class, 'categoryCup'])->name('categoryMhxCup');
+               Route::post('approve-register', [AppsController::class, 'approveRegister'])->name('approveRegister');
            });
            Route::group([
                'prefix'  => 'acl',

@@ -16,10 +16,12 @@ class MHXCupRegisterController extends Controller
      */
     public function index()
     {
+        $title = 'Delete Register!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         $registers = RacerRegister::where('category', 'b-max class b')->get();
-        return view($this->view.'index', [
-            'registers' => $registers
-        ]);
+        return view($this->view.'index');
     }
 
     /**

@@ -176,8 +176,8 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->segment(2) == 'register') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.register.index') }}" class="menu-link"><div class="menu-text">Racer Registered</div></a></div>
-                    <div class="menu-item {{ (request()->segment(2) == 't-shirt') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.t-shirt.index') }}" class="menu-link"><div class="menu-text">T-Shirt</div></a></div>
-                    <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.categories.index') }}" class="menu-link"><div class="menu-text">Category</div></a></div>
+                    {{--<div class="menu-item {{ (request()->segment(2) == 't-shirt') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.t-shirt.index') }}" class="menu-link"><div class="menu-text">T-Shirt</div></a></div>
+                    <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.categories.index') }}" class="menu-link"><div class="menu-text">Category</div></a></div>--}}
                 </div>
             </div>
 
