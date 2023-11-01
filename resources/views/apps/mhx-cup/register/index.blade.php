@@ -101,17 +101,17 @@
 
                 $.each(data, function(index, item) {
 
-                    console.log(item);
-
                     var tr = $('<tr>');
                     tr.append('<td>' + (index + 1) + '</td>');
                     tr.append('<td class="text-uppercase">' + item.full_name + '</td>');
                     tr.append('<td>' + item.email + '</td>');
 
                     var raceID = '';
-                    $.each(item.numberRegister, function(key, number) {
-                        raceID += item.nickname + sprintf("%03s", number.register);
-                        if (key !== item.numberRegister.length - 1) {
+                    $.each(item.number_register, function(key, number) {
+                        console.log(item.number_register);
+
+                        raceID += item.nickname + number.register.toString().padStart(3, '0');
+                        if (key !== item.number_register.length - 1) {
                             raceID += ', ';
                         }
                     });

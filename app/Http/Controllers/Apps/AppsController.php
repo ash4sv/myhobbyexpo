@@ -192,7 +192,7 @@ class AppsController extends Controller
     public function categoryCup(Request $request)
     {
         $categoryLoad = $request->input('category');
-        $data = RacerRegister::where('category', $categoryLoad)->get();
+        $data = RacerRegister::with('numberRegister')->where('category', $categoryLoad)->get();
         return response()->json($data);
     }
 
