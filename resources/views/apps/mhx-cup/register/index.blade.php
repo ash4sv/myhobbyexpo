@@ -29,7 +29,7 @@
     <div class="tab-content panel p-3 rounded-0 rounded-bottom">
         <div class="tab-pane fade active show" id="default-tab-1">
 
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+            <table class="mhx-table table table-striped table-bordered align-middle text-nowrap mb-0">
                 <thead>
                 <tr>
                     <th width="1%">No.</th>
@@ -90,60 +90,63 @@
 
 @push('script')
     <script>
+        $(document).ready(function() {
 
-        $('ul.nav-tabs a').on('click', function(e) {
-            e.preventDefault();
-            var categoryLoad = $(this).data('category-load');
-            var targetTable = $('table.data-table tbody');
+            $('ul.nav-tabs a').on('click', function(e) {
+                e.preventDefault();
+                var categoryLoad = $(this).data('category-load');
+                var targetTable = $('table.mhx-table tbody');
 
-            $.get('{{ route('apps.mhx-cup.categoryMhxCup') }}', { category: categoryLoad }, function(data) {
-                targetTable.empty();
+                $.get('{{ route('apps.mhx-cup.categoryMhxCup') }}', { category: categoryLoad }, function(data) {
+                    var urlvar = window.location.href + '/';
+                    var rootUrl = '{{ url('/') }}/';
 
-                $.each(data, function(index, item) {
+                    console.log(rootUrl);
 
-                    var tr = $('<tr>');
-                    tr.append('<td>' + (index + 1) + '</td>');
-                    tr.append('<td class="text-uppercase">' + item.full_name + '</td>');
-                    tr.append('<td>' + item.email + '</td>');
+                    targetTable.empty();
 
-                    var raceID = '';
-                    $.each(item.number_register, function(key, number) {
-                        console.log(item.number_register);
+                    $.each(data, function(index, item) {
+                        var tr = $('<tr>');
+                        tr.append('<td>' + (index + 1) + '</td>');
+                        tr.append('<td class="text-uppercase">' + item.full_name + '</td>');
+                        tr.append('<td>' + item.email + '</td>');
 
-                        raceID += item.nickname + number.register.toString().padStart(3, '0');
-                        if (key !== item.number_register.length - 1 && key % 4 !== 3) {
-                            raceID += ', ';
-                        }
-                        if (key % 4 === 3) {
-                            raceID += '<br>';
-                        }
+                        var raceID = '';
+                        $.each(item.number_register, function(key, number) {
+                            console.log(item.number_register);
+
+                            raceID += item.nickname + number.register.toString().padStart(3, '0');
+                            if (key !== item.number_register.length - 1 && key % 4 !== 3) {
+                                raceID += ', ';
+                            }
+                            if (key % 4 === 3) {
+                                raceID += '<br>';
+                            }
+                        });
+                        tr.append('<td class="text-uppercase">' + raceID + '</td>');
+
+                        tr.append('<td>' + item.team_group + '</td>');
+                        tr.append('<td>' + item.registration + '</td>');
+                        tr.append('<td>' + item.total_cost + '</td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.invoice + '" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-xs btn-indigo btn-sm my-n1 ms-2">View Receipt</a></td>');
+
+                        var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
+                        var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
+                        tr.append('<td width="1%" class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span>' +
+                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
+
+                        tr.append('<td>' +
+                            '<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>' +
+                            '<a href="' + urlvar + item.id + '/edit' + '" class="btn btn-sm btn-primary btn-sm my-n1 ms-1"><i class="fas fa-pencil-alt"></i></a>' +
+                            '<a href="' + urlvar + 'destroy/' + item.id + '" class="btn btn-sm btn-danger btn-sm my-n1 ms-1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>' +
+                            '</td>');
+
+                        targetTable.append(tr);
                     });
-                    tr.append('<td class="text-uppercase">' + raceID + '</td>');
-
-                    tr.append('<td>' + item.team_group + '</td>');
-                    tr.append('<td>' + item.registration + '</td>');
-                    tr.append('<td>' + item.total_cost + '</td>');
-                    tr.append('<td><a data-fancybox href="' + item.invoice + '" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a></td>');
-                    tr.append('<td><a data-fancybox href="' + item.receipt + '" class="btn btn-xs btn-indigo btn-sm my-n1 ms-2">View Receipt</a></td>');
-
-                    var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
-                    var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
-                    tr.append('<td class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span>' +
-                        (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
-
-                    tr.append('<td>' +
-                        '<a href="#" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>' +
-                        '<a href="#" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>' +
-                        '<a href="#" class="btn btn-sm btn-danger btn-sm my-n1"><i class="fas fa-trash-alt"></i></a>' +
-                        '</td>');
-
-                    targetTable.append(tr);
-
-                    $('.data-table').DataTable();
                 });
             });
+
         });
-
-
     </script>
 @endpush
