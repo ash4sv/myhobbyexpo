@@ -39,7 +39,7 @@
                     <th width="13.85714286%">Agent</th>
                     <th width="13.85714286%">Paid</th>
                     <th width="1%"></th>
-                    <th width="1%">#</th>
+                    <th width="1%">#</th>`
                 </tr>
                 </thead>
                 <tbody>
