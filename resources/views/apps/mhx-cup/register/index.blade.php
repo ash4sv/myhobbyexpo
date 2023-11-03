@@ -128,7 +128,7 @@
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
                         tr.append('<td>' + item.total_cost + '</td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.invoice + '" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + '" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a></td>');
                         tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-xs btn-indigo btn-sm my-n1 ms-2">View Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
