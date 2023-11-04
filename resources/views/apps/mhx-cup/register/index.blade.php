@@ -135,9 +135,9 @@
                             (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
 
                         tr.append('<td>' +
-                            '<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>' +
-                            '<a href="' + urlvar + item.id + '/edit' + '" class="btn btn-sm btn-primary btn-sm my-n1 ms-1"><i class="fas fa-pencil-alt"></i></a>' +
-                            '<a href="' + urlvar + 'destroy/' + item.id + '" class="btn btn-sm btn-danger btn-sm my-n1 ms-1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>' +
+                            '@can('mhx-cup-show')<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>@endcan' +
+                            '@can('mhx-cup-edit')<a href="' + urlvar + item.id + '/edit' + '" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>@endcan' +
+                            '@can('mhx-cup-delete') <a href="' + urlvar + 'destroy/' + item.id + '" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a> @endcan' +
                             '</td>');
 
                         targetTable.append(tr);
