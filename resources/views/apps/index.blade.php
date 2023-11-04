@@ -125,7 +125,7 @@
 
     @hasanyrole('mhxcup-admin')
     <a href="{{ route('apps.mhx-cup.register.index') }}" class="btn btn-indigo">Go to MHX CUP Registered List</a>
-    @endhasnayrole
+    @endhasanyrole
 
     @php
         $index = 0;
