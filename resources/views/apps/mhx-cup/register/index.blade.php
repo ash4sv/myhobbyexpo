@@ -6,7 +6,6 @@
 
 @section('content')
 
-
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
         <li class="breadcrumb-item"><a href="javascript:;">Page Options</a></li>
@@ -46,40 +45,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{--@foreach($registers as $register)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td class="text-uppercase">{{ $register->full_name }}</td>
-                        <td>{{ $register->email }}</td>
-                        <td class="text-uppercase">
-                            @foreach($register->numberRegister as $key => $number)
-                                {{ $register->nickname }}{{ sprintf("%03s", $number->register) }}@if (!$loop->last), @elseif ($key === count($register->numberRegister) - 1). @endif
-                            @endforeach
-                        </td>
-                        <td>{{ $register->team_group }}</td>
-                        <td>{{ $register->registration }}</td>
-                        <td>{{ number_format($register->total_cost, 2) }}</td>
-                        <td>
-                            <a data-fancybox href="{{ asset('assets/upload') }}" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a>
-                        </td>
-                        <td>
-                            <a data-fancybox href="{{ asset($register->receipt) }}" class="btn btn-xs btn-indigo btn-sm my-n1 ms-2">View Receipt</a>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge {{ $register->approval == 1 ? 'bg-primary' : 'bg-danger' }}">
-                                {{ $register->approval == 1 ? 'Approve' : 'Pending' }}
-                            </span>
-                            @if($register->approval == 0)
-                                <a href="#" data-to-approve="{{ $register->id }}" class="btn btn-xs btn-warning btn-sm my-n1 ms-2">Approve</a>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('apps.mhx-cup.register.show', $register) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('apps.mhx-cup.register.edit', $register) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ route('apps.mhx-cup.register.destroy', $register->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                @endforeach--}}
                 </tbody>
             </table>
 
@@ -91,13 +56,9 @@
 @push('script')
     <script>
         $(document).ready(function() {
-
-            $('ul.nav-tabs a').on('click', function(e) {
-                e.preventDefault();
-                var categoryLoad = $(this).data('category-load');
-                var targetTable = $('table.mhx-table tbody');
-
+            function loadData(categoryLoad) {
                 $.get('{{ route('apps.mhx-cup.categoryMhxCup') }}', { category: categoryLoad }, function(data) {
+                    var targetTable = $('table.mhx-table tbody');
                     var urlvar = window.location.href + '/';
                     var rootUrl = '{{ url('/') }}/';
 
@@ -180,6 +141,14 @@
                         targetTable.append(tr);
                     });
                 });
+            }
+
+            loadData($('ul.nav-tabs .nav-link.active').data('category-load'));
+
+            $('ul.nav-tabs a').on('click', function(e) {
+                e.preventDefault();
+                var categoryLoad = $(this).data('category-load');
+                loadData(categoryLoad);
             });
 
         });
