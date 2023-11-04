@@ -99,6 +99,7 @@
                         tr.find('.btn-approval').on('click', function(e) {
                             e.preventDefault();
                             const racerId = $(this).data('to-approve');
+                            const approvalButton = $(this);
 
                             Swal.fire({
                                 title: "Are you sure?",
@@ -124,6 +125,7 @@
                                                     icon: 'success',
                                                 })
                                             }
+                                            approvalButton.closest('td').html('<span class="badge bg-primary">Approved</span>');
                                             tr.find('.btn-receipt, .btn-invoice').removeClass('disabled');
                                         },
                                         error: function(error) {
