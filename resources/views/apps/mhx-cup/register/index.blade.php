@@ -32,6 +32,7 @@
                 <thead>
                 <tr>
                     <th width="1%">No.</th>
+                    <th>Ref</th>
                     <th>Full Name</th>
                     <th>IC Number</th>
                     <th>Race ID</th>
@@ -67,6 +68,7 @@
                     $.each(data, function(index, item) {
                         var tr = $('<tr>');
                         tr.append('<td>' + (index + 1) + '</td>');
+                        tr.append('<td>' + item.uniq + '</td>');
                         tr.append('<td class="text-uppercase">' + item.full_name + '</td>');
                         tr.append('<td>' + item.email + '</td>');
 
