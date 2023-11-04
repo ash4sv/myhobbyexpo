@@ -17,7 +17,7 @@ You have registered for the <span style="text-transform: capitalize;">{{ $catego
 - Category: {{ $category }}
 - Registration slot: {{ $registration }}
 - Nickname: {{ $nickname }}
-- Race ID: @foreach($runNum as $number){{ $nickname }}{{ $number->register }} @if (!$loop->last), @endif @endforeach
+- Race ID: @foreach($runNum as $number){{ $nickname }}{{ sprintf("%03s", $number->register) }} @if (!$loop->last), @endif @endforeach
 
 
 Please find attached a confirmation document containing all the necessary details for your participation. It includes the event schedule, rules and regulations, and other important information. We kindly request that you review the document carefully.
