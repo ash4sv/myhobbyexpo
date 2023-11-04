@@ -123,6 +123,10 @@
     </div>--}}
     @endhasanyrole
 
+    @hasanyrole('mhxcup-admin')
+    <a href="{{ route('apps.mhx-cup.register.index') }}" class="btn btn-indigo">Go to MHX CUP Registered List</a>
+    @endhasnayrole
+
     @php
         $index = 0;
         $date = 0;
