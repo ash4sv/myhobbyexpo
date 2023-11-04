@@ -111,8 +111,7 @@
 
                         var raceID = '';
                         $.each(item.number_register, function(key, number) {
-                            console.log(item.number_register);
-
+                            // console.log(item.number_register);
                             raceID += item.nickname + number.register.toString().padStart(3, '0');
                             if (key !== item.number_register.length - 1 && key % 4 !== 3) {
                                 raceID += ', ';
@@ -126,13 +125,51 @@
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
                         tr.append('<td>' + item.total_cost + '</td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname + '.pdf' + '" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-xs btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname + '.pdf' + '" class="btn btn-invoice btn-xs btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-xs btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
                         var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
                         tr.append('<td width="1%" class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span>' +
-                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
+                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-approval btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
+
+                        tr.find('.btn-approval').on('click', function(e) {
+                            e.preventDefault();
+                            const racerId = $(this).data('to-approve');
+
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You are about to approve this racer.",
+                                icon: "warning",
+                                buttons: ["Cancel", "Approve"],
+                                dangerMode: true,
+                            }).then((willApprove) => {
+                                if (willApprove) {
+                                    // User confirmed, submit a POST request to your Laravel server
+                                    $.ajax({
+                                        method: 'POST',
+                                        url: '{{ route('apps.mhx-cup.approveRegister') }}',
+                                        data: {
+                                            _token : '{{ csrf_token() }}',
+                                            id     : racerId
+                                        },
+                                        success: function(response) {
+                                            if(response.status == true){
+                                                Swal.fire({
+                                                    title: response.title,
+                                                    text: response.msg,
+                                                    icon: 'success',
+                                                })
+                                            }
+                                            tr.find('.btn-receipt, .btn-invoice').removeClass('disabled');
+                                        },
+                                        error: function(error) {
+                                            // Handle error, e.g., show an error message
+                                        }
+                                    });
+                                }
+                            });
+                        });
 
                         tr.append('<td>' +
                             '@can('mhx-cup-show')<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a> @endcan' +

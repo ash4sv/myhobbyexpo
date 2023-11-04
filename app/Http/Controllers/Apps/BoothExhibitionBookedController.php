@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\BoothExhibitionBooked;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BoothExhibitionBookedController extends Controller
@@ -22,9 +23,20 @@ class BoothExhibitionBookedController extends Controller
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view($this->view.'index', [
-            'booths' => BoothExhibitionBooked::all(),
-        ]);
+        $user = Auth::user();
+        $booths = BoothExhibitionBooked::all();
+
+        if ($user->hasAnyRole(['sysadmin', 'master'])){
+            $booths = BoothExhibitionBooked::all();
+        }
+        if ($user->hasRole('agent')) {
+            $booths = BoothExhibitionBooked::all();
+        }
+
+        return $user->roles;
+//        return view($this->view.'index', [
+//            'booths' => $booths
+//        ]);
     }
 
     /**

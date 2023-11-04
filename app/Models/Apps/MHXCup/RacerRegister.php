@@ -12,6 +12,38 @@ class RacerRegister extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
+    protected $fillable = [
+        'uniq',
+        'category',
+        'price_category',
+        'total_cost',
+        'full_name',
+        'identification_card_number',
+        'phone_number',
+        'email',
+        'nickname',
+        'team_group',
+        'registration',
+        'receipt',
+        'approval',
+    ];
+
+    protected $guarded = [
+        'uniq',
+        'category',
+        'price_category',
+        'total_cost',
+        'full_name',
+        'identification_card_number',
+        'phone_number',
+        'email',
+        'nickname',
+        'team_group',
+        'registration',
+        'receipt',
+        'approval',
+    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -199,23 +199,8 @@ class AppsController extends Controller
     public function approveRegister(Request $request)
     {
         $registered = RacerRegister::where('id', $request->id)->first();
-        $registered->update([
-            'approval' => true
-        ]);
-
-        if ($registered) {
-            $lastNumberRegister = $registered->numberRegister->last();
-            if ($lastNumberRegister) {
-                $register = $lastNumberRegister->uniq;
-            } else {
-                // Handle the case where no 'numberRegister' records exist for the given 'RacerRegister'.
-            }
-        } else {
-            // Handle the case where no 'RacerRegister' records were found for the given category.
-        }
-
         $pdfData = [
-            'uniq'                      => '',
+            'uniq'                      => $registered->uniq,
             'full_name'                 => $registered->full_name,
             'identification_card_number' => $registered->identification_card_number,
             'group'                     => $registered->team_group,
@@ -232,11 +217,18 @@ class AppsController extends Controller
 
         $customPaper = [0, 0, 595.28, 841.89];
         $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
-            ->save(public_path('assets/upload/' . $register.'_'.strtoupper($registered->nickname) . '.pdf'));
+            ->save(public_path('assets/upload/' . $registered->uniq.'_'.strtoupper($registered->nickname) . '.pdf'));
 
-        Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
+        $registered->update([
+            'approval' => true
+        ]);
 
-        Alert::success('Racer already approve!!', 'System will send the email to the racer');
-        return redirect()->back();
+        /*Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));*/
+
+        return response()->json([
+            'status' => true,
+            'title'  => 'Racer already approve!!',
+            'msg'    => 'System will send the email to the racer',
+        ]);
     }
 }

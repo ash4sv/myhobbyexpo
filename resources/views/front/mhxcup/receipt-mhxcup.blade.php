@@ -190,7 +190,7 @@
         <tr class="item">
             <td>
                 @foreach ($runNum as $key => $number)
-                    <span style="text-transform: uppercase;">{{ $nickname }}{{ $number->register }}</span>@if (!$loop->last), @elseif ($key === count($runNum) - 1). @endif
+                    <span style="text-transform: uppercase;">{{ $nickname }}{{ sprintf("%03s",$number->register) }}</span>@if (!$loop->last), @elseif ($key === count($runNum) - 1). @endif
                 @endforeach
             </td>
             <td></td>
