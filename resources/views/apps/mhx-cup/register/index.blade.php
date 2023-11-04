@@ -88,7 +88,7 @@
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
                         tr.append('<td>' + item.total_cost + '</td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname + '.pdf' + '" class="btn btn-invoice btn-xs btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-xs btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
                         tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-xs btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
