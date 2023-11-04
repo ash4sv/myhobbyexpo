@@ -166,6 +166,7 @@
             </div>
             @endcan
 
+            @can('mhx-cup-access')
             <div class="menu-item has-sub {{ (request()->segment(1) == 'mhx-cup') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -180,7 +181,7 @@
                     <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.categories.index') }}" class="menu-link"><div class="menu-text">Category</div></a></div>--}}
                 </div>
             </div>
-
+            @endcan
 
             @can('system-access')
             <div class="menu-header">Systems</div>

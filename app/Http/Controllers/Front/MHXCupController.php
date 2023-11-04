@@ -275,6 +275,7 @@ class MHXCupController extends Controller
                 Log::info('== MHXCUP PAYMENT PROSES START '. date('Ymd/m/y H:i') .' ==');
 
                 $racer = new RacerRegister();
+                $racer->uniq                      = $webHook['uniq'];
                 $racer->category                  = $webHook['category'];
                 $racer->price_category            = $webHook['price_category'];
                 $racer->total_cost                = $webHook['total_cost'];
