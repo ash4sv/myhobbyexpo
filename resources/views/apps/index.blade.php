@@ -126,6 +126,9 @@
     @hasanyrole('mhxcup-admin')
     <a href="{{ route('apps.mhx-cup.register.index') }}" class="btn btn-indigo">Go to MHX CUP Registered List</a>
     @endhasanyrole
+    @hasrole('agent')
+    <a href="{{ route('apps.booth-booked.index') }}" class="btn btn-indigo">Booth Booked</a>
+    @endhasrole
 
     @php
         $index = 0;
