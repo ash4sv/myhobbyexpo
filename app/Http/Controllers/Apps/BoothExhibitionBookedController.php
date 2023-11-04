@@ -33,10 +33,9 @@ class BoothExhibitionBookedController extends Controller
             $booths = BoothExhibitionBooked::all();
         }
 
-        return $user->roles;
-//        return view($this->view.'index', [
-//            'booths' => $booths
-//        ]);
+        return view($this->view.'index', [
+            'booths' => $booths
+        ]);
     }
 
     /**
