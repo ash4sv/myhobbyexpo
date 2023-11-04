@@ -121,13 +121,12 @@
         </div>
         @endforeach
     </div>--}}
-
+    @endhasanyrole
 
     @php
         $index = 0;
         $date = 0;
     @endphp
-    @endhasanyrole
 
     {{--[@foreach($dailyCounts as $data)[ {{ $index++ }}, {{ $data->count }}],@endforeach] <br>--}}
     {{--[[0, 10], [1, 8], [2, 4], [3, 13], [4, 17], [5, 9],] <br><br>--}}
