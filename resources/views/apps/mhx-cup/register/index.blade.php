@@ -88,13 +88,13 @@
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
                         tr.append('<td>' + item.total_cost + '</td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-xs btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-xs btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
                         var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
                         tr.append('<td width="1%" class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span>' +
-                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-xs btn-warning btn-approval btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
+                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-warning btn-approval btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
 
                         tr.find('.btn-approval').on('click', function(e) {
                             e.preventDefault();
