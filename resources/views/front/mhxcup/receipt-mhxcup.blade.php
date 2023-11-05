@@ -142,7 +142,7 @@
                         <td>
                             Invoice #: {{ $uniq }}<br />
                             Created: {{ date('d-m-Y', strtotime($create_date)) }}<br />
-                            Due: February 1, 2023
+                            {{--Due: February 1, 2023--}}
                         </td>
                     </tr>
                 </table>
