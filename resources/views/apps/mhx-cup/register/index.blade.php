@@ -105,10 +105,12 @@
                                 title: "Are you sure?",
                                 text: "You are about to approve this racer.",
                                 icon: "warning",
-                                buttons: ["Cancel", "Approve"],
-                                dangerMode: true,
+                                type: "warning",
+                                showDenyButton: true,
+                                confirmButtonText: 'Yes',
+                                denyButtonText: 'No',
                             }).then((willApprove) => {
-                                if (willApprove) {
+                                if (willApprove.isConfirmed) {
                                     const loadingIcon = $('<i class="fas fa-spinner fa-spin"></i>');
                                     approvalButton.html(loadingIcon);
 
@@ -133,6 +135,13 @@
                                         error: function(error) {
                                             // Handle error, e.g., show an error message
                                         }
+                                    });
+                                } else if (willApprove.isDenied) {
+                                    Swal.fire({
+                                        title: "Changes are not saved",
+                                        text: "Racer have not been approved!",
+                                        icon: "info",
+                                        type: "info",
                                     });
                                 }
                             });
