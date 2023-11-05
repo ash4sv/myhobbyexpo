@@ -109,7 +109,9 @@
                                 dangerMode: true,
                             }).then((willApprove) => {
                                 if (willApprove) {
-                                    // User confirmed, submit a POST request to your Laravel server
+                                    const loadingIcon = $('<i class="fas fa-spinner fa-spin"></i>');
+                                    approvalButton.html(loadingIcon);
+
                                     $.ajax({
                                         method: 'POST',
                                         url: '{{ route('apps.mhx-cup.approveRegister') }}',
