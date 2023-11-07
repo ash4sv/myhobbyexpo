@@ -222,7 +222,7 @@ class AppsController extends Controller
 
         $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
 
-        Storage::disk('public')->put($pdfPath, $pdf->output());
+        Storage::disk('public')->putFile($pdfPath, $pdf->output(), 'overwrite');
         Log::info('File save ' . $registered->uniq);
 
         $registered->update([
