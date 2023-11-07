@@ -232,7 +232,7 @@ class AppsController extends Controller
             'approval' => true
         ]);
 
-        // Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
+        Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
 
         return response()->json([
             'status' => true,
