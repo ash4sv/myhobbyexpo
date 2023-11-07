@@ -11,8 +11,10 @@ use App\Models\Apps\Section;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -218,21 +220,16 @@ class AppsController extends Controller
         $customPaper = [0, 0, 595.28, 841.89];
         $pdfPath = public_path('assets/upload/' . $registered->uniq.'_'.strtoupper($registered->nickname) . '.pdf');
 
-        if (file_exists($pdfPath)) {
-            // If the file already exists, overwrite it
-            $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
-                ->save($pdfPath);
-        } else {
-            // If the file doesn't exist, create a new one
-            $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
-                ->save($pdfPath);
-        }
+        $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
+
+        Storage::disk('public')->put($pdfPath, $pdf->output());
+        Log::info('File save ' . $registered->uniq);
 
         $registered->update([
             'approval' => true
         ]);
 
-        Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
+        // Mail::to($registered->email)->send(new SendConfirmationMHXCupEmail($pdfData));
 
         return response()->json([
             'status' => true,
