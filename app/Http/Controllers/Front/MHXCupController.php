@@ -178,7 +178,7 @@ class MHXCupController extends Controller
             'runNum'                    => $request->runNum,
         ]);
 
-        Cache::put('WebHook', $passingData, now()->addMinute(20));
+        Cache::put('WebHook', $passingData, now()->addMinute(10));
 
         $priceMyr = ($request->total_cost * 100);
         // $priceMyr = 100;
