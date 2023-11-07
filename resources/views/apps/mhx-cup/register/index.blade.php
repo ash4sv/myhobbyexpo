@@ -28,26 +28,28 @@
     <div class="tab-content panel p-3 rounded-0 rounded-bottom">
         <div class="tab-pane fade active show" id="default-tab-1">
 
-            <table class="mhx-table table table-striped table-bordered align-middle text-nowrap mb-0">
-                <thead>
-                <tr>
-                    <th width="1%">No.</th>
-                    <th>Ref</th>
-                    <th>Full Name</th>
-                    <th>IC Number</th>
-                    <th>Race ID</th>
-                    <th>Team Group</th>
-                    <th>Registration</th>
-                    <th>Total Cost (RM)</th>
-                    <th>Invoices</th>
-                    <th>Receipt</th>
-                    <th width="2%">Approval</th>
-                    <th width="1%">#</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="mhx-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                    <thead>
+                    <tr>
+                        <th width="1%">No.</th>
+                        <th>Ref</th>
+                        <th>Full Name</th>
+                        <th>IC Number</th>
+                        <th>Race ID</th>
+                        <th>Team Group</th>
+                        <th>Registration</th>
+                        <th>Total Cost (RM)</th>
+                        <th>Invoices</th>
+                        <th>Receipt</th>
+                        <th width="2%">Approval</th>
+                        <th width="1%">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
