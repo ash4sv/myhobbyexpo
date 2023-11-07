@@ -120,41 +120,41 @@
                                 <div class="card-body text-center">
                                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-4">SEMI-TECH</h3>
                                     <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">race day</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-0 text-mhx-red">Sunday</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-3 text-mhx-red">3rd December 2023</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">Sunday</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3 text-mhx-red">3rd December 2023</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">free practice</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">8.30am - 10.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">8.30am - 10.00pm</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">rumble session</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">10.00am - 2.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">10.00am - 2.00pm</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">round 1 to final</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-0">2.30pm - 10.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-0">2.30pm - 10.00pm</h4>
                                 </div>
                             </div>
                             <div class="card border-0 bg-mhx-orange">
                                 <div class="card-body text-center">
                                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-4">B-MAX</h3>
                                     <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">race day</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-0 text-mhx-red">Saturday</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-3 text-mhx-red">2nd December 2023</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">Saturday</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3 text-mhx-red">2nd December 2023</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">free practice</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">8.30am - 10.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">8.30am - 10.00pm</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">rumble session</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">10.00am - 2.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">10.00am - 2.00pm</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">round 1 to final</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">2.30pm - 10.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">2.30pm - 10.00pm</h4>
                                 </div>
                             </div>
                             <div class="card border-0 bg-mhx-orange">
                                 <div class="card-body text-center">
                                     <h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-4">STOCK-CAR</h3>
                                     <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">race day</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-0 text-mhx-red">Sunday</h4>
-                                    <h4 class="font-weight-400 text-uppercase mb-3 text-mhx-red">3rd December 2023</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-0 text-mhx-red">Sunday</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3 text-mhx-red">3rd December 2023</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">free practice</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">8.30am - 10.00pm</h4>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">8.30am - 10.00pm</h4>
                                     <h4 class="font-weight-700 text-uppercase mb-0">round 1 to final</h4>
-                                    <h4 class="font-weight-300 text-uppercase mb-3">10.00am - 10.00pm</h4>
-                                    <h5 class="font-weight-600 text-uppercase text-mhx-red"><i>only open to racer 15 years old and below</i></h5>
+                                    <h4 class="font-weight-700 text-uppercase mb-3">10.00am - 10.00pm</h4>
+                                    <h5 class="font-weight-700 text-uppercase text-mhx-red"><i>only open to racer 15 years old and below</i></h5>
                                 </div>
                             </div>
                         </div>
