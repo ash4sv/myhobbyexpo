@@ -132,7 +132,8 @@
                                                 })
                                             }
                                             approvalButton.closest('td').html('<span class="badge bg-primary">Approved</span>');
-                                            tr.find('.btn-receipt, .btn-invoice').removeClass('disabled');
+                                            tr.find('.btn-invoice').removeClass('disabled');
+                                            // tr.find('.btn-receipt, .btn-invoice').removeClass('disabled');
                                         },
                                         error: function(error) {
                                             // Handle error, e.g., show an error message
