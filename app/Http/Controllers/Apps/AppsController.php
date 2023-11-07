@@ -220,15 +220,16 @@ class AppsController extends Controller
         $customPaper = [0, 0, 595.28, 841.89];
         $pdfPath = public_path('assets/upload/' . $registered->uniq.'_'.strtoupper($registered->nickname) . '.pdf');
 
-        if (file_exists($pdfPath)) {
+        if (File::exists($pdfPath)) {
             // If the file already exists, overwrite it
+            File::delete($pdfPath);
             $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
             Log::info('File overwrite ' . $registered->uniq);
         } else {
             // If the file doesn't exist, create a new one
-            $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
-            Log::info('File save ' . $registered->uniq);
-        }
+             $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
+             Log::info('File save ' . $registered->uniq);
+         }
 
         $registered->update([
             'approval' => true
