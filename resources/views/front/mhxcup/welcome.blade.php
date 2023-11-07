@@ -95,6 +95,16 @@
         </div>
 
         <div>
+            <div class="container pt-sm-5 pb-sm-2 pt-4 px-5">
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <img src="{{ asset('assets/images/rule_battery_allowed.jpeg') }}" alt="" class="img-fluid mx-auto img-thumbnail">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ asset('assets/images/rule_motor_allowed.jpeg') }}" alt="" class="img-fluid mx-auto img-thumbnail">
+                    </div>
+                </div>
+            </div>
             <div class="container p-sm-5">
                 <img src="{{ asset('assets/images/mini-4wd/race-with-passion!@4x.png') }}" alt="" class="img-fluid pt-sm-0 pb-sm-0 pt-4 pb-4">
             </div>
@@ -104,7 +114,7 @@
             <div class="container px-sm-5 pt-sm-3 pb-sm-5 py-3">
                 <div class="row">
                     <div class="col-md-12 col-12 p-sm-5 py-4 bg-mhx-orange rounded-5 shadow-lg">
-
+                        <h1 class="text-center font-weight-700 mb-4">EVENT TENTATIVE</h1>
                         <div class="card-group">
                             <div class="card border-0 bg-mhx-orange">
                                 <div class="card-body text-center">
