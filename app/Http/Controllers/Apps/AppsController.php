@@ -223,8 +223,8 @@ class AppsController extends Controller
         if (File::exists($pdfPath)) {
             // If the file already exists, overwrite it
             File::delete($pdfPath);
-            $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
-            Log::info('File overwrite ' . $registered->uniq);
+            // $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
+            // Log::info('File overwrite ' . $registered->uniq);
         } else {
             // If the file doesn't exist, create a new one
              $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')->save($pdfPath);
