@@ -155,7 +155,9 @@
                 var currentDate = new Date();
                 // Clear existing options
                 registrationSelect.empty();
-                
+
+                registrationSelect.append('<option value="0">0</option>');
+
                 if (category === 'semi-tech class a' || category === 'b-max class b') {
                     // Early bird registration
                     if (currentDate <= new Date('2023-11-08')) {
