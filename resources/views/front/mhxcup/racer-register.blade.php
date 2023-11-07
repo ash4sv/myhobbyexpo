@@ -234,7 +234,8 @@
                     required: true
                 },
                 registration: {
-                    required: true
+                    required: true,
+                    min: 1
                 },
                 // receipt: {
                 //     required: true
