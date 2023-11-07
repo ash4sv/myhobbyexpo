@@ -35,7 +35,7 @@
                         <th width="1%">No.</th>
                         <th>Ref</th>
                         <th>Full Name</th>
-                        <th>IC Number</th>
+                        <th>Email</th>
                         <th>Race ID</th>
                         <th>Team Group</th>
                         <th>Registration</th>

@@ -185,16 +185,28 @@
             <td>Register of <span style="text-transform: capitalize !important;">{{ $pdfData['category'] }}</span> <span style="font-weight: bold">( {{ $pdfData['registration'] }} x RM{{ number_format($pdfData['price_category'], 2) }} )</span></td>
             <td>RM{{ number_format($pdfData['total_cost'], 2) }}</td>
         </tr>
+        @isset($pdfData['runNum'])
         <tr class="item">
             <td>
-                @isset($pdfData['runNum'])
+                RACE ID <br>
                 @foreach ($pdfData['runNum'] as $key => $number)
                     <span style="text-transform: uppercase;">{{ $pdfData['nickname'] }}{{ $number }}</span>@if (!$loop->last), @elseif ($key === count($pdfData['runNum']) - 1). @endif
                 @endforeach
-                @endisset
             </td>
             <td></td>
         </tr>
+        @endisset
+        @isset($pdfData['merchandises'])
+        <tr class="item">
+            <td>
+                T-SHIRT SIZE <br>
+                @foreach ($pdfData['merchandises'] as $key => $merchandise)
+                    <span style="text-transform: uppercase;">{{ $merchandise }}</span>@if (!$loop->last), @elseif ($key === count($pdfData['merchandises']) - 1). @endif
+                @endforeach
+            </td>
+            <td></td>
+        </tr>
+        @endisset
         <tr class="total">
             <td></td>
             <td>Total: RM{{ number_format($pdfData['total_cost'], 2) }}</td>

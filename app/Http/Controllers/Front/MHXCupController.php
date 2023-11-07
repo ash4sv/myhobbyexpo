@@ -243,6 +243,7 @@ class MHXCupController extends Controller
                 'price_category'            => $request->session()->pull('price_category'),
                 'total_cost'                => $request->session()->pull('total_cost'),
                 'runNum'                    => $request->session()->pull('runNum'),
+                'merchandises'              => $request->session()->pull('merchandises'),
                 'nickname'                  => $request->session()->pull('nickname')
             ];
 
