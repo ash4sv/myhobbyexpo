@@ -157,7 +157,8 @@
                             <strong>INFINITY PULSE SDN. BHD.</strong><br />
                             16-G, Jalan Seri Rejang 3, <br>
                             Rampai Business Park, South, <br>
-                            Taman Sri Rampai, 53300 Kuala Lumpur, <br>
+                            Taman Sri Rampai, <br>
+                            53300 Kuala Lumpur, <br>
                             Wilayah Persekutuan Kuala Lumpur
                         </td>
                         <td>
@@ -189,12 +190,24 @@
         </tr>
         <tr class="item">
             <td>
+                RACE ID <br>
                 @foreach ($runNum as $key => $number)
                     <span style="text-transform: uppercase;">{{ $nickname }}{{ sprintf("%03s",$number->register) }}</span>@if (!$loop->last), @elseif ($key === count($runNum) - 1). @endif
                 @endforeach
             </td>
             <td></td>
         </tr>
+        @if(!is_null($runNum[0]->shirt_zie))
+        <tr class="item">
+            <td>
+                T-SHIRT SIZE <br>
+                @foreach ($runNum as $key => $number)
+                    <span style="text-transform: uppercase;">{{ $number->shirt_zie }}</span>@if (!$loop->last), @elseif ($key === count($runNum) - 1). @endif
+                @endforeach
+            </td>
+            <td></td>
+        </tr>
+        @endif
         <tr class="total">
             <td></td>
             <td>Total: RM{{ number_format($total_cost, 2) }}</td>

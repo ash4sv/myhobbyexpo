@@ -362,8 +362,22 @@ class MHXCupController extends Controller
                 ];
 
                 $customPaper = [0, 0, 595.28, 841.89];
-                $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
-                    ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
+
+                $pdfPath = public_path('assets/upload/' . $webHook['uniq'] .'_'.strtoupper($racer->nickname) . '.pdf');
+
+                if (file_exists($pdfPath)) {
+                    // If the file already exists, overwrite it
+                    $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+                        ->save($pdfPath);
+                } else {
+                    // If the file doesn't exist, create a new one
+                    $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+                        ->save($pdfPath);
+                }
+
+                // $pdf = PDF::loadView('front.mhxcup.receipt-mhxcup', $pdfData)->setPaper($customPaper, 'portrait')
+                //     ->save(public_path('assets/upload/' . $webHook['uniq'].'_'.strtoupper($racer->nickname) . '.pdf'));
+
                 Log::info('PDF SAVED' . date('d-m-Y-H-i-s'));
 
                 Mail::to($racer->email)->send(new SendConfirmationMHXCupEmail($pdfData));
