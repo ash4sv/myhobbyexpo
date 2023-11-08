@@ -103,7 +103,7 @@
                         var paymentTypeClass = '';
                         switch (item.payment_type) {
                             case 1: // Direct Pay
-                                paymentType = 'Direct Pay',
+                                paymentType = 'Direct',
                                 paymentTypeClass = 'border-lime text-lime';
                                 break;
                             case 2: // BillPlz
