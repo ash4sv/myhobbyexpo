@@ -129,7 +129,7 @@
                                 paymentStatusClass = 'border-danger text-danger';
                                 break;
                             case 1: // paid
-                                paymentStatusBadgeContent = 'Fulfilled';
+                                paymentStatusBadgeContent = 'Paid';
                                 paymentStatusClass = 'border-success text-success';
                                 break;
                             default:
