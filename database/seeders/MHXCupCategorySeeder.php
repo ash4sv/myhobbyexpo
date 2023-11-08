@@ -557,6 +557,8 @@ class MHXCupCategorySeeder extends Seeder
                 if ($lastNumberRegister) {
                     $register = $lastNumberRegister->register;
                 }
+            } else {
+                $register = 0; // Start from 0 if no previous records found
             }
 
             $newRacer = new RacerRegister();
@@ -588,6 +590,8 @@ class MHXCupCategorySeeder extends Seeder
                     'shirt_zie' => $number['shirt_zie'],
                 ]);
                 $nickname->save();
+
+                $register = $nickname->register;
             }
         }
 
@@ -896,6 +900,8 @@ class MHXCupCategorySeeder extends Seeder
                 if ($lastNumberRegister) {
                     $register = $lastNumberRegister->register;
                 }
+            } else {
+                $register = 0; // Start from 0 if no previous records found
             }
 
             $newRacer = new RacerRegister();
@@ -927,6 +933,8 @@ class MHXCupCategorySeeder extends Seeder
                     'shirt_zie' => $number['shirt_zie'],
                 ]);
                 $nickname->save();
+
+                $register = $nickname->register;
             }
         }
 
