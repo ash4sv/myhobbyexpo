@@ -38,7 +38,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'ivanastariyantop13@gmail.com',
                 'nickname' => strtoupper('Ivan'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -63,7 +63,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'drdharmayogaraspb@gmail.com',
                 'nickname' => strtoupper('Dharma'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 2,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -96,7 +96,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'where9848@gmail.com',
                 'nickname' => strtoupper('affendy'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -121,7 +121,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'ngebutbenjut.m4wd@gmail.com',
                 'nickname' => strtoupper('Robert'),
                 'team_group' => 'Avante',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -146,7 +146,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'ngebutbenjut.m4wd@gmail.com',
                 'nickname' => strtoupper('Robert'),
                 'team_group' => 'Avante',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -171,7 +171,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'zakinoordin78@gmail.com',
                 'nickname' => strtoupper('zaki'),
                 'team_group' => 'MZ',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -196,7 +196,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'rizalrazaly@gmail.com',
                 'nickname' => strtoupper('Rizal'),
                 'team_group' => 'ZaK',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -221,7 +221,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'leesengleong668@gmail.com',
                 'nickname' => strtoupper('LEESENG'),
                 'team_group' => 'NA',
-                'registration' => '',
+                'registration' => 3,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -262,7 +262,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'aan_kojenk@yahoo.com',
                 'nickname' => strtoupper('Fauzan'),
                 'team_group' => 'TopTip/aan',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -287,7 +287,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'nuttajibu@gmail.com',
                 'nickname' => strtoupper('Krishpong'),
                 'team_group' => 'OVERDOSE',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -312,7 +312,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'nursalamnorimah88@gmail.com',
                 'nickname' => strtoupper('Nursalam'),
                 'team_group' => 'Southern Brotherhood',
-                'registration' => '',
+                'registration' => 3,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -353,7 +353,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'beemtthham1515@gmail.com',
                 'nickname' => strtoupper('MR BEE'),
                 'team_group' => 'Southern Brotherhood',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => $folder.'1080890469.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -378,7 +378,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'Foo1107@hotmail.com',
                 'nickname' => strtoupper('KAH FOO'),
                 'team_group' => '360',
-                'registration' => '',
+                'registration' => 7,
                 'receipt' => $folder.'5356042283.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -451,7 +451,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'Foo1107@hotmail.com',
                 'nickname' => strtoupper('KAH FOO'),
                 'team_group' => '360',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => $folder.'0666687234.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -476,7 +476,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'nurhansyamilsyah@gmail.com',
                 'nickname' => strtoupper('BOYJB'),
                 'team_group' => 'BHY',
-                'registration' => '',
+                'registration' => 2,
                 'receipt' => $folder.'2159237759.jpg',
                 'approval' => false,
                 'runNum' => [
@@ -509,7 +509,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'banditogoreng@gmail.com',
                 'nickname' => strtoupper('Aswad'),
                 'team_group' => 'NA',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => $folder.'2790687979.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -534,7 +534,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'syahirthani@gmail.com',
                 'nickname' => strtoupper('syahir'),
                 'team_group' => 'NA',
-                'registration' => '',
+                'registration' => 2,
                 'receipt' => $folder.'1483489753.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -609,7 +609,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'ivanastariyantop13@gmail.com',
                 'nickname' => strtoupper('Ivan'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -634,7 +634,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'hermensatria@gmail.com',
                 'nickname' => strtoupper('hermen'),
                 'team_group' => 'TOG',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -659,7 +659,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'salomosibarani@gmail.com',
                 'nickname' => strtoupper('Salomo'),
                 'team_group' => 'TOG',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -684,7 +684,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'drdharmayogaraspb@gmail.com',
                 'nickname' => strtoupper('Dharma'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 2,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -717,7 +717,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'where9848@gmail.com',
                 'nickname' => strtoupper('affendy'),
                 'team_group' => 'MELATI R',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -742,7 +742,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'zakinoordin78@gmail.com',
                 'nickname' => strtoupper('zaki'),
                 'team_group' => 'MZ',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -767,7 +767,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'rizalrazaly@gmail.com',
                 'nickname' => strtoupper('Rizal'),
                 'team_group' => 'ZaK',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -792,7 +792,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'aan_kojenk@yahoo.com',
                 'nickname' => strtoupper('Fauzan'),
                 'team_group' => 'TopTip/aan',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
                 'runNum' => [
@@ -817,7 +817,7 @@ class MHXCupCategorySeeder extends Seeder
                 'email' => 'dinomar4573@gmail.com',
                 'nickname' => strtoupper('deen'),
                 'team_group' => 'Southern Brotherhood',
-                'registration' => '',
+                'registration' => 1,
                 'receipt' => $folder.'7060808117.jpg',
                 'approval' => false,
                 'runNum' => [
@@ -841,8 +841,8 @@ class MHXCupCategorySeeder extends Seeder
                 'phone_number' => '+01111309628',
                 'email' => 'banditogoreng@gmail.com',
                 'nickname' => strtoupper('Aswad'),
-                'team_group' => '',
-                'registration' => '',
+                'team_group' => 'NA',
+                'registration' => 1,
                 'receipt' => $folder.'2790687979.jpeg',
                 'approval' => false,
                 'runNum' => [
@@ -866,8 +866,8 @@ class MHXCupCategorySeeder extends Seeder
                 'phone_number' => '+0193654660',
                 'email' => 'syahirthani@gmail.com',
                 'nickname' => strtoupper('syahir'),
-                'team_group' => '',
-                'registration' => '',
+                'team_group' => 'NA',
+                'registration' => 2,
                 'receipt' => $folder.'1483489753.jpeg',
                 'approval' => false,
                 'runNum' => [
