@@ -153,6 +153,8 @@
                 var category = $("input[name='category']").val();
                 var registrationSelect = $("#registrationSlot");
                 var currentDate = new Date();
+
+                console.log(currentDate);
                 // Clear existing options
                 registrationSelect.empty();
 
@@ -167,14 +169,14 @@
                         console.log('Early bird registration only for 20');
                     }
                     // Pre-event online registration
-                    if (currentDate >= new Date('2023-11-09 23:59:59') && currentDate <= new Date('2023-12-01 23:59:59')) {
+                    if (currentDate >= new Date('2023-11-09 00:00:00') && currentDate <= new Date('2023-12-01 23:59:59')) {
                         for (var i = 1; i <= 20; i++) {
                             registrationSelect.append('<option value="' + i + '">' + i + '</option>');
                         }
                         console.log('Pre-event online registration only for 15');
                     }
                     // Walk-in registration
-                    if (currentDate >= new Date('2023-12-02 23:59:59') && currentDate <= new Date('2023-12-03 23:59:59')) {
+                    if (currentDate >= new Date('2023-12-02 00:00:00') && currentDate <= new Date('2023-12-03 23:59:59')) {
                         for (var i = 1; i <= 15; i++) {
                             registrationSelect.append('<option value="' + i + '">' + i + '</option>');
                         }
@@ -189,14 +191,14 @@
                         console.log('Early bird registration just 5')
                     }
                     // Pre-event online registration
-                    if (currentDate >= new Date('2023-11-09 23:59:59') && currentDate <= new Date('2023-12-01')) {
+                    if (currentDate >= new Date('2023-11-09 00:00:00') && currentDate <= new Date('2023-12-01')) {
                         for (var i = 1; i <= 5; i++) {
                             registrationSelect.append('<option value="' + i + '">' + i + '</option');
                         }
                         console.log('Pre-event online registration just 5')
                     }
                     // Walk-in registration
-                    if (currentDate >= new Date('2023-12-02 23:59:59') && currentDate <= new Date('2023-12-03')) {
+                    if (currentDate >= new Date('2023-12-02 00:00:00') && currentDate <= new Date('2023-12-03')) {
                         for (var i = 1; i <= 5; i++) {
                             registrationSelect.append('<option value="' + i + '">' + i + '</option');
                         }
