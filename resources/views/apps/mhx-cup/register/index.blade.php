@@ -140,7 +140,7 @@
 
                         var paymentStatusBadge = '<span class="badge border ' + paymentStatusClass + ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> ' + paymentStatusBadgeContent + '</span>';
 
-                        tr.append('<td>' + paymentTypeBadge + ' ' + paymentStatusBadge + '</td>');
+                        tr.append('<td class="text-center">' + paymentTypeBadge + ' ' + paymentStatusBadge + '</td>');
 
                         tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">Invoice</a></td>');
                         tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">Receipt</a></td>');
