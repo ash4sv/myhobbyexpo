@@ -14,6 +14,14 @@
 
     <h1 class="page-header">@yield('page-header') {{--<small>header small text goes here...</small>--}}</h1>
 
+{{--    <div class="d-flex align-items-center mb-3">--}}
+{{--        <div class="me-auto">--}}
+{{--            <a href="{{ route('apps.mhx-cup.register.create') }}" class="btn btn-primary px-4">--}}
+{{--                <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Racer--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="" data-category-load="semi-tech class a" data-bs-toggle="tab" class="nav-link px-sm-5 active">Semi-Tech Class A</a>
@@ -40,10 +48,10 @@
                         <th>Team Group</th>
                         <th>Registration</th>
                         <th>Total Cost (RM)</th>
+                        <th width="2%">Payment</th>
                         <th>Invoices</th>
-                        <th>Receipt</th>
-                        <th width="2%">Approval</th>
-                        <th width="1%">#</th>
+                        <th width="2%">Receipt</th>
+                        <th width="1%">Approval</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -90,8 +98,52 @@
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
                         tr.append('<td>' + item.total_cost + '</td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">View Invoice</a></td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">View Receipt</a></td>');
+
+                        var paymentType = '';
+                        var paymentTypeClass = '';
+                        switch (item.payment_type) {
+                            case 1: // Direct Pay
+                                paymentType = 'Direct Pay',
+                                paymentTypeClass = 'border-lime text-lime';
+                                break;
+                            case 2: // BillPlz
+                                paymentType = 'BillPlz',
+                                paymentTypeClass = 'border-info text-info';
+                                break;
+                            case 3: // Cash
+                                paymentType = 'Cash',
+                                paymentTypeClass = 'border-green text-green';
+                                break;
+                            default:
+                                paymentType = 'Unknown',
+                                paymentTypeClass = 'border-dark text-dark';
+                                break;
+                        }
+                        var paymentTypeBadge = '<span class="badge border ' + paymentTypeClass + ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> ' + paymentType + '</span>';
+
+                        var paymentStatusBadgeContent = '';
+                        var paymentStatusClass = '';
+                        switch (item.payment_status) {
+                            case 0: // unpaid
+                                paymentStatusBadgeContent = 'Unpaid';
+                                paymentStatusClass = 'border-danger text-danger';
+                                break;
+                            case 1: // paid
+                                paymentStatusBadgeContent = 'Fulfilled';
+                                paymentStatusClass = 'border-success text-success';
+                                break;
+                            default:
+                                paymentStatusBadgeContent = 'Unknown';
+                                paymentStatusClass = 'border-dark text-dark';
+                                break;
+                        }
+
+                        var paymentStatusBadge = '<span class="badge border ' + paymentStatusClass + ' px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> ' + paymentStatusBadgeContent + '</span>';
+
+                        tr.append('<td>' + paymentTypeBadge + ' ' + paymentStatusBadge + '</td>');
+
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">Invoice</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
                         var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
@@ -134,6 +186,9 @@
                                             approvalButton.closest('td').html('<span class="badge bg-primary">Approved</span>');
                                             tr.find('.btn-invoice').removeClass('disabled');
                                             // tr.find('.btn-receipt, .btn-invoice').removeClass('disabled');
+
+                                            loadData(categoryLoad);
+                                            console.log('Area refresh');
                                         },
                                         error: function(error) {
                                             // Handle error, e.g., show an error message
@@ -150,11 +205,11 @@
                             });
                         });
 
-                        tr.append('<td>' +
-                            '@can('mhx-cup-show')<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a> @endcan' +
-                            '@can('mhx-cup-edit')<a href="' + urlvar + item.id + '/edit' + '" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a> @endcan' +
-                            '@can('mhx-cup-delete') <a href="' + urlvar + 'destroy/' + item.id + '" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a> @endcan' +
-                            '</td>');
+                        {{--tr.append('<td>' +--}}
+                        {{--    '@can('mhx-cup-show')<a href="' + urlvar + item.id + '" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a> @endcan' +--}}
+                        {{--    '@can('mhx-cup-edit')<a href="' + urlvar + item.id + '/edit' + '" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a> @endcan' +--}}
+                        {{--    '@can('mhx-cup-delete') <a href="' + urlvar + 'destroy/' + item.id + '" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a> @endcan' +--}}
+                        {{--    '</td>');--}}
 
                         targetTable.append(tr);
                     });

@@ -104,6 +104,8 @@ class MHXCupController extends Controller
         $racer->registration              = $request->registration;
         $racer->receipt                   = $receipt;
         $racer->approval                  = false;
+        $racer->payment_type              = 1;
+        $racer->payment_status            = true;
         $racer->save();
 
         if ($request->registration > 0) {
@@ -289,6 +291,8 @@ class MHXCupController extends Controller
                 $racer->registration              = $webHook['registration'];
                 $racer->receipt                   = null;
                 $racer->approval                  = true;
+                $racer->payment_type              = 2;
+                $racer->payment_status            = true;
                 $racer->save();
 
                 Log::info('== RACER REGISTER ==');
