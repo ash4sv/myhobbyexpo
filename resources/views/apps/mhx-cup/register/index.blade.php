@@ -93,7 +93,7 @@
                                 raceID += '<br>';
                             }
                         });
-                        tr.append('<td class="text-uppercase">' + raceID + '</td>');\
+                        tr.append('<td class="text-uppercase">' + raceID + '</td>');
 
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
