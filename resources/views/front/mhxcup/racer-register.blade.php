@@ -10,7 +10,7 @@
             <div class="col-md-6 mx-auto">
                 <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
-                    <div class="card mb-4" id="section_a">
+                    <div class="card mb-4" id="section_banner">
                         <div class="card-body">
                             @if($category['category'] == 'semi-tech class a')
                                 <img src="{{ asset('assets/images/mini-4wd/layout-semi-tech.jpeg') }}" alt="" class="img-fluid">
@@ -105,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" id="payment">
                         <div class="card-body">
 
                             <div class="mb-3">
@@ -277,6 +277,21 @@
 
             var lastNum = {{ $lastNum ?? 0 }};
             console.log('Last number for {{ $category['category'] }}', lastNum);
+
+            if( lastNum < 150 ){
+                console.log('Less than 150')
+            } else {
+                $('#section_banner, #section_b, #section_c, #payment').remove();
+                $('#section_a').empty();
+                $("#section_a").append(
+                    '<div class="card-body">' +
+                    '<div id="merchandise_" class="text-center">' +
+                    '<h2>Registration already close</h2>' +
+                    '<h2>See your next year!!!</h2>' +
+                    '</div>' +
+                    '</div>'
+                );
+            }
 
             // Listen for changes in the registration slot selection
             $("#registrationSlot").change(function () {
