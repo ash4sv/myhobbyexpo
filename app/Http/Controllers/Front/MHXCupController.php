@@ -58,7 +58,11 @@ class MHXCupController extends Controller
     {
         /*$lastNum = RacerNickNameRegister::orderBy('id', 'DESC')->first();*/
         $category = $request->session()->only(['category', 'price_category']);
-        $registered = RacerRegister::where('category', $category['category'])->orderBy('id', 'DESC')->first();
+        if (!empty($category['category'])) {
+            $registered = RacerRegister::where('category', $category['category'])->orderBy('id', 'DESC')->first();
+        } else {
+            return redirect()->route('mhxcup.register');
+        }
 
         if ($registered) {
             $lastNumberRegister = $registered->numberRegister->last();
