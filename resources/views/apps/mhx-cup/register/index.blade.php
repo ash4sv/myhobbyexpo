@@ -45,7 +45,6 @@
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Race ID</th>
-                        <th>Tshirt</th>
                         <th>Team Group</th>
                         <th>Registration</th>
                         <th>Total Cost (RM)</th>
@@ -84,7 +83,6 @@
                         tr.append('<td>' + item.email + '</td>');
 
                         var raceID = '';
-                        var tshirt = '';
                         $.each(item.number_register, function(key, number) {
                             // console.log(item.number_register);
                             raceID += item.nickname + number.register.toString().padStart(3, '0');
@@ -94,17 +92,8 @@
                             if (key % 3 === 2) {
                                 raceID += '<br>';
                             }
-
-                            tshirt += number.shirt_zie.toUpperCase();
-                            if (key !== item.number_register.length - 1 && key % 3 !== 2) {
-                                tshirt += ', ';
-                            }
-                            if (key % 3 === 2) {
-                                tshirt += '<br>';
-                            }
                         });
-                        tr.append('<td class="text-uppercase">' + raceID + '</td>');
-                        tr.append('<td class="text-uppercase">' + tshirt + '</td>');
+                        tr.append('<td class="text-uppercase">' + raceID + '</td>');\
 
                         tr.append('<td>' + item.team_group + '</td>');
                         tr.append('<td>' + item.registration + '</td>');
