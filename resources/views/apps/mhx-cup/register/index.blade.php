@@ -114,6 +114,10 @@
                                 paymentType = 'Cash',
                                 paymentTypeClass = 'border-green text-green';
                                 break;
+                            case 4: // Cash
+                                paymentType = 'FoC',
+                                paymentTypeClass = 'border-indigo text-indigo';
+                                break;
                             default:
                                 paymentType = 'Unknown',
                                 paymentTypeClass = 'border-dark text-dark';
