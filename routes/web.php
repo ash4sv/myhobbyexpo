@@ -49,6 +49,8 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
     ], function (){
         Route::get('register', [RegisterController::class, 'register'])->name('register');
         Route::get('register/{hall}', [RegisterController::class, 'registerHall'])->name('register.hall');
+        Route::get('add-on', [RegisterController::class, 'addOn'])->name('addon');
+        Route::post('add-on', [RegisterController::class, 'addOnPost'])->name('addonPost');
 
         Route::post('register', [RegisterController::class, 'booth'])->name('booth');
         Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');
@@ -68,7 +70,10 @@ Route::domain('participant.' . env('APP_URL'))->group(function (){
         'as'        => 'participant.',
     ], function (){
         Route::get('register', [ParticipantController::class, 'formView'])->name('form');
-
+        Route::post('post-register', [ParticipantController::class, 'formPost'])->name('post');
+        Route::get('cart', [ParticipantController::class, 'cartView'])->name('cart');
+        Route::post('remove-cart-item', [ParticipantController::class, 'removeCartItem'])->name('removecartitem');
+        Route::post('update-cart-quantity', [ParticipantController::class, 'updateQuantity'])->name('updatequantity');
     });
 });
 
