@@ -150,8 +150,8 @@ class ParticipantController extends Controller
 
         // push payment gateways
         $cleanedOverallTotal = str_replace(',', '', $overallTotal);
-        // $priceMyr = ($cleanedOverallTotal * 100);
-        $priceMyr = 100;
+        $priceMyr = ($cleanedOverallTotal * 100);
+        // $priceMyr = 100;
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
         if(config('billplz.billplz_sandbox')) {
