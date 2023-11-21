@@ -258,6 +258,27 @@ class ParticipantController extends Controller
                 $ticket->payment_status = true;
                 $ticket->save();
 
+                $billplzData = [
+                    'shopref'       => $visitor->uniq,
+                    'billplz_id'    => $request['id'],
+                    'collection_id' => $request['collection_id'],
+                    'paid'          => $request['paid'],
+                    'state'         => $request['state'],
+                    'amount'        => $request['amount'],
+                    'paid_amount'   => $request['paid_amount'],
+                    'due_at'        => $request['due_at'],
+                    'email'         => $request['email'],
+                    'mobile'        => $request['mobile'],
+                    'name'          => $request['name'],
+                    'url'           => $request['url'],
+                    'paid_at'       => $request['paid_at'],
+                    'x_signature'   => $request['x_signature'],
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ];
+
+                DB::table('billplz_webhook')->insert($billplzData);
+
                 $pdfData = [
                     'visitor' => $visitor,
                     'carts'   => $carts,
