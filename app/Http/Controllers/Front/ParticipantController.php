@@ -147,7 +147,8 @@ class ParticipantController extends Controller
         $uniq = Str::random(8);
 
         // push payment gateways
-        $priceMyr = ($overallTotal * 100);
+        // $priceMyr = ($overallTotal * 100);
+        $priceMyr = 100;
 
         $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
         if(config('billplz.billplz_mhx_sandbox')) {
