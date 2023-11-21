@@ -8,10 +8,10 @@ Thank you for choosing MHX 2023! We are excited to confirm your ticket purchase 
 Transaction Details:
 
 - Event: MHX 2023
-- Ticket Type and Quantity: @foreach(json_decode($carts->cart) as $key => $item) {{ $item->ticketType }}  {{ $item->ticketQuantity }} @if (!$loop->last), @endif @endforeach
-- Total Amount: {{ $carts->overallTotal }}
+- Total Amount: RM {{ number_format($carts->overallTotal, 2) }}
+- Ticket Type and Quantity: @foreach(json_decode($carts->cart) as $key => $item) {{ $item->ticketType }} : {{ $item->ticketQuantity }} @if (!$loop->last), @endif @endforeach
 
-We appreciate your support and look forward to welcoming you to MHX 2023. If you have any further questions or need assistance, feel free to contact our customer support team at [Customer Support Email or Phone Number].
+We appreciate your support and look forward to welcoming you to MHX 2023.
 
 Best regards,
 
