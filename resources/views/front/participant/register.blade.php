@@ -13,6 +13,13 @@
     </div>
 
     <div class="row">
+        <div class="col-md-8 col-lg-6 mx-auto mb-4 text-center">
+            <h4 class="text-white font-weight-700">Please Select Your Pack</h4>
+            <p class="mb-0 text-white">Ticket Information</p>
+        </div>
+    </div>
+
+    <div class="row pb-5">
         <div id="card-container" class="col-md-8 col-lg-6 mx-auto">
         </div>
     </div>

@@ -5,13 +5,21 @@
 @section('reg-form')
 
     <div class="row">
+        <div class="col-md-8 col-lg-6 mx-auto mb-4">
+            <a href="#">
+                <img src="{{ asset('assets/images/logo-event@3x.png') }}" alt="" class="d-block mx-auto mb-10px img-fluid">
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-8 col-lg-6 mx-auto mb-4 text-center">
             <h4 class="text-white font-weight-700">Confirm Your Selection</h4>
             <p class="mb-0 text-white">Please check your selection and click 'Confirm & Checkout' when ready</p>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row pb-5">
         {{--<form id="cart-form">--}}
             <div id="cart-container" class="col-md-10 col-lg-8 mx-auto">
                 <div class="card mb-4" id="data-cart">
@@ -141,6 +149,9 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mb-0">
+                            <p class="mb-0 text-center">By clicking <strong>"Confirm & Checkout"</strong>, I hereby agree and consent to the <a target="_blank" href="#">Terms &amp; Conditions</a> of the event.</p>
                         </div>
                     </div>
                 </div>
@@ -334,6 +345,10 @@
                     phone_number: {
                         required: true,
                     },
+                    agent_code: {
+                        required: true,
+                        min: 1
+                    }
                 },
                 messages: {
                     full_name: {
@@ -348,6 +363,9 @@
                     },
                     phone_number: {
                         required: 'Please enter your phone number.',
+                    },
+                    agent_code: {
+                        required: 'Please select your agent.',
                     },
                 },
                 errorElement: "span",
