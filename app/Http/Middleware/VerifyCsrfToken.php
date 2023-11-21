@@ -16,5 +16,7 @@ class VerifyCsrfToken extends Middleware
         'pay-webhook',
         'mhx-redirect',
         'mhx-webhook',
+        'visitor-redirect',
+        'visitor-webhook',
     ];
 }
