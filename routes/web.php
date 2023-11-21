@@ -74,6 +74,11 @@ Route::domain('participant.' . env('APP_URL'))->group(function (){
         Route::get('cart', [ParticipantController::class, 'cartView'])->name('cart');
         Route::post('remove-cart-item', [ParticipantController::class, 'removeCartItem'])->name('removecartitem');
         Route::post('update-cart-quantity', [ParticipantController::class, 'updateQuantity'])->name('updatequantity');
+        Route::post('update-session', [ParticipantController::class, 'updateSession'])->name('updatesession');
+        Route::post('confirm-checkout', [ParticipantController::class, 'confirmCheckout'])->name('confirmcheckout');
+
+        Route::get('visitor-redirect', [ParticipantController::class, 'redirectUrl'])->name('redirection');
+        Route::post('visitor-webhook', [ParticipantController::class, 'webHook'])->name('webhook');
     });
 });
 

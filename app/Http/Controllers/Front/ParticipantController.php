@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\VisitorTicket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Billplz\Client;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ParticipantController extends Controller
 {
@@ -86,7 +93,10 @@ class ParticipantController extends Controller
                 'message' => 'Item removed successfully']
             );
         } else {
-            return response()->json(['status' => false, 'message' => 'Item not found in the cart']);
+            return response()->json([
+                'status' => false,
+                'message' => 'Item not found in the cart'
+            ]);
         }
     }
 
@@ -107,11 +117,182 @@ class ParticipantController extends Controller
             // Update the cart session
             Session::put('cart', $cart);
 
-            return response()->json(['status' => true, 'message' => 'Quantity updated successfully']);
+            return response()->json([
+                'status' => true,
+                'message' => 'Quantity updated successfully'
+            ]);
         } else {
-            return response()->json(['status' => false, 'message' => 'Item not found in the cart']);
+            return response()->json([
+                'status' => false,
+                'message' => 'Item not found in the cart'
+            ]);
         }
     }
 
+    public function updateSession(Request $request)
+    {
+        Session::put('cart', $request->session()->get('cart', []));
+        return response()->json([
+            'status' => true,
+            'message' => 'Session updated successfully'
+        ]);
+    }
 
+    public function confirmCheckout(Request $request)
+    {
+        // Extract data from the request
+        $cartItems = $request->input('cart');
+        $visitorDetails = $request->input('visitorDetails');
+        $overallTotal = $request->input('overallTotal');
+        $uniq = Str::random(8);
+
+        // push payment gateways
+        $priceMyr = ($overallTotal * 100);
+
+        $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
+        if(config('billplz.billplz_mhx_sandbox')) {
+            $billplz->useSandbox();
+        }
+        $bill = $billplz->bill();
+        $bill = $bill->create(
+            config('billplz.billplz_mhx_collection_id'),
+            $visitorDetails['email'],
+            $visitorDetails['phone_number'],
+            $visitorDetails['full_name'],
+            \Duit\MYR::given($priceMyr),
+            route('participant.webhook'),
+            'Purchasing of MHX Ticket',
+            ['redirect_url' => route('participant.redirection')],
+        );
+
+        // save cart:temp
+        DB::table('carts_temp')->insert([
+            'uniq'         => $uniq,
+            'cart'         => json_encode($cartItems),
+            'overallTotal' => $overallTotal,
+            'created_at'   => now(),
+            'updated_at'   => now(),
+        ]);
+
+        // save visitor:temp
+        DB::table('visitors_temp')->insert([
+            'uniq'       => $uniq,
+            'visitor'    => json_encode($visitorDetails),
+            'billplz'    => json_encode($bill->toArray()),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Session::forget('cart');
+
+        // Return a response indicating success
+        return response()->json([
+            'status' => true,
+            'message' => 'Checkout confirmed successfully',
+            'redirect' => $bill->toArray()['url']
+        ]);
+    }
+
+    public function redirectUrl(Request $request)
+    {
+        // Search in visitor:temp billplz id
+        $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
+        if(config('billplz.billplz_mhx_sandbox')) {
+            $billplz->useSandbox();
+        }
+        $bill = $billplz->bill();
+        try {
+            $bill = $bill->redirect($request->all());
+        } catch(\Exception $e) {
+            dd($e->getMessage());
+        }
+        $bill['data'] = $billplz->bill()->get($bill['id'])->toArray();
+
+        if ($bill['data']['paid'] == 'true') {
+            $id = $bill['data']['id'];
+            $visitor = DB::table('visitors_temp')->whereJsonContains('billplz->id', $id)->first();
+            $carts = DB::table('carts_temp')->where('uniq', $visitor->uniq)->first();
+
+            DB::table('billplz_status')->insert([
+                'shopref'             => $visitor->uniq,
+                'billplz_id'          => $bill['id'],
+                'billplz_paid'        => $bill['paid'],
+                'billplz_paid_at'     => $bill['paid_at'],
+                'billplz_x_signature' => $bill['x_signature'],
+                'created_at'          => now(),
+                'updated_at'          => now(),
+            ]);
+
+            Alert::success('Thank you for registration', 'We will send an email for your reference');
+            return view('front.participant.receipt', [
+                'visitor' => $visitor,
+                'carts'   => $carts
+            ]);
+        } elseif ($bill['data']['paid'] == 'false') {
+            Alert::warning('We are sorry', 'Your payment don\'t go through');
+        }
+
+        // Show receipt
+    }
+
+    public function webhook(Request $request)
+    {
+        $data = $request->all();
+
+        if (!empty($data)) {
+
+            Log::info('==== Ticket ====');
+            if ($data['paid'] == 'true') {
+
+                $id = $data['id'];
+                $visitor = DB::table('visitors_temp')->whereJsonContains('billplz->id', $id)->first();
+                $carts = DB::table('carts_temp')->where('uniq', $visitor->uniq)->first();
+
+                $ticket                 = new VisitorTicket();
+                $ticket->uniq           = $visitor->uniq;
+                $ticket->visitor        = $visitor->visitor;
+                $ticket->cart           = $carts->cart;
+                $ticket->overallTotal   = $carts->overallTotal;
+                $ticket->billplz        = $visitor->billplz;
+                $ticket->payment_status = true;
+                $ticket->save();
+
+                $pdfData = [
+                    'visitor' => $visitor,
+                    'carts'   => $carts,
+                ];
+
+                $customPaper = [0, 0, 595.28, 841.89];
+                $pdfPath = public_path('assets/upload/' . $visitor->uniq . '_' . $visitor->identification_card_number . '.pdf');
+
+                if (file_exists($pdfPath)) {
+                    // If the file already exists, overwrite it
+                    $pdf = PDF::loadView('front.participant.receipt-pdf', $pdfData)->setPaper($customPaper, 'portrait')
+                        ->save($pdfPath);
+                } else {
+                    // If the file doesn't exist, create a new one
+                    $pdf = PDF::loadView('front.participant.receipt-pdf', $pdfData)->setPaper($customPaper, 'portrait')
+                        ->save($pdfPath);
+                }
+
+                Log::info('TICKET PDF SAVED' . date('d-m-Y-H-i-s'));
+                // EMAIL TO USER
+                Log::info('== TICKET EMAIL SENT ==');
+                Log::info('== TICKET PURCHASE DONE ==');
+
+            } elseif ($data['paid'] == 'false') {
+
+                Log::info('=== CANCEL OF PAYMENT TICKET ===');
+                Log::debug($data);
+                Log::info('=== UNSUCCESSFULLY TICKET WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
+
+            }
+
+        } else {
+
+            Log::info('TICKET NO RETURN');
+            Log::info('=== TICKET UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
+
+        }
+    }
 }

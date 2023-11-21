@@ -12,54 +12,108 @@
     </div>
 
     <div class="row">
-        <div id="cart-container" class="col-md-10 col-lg-8 mx-auto">
-            <div class="card mb-4" id="data-cart">
-                <h5 class="card-header py-2">&nbsp;</h5>
-                <div class="card-body">
+        {{--<form id="cart-form">--}}
+            <div id="cart-container" class="col-md-10 col-lg-8 mx-auto">
+                <div class="card mb-4" id="data-cart">
+                    <h5 class="card-header">Tickets</h5>
+                    <div class="card-body">
 
-                    @foreach($cartItems as $item)
-                        <div class="row align-items-center">
-                            <div class="col-md-4 col-12 text-sm-start text-center">
-                                <h5 class="font-weight-700 mb-0 py-2">{{ $item['ticketType'] }}</h5>
+                        @foreach($cartItems as $key => $item)
+                            <div class="row align-items-center">
+                                <div class="col-md-4 col-12 text-sm-start text-center">
+                                    <h5 class="font-weight-700 mb-0 py-2">{{ $item['ticketType'] }}</h5>
+                                    <input type="hidden" name="cart[{{ $key }}][ticketType]" value="{{ $item['ticketType'] }}">
+                                </div>
+                                <div class="col-md-2 col-4 text-center">
+                                    <h5 class="mb-0 py-2">RM{{ $item['ticketTypePrice'] }}</h5>
+                                    <input type="hidden" name="cart[{{ $key }}][ticketTypePrice]" value="{{ $item['ticketTypePrice'] }}">
+                                </div>
+                                <div class="col-md-2 col-4">
+                                    <input class="form-control text-center quantity-input" type="number" name="quantity" value="{{ $item['ticketQuantity'] }}" data-ticket-type="{{ $item['ticketType'] }}">
+                                    <input type="hidden" name="cart[{{ $key }}][ticketQuantity]" value="{{ $item['ticketQuantity'] }}">
+                                    {{--<input class="form-control text-center" type="number" name="" id="" value="{{ $item['ticketQuantity'] }}">--}}
+                                </div>
+                                <div class="col-md-2 col-4 text-center">
+                                    <!-- Display the total for each item -->
+                                    <h5 class="mb-0 py-2">RM{{ number_format($item['total'], 2) }}</h5>
+                                    <input type="hidden" name="cart[{{ $key }}][total]" value="{{ number_format($item['total'], 2) }}">
+                                </div>
+                                <div class="col-md-2 text-sm-end text-center">
+                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="updateQuantity('{{ $item['ticketType'] }}')">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="removeCartItem('{{ $item['ticketType'] }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-md-2 col-4 text-center">
-                                <h5 class="mb-0 py-2">RM{{ $item['ticketTypePrice'] }}</h5>
+                            <hr>
+                        @endforeach
+
+                        <div class="row">
+                            <div class="col-md-6 text-start">
+                                <a class="btn btn-link" href="{{ route('participant.form') }}">
+                                    <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                                </a>
                             </div>
-                            <div class="col-md-2 col-4">
-                                <input class="form-control text-center quantity-input" type="number" name="quantity" value="{{ $item['ticketQuantity'] }}" data-ticket-type="{{ $item['ticketType'] }}">
-                                {{--<input class="form-control text-center" type="number" name="" id="" value="{{ $item['ticketQuantity'] }}">--}}
-                            </div>
-                            <div class="col-md-2 col-4 text-center">
-                                <!-- Display the total for each item -->
-                                <h5 class="mb-0 py-2">RM{{ number_format($item['total'], 2) }}</h5>
-                            </div>
-                            <div class="col-md-2 text-sm-end text-center">
-                                <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0 update-quantity-btn" data-ticket-type="{{ $item['ticketType'] }}">
-                                    <i class="fas fa-sync"></i>
-                                </button>
-                                <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="removeCartItem('{{ $item['ticketType'] }}')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                            <div class="col-md-6 text-end">
+                                <p class="mb-0">Total Amount</p>
+                                <!-- Display the overall total -->
+                                <h1 class="font-weight-700 mb-0">MYR{{ number_format($overallTotal, 2) }}</h1>
+                                <input type="hidden" name="overallTotal" value="{{ number_format($overallTotal, 2) }}">
                             </div>
                         </div>
-                        <hr>
-                    @endforeach
 
-                    <div class="row">
-                        <div class="col-md-6 ms-auto text-end">
-                            <p class="mb-0">Total Amount</p>
-                            <!-- Display the overall total -->
-                            <h1 class="font-weight-700 mb-0">MYR{{ number_format($overallTotal, 2) }}</h1>
-                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <div class="mb-0 text-center">
-            <input class="btn btn-indigo btn-lg w-300px" type="button" value="Confirm & Checkout">
-        </div>
+            <div id="" class="col-md-10 col-lg-8 mx-auto">
+                <div class="card mb-4" id="customer-details">
+                    <h5 class="card-header">Visitor Details</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="full_name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="" name="full_name" value="{{ old('full_name') }}">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="identification_card_number" class="form-label">Identification Card Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="" name="identification_card_number" value="{{ old('identification_card_number') }}">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="" name="email" value="{{ old('email') }}">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone_number" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="" name="phone_number" value="{{ old('phone_number') }}">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-0 text-center">
+                <button class="btn btn-indigo btn-lg w-300px" onclick="confirmAndCheckout()">
+                    Confirm & Checkout
+                </button>
+            </div>
+        {{--</form>--}}
     </div>
 
 @endsection
@@ -86,10 +140,8 @@
             });
         }
 
-        // Attach an event listener to the update button
-        $('.update-quantity-btn').on('click', function() {
-            var ticketType = $(this).data('ticket-type');
-            var newQuantity = 1; // Set the new quantity as needed
+        function updateQuantity(ticketType) {
+            var newQuantity = $('.quantity-input[data-ticket-type="' + ticketType + '"]').val();
 
             // Make an Ajax request to update the quantity
             $.ajax({
@@ -111,6 +163,139 @@
                 error: function(error) {
                     console.error('Error updating quantity:', error);
                 }
+            });
+        }
+
+        function confirmAndCheckout() {
+            // Update session data
+            updateSessionData(function(success) {
+                if (success) {
+                    // Continue with Confirm & Checkout after updating the session
+                    doConfirmAndCheckout();
+                } else {
+                    console.error('Error updating session data');
+                }
+            });
+        }
+
+        function doConfirmAndCheckout() {
+            // Additional data to include in the request (visitor details)
+            var visitorDetails = {
+                full_name: $('[name="full_name"]').val(),
+                identification_card_number: $('[name="identification_card_number"]').val(),
+                email: $('[name="email"]').val(),
+                phone_number: $('[name="phone_number"]').val(),
+            };
+
+            // Construct cart data array with indexed keys
+            var cartData = [];
+            $('.quantity-input').each(function(index) {
+                var ticketType = $(this).data('ticket-type');
+                var quantity = $(this).val();
+
+                // Construct cart item data
+                var cartItemData = {
+                    ticketType: ticketType,
+                    ticketTypePrice: $('[name="cart[' + index + '][ticketTypePrice]"]').val(),
+                    ticketQuantity: quantity,
+                    total: $('[name="cart[' + index + '][total]"]').val(),
+                };
+
+                // Push cart item data to the array
+                cartData.push(cartItemData);
+            });
+
+            // Combine visitor details with cart data
+            var formData = {
+                cart: cartData,
+                visitorDetails: visitorDetails,
+                overallTotal: $('[name="overallTotal"]').val(),
+                _token: '{{ csrf_token() }}',
+            };
+
+            // Make an Ajax request to handle the submission
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('participant.confirmcheckout') }}', // Update the URL to your route
+                data: formData,
+                success: function(response) {
+                    if (response.status === true) {
+                        // Redirect to a success page or perform other actions
+                        window.location.href = response.redirect;
+                    } else {
+                        console.error('Error confirming checkout:', response);
+                    }
+                },
+                error: function(error) {
+                    console.error('Error confirming checkout:', error);
+                }
+            });
+        }
+
+        function updateSessionData(callback) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('participant.updatesession') }}', // Update the URL to your route
+                data: { _token: '{{ csrf_token() }}' },
+                success: function(response) {
+                    if (response.status === true) {
+                        // Callback with success
+                        callback(true);
+                    } else {
+                        // Callback with failure
+                        callback(false);
+                        console.error('Error updating session data:', response.message);
+                    }
+                },
+                error: function(error) {
+                    // Callback with failure
+                    callback(false);
+                    console.error('Error updating session data:', error);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // Initialize jQuery Validate plugin
+            $('#cart-form').validate({
+                rules: {
+                    full_name: {
+                        required: true,
+                    },
+                    identification_card_number: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    phone_number: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    full_name: {
+                        required: 'Please enter your full name.',
+                    },
+                    identification_card_number: {
+                        required: 'Please enter your identification card number.',
+                    },
+                    email: {
+                        required: 'Please enter your email address.',
+                        email: 'Please enter a valid email address.',
+                    },
+                    phone_number: {
+                        required: 'Please enter your phone number.',
+                    },
+                },
+                errorElement: "span",
+                errorClass: "is-invalid",
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.closest(".form-control").siblings(".invalid-feedback"));
+                },
+                /*submitHandler: function(form) {
+                    doConfirmAndCheckout();
+                }*/
             });
         });
 
