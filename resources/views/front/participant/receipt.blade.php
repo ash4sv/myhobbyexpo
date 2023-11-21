@@ -221,7 +221,7 @@
         <li>All payment made is non-refundable</li>
         <li>Registration are not exchangeable/swap</li>
         <li>Please bring this receipt to redeem your race card</li>
-        <li>IC/Passport is a must for verification to redeem your race card</li>
+        <li>To redeem your ticket</li>
         <li>Other terms & conditions applied</li>
     </ol>
 </div>

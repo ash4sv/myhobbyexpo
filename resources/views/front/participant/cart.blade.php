@@ -229,6 +229,7 @@
                 identification_card_number: $('[name="identification_card_number"]').val(),
                 email: $('[name="email"]').val(),
                 phone_number: $('[name="phone_number"]').val(),
+                agent_code: $('[name="agent_code"]').val(),
             };
 
             // Ticket types that require shirt sizes
