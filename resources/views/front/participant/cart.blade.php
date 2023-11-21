@@ -47,15 +47,11 @@
                                     <input type="hidden" name="cart[{{ $key }}][total]" value="{{ number_format($item['total'], 2) }}">
                                 </div>
                                 <div class="col-md-2 text-sm-end text-center">
-                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="updateQuantity('{{ $item['ticketType'] }}')">
-                                        <i class="fas fa-sync"></i>
-                                    </button>
-                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="removeCartItem('{{ $item['ticketType'] }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="updateQuantity('{{ $item['ticketType'] }}')"><i class="fas fa-sync"></i></button>
+                                    <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="removeCartItem('{{ $item['ticketType'] }}')"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
-                            @if($item['ticketType'] === 'ELF MUSIC PACK')
+                            @if(in_array($item['ticketType'], ['CHOII LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK']))
                                 <div class="elf-tshirt-section">
                                     <!-- Use a class to group the shirt size selections for each ticket -->
                                     @for ($i = 1; $i <= $item['ticketQuantity']; $i++)
@@ -63,7 +59,7 @@
                                             <!-- Use $i to append a unique number to the label -->
                                             <label for="shirt_size_{{ $key }}_{{ $i }}" class="col-sm-4 col-form-label">Select your shirt size {{ $i }}</label>
                                             <div class="col-sm-8">
-                                                <select name="shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
+                                                <select name="_shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
                                                     <!-- Updated shirt size options -->
                                                     <option value="S">S</option>
                                                     <option value="M">M</option>
@@ -143,8 +139,7 @@
                                 <div class="mb-3">
                                     <label for="agent_code" class="form-label">Agent <span class="text-danger">*</span></label>
                                     <select name="agent_code" id="agent_code" class="form-control default-select2">
-                                        <option value="">Please Select Your Sales Agent</option>
-                                        <option value="">Normal Purchase (No Agent)</option>
+
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -236,6 +231,9 @@
                 phone_number: $('[name="phone_number"]').val(),
             };
 
+            // Ticket types that require shirt sizes
+            var specialTicketTypes = ['CHOII LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK'];
+
             // Construct cart data array with indexed keys
             var cartData = [];
             $('.quantity-input').each(function(index) {
@@ -250,9 +248,11 @@
                     total: $('[name="cart[' + index + '][total]"]').val(),
                 };
 
-                if (ticketType === 'ELF MUSIC PACK') {
+                // Check if the ticket type requires special handling
+                if (specialTicketTypes.includes(ticketType)) {
                     var shirtSizes = [];
-                    $('select[name="shirt_sizes[' + index + '][]"]').each(function() {
+                    // Iterate over the shirt size selects for the current ticket type
+                    $('select[name="_shirt_sizes[' + index + '][]"]').each(function() {
                         shirtSizes.push($(this).val());
                     });
                     cartItemData.shirtSizes = shirtSizes;
@@ -317,13 +317,14 @@
             var quantity = $(this).val();
 
             // Remove existing shirt size sections for this ticket type
-            $('.elf-tshirt-section').remove();
+            $('.elf-tshirt-section[data-ticket-type="' + ticketType + '"]').remove();
 
             // Append new shirt size sections based on the updated quantity
             for (var i = 1; i <= quantity; i++) {
                 var newSection = $('.elf-tshirt-section:first').clone();
                 newSection.find('label').text('Select your shirt size ' + i);
                 newSection.find('select').attr('id', 'shirt_size_' + ticketType + '_' + i);
+                newSection.attr('data-ticket-type', ticketType);
                 $('.elf-tshirt-section:last').after(newSection);
             }
         });
@@ -378,10 +379,21 @@
                 }*/
             });
 
+            // Existing options
+            $('#agent_code').append($('<option>', {
+                value: 0,
+                text: 'Please Select Your Sales Agent'
+            }));
+            $('#agent_code').append($('<option>', {
+                value: 1,
+                text: 'Normal Purchase (No Agent)'
+            }));
+
+            // Generate options with names starting from ELF001 and values from 3, incrementing both for each option
             for (let i = 1; i <= 50; i++) {
                 let agentCode = 'ELF' + pad(i, 3); // pad function adds leading zeros if needed
                 $('#agent_code').append($('<option>', {
-                    value: agentCode,
+                    value: i + 1, // Increment by 2 to start from 3
                     text: agentCode
                 }));
             }
