@@ -146,7 +146,7 @@
                     <tr>
                         <td class="title">
                             {{--<img src="{{ asset('assets/images/logo-nav.png') }}" alt="Company logo" style="width: 100%; max-width: 300px" />--}}
-                            <h6 style="margin:0 0;">SPECTA Group Ventures</h6>
+                        <h6 style="margin:0 0;">SPECTA Group Ventures</h6>
                         </td>
                         <td>
                             Invoice #: {{ $visitor->uniq }}<br />

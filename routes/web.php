@@ -64,7 +64,7 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
     });
 });
 
-Route::domain('participant.' . env('APP_URL'))->group(function (){
+Route::domain('ticket.' . env('APP_URL'))->group(function (){
     Route::group([
         'namespace' => 'Front',
         'as'        => 'participant.',
