@@ -198,8 +198,8 @@
                 },
                 success: function(response) {
                     if (response.status === true) {
-                        // Refresh only the container
-                        $('#cart-container').load(window.location.href + ' #data-cart');
+                        // Refresh only the specific container related to the ticketType
+                        $('#data-cart').load(window.location.href + ' #data-cart');
                     } else {
                         console.error('Error updating quantity:', response.message);
                     }
