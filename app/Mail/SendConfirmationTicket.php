@@ -53,7 +53,7 @@ class SendConfirmationTicket extends Mailable
      */
     public function attachments(): array
     {
-        $attachment = $this->pdfData['visitor']['uniq'] . '_' . json_decode($this->pdfData['visitor']['visitor'])['identification_card_number'] . '.pdf';
+        $attachment = $this->pdfData['visitor']->uniq . '_' . json_decode($this->pdfData['visitor']->visitor)->identification_card_number . '.pdf';
         $file = public_path('assets/upload/').$attachment;
 
         return [
