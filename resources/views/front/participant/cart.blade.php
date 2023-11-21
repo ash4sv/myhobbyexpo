@@ -134,10 +134,9 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="agent_code" class="form-label">Agent <span class="text-danger">*</span></label>
-                                    <select name="agent_code" id="" class="form-control default-select2">
+                                    <select name="agent_code" id="agent_code" class="form-control default-select2">
                                         <option value="">Please Select Your Sales Agent</option>
                                         <option value="">Normal Purchase (No Agent)</option>
-                                        <option value="">ELF001</option>
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -360,6 +359,23 @@
                     doConfirmAndCheckout();
                 }*/
             });
+
+            for (let i = 1; i <= 50; i++) {
+                let agentCode = 'ELF' + pad(i, 3); // pad function adds leading zeros if needed
+                $('#agent_code').append($('<option>', {
+                    value: agentCode,
+                    text: agentCode
+                }));
+            }
+
+            // Function to pad numbers with leading zeros
+            function pad(number, length) {
+                let str = '' + number;
+                while (str.length < length) {
+                    str = '0' + str;
+                }
+                return str;
+            }
         });
 
     </script>
