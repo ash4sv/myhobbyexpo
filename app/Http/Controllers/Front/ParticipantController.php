@@ -150,13 +150,13 @@ class ParticipantController extends Controller
         // $priceMyr = ($overallTotal * 100);
         $priceMyr = 100;
 
-        $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
-        if(config('billplz.billplz_mhx_sandbox')) {
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+        if(config('billplz.billplz_sandbox')) {
             $billplz->useSandbox();
         }
         $bill = $billplz->bill();
         $bill = $bill->create(
-            config('billplz.billplz_mhx_collection_id'),
+            config('billplz.billplz_collection_id'),
             $visitorDetails['email'],
             $visitorDetails['phone_number'],
             $visitorDetails['full_name'],
@@ -197,8 +197,8 @@ class ParticipantController extends Controller
     public function redirectUrl(Request $request)
     {
         // Search in visitor:temp billplz id
-        $billplz = Client::make(config('billplz.billplz_mhx_key'), config('billplz.billplz_mhx_signature'));
-        if(config('billplz.billplz_mhx_sandbox')) {
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+        if(config('billplz.billplz_sandbox')) {
             $billplz->useSandbox();
         }
         $bill = $billplz->bill();
