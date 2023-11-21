@@ -4,8 +4,9 @@ namespace App\Models\Apps;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VisitorTicket extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 }

@@ -264,7 +264,7 @@ class ParticipantController extends Controller
                 ];
 
                 $customPaper = [0, 0, 595.28, 841.89];
-                $pdfPath = public_path('assets/upload/' . $visitor->uniq . '_' . $visitor->identification_card_number . '.pdf');
+                $pdfPath = public_path('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number . '.pdf');
 
                 if (file_exists($pdfPath)) {
                     // If the file already exists, overwrite it
