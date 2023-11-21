@@ -47,6 +47,32 @@
                                     </button>
                                 </div>
                             </div>
+                            @if($item['ticketType'] === 'ELF MUSIC PACK')
+                                <div class="elf-tshirt-section">
+                                    <!-- Use a class to group the shirt size selections for each ticket -->
+                                    @for ($i = 1; $i <= $item['ticketQuantity']; $i++)
+                                        <div class="mb-3 mt-3 row">
+                                            <!-- Use $i to append a unique number to the label -->
+                                            <label for="shirt_size_{{ $key }}_{{ $i }}" class="col-sm-4 col-form-label">Select your shirt size {{ $i }}</label>
+                                            <div class="col-sm-8">
+                                                <select name="shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
+                                                    <!-- Updated shirt size options -->
+                                                    <option value="S">S</option>
+                                                    <option value="M">M</option>
+                                                    <option value="L">L</option>
+                                                    <option value="XL">XL</option>
+                                                    <option value="XXL">XXL (2XL)</option>
+                                                    <option value="XXXL">XXXL (3XL)</option>
+                                                    <option value="XXXXL">XXXXL (4XL)</option>
+                                                    <option value="XXXXXL">XXXXXL (5XL)</option>
+                                                    <option value="XXXXXXL">XXXXXXL (6XL)</option>
+                                                    <option value="XXXXXXXL">XXXXXXXL (7XL)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            @endif
                             <hr>
                         @endforeach
 
@@ -82,7 +108,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="identification_card_number" class="form-label">Identification Card Number <span class="text-danger">*</span></label>
+                                    <label for="identification_card_number" class="form-label">Identification Card Number / Passport Number <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="" name="identification_card_number" value="{{ old('identification_card_number') }}">
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -100,6 +126,19 @@
                                 <div class="mb-3">
                                     <label for="phone_number" class="form-label">Phone Number <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="" name="phone_number" value="{{ old('phone_number') }}">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="agent_code" class="form-label">Agent <span class="text-danger">*</span></label>
+                                    <select name="agent_code" id="" class="form-control default-select2">
+                                        <option value="">Please Select Your Sales Agent</option>
+                                        <option value="">Normal Purchase (No Agent)</option>
+                                        <option value="">ELF001</option>
+                                    </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
                             </div>
@@ -201,6 +240,14 @@
                     total: $('[name="cart[' + index + '][total]"]').val(),
                 };
 
+                if (ticketType === 'ELF MUSIC PACK') {
+                    var shirtSizes = [];
+                    $('select[name="shirt_sizes[' + index + '][]"]').each(function() {
+                        shirtSizes.push($(this).val());
+                    });
+                    cartItemData.shirtSizes = shirtSizes;
+                }
+
                 // Push cart item data to the array
                 cartData.push(cartItemData);
             });
@@ -254,6 +301,22 @@
                 }
             });
         }
+
+        $('.quantity-input').on('change', function() {
+            var ticketType = $(this).data('ticket-type');
+            var quantity = $(this).val();
+
+            // Remove existing shirt size sections for this ticket type
+            $('.elf-tshirt-section').remove();
+
+            // Append new shirt size sections based on the updated quantity
+            for (var i = 1; i <= quantity; i++) {
+                var newSection = $('.elf-tshirt-section:first').clone();
+                newSection.find('label').text('Select your shirt size ' + i);
+                newSection.find('select').attr('id', 'shirt_size_' + ticketType + '_' + i);
+                $('.elf-tshirt-section:last').after(newSection);
+            }
+        });
 
         $(document).ready(function() {
             // Initialize jQuery Validate plugin

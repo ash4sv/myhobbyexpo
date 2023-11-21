@@ -194,7 +194,15 @@
         </tr>
         @foreach(json_decode($carts->cart) as $key => $item)
         <tr class="item">
-            <td>{{ $item->ticketType }}</td>
+            <td>
+                {{ $item->ticketType }} <br>
+                @if(isset($item->shirtSizes))
+                    T-Shirt Size:
+                    @foreach($item->shirtSizes as $shirt)
+                        {{ $shirt }}@if (!$loop->last), @endif
+                    @endforeach
+                @endif
+            </td>
             <td>RM {{ number_format($item->ticketTypePrice, 2) }}</td>
             <td>{{ $item->ticketQuantity }}</td>
             <td>RM {{ number_format($item->total, 2) }}</td>

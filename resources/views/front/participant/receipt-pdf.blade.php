@@ -194,7 +194,15 @@
         </tr>
         @foreach(json_decode($carts->cart) as $key => $item)
         <tr class="item">
-            <td>{{ $item->ticketType }}</td>
+            <td>
+                {{ $item->ticketType }} <br>
+                @if(isset($item->shirtSizes))
+                    T-Shirt Size:
+                    @foreach($item->shirtSizes as $shirt)
+                        {{ $shirt }}@if (!$loop->last), @endif
+                    @endforeach
+                @endif
+            </td>
             <td>RM {{ number_format($item->ticketTypePrice, 2) }}</td>
             <td>{{ $item->ticketQuantity }}</td>
             <td>RM {{ number_format($item->total, 2) }}</td>
@@ -213,7 +221,7 @@
         <li>All payment made is non-refundable</li>
         <li>Registration are not exchangeable/swap</li>
         <li>Please bring this receipt to redeem your race card</li>
-        <li>IC/Passport is a must for verification to redeem your race card</li>
+        <li>To redeem your ticket</li>
         <li>Other terms & conditions applied</li>
     </ol>
 </div>

@@ -14,7 +14,6 @@
 
     <div class="row">
         <div id="card-container" class="col-md-8 col-lg-6 mx-auto">
-
         </div>
     </div>
 
@@ -43,9 +42,14 @@
             }
 
             // Function to create a card with dynamic data
-            function createCard(cardTitle, ticketType, priceText, quantity) {
+            function createCard(cardTitle, ticketType, priceText, quantity, image) {
                 // Create the card element
-                var card = $('<div class="card mb-4" id="booth_design">');
+                var card = $('<div class="card mb-3">');
+                var carRow = $('<div class="row g-0">');
+                var cardColImg = $('<div class="col-md-4">' +
+                    '<a data-fancybox data-src="' + image + '" href=""><img src="' + image + '" class="img-fluid rounded-start" alt=""></a>' +
+                    '</div>');
+                var cardColBody = $('<div class="col-md-8">');
                 var cardBody = $('<div class="card-body">');
 
                 var title = $('<h5 class="card-title font-weight-700">').text(cardTitle);
@@ -61,32 +65,33 @@
                 cardBody.append(hiddenTicketType, hiddenTicketTypePrice);
 
                 var colTicketType = $('<div class="col-md-5 ticket-type">').text(ticketType);
-                var colPrice = $('<div class="col-md-4 price">').html('<span class="price-text">' + priceText + '</span>');
+                var colPrice = $('<div class="col-md-6 col-6 price font-weight-600">').html('<span class="price-text">' + priceText + '</span>');
 
                 var selectName = 'ticket_qty_' + ticketType.replace(/\s+/g, '_').toLowerCase();
-                var colQuantity = $('<div class="col-md-3">').append(
+                var colQuantity = $('<div class="col-md-6 col-6">').append(
                     $('<select class="form-control default-select2" name="' + selectName + '">').append(
                         // Generate options for quantity starting from zero
                         Array.from({ length: 11 }, (_, i) => '<option value="' + i + '">' + i + '</option>')
                     )
                 );
 
-
-                row.append(colTicketType, colPrice, colQuantity);
+                row.append(colPrice, colQuantity);
                 cardBody.append(row);
-                card.append(cardBody);
+                cardColBody.append(cardBody);
+                carRow.append(cardColImg, cardColBody);
+                card.append(carRow);
                 return card;
             }
 
             // Call the function for each card
-            var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', pricing('RM85.00', 'RM99.00') + ' / [Normal]', '');
-            var adultTicketCard = createCard('ADULT TICKET', 'ADULT TICKET', 'RM20.00 / 2 Days', '');
-            var kidsTicketCard = createCard('KIDS TICKET', 'KIDS TICKET', 'RM20.00 / 2 Days', '');
-            var choii64Card = createCard('CHOII 64 LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK', 'RM20.00 / Pack', '');
-            var choiiLimitedCard = createCard('CHOII LIMITED EDITION PACK', 'CHOII LIMITED EDITION PACK', 'RM20.00 / Pack', '');
+            var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', pricing('RM85.00', 'RM99.00') + ' / [Normal]', '', '{{ asset('assets/images/ticket_concert.jpeg') }}');
+            var adultTicketCard = createCard('ADULT TICKET', 'ADULT TICKET', 'RM5.00 / 2 Days', '', '{{ asset('assets/images/ticket_adult.jpeg') }}');
+            var kidsTicketCard = createCard('KIDS TICKET', 'KIDS TICKET', 'RM20.00 / 2 Days', '', '{{ asset('assets/images/ticket_kids.jpeg') }}');
+            var choii64Card = createCard('CHOII 64 LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK', 'RM259.00 / Pack', '', '{{ asset('assets/images/ticket_super_vvip.jpeg') }}');
+            var choiiLimitedCard = createCard('CHOII LIMITED EDITION PACK', 'CHOII LIMITED EDITION PACK', 'RM189.00 / Pack', '', '{{ asset('assets/images/ticket_super_special.jpeg') }}');
 
             // Append the generated cards to the container (assuming there is a container with id "card-container")
-            $('#card-container').append(elfMusicCard, adultTicketCard);
+            $('#card-container').append(elfMusicCard, choiiLimitedCard, choii64Card, adultTicketCard, kidsTicketCard);
 
             // Append the "Buy Ticket Now" section outside the card
             var buyTicketButton = $('<input class="btn btn-indigo btn-lg w-300px" type="button" value="Buy Ticket Now">');

@@ -149,7 +149,8 @@ class ParticipantController extends Controller
         $uniq = Str::random(8);
 
         // push payment gateways
-        $priceMyr = ($overallTotal * 100);
+        $cleanedOverallTotal = str_replace(',', '', $overallTotal);
+        $priceMyr = ($cleanedOverallTotal * 100);
         // $priceMyr = 100;
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
@@ -172,7 +173,7 @@ class ParticipantController extends Controller
         DB::table('carts_temp')->insert([
             'uniq'         => $uniq,
             'cart'         => json_encode($cartItems),
-            'overallTotal' => $overallTotal,
+            'overallTotal' => $cleanedOverallTotal,
             'created_at'   => now(),
             'updated_at'   => now(),
         ]);
