@@ -20,7 +20,7 @@
     </div>
 
     <div class="row pb-5">
-        {{--<form id="cart-form">--}}
+        <form id="cart-form" onsubmit="event.preventDefault();">
             <div id="cart-container" class="col-md-10 col-lg-8 mx-auto">
                 <div class="card mb-4" id="data-cart">
                     <h5 class="card-header">Tickets</h5>
@@ -157,7 +157,7 @@
                     Confirm & Checkout
                 </button>
             </div>
-        {{--</form>--}}
+        </form>
     </div>
 
 @endsection
@@ -231,6 +231,11 @@
                 phone_number: $('[name="phone_number"]').val(),
                 agent_code: $('[name="agent_code"]').val(),
             };
+
+            if (!validateVisitorDetails(visitorDetails)) {
+                console.error('Error validating visitor details. Please fill in all required fields.');
+                return;
+            }
 
             // Ticket types that require shirt sizes
             var specialTicketTypes = ['CHOII LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK'];
@@ -313,6 +318,21 @@
             });
         }
 
+        function validateVisitorDetails(visitorDetails) {
+            // Check if any of the required fields is null or empty
+            if (
+                !visitorDetails.full_name ||
+                !visitorDetails.identification_card_number ||
+                !visitorDetails.email ||
+                !visitorDetails.phone_number ||
+                !visitorDetails.agent_code
+            ) {
+                return false;
+            }
+
+            return true;
+        }
+
         $('.quantity-input').on('change', function() {
             var ticketType = $(this).data('ticket-type');
             var quantity = $(this).val();
@@ -349,7 +369,7 @@
                     },
                     agent_code: {
                         required: true,
-                        min: 1
+                        min: 1,
                     }
                 },
                 messages: {
@@ -368,6 +388,7 @@
                     },
                     agent_code: {
                         required: 'Please select your agent.',
+                        min: 'Please select your agent.',
                     },
                 },
                 errorElement: "span",
@@ -375,9 +396,6 @@
                 errorPlacement: function (error, element) {
                     error.appendTo(element.closest(".form-control").siblings(".invalid-feedback"));
                 },
-                /*submitHandler: function(form) {
-                    doConfirmAndCheckout();
-                }*/
             });
 
             // Existing options
