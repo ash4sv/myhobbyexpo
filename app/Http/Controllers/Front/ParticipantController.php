@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendConfirmationTicket;
 use App\Models\Apps\VisitorTicket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -298,7 +300,9 @@ class ParticipantController extends Controller
                 }
 
                 Log::info('TICKET PDF SAVED' . date('d-m-Y-H-i-s'));
-                // EMAIL TO USER
+
+                Mail::to(json_decode($visitor->visitor)->email)->send(new SendConfirmationTicket($pdfData));
+
                 Log::info('== TICKET EMAIL SENT ==');
                 Log::info('== TICKET PURCHASE DONE ==');
 
