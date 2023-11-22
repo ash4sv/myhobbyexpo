@@ -14,6 +14,74 @@
 
     <h1 class="page-header">@yield('page-header') {{--<small>header small text goes here...</small>--}}</h1>
 
+    <div class="row">
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">ELF MUSIC PACK</div>
+                    <div class="stats-number">{{ $visitorCount['ELF MUSIC PACK'] }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">CHOII LIMITED EDITION PACK</div>
+                    <div class="stats-number">{{ $visitorCount['CHOII LIMITED EDITION PACK'] }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">CHOII 64 LIMITED EDITION PACK</div>
+                    <div class="stats-number">{{ $visitorCount['CHOII 64 LIMITED EDITION PACK'] }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">ADULT TICKET</div>
+                    <div class="stats-number">{{ $visitorCount['ADULT TICKET'] }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">KIDS TICKET</div>
+                    <div class="stats-number">{{ $visitorCount['KIDS TICKET'] }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 70.1%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (70.1%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <h4 class="panel-title"></h4>
@@ -67,7 +135,11 @@
                         {{ $visitor->payment_status == 1 ? 'Paid' : 'Unpaid' }}
                         </span>
                     </td>
-                    <td></td>
+                    <td>
+                        <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
                 </tbody>
