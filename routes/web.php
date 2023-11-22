@@ -10,6 +10,7 @@ use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\MHXCupCategoryController;
+use App\Http\Controllers\Apps\MHXCupRaceController;
 use App\Http\Controllers\Apps\MHXCupRegisterController;
 use App\Http\Controllers\Apps\MHXCupTShirtController;
 use App\Http\Controllers\Apps\PermissionsController;
@@ -18,8 +19,10 @@ use App\Http\Controllers\Apps\RolesController;
 use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\VendorController;
+use App\Http\Controllers\Apps\VisitorController;
 use App\Http\Controllers\Front\MHXCupController;
 use App\Http\Controllers\Front\ParticipantController;
+use App\Http\Controllers\Front\RaceController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\Front\WebController;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +99,8 @@ Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
         Route::post('mhx-payment', [MHXCupController::class, 'mhxPayment'])->name('mhxPayment');
         Route::get('mhx-redirect', [MHXCupController::class, 'redirectUrl'])->name('redirectHook');
         Route::post('mhx-webhook', [MHXCupController::class, 'webhook'])->name('webHook');
+
+        Route::get('scoreboard', [RaceController::class, 'scoreboard'])->name('scoreboard');
     });
 });
 
@@ -118,6 +123,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::get('logs', [LogsController::class, 'index'])->name('logs');
            Route::resource('agent', AgentController::class);
            Route::resource('vendors', VendorController::class);
+           Route::resource('ticket-visitor', VisitorController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'
@@ -150,6 +156,13 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('register', MHXCupRegisterController::class);
                Route::get('registered-recer', [AppsController::class, 'categoryCup'])->name('categoryMhxCup');
                Route::post('approve-register', [AppsController::class, 'approveRegister'])->name('approveRegister');
+           });
+           Route::group([
+               'prefix'  => 'race',
+               'as'     => 'race.'
+           ], function (){
+               Route::get('racing-day', [MHXCupRaceController::class, 'racingDay'])->name('racing-day');
+               Route::post('store', [MHXCupRaceController::class, 'store'])->name('store');
            });
            Route::group([
                'prefix'  => 'acl',

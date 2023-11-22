@@ -88,6 +88,16 @@
             </div>
             @endcan
 
+            <div class="menu-header">Visitor</div>
+            <div class="menu-item {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }}">
+                <a href="{{ route('apps.ticket-visitor.index') }}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="menu-text">Ticket Visitor</div>
+                </a>
+            </div>
+
             <div class="menu-header">Exhibition</div>
             @can('agent-access')
             <div class="menu-item {{ (request()->segment(1) == 'agent') ? 'active' : '' }}">
@@ -182,6 +192,30 @@
                 </div>
             </div>
             @endcan
+
+            <div class="menu-header">Event</div>
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-align-left"></i>
+                    </div>
+                    <div class="menu-text">MHX CUP 2023</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="" class="menu-link">
+                            <div class="menu-text">Race ID</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="{{ route('apps.race.racing-day') }}" class="menu-link">
+                            <div class="menu-text">Racing Day</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             @can('system-access')
             <div class="menu-header">Systems</div>
