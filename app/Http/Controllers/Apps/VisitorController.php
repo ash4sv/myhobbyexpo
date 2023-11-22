@@ -11,14 +11,41 @@ class VisitorController extends Controller
 {
     protected string $view = 'apps.visitor.';
 
+    private function countShirtSizes($cartData)
+    {
+        $ticketTypeCounts = [
+            'ELF MUSIC PACK' => 0,
+            'CHOII LIMITED EDITION PACK' => 0,
+            'CHOII 64 LIMITED EDITION PACK' => 0,
+            'ADULT TICKET' => 0,
+            'KIDS TICKET' => 0,
+        ];
+        foreach ($cartData as $item) {
+            $cart = json_decode($item->cart, true);
+
+            foreach ($cart as $product) {
+                $ticketType = $product['ticketType'];
+                $ticketQuantity = $product['ticketQuantity'];
+
+                // Increment the count for the current ticketType, considering ticketQuantity
+                $ticketTypeCounts[$ticketType] = isset($ticketTypeCounts[$ticketType])
+                    ? $ticketTypeCounts[$ticketType] + $ticketQuantity
+                    : $ticketQuantity;
+            }
+        }
+        return $ticketTypeCounts;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $visitors = VisitorTicket::all();
+        $visitorCount = $this->countShirtSizes($visitors);
         return view($this->view.'index', [
-            'visitors' => $visitors
+            'visitors'     => $visitors,
+            'visitorCount' => $visitorCount
         ]);
     }
 
