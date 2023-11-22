@@ -51,31 +51,53 @@
                                     <button class="btn btn-white border-secondary bg-white btn-md mt-3 mt-sm-0" onclick="removeCartItem('{{ $item['ticketType'] }}')"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
-                            @if(in_array($item['ticketType'], ['CHOII LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK']))
-                                <div class="elf-tshirt-section">
-                                    <!-- Use a class to group the shirt size selections for each ticket -->
-                                    @for ($i = 1; $i <= $item['ticketQuantity']; $i++)
-                                        <div class="mb-3 mt-3 row">
-                                            <!-- Use $i to append a unique number to the label -->
-                                            <label for="shirt_size_{{ $key }}_{{ $i }}" class="col-sm-4 col-form-label">Select your shirt size {{ $i }}</label>
-                                            <div class="col-sm-8">
-                                                <select name="_shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
-                                                    <!-- Updated shirt size options -->
-                                                    <option value="S">S</option>
-                                                    <option value="M">M</option>
-                                                    <option value="L">L</option>
-                                                    <option value="XL">XL</option>
-                                                    <option value="XXL">XXL (2XL)</option>
-                                                    <option value="XXXL">XXXL (3XL)</option>
-                                                    <option value="XXXXL">XXXXL (4XL)</option>
-                                                    <option value="XXXXXL">XXXXXL (5XL)</option>
-                                                    <option value="XXXXXXL">XXXXXXL (6XL)</option>
-                                                    <option value="XXXXXXXL">XXXXXXXL (7XL)</option>
-                                                </select>
+                            @if($overallTotalSizes <= 1500)
+                                @if(in_array($item['ticketType'], ['CHOII LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK']))
+                                    <div class="elf-tshirt-section">
+                                        <!-- Use a class to group the shirt size selections for each ticket -->
+                                        @for ($i = 1; $i <= $item['ticketQuantity']; $i++)
+                                            <div class="mb-3 mt-3 row">
+                                                <!-- Use $i to append a unique number to the label -->
+                                                <label for="shirt_size_{{ $key }}_{{ $i }}" class="col-sm-4 col-form-label">Select your shirt size {{ $i }}</label>
+                                                <div class="col-sm-8">
+                                                    <select name="_shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
+                                                        <!-- Updated shirt size options -->
+                                                        @if($sizesCount['S'] <= 300)
+                                                            <option value="S">S</option>
+                                                        @endif
+                                                        @if($sizesCount['M'] <= 450)
+                                                            <option value="M">M</option>
+                                                        @endif
+                                                        @if($sizesCount['L'] <= 350)
+                                                            <option value="L">L</option>
+                                                        @endif
+                                                        @if($sizesCount['XL'] <= 200)
+                                                            <option value="XL">XL</option>
+                                                        @endif
+                                                        @if($sizesCount['XXL'] <= 80)
+                                                            <option value="XXL">XXL (2XL)</option>
+                                                        @endif
+                                                        @if($sizesCount['XXXL'] <= 50)
+                                                            <option value="XXXL">XXXL (3XL)</option>
+                                                        @endif
+                                                        @if($sizesCount['XXXXL'] <= 30)
+                                                            <option value="XXXXL">XXXXL (4XL)</option>
+                                                        @endif
+                                                        @if($sizesCount['XXXXXL'] <= 20)
+                                                            <option value="XXXXXL">XXXXXL (5XL)</option>
+                                                        @endif
+                                                        @if($sizesCount['XXXXXXL'] <= 10)
+                                                            <option value="XXXXXXL">XXXXXXL (6XL)</option>
+                                                        @endif
+                                                        @if($sizesCount['XXXXXXXL'] <= 10)
+                                                            <option value="XXXXXXXL">XXXXXXXL (7XL)</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endfor
-                                </div>
+                                        @endfor
+                                    </div>
+                                @endif
                             @endif
                             <hr>
                         @endforeach

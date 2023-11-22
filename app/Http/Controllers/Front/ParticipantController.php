@@ -56,9 +56,47 @@ class ParticipantController extends Controller
         ]);
     }
 
+    private function countShirtSizes($cartData)
+    {
+        $sizesCount = [
+            'S' => 0,
+            'M' => 0,
+            'L' => 0,
+            'XL' => 0,
+            'XXL' => 0,
+            'XXXL' => 0,
+            'XXXXL' => 0,
+            'XXXXXL' => 0,
+            'XXXXXXL' => 0,
+            'XXXXXXXL' => 0,
+        ];
+
+        foreach ($cartData as $item) {
+            $cart = json_decode($item->cart, true);
+
+            foreach ($cart as $product) {
+                if (isset($product['shirtSizes'])) {
+                    foreach ($product['shirtSizes'] as $size) {
+                        if (array_key_exists($size, $sizesCount)) {
+                            $sizesCount[$size]++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $sizesCount;
+    }
+
     public function cartView(Request $request)
     {
         $cart = Session::get('cart');
+
+        $cartData = DB::table('carts_temp')->get();
+        $sizesCount = $this->countShirtSizes($cartData);
+        $overallTotalSizes = array_sum($sizesCount);
+
+        Log::info([ $sizesCount, $overallTotalSizes ]);
 
         if ($cart) {
             $total = 0;
@@ -71,8 +109,10 @@ class ParticipantController extends Controller
             }
 
             return view('front.participant.cart', [
-                'cartItems' => $cart,
-                'overallTotal' => $total,
+                'cartItems'         => $cart,
+                'overallTotal'      => $total,
+                'sizesCount'        => $sizesCount,
+                'overallTotalSizes' => $overallTotalSizes
             ]);
         } else {
             return redirect()->route('participant.form');
