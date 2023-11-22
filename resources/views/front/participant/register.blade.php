@@ -53,10 +53,10 @@
                 // Create the card element
                 var card = $('<div class="card mb-3">');
                 var carRow = $('<div class="row g-0">');
-                var cardColImg = $('<div class="col-md-4">' +
+                var cardColImg = $('<div class="col-md-4 col-4">' +
                     '<a data-fancybox data-src="' + image + '" href=""><img src="' + image + '" class="img-fluid rounded-start" alt=""></a>' +
                     '</div>');
-                var cardColBody = $('<div class="col-md-8">');
+                var cardColBody = $('<div class="col-md-8 col-8">');
                 var cardBody = $('<div class="card-body">');
 
                 var title = $('<h5 class="card-title font-weight-700">').text(cardTitle);
