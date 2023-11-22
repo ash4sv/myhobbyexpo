@@ -96,7 +96,7 @@ class ParticipantController extends Controller
         $sizesCount = $this->countShirtSizes($cartData);
         $overallTotalSizes = array_sum($sizesCount);
 
-        Log::info([ $sizesCount, $overallTotalSizes ]);
+        // Log::info([ $sizesCount, $overallTotalSizes ]);
 
         if ($cart) {
             $total = 0;
