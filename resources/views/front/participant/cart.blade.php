@@ -62,36 +62,36 @@
                                                 <div class="col-sm-8">
                                                     <select name="_shirt_sizes[{{ $key }}][]" id="shirt_size_{{ $key }}_{{ $i }}" class="form-control default-select2">
                                                         <!-- Updated shirt size options -->
-                                                        @if($sizesCount['S'] <= 300)
+                                                        @if($sizesCount['S'] <= 400)
                                                             <option value="S">S</option>
                                                         @endif
-                                                        @if($sizesCount['M'] <= 450)
+                                                        @if($sizesCount['M'] <= 580)
                                                             <option value="M">M</option>
                                                         @endif
-                                                        @if($sizesCount['L'] <= 350)
+                                                        @if($sizesCount['L'] <= 500)
                                                             <option value="L">L</option>
                                                         @endif
-                                                        @if($sizesCount['XL'] <= 200)
+                                                        @if($sizesCount['XL'] <= 330)
                                                             <option value="XL">XL</option>
                                                         @endif
-                                                        @if($sizesCount['XXL'] <= 80)
+                                                        @if($sizesCount['XXL'] <= 120)
                                                             <option value="XXL">XXL (2XL)</option>
                                                         @endif
-                                                        @if($sizesCount['XXXL'] <= 50)
+                                                        @if($sizesCount['XXXL'] <= 40)
                                                             <option value="XXXL">XXXL (3XL)</option>
                                                         @endif
-                                                        @if($sizesCount['XXXXL'] <= 30)
+                                                        @if($sizesCount['XXXXL'] <= 20)
                                                             <option value="XXXXL">XXXXL (4XL)</option>
                                                         @endif
-                                                        @if($sizesCount['XXXXXL'] <= 20)
+                                                        @if($sizesCount['XXXXXL'] <= 10)
                                                             <option value="XXXXXL">XXXXXL (5XL)</option>
                                                         @endif
-                                                        @if($sizesCount['XXXXXXL'] <= 10)
+                                                        {{--@if($sizesCount['XXXXXXL'] <= 10)
                                                             <option value="XXXXXXL">XXXXXXL (6XL)</option>
                                                         @endif
                                                         @if($sizesCount['XXXXXXXL'] <= 10)
                                                             <option value="XXXXXXXL">XXXXXXXL (7XL)</option>
-                                                        @endif
+                                                        @endif--}}
                                                     </select>
                                                 </div>
                                             </div>

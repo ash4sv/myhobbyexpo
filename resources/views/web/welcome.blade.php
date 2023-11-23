@@ -66,8 +66,11 @@
                         <li class="nav-item"><a class="nav-link" href="#faq" data-click="scroll-to-target">FAQ</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact" data-click="scroll-to-target">CONTACT</a></li>
                         <li class="nav-item d-flex align-items-center">
-                            <a class="btn btn-indigo mb-4px" href="{{ route('preregister') }}" target="_blank">PRE-REGISTRATION</a>
+                            <a class="btn btn-indigo mb-4px" href="{{ route('participant.form') }}" target="_blank">VISITOR TICKET</a>
                         </li>
+                        {{--<li class="nav-item d-flex align-items-center">
+                            <a class="btn btn-indigo mb-4px" href="{{ route('preregister') }}" target="_blank">Visitor Ticket</a>
+                        </li>--}}
                     </ul>
                 </div>
 
