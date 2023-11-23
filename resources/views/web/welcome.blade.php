@@ -398,7 +398,7 @@
                     <li>
                         <a href="#" class="accordion-toggle">Do I have to pay for car parking?</a>
                         <p class="inner">
-                            Venue have more than 4,500 parking bays at outside area. There is no parking fees.
+                            Venue have more than 4,500 parking bays at outside area. Normal parking fees started from RM5.
                         </p>
                     </li>
                     <li>
