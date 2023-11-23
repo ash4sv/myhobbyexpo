@@ -386,7 +386,7 @@
                     <li>
                         <a href="#" class="accordion-toggle">How much is admission fee?</a>
                         <p class="inner">
-                            The admission are rm15.00 for 2 days for adults & rm5.00 per day for kids. Free admission for kids below 6 years old, oku & senior citizens. All visitors who are pay are entitled to get lucky draw number.
+                            The admission are rm20.00 for 2 days for adults & rm5.00 per day for kids. Free admission for kids below 6 years old, oku & senior citizens. All visitors who are pay are entitled to get lucky draw number.
                         </p>
                     </li>
                     <li>
