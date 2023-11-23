@@ -136,7 +136,7 @@
                         </span>
                     </td>
                     <td>
-                        <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue">
+                        <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
                             <i class="fa fa-print"></i>
                         </a>
                     </td>

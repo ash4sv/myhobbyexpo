@@ -53,7 +53,14 @@ Route::domain('vendor.' . env('APP_URL'))->group(function(){
         Route::get('register', [RegisterController::class, 'register'])->name('register');
         Route::get('register/{hall}', [RegisterController::class, 'registerHall'])->name('register.hall');
         Route::get('add-on', [RegisterController::class, 'addOn'])->name('addon');
-        Route::post('add-on', [RegisterController::class, 'addOnPost'])->name('addonPost');
+        Route::post('add-on', [RegisterController::class, 'addOnPost'])->name('addonPost'); // Search
+        Route::post('add-on-order', [RegisterController::class, 'addOnOrder'])->name('addonOrder');
+        Route::get('add-on-cart', [RegisterController::class, 'addOnCart'])->name('addonCart');
+        Route::post('add-on-remove-cart-item', [RegisterController::class, 'removeCartItem'])->name('removeCartItem');
+        Route::post('add-on-update-cart-item', [RegisterController::class, 'updateQuantity'])->name('updateCartItem');
+        Route::post('add-on-proceed', [RegisterController::class, 'proceedCart'])->name('proceedCart');
+        Route::get('add-on-pay-redirect', [RegisterController::class, 'addonHandleRedirect'])->name('addonhandleredirect');
+        Route::post('add-on-pay-webhook', [RegisterController::class, 'addonHandleWebhook'])->name('addonhandlewebhook');
 
         Route::post('register', [RegisterController::class, 'booth'])->name('booth');
         Route::post('submit', [RegisterController::class ,'vendorRegister'])->name('submit');

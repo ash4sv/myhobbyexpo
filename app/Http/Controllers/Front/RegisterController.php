@@ -19,7 +19,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Exception\UnableToBuildUuidException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Billplz\Client;
 use PDF;
@@ -109,6 +111,24 @@ class RegisterController extends Controller
             'halls'  => $halls,
             'direct' => true
         ]);
+    }
+
+    public function addOn()
+    {
+        return view('front.add-on');
+    }
+
+    public function addOnPost(Request $request)
+    {
+        $inv = BoothExhibitionBooked::where('inv_number', $request->invoice)->first();
+
+        $data = [
+            'status' => true,
+            'inv'    => $inv,
+            'vendor' => $inv->vendor,
+            'booth'  => $inv->vendor->registerBooth
+        ];
+        return response()->json($data);
     }
 
     public function getBoothNumbers(Request $request)
@@ -451,6 +471,257 @@ class RegisterController extends Controller
 
         }
 
+    }
+
+    public function addOnOrder(Request $request)
+    {
+        $submissionData = $request->all();
+        $addOnCart = Session::has('add_on_cart') ? Session::get('add_on_cart') : [];
+
+        $invoiceNumber = $submissionData['invoice'];
+
+        foreach ($submissionData['items'] as $item) {
+            $itemKey = $this->sanitizeKey($item['name']);
+            $itemName = $item['name'];
+            $itemQuantity = $item['quantity'];
+
+            if ($itemQuantity > 0) {
+                $existingItemKey = array_search($itemKey, array_column($addOnCart, 'key'));
+
+                if ($existingItemKey !== false) {
+                    // If the item exists, update the quantity
+                    $addOnCart[$existingItemKey]['quantity'] += $itemQuantity;
+                } else {
+                    // If the item doesn't exist, add a new entry
+                    $itemData = [
+                        'key' => $itemKey,
+                        'name' => $itemName,
+                        'price' => $item['price'],
+                        'quantity' => $itemQuantity,
+                        'total_price' => $item['price'] * $itemQuantity,
+                    ];
+                    $addOnCart[] = $itemData;
+                }
+            }
+        }
+
+        // Update the "add_on_cart" session with the modified cart items
+        Session::put('add_on_cart', $addOnCart);
+        Session::put('add_on_invoice', $invoiceNumber);
+
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Item added to cart successfully',
+            'redirect'  => route('front.addonCart'),
+        ]);
+    }
+
+    private function sanitizeKey($key)
+    {
+        $key = str_replace([' ', '.', '+', '-', '(', ')', '&'], '_', $key);
+        $key = preg_replace('/[^A-Za-z0-9_]/', '', $key);
+        return $key;
+    }
+
+
+    public function addOnCart(Request $request)
+    {
+        $cart = Session::get('add_on_cart');
+        $invoice = Session::get('add_on_invoice');
+        if ($cart) {
+            return view('front.add-on-cart', [
+                'cartItems' => $cart,
+                'invoice'   => $invoice
+            ]);
+        } else {
+            return redirect()->route('front.addon');
+        }
+    }
+
+    public function removeCartItem(Request $request)
+    {
+        $itemKeyToRemove = $request->input('itemKey');
+
+        $cart = Session::get('add_on_cart', []);
+
+        $itemIndexToRemove = array_search($itemKeyToRemove, array_column($cart, 'key'));
+
+        if ($itemIndexToRemove !== false) {
+            unset($cart[$itemIndexToRemove]);
+            Session::put('add_on_cart', array_values($cart));
+            return response()->json([
+                'status' => true,
+                'message' => 'Item removed successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Item not found in the cart'
+            ]);
+        }
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $itemKeyToUpdate = $request->input('itemKey');
+        $newQuantity = $request->input('newQuantity');
+
+        $cart = Session::get('add_on_cart', []);
+
+        // Find the index of the item with the specified itemKey
+        $itemIndexToUpdate = array_search($itemKeyToUpdate, array_column($cart, 'key'));
+
+        if ($itemIndexToUpdate !== false) {
+            // Update the quantity for the item
+            $cart[$itemIndexToUpdate]['quantity'] = $newQuantity;
+            $cart[$itemIndexToUpdate]['total_price'] = $cart[$itemIndexToUpdate]['price'] * $newQuantity;
+
+            // Update the cart session
+            Session::put('add_on_cart', $cart);
+
+            return response()->json([
+                'status' => true,
+                'newTotal' => $cart[$itemIndexToUpdate]['total_price'],
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Item not found in the cart',
+            ]);
+        }
+    }
+
+    public function proceedCart(Request $request)
+    {
+        $items = $request->input('items');
+        $invoice = $request->input('invoice');
+        $total = $request->input('total');
+
+        $boothBooked = BoothExhibitionBooked::where('inv_number', $invoice)->first();
+        $email = $boothBooked->vendor->email;
+        $phone = $boothBooked->vendor->phone_num;
+        $name = $boothBooked->vendor->company;
+
+        $priceMyr = ($total * 100);
+
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+        if(config('billplz.billplz_sandbox')) {
+            $billplz->useSandbox();
+        }
+        $bill = $billplz->bill();
+        $bill = $bill->create(
+            config('billplz.billplz_collection_id'),
+            $email,
+            $phone,
+            $name,
+            \Duit\MYR::given($priceMyr),
+            route('front.addonhandlewebhook'),
+            'Register of Vendor MHX2023 - Add On Order',
+            ['redirect_url' => route('front.addonhandleredirect')],
+        );
+
+        DB::table('add_on_cart_temp')->insert([
+            'invoice'      => $invoice,
+            'cart_data'    => json_encode($items),
+            'total'        => $total,
+            'billplz'      => json_encode($bill->toArray()),
+            'created_at'   => now(),
+            'updated_at'   => now(),
+        ]);
+
+        Session::forget('add_on_cart');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Checkout confirmed successfully',
+            'redirect' => $bill->toArray()['url']
+        ]);
+    }
+
+    public function addonHandleRedirect(Request $request)
+    {
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+        if(config('billplz.billplz_sandbox')) {
+            $billplz->useSandbox();
+        }
+        $bill = $billplz->bill();
+        try {
+            $bill = $bill->redirect($request->all());
+        } catch(\Exception $e) {
+            dd($e->getMessage());
+        }
+        $bill['data'] = $billplz->bill()->get($bill['id'])->toArray();
+
+        if ($bill['data']['paid'] == 'true') {
+            $id = $bill['data']['id'];
+            $vendorAddOn = DB::table('add_on_cart_temp')->whereJsonContains('billplz->id', $id)->first();
+            $vendorAddOnName = $vendorAddOn->invoice . '_AddOn';
+
+            DB::table('billplz_status')->insert([
+                'shopref'             => $vendorAddOnName,
+                'billplz_id'          => $bill['id'],
+                'billplz_paid'        => $bill['paid'],
+                'billplz_paid_at'     => $bill['paid_at'],
+                'billplz_x_signature' => $bill['x_signature'],
+                'created_at'          => now(),
+                'updated_at'          => now(),
+            ]);
+
+            Alert::success('Thank you for purchase add on', 'We will send an email for your reference');
+            return redirect()->route('front.addon');
+        } elseif ($bill['data']['paid'] == 'false') {
+            Alert::warning('We are sorry', 'Your payment don\'t go through');
+        }
+    }
+
+    public function addonHandleWebhook(Request $request)
+    {
+        $data = $request->all();
+
+        if (!empty($data)) {
+            if ($data['paid'] == 'true') {
+                Log::info('==== ADDON ORDER ====');
+                $id = $data['id'];
+                $vendorAddOn = DB::table('add_on_cart_temp')->whereJsonContains('billplz->id', $id)->first();
+                $vendorAddOnName = $vendorAddOn->invoice . '_AddOn';
+
+                $getBoothExhibitionBooked = BoothExhibitionBooked::where('inv_number', $vendorAddOn->invoice)->first();
+                $existingData = json_decode($getBoothExhibitionBooked->inv_description, true);
+                $addOnNew = json_decode($vendorAddOn->cart_data, true);
+                $mergedData = array_merge($existingData, $addOnNew);
+
+                $getBoothExhibitionBooked->update([
+                    'inv_description' => json_encode($mergedData),
+                ]);
+
+                $billplzData = [
+                    'shopref'       => $vendorAddOnName,
+                    'billplz_id'    => $request['id'],
+                    'collection_id' => $request['collection_id'],
+                    'paid'          => $request['paid'],
+                    'state'         => $request['state'],
+                    'amount'        => $request['amount'],
+                    'paid_amount'   => $request['paid_amount'],
+                    'due_at'        => $request['due_at'],
+                    'email'         => $request['email'],
+                    'mobile'        => $request['mobile'],
+                    'name'          => $request['name'],
+                    'url'           => $request['url'],
+                    'paid_at'       => $request['paid_at'],
+                    'x_signature'   => $request['x_signature'],
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ];
+                DB::table('billplz_webhook')->insert($billplzData);
+
+                Log::info('== ADDON ORDER PURCHASE DONE ==');
+            }
+        } else {
+
+            Log::info('ADDON ORDER NO RETURN');
+            Log::info('=== ADDON ORDER UNSUCCESSFULLY WEBHOOK ' . date('Ymd/m/y H:i') . ' ===');
+
+        }
     }
 }
 
