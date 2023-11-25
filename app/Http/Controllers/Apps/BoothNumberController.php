@@ -79,8 +79,10 @@ class BoothNumberController extends Controller
      */
     public function show(string $id)
     {
-        $this->authorize('booth-number-show');
-
+        $booth = BoothNumber::findOrFail($id);
+        return view($this->view.'show', [
+            'booth' => $booth
+        ]);
     }
 
     /**
