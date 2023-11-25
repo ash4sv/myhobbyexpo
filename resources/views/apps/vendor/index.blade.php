@@ -37,6 +37,7 @@
                     <th width="16.33333333%">Social Media</th>
                     <th width="16.33333333%">Booth Register</th>
                     <th width="1%">#</th>
+                    <th width="1%"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,7 +75,7 @@
                     </td>
                     <td nowrap="">
                         @can('vendor-show')
-                        {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                        <a href="{{ route('apps.vendors.show', $vendor) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                         @endcan
                         @can('vendor-edit')
                         <a href="{{ route('apps.vendors.edit', $vendor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
