@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'MHX Cup Categories')
-@section('page-header', 'MHX Cup Categories')
+@section('page-title', 'Tracks')
+@section('page-header', 'Tracks')
 @section('description', '')
 
 @section('content')
@@ -28,8 +28,8 @@
 
             <div class="d-flex align-items-center mb-3">
                 <div class="me-auto">
-                    <a href="{{ route('apps.event-mhx-cup.categories.create') }}" class="btn btn-primary px-4">
-                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Category
+                    <a href="{{ route('apps.event-mhx-cup.tracks.create') }}" class="btn btn-primary px-4">
+                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Track
                     </a>
                 </div>
             </div>
@@ -38,27 +38,16 @@
                 <thead>
                 <tr>
                     <th class="text-center" width="1%">No.</th>
-                    <th width="2%">Category Image</th>
                     <th>Category Name</th>
                     <th width="1%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $key => $category)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>
-                        <a  href="{{ asset($category->category_image)  }}" data-fancybox>
-                            <img src="{{ asset($category->category_image)  }}" alt="" class="h-60px">
-                        </a>
-                    </td>
-                    <td>{{ $category->category_name }}</td>
-                    <td>
-                        <a href="{{ route('apps.event-mhx-cup.categories.edit', $category) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="{{ route('apps.event-mhx-cup.categories.destroy', $category->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                @endforeach
+                {{--<tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>--}}
                 </tbody>
             </table>
         </div>

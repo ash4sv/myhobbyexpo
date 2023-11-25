@@ -187,15 +187,13 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item {{ (request()->segment(2) == 'register') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.register.index') }}" class="menu-link"><div class="menu-text">Racer Registered</div></a></div>
-                    {{--<div class="menu-item {{ (request()->segment(2) == 't-shirt') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.t-shirt.index') }}" class="menu-link"><div class="menu-text">T-Shirt</div></a></div>
-                    <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}"><a href="{{ route('apps.mhx-cup.categories.index') }}" class="menu-link"><div class="menu-text">Category</div></a></div>--}}
                 </div>
             </div>
             @endcan
 
             <div class="menu-header">Event</div>
 
-            <div class="menu-item has-sub">
+            <div class="menu-item has-sub {{ (request()->segment(1) == 'event-mhx-cup') ? 'active' : '' }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-align-left"></i>
@@ -204,14 +202,29 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="" class="menu-link">
-                            <div class="menu-text">Race ID</div>
+                    <div class="menu-item {{ (request()->segment(2) == 'categories') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.categories.index') }}" class="menu-link">
+                            <div class="menu-text">Category</div>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <a href="{{ route('apps.race.racing-day') }}" class="menu-link">
-                            <div class="menu-text">Racing Day</div>
+                    <div class="menu-item {{ (request()->segment(2) == 'tracks') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.tracks.index') }}" class="menu-link">
+                            <div class="menu-text">Tracks</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'racers') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.racers.index') }}" class="menu-link">
+                            <div class="menu-text">Racers</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'races') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.races.index') }}" class="menu-link">
+                            <div class="menu-text">Races</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'results') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
+                            <div class="menu-text">Result</div>
                         </a>
                     </div>
                 </div>

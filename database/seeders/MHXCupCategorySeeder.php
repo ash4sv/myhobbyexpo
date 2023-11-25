@@ -372,7 +372,7 @@ class MHXCupCategorySeeder extends Seeder
         foreach ($racerClassC as $racer) {
             $uniq = Str::random(4);
 
-            $registered = RacerRegister::where('category', $bmax)->orderBy('id', 'DESC')->first();
+            $registered = RacerRegister::where('category', $stockcar)->orderBy('id', 'DESC')->first();
             if ($registered) {
                 $lastNumberRegister = $registered->numberRegister->last();
                 if ($lastNumberRegister) {

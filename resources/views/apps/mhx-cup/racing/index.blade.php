@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'MHX Cup Categories')
-@section('page-header', 'MHX Cup Categories')
+@section('page-title', 'Racing Day')
+@section('page-header', 'Racing Day')
 @section('description', '')
 
 @section('content')
@@ -26,41 +26,46 @@
         </div>
         <div class="panel-body">
 
-            <div class="d-flex align-items-center mb-3">
-                <div class="me-auto">
-                    <a href="{{ route('apps.event-mhx-cup.categories.create') }}" class="btn btn-primary px-4">
-                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Category
-                    </a>
-                </div>
-            </div>
+            <form method="post" action="{{ route('apps.race.store') }}">
+                @csrf
 
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+                <label class="form-label" for="line_1">Line 1:</label>
+                <input class="form-control" type="text" name="line_1" required>
+
+                <button class="btn btn-indigo" type="submit">Submit</button>
+            </form>
+
+            <table class="table w-500px">
                 <thead>
                 <tr>
-                    <th class="text-center" width="1%">No.</th>
-                    <th width="2%">Category Image</th>
-                    <th>Category Name</th>
-                    <th width="1%">Action</th>
+                    <td>Line 1</td>
+                    <td>Line 2</td>
+                    <td>Line 3</td>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $key => $category)
+                @foreach($racing as $race)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
                     <td>
-                        <a  href="{{ asset($category->category_image)  }}" data-fancybox>
-                            <img src="{{ asset($category->category_image)  }}" alt="" class="h-60px">
-                        </a>
+                        @isset($race->line_1)
+                            {{ $race->line_1 }}
+                        @endisset
                     </td>
-                    <td>{{ $category->category_name }}</td>
                     <td>
-                        <a href="{{ route('apps.event-mhx-cup.categories.edit', $category) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="{{ route('apps.event-mhx-cup.categories.destroy', $category->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                        @isset($race->line_2)
+                            {{ $race->line_2 }}
+                        @endisset
+                    </td>
+                    <td>
+                        @isset($race->line_3)
+                            {{ $race->line_3 }}
+                        @endisset
                     </td>
                 </tr>
                 @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
 

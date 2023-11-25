@@ -11,7 +11,10 @@ use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
 use App\Http\Controllers\Apps\MHXCupCategoryController;
 use App\Http\Controllers\Apps\MHXCupRaceController;
+use App\Http\Controllers\Apps\MHXCupRacerController;
 use App\Http\Controllers\Apps\MHXCupRegisterController;
+use App\Http\Controllers\Apps\MHXCupResultController;
+use App\Http\Controllers\Apps\MHXCupTrackController;
 use App\Http\Controllers\Apps\MHXCupTShirtController;
 use App\Http\Controllers\Apps\PermissionsController;
 use App\Http\Controllers\Apps\PreRegisterController;
@@ -159,10 +162,19 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                'as'     => 'mhx-cup.'
            ], function (){
                Route::resource('t-shirt', MHXCupTShirtController::class);
-               Route::resource('categories', MHXCupCategoryController::class);
                Route::resource('register', MHXCupRegisterController::class);
                Route::get('registered-recer', [AppsController::class, 'categoryCup'])->name('categoryMhxCup');
                Route::post('approve-register', [AppsController::class, 'approveRegister'])->name('approveRegister');
+           });
+           Route::group([
+               'prefix'  => 'event-mhx-cup',
+               'as'     => 'event-mhx-cup.'
+           ], function (){
+               Route::resource('categories', MHXCupCategoryController::class);
+               Route::resource('tracks', MHXCupTrackController::class);
+               Route::resource('racers', MHXCupRacerController::class);
+               Route::resource('races', MHXCupRaceController::class);
+               Route::resource('results', MHXCupResultController::class);
            });
            Route::group([
                'prefix'  => 'race',
