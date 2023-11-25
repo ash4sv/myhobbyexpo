@@ -59,7 +59,10 @@ class BoothExhibitionBookedController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $booths = BoothExhibitionBooked::findOrFail($id);
+        return view($this->view.'show', [
+            'booths' => $booths
+        ]);
     }
 
     /**
