@@ -23,16 +23,12 @@ class BoothExhibitionBookedController extends Controller
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        $user = Auth::user();
+//        $user = Auth::user();
+//        return $user->roles;
+//        if ($user->hasrole(['sysadmin', 'master', 'agent'])) {
+//
+//        }
         $booths = BoothExhibitionBooked::all();
-
-        if ($user->hasAnyRole(['sysadmin', 'master'])){
-            $booths = BoothExhibitionBooked::all();
-        }
-        if ($user->hasRole('agent')) {
-            $booths = BoothExhibitionBooked::all();
-        }
-
         return view($this->view.'index', [
             'booths' => $booths
         ]);
