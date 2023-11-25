@@ -110,7 +110,7 @@
                         </td>
                         <td>
                             @can('booth-number-show')
-                            {{--<a href="{{ route('apps.exhibition.hall.show', $hall) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>--}}
+                            <a href="{{ route('apps.exhibition.booth-number.show', $booth) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                             @endcan
                             @can('booth-number-edit')
                             <a href="{{ route('apps.exhibition.booth-number.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
