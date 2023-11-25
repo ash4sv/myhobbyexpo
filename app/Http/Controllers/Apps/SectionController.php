@@ -67,8 +67,10 @@ class SectionController extends Controller
      */
     public function show(string $id)
     {
-        $this->authorize('zone-show');
-
+        $section = Section::findOrFail($id);
+        return view($this->view.'show', [
+            'section' => $section
+        ]);
     }
 
     /**

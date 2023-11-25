@@ -16,7 +16,7 @@
 
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title"></h4>
+            <h4 class="panel-title">@yield('page-title')</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -26,81 +26,72 @@
         </div>
         <div class="panel-body">
 
-            <div class="d-flex align-items-center mb-3">
-                <div class="me-auto">
-                    @can('zone-create')
-                    <a href="{{ route('apps.exhibition.section.create') }}" class="btn btn-primary px-4">
-                        <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Section
-                    </a>
-                    @endcan
-                </div>
-            </div>
-
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
-                <thead>
-                <tr>
-                    <th width="1%">No.</th>
-                    <th width="1%"></th>
-                    <th width="1%"></th>
-                    <th width="31.33333333%">Hall</th>
-                    <th width="31.33333333%">Name Section</th>
-                    <th width="10%">Booths</th>
-                    <th width="1%">Status</th>
-                    <th width="1%">Coming Soon</th>
-                    <th width="1%">#</th>
-                </tr>
-                </thead>
+            <table class="table table-bordered">
                 <tbody>
-                @foreach($sections as $section)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>
+                    <tr>
+                        <td>Hall :</td>
+                        <td>
+                            {{ $section->hall->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name Section : </td>
+                        <td>{{ $section->name }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%"></td>
+                        <td>
                         <a href="{{ asset($section->poster) }}" data-fancybox data-src="{{ asset($section->poster) }}" data-caption="{{ $section->name }}">
                             <img src="{{ asset($section->poster) }}" alt="" class="h-60px">
                         </a>
-                    </td>
-                    <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%"></td>
+                        <td>
                         <a href="{{ asset($section->layout) }}" data-fancybox data-src="{{ asset($section->layout) }}" data-caption="{{ $section->name }}">
                             <img src="{{ asset($section->layout) }}" alt="" class="h-60px">
                         </a>
                     </td>
-                    <td>{{ $section->hall->name }}</td>
-                    <td>{{ $section->name }}</td>
-                    <td>
+                    </tr>
+                    <tr>
+                        <td>Booths:</td>
+                        <td>
                         @if(count($section->numbers) > 0)
                             <div class="progress progress-striped">
                                 <div class="progress-bar bg-warning" style="width:{{ (count($section->numbers->where('status', 1)) / count($section->numbers)) * 100 }}%">{{ (count($section->numbers->where('status', 1)) / count($section->numbers)) * 100 }}%</div>
                             </div>
                         @endif
                         <p class="mb-0">{{ count($section->numbers->where('status', 1)) }} / {{ count($section->numbers) }}</p>
-                    </td>
-                    <td class="text-center">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>
                         <span class="badge {{ $section->status == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $section->status == 1 ? 'Enable' : 'Disable' }}
                         </span>
-                    </td>
-                    <td class="text-center">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Coming Soon :</td>
+                        <td>
                         <span class="badge {{ $section->coming_soon == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $section->coming_soon == 1 ? 'Enable' : 'Disable' }}
                         </span>
                     </td>
-                    <td>
-                        @can('zone-show')
-                        <a href="{{ route('apps.exhibition.section.show', $section) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
-                        @endcan
-                        @can('zone-edit')
-                        <a href="{{ route('apps.exhibition.section.edit', $section) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
-                        @endcan
-                        @can('zone-delete')
-                        <a href="{{ route('apps.exhibition.section.destroy', $section->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
-                        @endcan
-                    </td>
-                </tr>
-                @endforeach
+                    </tr>
+                    
                 </tbody>
             </table>
+
+            <a href="{{ url('exhibition/section') }}" class="btn btn-indigo btn-lg w-150px">Back</a>
 
         </div>
     </div>
 
 @endsection
+
+@push('script')
+
+@endpush
