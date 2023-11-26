@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'Tracks')
-@section('page-header', 'Tracks')
+@section('page-title', 'MHX Cup Tracks')
+@section('page-header', 'MHX Cup Tracks')
 @section('description', '')
 
 @section('content')
@@ -38,16 +38,29 @@
                 <thead>
                 <tr>
                     <th class="text-center" width="1%">No.</th>
-                    <th>Category Name</th>
+                    <th width="1%">Track Layouts</th>
+                    <th>Racing Categories</th>
+                    <th>Track Name</th>
                     <th width="1%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{--<tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>--}}
+                @foreach($tracks as $track)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
+                        <a  href="{{ asset($track->track_layouts)  }}" data-fancybox>
+                            <img src="{{ asset($track->track_layouts)  }}" alt="" class="h-60px">
+                        </a>
+                    </td>
+                    <td>{{ $track->mhxcupcategory->category_name }}</td>
+                    <td>{{ $track->track_name }}</td>
+                    <td>
+                        <a href="{{ route('apps.event-mhx-cup.tracks.edit', $track) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('apps.event-mhx-cup.tracks.destroy', $track->id) }}" class="btn btn-sm btn-danger btn-sm my-n1" data-confirm-delete="true"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('page-title', 'MHX Cup Create Tracks')
-@section('page-header', 'MHX Cup Create Tracks')
+@section('page-title', 'MHX Cup Edit Tracks')
+@section('page-header', 'MHX Cup Edit Tracks')
 @section('description', '')
 
 @section('content')
@@ -26,7 +26,8 @@
         </div>
         <div class="panel-body">
 
-            <form action="{{ route('apps.event-mhx-cup.tracks.store') }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+            <form action="{{ route('apps.event-mhx-cup.tracks.update', $track) }}" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+                @method('PUT')
                 @include('apps.mhx-cup.tracks.form')
             </form>
 
@@ -34,3 +35,4 @@
     </div>
 
 @endsection
+

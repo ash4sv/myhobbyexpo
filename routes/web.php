@@ -175,6 +175,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('racers', MHXCupRacerController::class);
                Route::resource('races', MHXCupRaceController::class);
                Route::resource('results', MHXCupResultController::class);
+
+               Route::get('getCategoryData/{categoryId}', [MHXCupRaceController::class, 'getCategoryData'])->name('getCategoryData');
            });
            Route::group([
                'prefix'  => 'race',

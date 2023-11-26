@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/switchery/dist/switchery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
 
@@ -78,6 +79,7 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/switchery/dist/switchery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/summernote/dist/summernote-lite.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/apps.js') }}"></script>

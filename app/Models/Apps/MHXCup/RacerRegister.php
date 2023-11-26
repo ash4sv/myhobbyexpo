@@ -67,4 +67,9 @@ class RacerRegister extends Model
     {
         return $this->hasMany(RacerNickNameRegister::class, 'racer_id', 'id');
     }
+
+    public function mhxracer()
+    {
+        return $this->hasMany(RacingRacers::class, 'racer_registers_id', 'id');
+    }
 }

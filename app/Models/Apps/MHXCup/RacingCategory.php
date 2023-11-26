@@ -11,6 +11,21 @@ class RacingCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function mhxcuptrack()
+    {
+        return $this->hasMany(RacingTrack::class, 'racing_categories_id', 'id');
+    }
+
+    public function mhxcupracer()
+    {
+        return $this->hasMany(RacingRacers::class, 'racing_categories_id', 'id');
+    }
+
+    public function mhxraces()
+    {
+        return $this->hasMany(Racing::class, 'racing_categories_id', 'id');
+    }
+
     public function saveRacingCategory($category, $request)
     {
         $category->category_name = $request->category_name;
