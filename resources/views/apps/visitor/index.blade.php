@@ -101,12 +101,14 @@
                     <th>Uniq</th>
                     <th>Full Name</th>
                     <th>IC / Passport</th>
-                    <th>Email</th>
                     <th>Phone Number</th>
                     <th>Ticket Purchase</th>
                     <th>Total Purchase (RM)</th>
                     <th>Status</th>
                     <th>Action</th>
+                    <th>#</th>
+                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -116,7 +118,6 @@
                     <td>{{ $visitor->uniq }}</td>
                     <td>{{ json_decode($visitor->visitor)->full_name }}</td>
                     <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
-                    <td>{{ json_decode($visitor->visitor)->email }}</td>
                     <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
                     <td>
                         @foreach(json_decode($visitor->cart) as $key => $ticket)
@@ -139,6 +140,10 @@
                         <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
                             <i class="fa fa-print"></i>
                         </a>
+                    </td>
+                    <td nowrap="">
+                    <a href="{{ route('apps.ticket-visitor.show', $visitor) }}"
+                            class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
                 @endforeach

@@ -70,7 +70,11 @@ class VisitorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $visitor = VisitorTicket::findOrFail($id);
+
+        return view($this->view.'show', [
+            'visitor' => $visitor,
+        ]);
     }
 
     /**
