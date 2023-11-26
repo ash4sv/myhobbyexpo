@@ -50,7 +50,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         <a  href="{{ asset($track->track_layouts)  }}" data-fancybox>
-                            <img src="{{ asset($track->track_layouts)  }}" alt="" class="h-60px">
+                            <img src="{{ asset($track->track_layouts)  }}" alt="" class="h-100px">
                         </a>
                     </td>
                     <td>{{ $track->mhxcupcategory->category_name }}</td>

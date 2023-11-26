@@ -49,7 +49,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         <a  href="{{ asset($category->category_image)  }}" data-fancybox>
-                            <img src="{{ asset($category->category_image)  }}" alt="" class="h-60px">
+                            <img src="{{ asset($category->category_image)  }}" alt="" class="h-100px">
                         </a>
                     </td>
                     <td>{{ $category->category_name }}</td>

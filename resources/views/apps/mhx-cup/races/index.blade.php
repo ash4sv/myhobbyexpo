@@ -53,13 +53,13 @@
                 @foreach($races as $race)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $race->mhxcategory->category_name }}</td>
-                        <td>{{ $race->mhxcupctrack->track_name }}</td>
-                        <td>{{ $race->mhxracer1->racer_name }}</td>
-                        <td>{{ $race->mhxracer2->racer_name }}</td>
-                        <td>{{ $race->mhxracer3->racer_name }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>@isset($race->mhxcategory) {{ $race->mhxcategory->category_name }}@endisset</td>
+                        <td>@isset($race->mhxcupctrack) {{ $race->mhxcupctrack->track_name }} @endisset</td>
+                        <td>@isset($race->mhxracer1) {{ $race->mhxracer1->racer_name }}@endisset</td>
+                        <td>@isset($race->mhxracer2) {{ $race->mhxracer2->racer_name }} @endisset</td>
+                        <td>@isset($race->mhxracer3) {{ $race->mhxracer3->racer_name }}@endisset</td>
+                        <td>{{ $race->racing_date }}</td>
+                        <td>{{ $race->racing_time }}</td>
                         <td></td>
                         <td></td>
                     </tr>
