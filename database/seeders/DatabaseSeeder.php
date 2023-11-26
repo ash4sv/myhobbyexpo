@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
 //        $this->call(DbTruncateSeeder::class);
 //        $this->call(BoothSpecialPriceSeeder::class);
 
-        $this->call(MHXCupCategorySeeder::class);
+        // $this->call(MHXCupCategorySeeder::class);
+
+        $this->call(RacingTrackSeeder::class);
     }
 }
