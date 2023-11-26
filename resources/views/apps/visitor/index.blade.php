@@ -102,9 +102,9 @@
                     <th>Full Name</th>
                     <th>IC / Passport</th>
                     <th>Phone Number</th>
-                    <th>Ticket Purchase</th>
                     <th>Total Purchase (RM)</th>
                     <th>Status</th>
+                    <th>Redeem Status</th>
                     <th>Action</th>
                     <th>#</th>
                     <th></th>
@@ -119,21 +119,15 @@
                     <td>{{ json_decode($visitor->visitor)->full_name }}</td>
                     <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
                     <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
-                    <td>
-                        @foreach(json_decode($visitor->cart) as $key => $ticket)
-                            {{ $ticket->ticketType }} {{ $ticket->ticketQuantity }}x @if (!$loop->last), @endif
-                            @if(isset($item->shirtSizes))
-                                T-Shirt Size:
-                                @foreach($item->shirtSizes as $shirt)
-                                    {{ $shirt }}@if (!$loop->last), @endif
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </td>
                     <td>{{ number_format($visitor->overallTotal, 2) }}</td>
                     <td>
                         <span class="badge {{ $visitor->payment_status == 1 ? 'bg-primary' : 'bg-danger' }}">
                         {{ $visitor->payment_status == 1 ? 'Paid' : 'Unpaid' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-success' : 'bg-danger' }}">
+                            {{ $visitor->redeem_status == 1 ? 'Redeemed' : 'Not Redeemed' }}
                         </span>
                     </td>
                     <td>
@@ -142,9 +136,10 @@
                         </a>
                     </td>
                     <td nowrap="">
-                    <a href="{{ route('apps.ticket-visitor.show', $visitor) }}"
-                            class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('apps.ticket-visitor.show', $visitor) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('apps.ticket-visitor.edit', $visitor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
                     </td>
+                    
                 </tr>
                 @endforeach
                 </tbody>

@@ -82,7 +82,11 @@ class VisitorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $visitor = VisitorTicket::findOrFail($id);
+
+        return view($this->view.'edit', [
+            'visitor' => $visitor,
+        ]);
     }
 
     /**
@@ -90,7 +94,15 @@ class VisitorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'redeem_status' => 'required|in:1,2',
+        ]);
+
+        $visitor = VisitorTicket::find($id);
+        $visitor->redeem_status = $request->redeem_status;
+        $visitor->save();
+
+        return redirect()->route('apps.ticket-visitor.index', $id)->with('success', 'Redeem status updated successfully.');
     }
 
     /**
