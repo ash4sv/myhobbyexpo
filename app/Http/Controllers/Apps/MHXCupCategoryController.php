@@ -18,7 +18,7 @@ class MHXCupCategoryController extends Controller
      */
     public function index()
     {
-        $title = 'Delete MHX Cup category!';
+        $title = 'Delete MHX Cup Category!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
