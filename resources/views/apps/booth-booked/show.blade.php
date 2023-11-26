@@ -80,6 +80,21 @@
                     </tr>
                     @endisset
                     <tr>
+                        <td> Description : </td>
+                        <td>    
+                            @foreach ($boothData as $key => $value)
+                                {{ ucwords(str_replace('_', ' ', $key)) }}:
+                                    
+                                @if ($key === 'booths' && is_array($value))
+                                    {{ implode(', ', array_keys($value['id'])) }}
+                                @else
+                                    {{ is_array($value) ? json_encode($value) : htmlspecialchars($value) }}
+                                @endif
+                                <br>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Agent :</td>
                         <td>
                             {{ $booths->agent->name }}
