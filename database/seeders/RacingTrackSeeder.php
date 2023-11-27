@@ -16,13 +16,13 @@ class RacingTrackSeeder extends Seeder
      */
     public function run(): void
     {
-        // Schema::disableForeignKeyConstraints();
-        // DB::table('racing_categories')->truncate();
-        // DB::table('racing_tracks')->truncate();
-        // DB::table('racing_racers')->truncate();
+        Schema::disableForeignKeyConstraints();
+        DB::table('racing_categories')->truncate();
+        DB::table('racing_tracks')->truncate();
+        DB::table('racing_racers')->truncate();
         // DB::table('racings')->truncate();
         // DB::table('racing_results')->truncate();
-        // Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
 
         $path = 'assets/upload/';
 
