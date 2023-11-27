@@ -91,7 +91,7 @@
             }
 
             // Call the function for each card
-            var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', 'RM99.00' + ' / [Normal]', '', '{{ asset('assets/images/ticket_concert.webp') }}');
+            var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', 'RM79.00' + ' / [Normal]', '', '{{ asset('assets/images/ticket_concert.webp') }}');
             var adultTicketCard = createCard('ADULT TICKET', 'ADULT TICKET', 'RM20.00 / 2 Days', '', '{{ asset('assets/images/ticket_adult.webp') }}');
             var kidsTicketCard = createCard('KIDS TICKET', 'KIDS TICKET', 'RM5.00 / 2 Days', '', '{{ asset('assets/images/ticket_kids.webp') }}');
             var choii64Card = createCard('CHOII 64 LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK', 'RM259.00 / Pack', '', '{{ asset('assets/images/ticket_super_vvip.webp') }}');
