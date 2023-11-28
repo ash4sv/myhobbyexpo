@@ -58,9 +58,14 @@ class BoothExhibitionBookedController extends Controller
         $booths = BoothExhibitionBooked::findOrFail($id);
         $boothData = json_decode($booths->inv_description, true);
 
+        $itemsToDisplay = [
+            'add_table', 'add_chair', 'add_sso', 'add_sso_15amp', 'add_steel_barricade', 'add_shell_scheme_barricade',
+        ];
+
         return view($this->view.'show', [
             'booths' => $booths,
             'boothData' => $boothData,
+            'itemsToDisplay' => $itemsToDisplay
         ]);
     }
 
