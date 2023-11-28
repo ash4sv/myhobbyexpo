@@ -82,6 +82,15 @@
         </div>
     </div>
 
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link py-3 px-5 {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }}" href="{{ route('apps.ticket-visitor.index') }}">In House Visitor Tickets</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link py-3 px-5 {{ (request()->segment(1) == 'shopee-visitor') ? 'active' : '' }}" href="{{ route('apps.shopee-visitor.index') }}">Shopee Visitor Ticket</a>
+        </li>
+    </ul>
+
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <h4 class="panel-title"></h4>
@@ -94,7 +103,18 @@
         </div>
         <div class="panel-body">
 
-            <table class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
+            <div class="input-group mb-4">
+                <div class="flex-fill position-relative">
+                    <div class="input-group">
+                        <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1;">
+                            <i class="fa fa-search opacity-5"></i>
+                        </div>
+                        <input type="text" class="form-control px-35px bg-light" placeholder="Search tickets..." id="searchInput" />
+                    </div>
+                </div>
+            </div>
+
+            <table id="dataTable" class="data-table table table-striped table-bordered align-middle text-nowrap mb-0">
                 <thead>
                 <tr>
                     <th width="1%">No.</th>
@@ -111,36 +131,36 @@
                 </thead>
                 <tbody>
                 @foreach($visitors as $key => $visitor)
-                <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td>{{ $visitor->uniq }}</td>
-                    <td>{{ json_decode($visitor->visitor)->full_name }}</td>
-                    <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
-                    <td>{{ json_decode($visitor->visitor)->email }}</td>
-                    <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
-                    <td>
-                        @foreach(json_decode($visitor->cart) as $key => $ticket)
-                            {{ $ticket->ticketType }} {{ $ticket->ticketQuantity }}x @if (!$loop->last), @endif
-                            @if(isset($item->shirtSizes))
-                                T-Shirt Size:
-                                @foreach($item->shirtSizes as $shirt)
-                                    {{ $shirt }}@if (!$loop->last), @endif
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </td>
-                    <td>{{ number_format($visitor->overallTotal, 2) }}</td>
-                    <td>
+                    <tr class="{{ ($visitor->status === true) ? 'bg-success-100':'' }}">
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td>{{ $visitor->uniq }}</td>
+                        <td>{{ json_decode($visitor->visitor)->full_name }}</td>
+                        <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
+                        <td>{{ json_decode($visitor->visitor)->email }}</td>
+                        <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
+                        <td>
+                            @foreach(json_decode($visitor->cart) as $key => $ticket)
+                                {{ $ticket->ticketType }} {{ $ticket->ticketQuantity }}x @if (!$loop->last), @endif
+                                @if(isset($item->shirtSizes))
+                                    T-Shirt Size:
+                                    @foreach($item->shirtSizes as $shirt)
+                                        {{ $shirt }}@if (!$loop->last), @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>{{ number_format($visitor->overallTotal, 2) }}</td>
+                        <td>
                         <span class="badge {{ $visitor->payment_status == 1 ? 'bg-primary' : 'bg-danger' }}">
                         {{ $visitor->payment_status == 1 ? 'Paid' : 'Unpaid' }}
                         </span>
-                    </td>
-                    <td>
-                        <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
-                            <i class="fa fa-print"></i>
-                        </a>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
+                                <i class="fa fa-print"></i>
+                            </a>
+                        </td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
@@ -149,3 +169,15 @@
     </div>
 
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('#dataTable').DataTable();
+
+            $('#searchInput').on('keyup', function () {
+                dataTable.search($(this).val()).draw();
+            });
+        });
+    </script>
+@endpush

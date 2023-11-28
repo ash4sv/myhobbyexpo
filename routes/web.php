@@ -23,6 +23,7 @@ use App\Http\Controllers\Apps\SectionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\VendorController;
 use App\Http\Controllers\Apps\VisitorController;
+use App\Http\Controllers\Apps\VisitorShopeeController;
 use App\Http\Controllers\Front\MHXCupController;
 use App\Http\Controllers\Front\ParticipantController;
 use App\Http\Controllers\Front\RaceController;
@@ -134,6 +135,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::resource('agent', AgentController::class);
            Route::resource('vendors', VendorController::class);
            Route::resource('ticket-visitor', VisitorController::class);
+           Route::resource('shopee-visitor', VisitorShopeeController::class);
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'
@@ -177,6 +179,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('results', MHXCupResultController::class);
 
                Route::get('getCategoryData/{categoryId}', [MHXCupRaceController::class, 'getCategoryData'])->name('getCategoryData');
+               Route::post('submit-result', [MHXCupRaceController::class, 'submitResult'])->name('result');
+               Route::post('race-complete', [MHXCupRaceController::class, 'completeReport'])->name('completeRace');
            });
            Route::group([
                'prefix'  => 'race',
