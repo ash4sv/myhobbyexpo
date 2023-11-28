@@ -79,25 +79,34 @@
                         </td>
                     </tr>
                     @endisset
-                    <tr>
-                        @foreach ($boothData as $key => $value)
-                            @if ($key === 'booths' && is_array($value))
-                                <tr>
-                                    <td>{{ ucwords(str_replace('_', ' ', $key)) }}:</td>
-                                    <td>
-                                        {{ implode(', ', array_filter(array_keys($value['id']), function ($id) use ($value) {
-                                            return $value['id'][$id] > 0;
-                                        })) }}
-                                    </td>
-                                </tr>
-                            @elseif ($value > 0)
-                                <tr>
-                                    <td>{{ ucwords(str_replace('_', ' ', $key)) }}:</td>
-                                    <td>{{ is_array($value) ? json_encode($value) : htmlspecialchars($value) }}</td>
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tr>
+                    {{--<tr>
+                        <td colspan="2">{{ $booths }}</td>
+                    </tr>--}}
+                    {{--@foreach ($boothData as $key => $value)
+                        @if ($key === 'booths' && is_array($value))
+                            <tr>
+                                <td>{{ ucwords(str_replace('_', ' ', $key)) }}:</td>
+                                <td>
+                                    {{ implode(', ', array_filter(array_keys($value['id']), function ($id) use ($value) {
+                                        return $value['id'][$id] > 0;
+                                    })) }}
+                                </td>
+                            </tr>
+                        @elseif ($value > 0)
+                            <tr>
+                                <td>{{ ucwords(str_replace('_', ' ', $key)) }}:</td>
+                                <td>{{ is_array($value) ? json_encode($value) : htmlspecialchars($value) }}</td>
+                            </tr>
+                        @endif
+                    @endforeach--}}
+                    @foreach($itemsToDisplay as $item)
+                        @if(isset($jsonData[$item]) && $jsonData[$item] > 0)
+                            <tr>
+                                <td>{{ ucwords(str_replace('_', ' ', $item)) }}</td>
+                                <td>{{ $jsonData[$item] }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
                     <tr>
                         <td>Agent :</td>
                         <td>
@@ -108,7 +117,6 @@
                         <td>Paid :</td>
                         <td>
                             {{ $booths->total }}
-
                         </td>
                     </tr>
                     @isset($booths->inv_number)
