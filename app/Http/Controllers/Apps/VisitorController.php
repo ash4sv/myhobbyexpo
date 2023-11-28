@@ -92,18 +92,19 @@ class VisitorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateRedeemStatus(string $id)
     {
-        $request->validate([
-            'redeem_status' => 'required|in:1,2',
-        ]);
-
         $visitor = VisitorTicket::find($id);
-        $visitor->redeem_status = $request->redeem_status;
+        $visitor->redeem_status = 1;
         $visitor->save();
 
-        return redirect()->route('apps.ticket-visitor.index', $id)->with('success', 'Redeem status updated successfully.');
+        return response()->json([
+            'status' => true,
+            'title' => 'Redeem status updated successfully.',
+            'msg' => 'The redeem status has been updated to ' . $visitor->redeem_status,
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.

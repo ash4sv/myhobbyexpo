@@ -126,10 +126,16 @@
                         </span>
                     </td>
                     <td>
-                        <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-success' : 'bg-danger' }}">
+                        <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-primary' : 'bg-danger' }}">
                             {{ $visitor->redeem_status == 1 ? 'Redeemed' : 'Not Redeemed' }}
                         </span>
+                        <button
+                            class="btn btn-redeem btn-sm my-n1 ms-2{{ $visitor->redeem_status == 1 ? ' disabled' : '' }}"
+                            data-to-redeem="{{ $visitor->id }}">
+                            Redeem
+                        </button>
                     </td>
+
                     <td>
                         <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
                             <i class="fa fa-print"></i>
@@ -137,7 +143,6 @@
                     </td>
                     <td nowrap="">
                         <a href="{{ route('apps.ticket-visitor.show', $visitor) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('apps.ticket-visitor.edit', $visitor) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>
                     </td>
                     
                 </tr>
@@ -149,3 +154,63 @@
     </div>
 
 @endsection
+
+@push('script')
+<script>
+    $(document).ready(function () {
+        function updateRedeemStatus(visitorId, redeemButton) {
+            // Perform AJAX request to update redeem status
+            $.ajax({
+                method: 'POST',
+                url: 'ticket-visitor/' + visitorId + '/update-redeem-status',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: visitorId
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        Swal.fire({
+                            title: response.title,
+                            text: response.msg,
+                            icon: 'success',
+                        })
+                    }
+                    redeemButton.closest('td').find('.badge').removeClass('bg-danger').addClass('bg-primary').text('Redeemed');
+                    redeemButton.addClass('disabled');
+                },
+                error: function (error) {
+                    // Handle error, e.g., show an error message
+                }
+            });
+        }
+
+        $('.btn-redeem').on('click', function (e) {
+            e.preventDefault();
+            const visitorId = $(this).data('to-redeem');
+            const redeemButton = $(this);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to redeem this visitor.",
+                icon: "warning",
+                type: "warning",
+                showDenyButton: true,
+                confirmButtonText: 'Yes',
+                denyButtonText: 'No',
+            }).then((willRedeem) => {
+                if (willRedeem.isConfirmed) {
+                    updateRedeemStatus(visitorId, redeemButton);
+                } else if (willRedeem.isDenied) {
+                    Swal.fire({
+                        title: "Changes are not saved",
+                        text: "Visitor has not been redeemed!",
+                        icon: "info",
+                        type: "info",
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+@endpush

@@ -134,6 +134,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::resource('agent', AgentController::class);
            Route::resource('vendors', VendorController::class);
            Route::resource('ticket-visitor', VisitorController::class);
+           Route::post('ticket-visitor/{id}/update-redeem-status', [VisitorController::class, 'updateRedeemStatus'])->name('ticket-visitor.updateRedeemStatus');
            Route::group([
                'prefix'  => 'exhibition',
                'as'     => 'exhibition.'
