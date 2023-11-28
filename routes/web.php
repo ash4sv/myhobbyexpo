@@ -136,6 +136,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
            Route::resource('vendors', VendorController::class);
            Route::resource('ticket-visitor', VisitorController::class);
            Route::resource('shopee-visitor', VisitorShopeeController::class);
+           Route::get('shopee-visitor-data', [VisitorShopeeController::class, 'shopeeData'])->name('shopeeData');
+           Route::post('shopee-visitor-redeem', [VisitorShopeeController::class, 'shopeeRedeem'])->name('shopeeRedeem');
            Route::post('ticket-visitor/{id}/update-redeem-status', [VisitorController::class, 'updateRedeemStatus'])->name('ticket-visitor.updateRedeemStatus');
 
            Route::group([

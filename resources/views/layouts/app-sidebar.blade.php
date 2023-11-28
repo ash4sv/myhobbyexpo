@@ -89,7 +89,7 @@
             @endcan
 
             <div class="menu-header">Visitor</div>
-            <div class="menu-item {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }}">
+            <div class="menu-item {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }} {{ (request()->segment(1) == 'shopee-visitor') ? 'active' : '' }}">
                 <a href="{{ route('apps.ticket-visitor.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa fa-users"></i>
@@ -225,6 +225,11 @@
                     <div class="menu-item {{ (request()->segment(2) == 'results') ? 'active' : '' }}">
                         <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
                             <div class="menu-text">Result</div>
+                        </a>
+                    </div>
+                    <div class="menu-item {{ (request()->segment(2) == 'score-board') ? 'active' : '' }}">
+                        <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
+                            <div class="menu-text">Score Board</div>
                         </a>
                     </div>
                 </div>

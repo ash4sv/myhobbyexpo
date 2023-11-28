@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/plugins/fancyapps/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
 <body>

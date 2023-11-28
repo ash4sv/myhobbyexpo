@@ -37,7 +37,7 @@
                     <th width="13.85714286%">Phone</th>
                     <th width="13.85714286%">Hall | Zone | Booth</th>
                     <th width="13.85714286%">Agent</th>
-                    <th width="13.85714286%">Paid</th>
+                    {{--<th width="13.85714286%">Paid</th>--}}
                     <th width="13.85714286%">Invoice</th>
                     <th width="1%">#</th>
                 </tr>
@@ -76,16 +76,16 @@
                         @endisset
                     </td>
                     <td>{{ $data->agent->name }}</td>
-                    <td>{{ $data->total }}</td>
+                    {{--<td>{{ $data->total }}</td>--}}
                     <td>
                         @isset($data->inv_number)
-                        <a data-fancybox href="{{ asset('assets/upload/'.$data->inv_number.'.pdf') }}" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a>
+                        <a data-fancybox href="{{ asset('assets/upload/'.$data->inv_number.'.pdf') }}" class="btn btn-yellow btn-sm my-n1">View Invoice</a>
                         @endisset
                     </td>
                     <td nowrap="">
                         @can('booth-booked-show')
                         <a href="{{ route('apps.booth-booked.show', $data) }}"
-                            class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                            class="btn btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                         @endcan
                         @can('booth-booked-edit')
                         {{--<a href="{{ route('apps.exhibition.booth.edit', $booth) }}" class="btn btn-sm btn-primary btn-sm my-n1"><i class="fas fa-pencil-alt"></i></a>--}}
