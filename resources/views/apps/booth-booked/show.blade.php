@@ -100,10 +100,10 @@
                         @endif
                     @endforeach--}}
                     @foreach($itemsToDisplay as $item)
-                        @if(isset($jsonData[$item]) && $jsonData[$item] > 0)
+                        @if(isset($boothData[$item]) && $boothData[$item] > 0)
                             <tr>
                                 <td>{{ ucwords(str_replace('_', ' ', $item)) }}</td>
-                                <td>{{ $jsonData[$item] }}</td>
+                                <td>{{ $boothData[$item] }} x Unit</td>
                             </tr>
                         @endif
                     @endforeach
@@ -116,14 +116,14 @@
                     <tr>
                         <td>Paid :</td>
                         <td>
-                            {{ $booths->total }}
+                            RM {{ number_format($booths->total, 2) }}
                         </td>
                     </tr>
                     @isset($booths->inv_number)
                     <tr>
                         <td>Invoice :</td>
                         <td>
-                            <a data-fancybox href="{{ asset('assets/upload/'.$booths->inv_number.'.pdf') }}" class="btn btn-xs btn-yellow btn-sm my-n1 ms-2">View Invoice</a>
+                            <a data-fancybox href="{{ asset('assets/upload/'.$booths->inv_number.'.pdf') }}" class="btn btn-yellow btn-sm my-n1">View Invoice</a>
                         </td>
                     </tr>
                     @endisset
