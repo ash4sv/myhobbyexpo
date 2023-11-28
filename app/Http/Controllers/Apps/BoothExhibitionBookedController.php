@@ -56,8 +56,11 @@ class BoothExhibitionBookedController extends Controller
     public function show(string $id)
     {
         $booths = BoothExhibitionBooked::findOrFail($id);
+        $boothData = json_decode($booths->inv_description, true);
+
         return view($this->view.'show', [
-            'booths' => $booths
+            'booths' => $booths,
+            'boothData' => $boothData,
         ]);
     }
 
