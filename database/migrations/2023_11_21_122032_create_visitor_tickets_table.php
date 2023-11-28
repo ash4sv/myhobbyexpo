@@ -19,7 +19,6 @@ return new class extends Migration
             $table->double('overallTotal')->nullable();
             $table->longText('billplz')->nullable();
             $table->boolean('payment_status');
-            $table->boolean('redeem_status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
