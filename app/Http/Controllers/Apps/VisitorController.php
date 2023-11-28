@@ -70,7 +70,11 @@ class VisitorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $visitor = VisitorTicket::findOrFail($id);
+
+        return view($this->view.'show', [
+            'visitor' => $visitor,
+        ]);
     }
 
     /**
@@ -78,16 +82,29 @@ class VisitorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $visitor = VisitorTicket::findOrFail($id);
+
+        return view($this->view.'edit', [
+            'visitor' => $visitor,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateRedeemStatus(string $id)
     {
-        //
+        $visitor = VisitorTicket::find($id);
+        $visitor->redeem_status = 1;
+        $visitor->save();
+
+        return response()->json([
+            'status' => true,
+            'title' => 'Redeem status updated successfully.',
+            'msg' => 'The redeem status has been updated to ' . $visitor->redeem_status,
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.

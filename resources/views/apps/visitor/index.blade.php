@@ -121,12 +121,11 @@
                     <th>Uniq</th>
                     <th>Full Name</th>
                     <th>IC / Passport</th>
-                    <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Ticket Purchase</th>
                     <th>Total Purchase (RM)</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th width="1%">Redeem Status</th>
+                    <th width="1%">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -136,19 +135,7 @@
                         <td>{{ $visitor->uniq }}</td>
                         <td>{{ json_decode($visitor->visitor)->full_name }}</td>
                         <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
-                        <td>{{ json_decode($visitor->visitor)->email }}</td>
                         <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
-                        <td>
-                            @foreach(json_decode($visitor->cart) as $key => $ticket)
-                                {{ $ticket->ticketType }} {{ $ticket->ticketQuantity }}x @if (!$loop->last), @endif
-                                @if(isset($item->shirtSizes))
-                                    T-Shirt Size:
-                                    @foreach($item->shirtSizes as $shirt)
-                                        {{ $shirt }}@if (!$loop->last), @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
-                        </td>
                         <td>{{ number_format($visitor->overallTotal, 2) }}</td>
                         <td>
                         <span class="badge {{ $visitor->payment_status == 1 ? 'bg-primary' : 'bg-danger' }}">
@@ -156,9 +143,20 @@
                         </span>
                         </td>
                         <td>
+                        <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                            {{ $visitor->redeem_status == 1 ? 'Redeemed' : 'Not Redeemed' }}
+                        </span>
+                            <button
+                                class="btn btn-info btn-redeem btn-sm my-n1 ms-2{{ $visitor->redeem_status == 1 ? ' disabled' : '' }}"
+                                data-to-redeem="{{ $visitor->id }}">
+                                Redeem
+                            </button>
+                        </td>
+                        <td nowrap="">
                             <a data-fancybox href="{{ asset('assets/upload/' . $visitor->uniq . '_' . json_decode($visitor->visitor)->identification_card_number)  . '.pdf' }}" class="btn btn-sm btn-blue my-n1">
                                 <i class="fa fa-print"></i>
                             </a>
+                            <a href="{{ route('apps.ticket-visitor.show', $visitor) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -173,6 +171,59 @@
 @push('script')
     <script>
         $(document).ready(function () {
+            function updateRedeemStatus(visitorId, redeemButton) {
+                // Perform AJAX request to update redeem status
+                $.ajax({
+                    method: 'POST',
+                    url: 'ticket-visitor/' + visitorId + '/update-redeem-status',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: visitorId
+                    },
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                title: response.title,
+                                text: response.msg,
+                                icon: 'success',
+                            })
+                        }
+                        redeemButton.closest('td').find('.badge').removeClass('bg-danger').addClass('bg-primary').text('Redeemed');
+                        redeemButton.addClass('disabled');
+                    },
+                    error: function (error) {
+                        // Handle error, e.g., show an error message
+                    }
+                });
+            }
+
+            $('.btn-redeem').on('click', function (e) {
+                e.preventDefault();
+                const visitorId = $(this).data('to-redeem');
+                const redeemButton = $(this);
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to redeem this visitor.",
+                    icon: "warning",
+                    type: "warning",
+                    showDenyButton: true,
+                    confirmButtonText: 'Yes',
+                    denyButtonText: 'No',
+                }).then((willRedeem) => {
+                    if (willRedeem.isConfirmed) {
+                        updateRedeemStatus(visitorId, redeemButton);
+                    } else if (willRedeem.isDenied) {
+                        Swal.fire({
+                            title: "Changes are not saved",
+                            text: "Visitor has not been redeemed!",
+                            icon: "info",
+                            type: "info",
+                        });
+                    }
+                });
+            });
+
             var dataTable = $('#dataTable').DataTable();
 
             $('#searchInput').on('keyup', function () {
