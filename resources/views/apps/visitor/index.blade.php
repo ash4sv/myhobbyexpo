@@ -130,7 +130,7 @@
                 </thead>
                 <tbody>
                 @foreach($visitors as $key => $visitor)
-                    <tr class="{{ ($visitor->status === true) ? 'bg-success-100':'' }}">
+                    <tr class="{{ ($visitor->redeem_status === 1) ? 'bg-success-100':'' }}">
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $visitor->uniq }}</td>
                         <td>{{ json_decode($visitor->visitor)->full_name }}</td>
@@ -142,10 +142,10 @@
                         {{ $visitor->payment_status == 1 ? 'Paid' : 'Unpaid' }}
                         </span>
                         </td>
-                        <td>
-                        <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-primary' : 'bg-danger' }}">
-                            {{ $visitor->redeem_status == 1 ? 'Redeemed' : 'Not Redeemed' }}
-                        </span>
+                        <td class="text-center">
+                            <span class="badge {{ $visitor->redeem_status == 1 ? 'bg-primary' : 'bg-danger' }}">
+                                {{ $visitor->redeem_status == 1 ? 'Redeemed' : 'Not Redeemed' }}
+                            </span>
                             <button
                                 class="btn btn-info btn-redeem btn-sm my-n1 ms-2{{ $visitor->redeem_status == 1 ? ' disabled' : '' }}"
                                 data-to-redeem="{{ $visitor->id }}">
