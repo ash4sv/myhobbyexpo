@@ -14,6 +14,41 @@
 
     <h1 class="page-header">@yield('page-header') {{--<small>header small text goes here...</small>--}}</h1>
 
+    <div class="row">
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Total Tickets</div>
+                    <div class="stats-number">{{ number_format((count($visitors) - count($visitors->where('status', 1)))) }}</div>
+                    <div class="stats-progress progress">
+                        @php
+                            $totalVisitors = count($visitors);
+                            $redeemedVisitors = count($visitors->where('status', 1));
+                            $percentageRedeemed = $redeemedVisitors / $totalVisitors * 100;
+                            $formattedPercentageRedeemed = number_format($percentageRedeemed, 2) . '%';
+                        @endphp
+                        <div class="progress-bar" style="width:{{ $formattedPercentageRedeemed }};"></div>
+                    </div>
+                    <div class="stats-desc">Total Redeem Shopee Ticket ({{ $formattedPercentageRedeemed }})</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="widget widget-stats bg-teal mb-10px">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Total Tickets</div>
+                    <div class="stats-number">{{ number_format($redeemedVisitors) }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <div class="stats-desc">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link py-3 px-5 {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }}" href="{{ route('apps.ticket-visitor.index') }}">In House Visitor Tickets</a>

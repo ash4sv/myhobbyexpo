@@ -20,7 +20,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">ELF MUSIC PACK</div>
-                    <div class="stats-number">{{ $visitorCount['ELF MUSIC PACK'] }}</div>
+                    <div class="stats-number">{{ number_format($visitorCount['ELF MUSIC PACK']) }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">CHOII LIMITED EDITION PACK</div>
-                    <div class="stats-number">{{ $visitorCount['CHOII LIMITED EDITION PACK'] }}</div>
+                    <div class="stats-number">{{ number_format($visitorCount['CHOII LIMITED EDITION PACK']) }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">CHOII 64 LIMITED EDITION PACK</div>
-                    <div class="stats-number">{{ $visitorCount['CHOII 64 LIMITED EDITION PACK'] }}</div>
+                    <div class="stats-number">{{ number_format($visitorCount['CHOII 64 LIMITED EDITION PACK']) }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
@@ -59,7 +59,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">ADULT TICKET</div>
-                    <div class="stats-number">{{ $visitorCount['ADULT TICKET'] }}</div>
+                    <div class="stats-number">{{ number_format($visitorCount['ADULT TICKET']) }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
                     <div class="stats-title">KIDS TICKET</div>
-                    <div class="stats-number">{{ $visitorCount['KIDS TICKET'] }}</div>
+                    <div class="stats-number">{{ number_format($visitorCount['KIDS TICKET']) }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
