@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(MHXCupCategorySeeder::class);
 
         // $this->call(RacingTrackSeeder::class);
-        $this->call(VisitorShopeeTicketSeeder::class);
+        // $this->call(VisitorShopeeTicketSeeder::class);
+        $this->call(VendorSeeder::class);
     }
 }
