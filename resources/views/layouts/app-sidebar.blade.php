@@ -88,7 +88,9 @@
             </div>
             @endcan
 
+            @can('visitor')
             <div class="menu-header">Visitor</div>
+            @can('ticket-access')
             <div class="menu-item {{ (request()->segment(1) == 'ticket-visitor') ? 'active' : '' }} {{ (request()->segment(1) == 'shopee-visitor') ? 'active' : '' }}">
                 <a href="{{ route('apps.ticket-visitor.index') }}" class="menu-link">
                     <div class="menu-icon">
@@ -97,6 +99,8 @@
                     <div class="menu-text">Ticket Visitor</div>
                 </a>
             </div>
+            @endcan
+            @endcan
 
             <div class="menu-header">Exhibition</div>
             @can('agent-access')
