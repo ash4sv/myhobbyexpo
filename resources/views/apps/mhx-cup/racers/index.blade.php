@@ -70,26 +70,26 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $racer->mhxregistered->full_name }}</td>
                             <td>{{ $racer->racer_name }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_1 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_1 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_2 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_2 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_3 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_3 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_4 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_4 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_5 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_5 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_6 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_6 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_7 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_7 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_8 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_8 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_9 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_9 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_10 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_10 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_11 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_11 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_12 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_12 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_13 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_13 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_14 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_14 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_15 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_15 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_16 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_16 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_17 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_17 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_18 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_18 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_19 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_19 }}</td>
+                            <td width="0.5%" class="text-center {{ ($racer->slot_20 == 1)? 'bg-success':'bg-danger' }}">{{ $racer->slot_20 }}</td>
                             <td></td>
                         </tr>
                         @endforeach

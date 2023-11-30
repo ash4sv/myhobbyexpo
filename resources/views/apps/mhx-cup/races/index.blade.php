@@ -60,8 +60,10 @@
                         <td>@isset($race->mhxracer3) {{ $race->mhxracer3->racer_name }}@endisset</td>
                         <td>{{ $race->racing_date }}</td>
                         <td>{{ $race->racing_time }}</td>
-                        <td></td>
-                        <td></td>
+                        <td width="1%" class="{{ ($race->status === 1)? 'bg-lime':'bg-warning' }} text-center">{{ ($race->status === 1)? 'Complete':'In Progress' }}</td>
+                        <td>
+                            <a href="{{ route('apps.event-mhx-cup.races.show', $race) }}" class="btn btn-sm btn-info btn-sm my-n1"><i class="fas fa-eye"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

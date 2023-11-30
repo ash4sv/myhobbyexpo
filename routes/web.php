@@ -9,6 +9,7 @@ use App\Http\Controllers\Apps\BoothExhibitionBookedController;
 use App\Http\Controllers\Apps\BoothNumberController;
 use App\Http\Controllers\Apps\HallController;
 use App\Http\Controllers\Apps\LogsController;
+use App\Http\Controllers\Apps\MHXCupBoardController;
 use App\Http\Controllers\Apps\MHXCupCategoryController;
 use App\Http\Controllers\Apps\MHXCupRaceController;
 use App\Http\Controllers\Apps\MHXCupRacerController;
@@ -111,7 +112,7 @@ Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
         Route::get('mhx-redirect', [MHXCupController::class, 'redirectUrl'])->name('redirectHook');
         Route::post('mhx-webhook', [MHXCupController::class, 'webhook'])->name('webHook');
 
-        Route::get('scoreboard', [RaceController::class, 'scoreboard'])->name('scoreboard');
+        Route::get('scoreboard/{category}/{track}', [RaceController::class, 'scoreboard'])->name('scoreboard');
     });
 });
 
@@ -179,9 +180,13 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('categories', MHXCupCategoryController::class);
                Route::resource('tracks', MHXCupTrackController::class);
                Route::resource('racers', MHXCupRacerController::class);
-               Route::resource('races', MHXCupRaceController::class);
-               Route::resource('results', MHXCupResultController::class);
-
+               Route::group([
+                   'prefix'  => 'screening-round',
+               ], function (){
+                   Route::resource('races', MHXCupRaceController::class);
+                   Route::resource('results', MHXCupResultController::class);
+                   Route::resource('board', MHXCupBoardController::class);
+               });
                Route::get('getCategoryData/{categoryId}', [MHXCupRaceController::class, 'getCategoryData'])->name('getCategoryData');
                Route::post('submit-result', [MHXCupRaceController::class, 'submitResult'])->name('result');
                Route::post('race-complete', [MHXCupRaceController::class, 'completeReport'])->name('completeRace');

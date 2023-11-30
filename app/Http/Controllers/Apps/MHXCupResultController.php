@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apps\MHXCup\RacingResult;
 use Illuminate\Http\Request;
 
 class MHXCupResultController extends Controller
 {
-    protected string $view = 'apps.mhx-cup.categories.';
-    protected string $route = 'apps.mhx-cup.categories.';
+    protected string $view = 'apps.mhx-cup.results.';
+    protected string $route = 'apps.event-mhx-cup.results.';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $results = RacingResult::all();
+        return view($this->view.'index', [
+            'results' => $results
+        ]);
     }
 
     /**

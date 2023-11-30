@@ -10,7 +10,17 @@ class Racing extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'racing_categories_id',
+        'racing_tracks_id',
+        'racing_date',
+        'racing_time',
+        'racer_1',
+        'racer_2',
+        'racer_3',
+        'status',
+        'racing_duration',
+    ];
 
     public function mhxcategory()
     {
@@ -20,6 +30,11 @@ class Racing extends Model
     public function mhxcupctrack()
     {
         return $this->belongsTo(RacingTrack::class, 'racing_tracks_id', 'id');
+    }
+
+    public function mhxcupresult()
+    {
+        return $this->hasMany(RacingResult::class, 'racings_id', 'id');
     }
 
     public function mhxracer1()
@@ -35,5 +50,10 @@ class Racing extends Model
     public function mhxracer3()
     {
         return $this->belongsTo(RacingRacers::class, 'racer_3', 'id');
+    }
+
+    public function score()
+    {
+        return $this->hasMany(RacingScoreBoard::class, 'racings_id', 'id');
     }
 }

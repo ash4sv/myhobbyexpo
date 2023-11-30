@@ -194,7 +194,7 @@
                 </div>
             </div>
             @endcan
-
+            @can('mhx-cup-access')
             <div class="menu-header">Event</div>
 
             <div class="menu-item has-sub {{ (request()->segment(1) == 'event-mhx-cup') ? 'active' : '' }}">
@@ -221,24 +221,34 @@
                             <div class="menu-text">Racers</div>
                         </a>
                     </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'races') ? 'active' : '' }}">
-                        <a href="{{ route('apps.event-mhx-cup.races.index') }}" class="menu-link">
-                            <div class="menu-text">Races</div>
+                    <div class="menu-item has-sub {{ (request()->segment(2) == 'screening-round') ? 'active' : '' }}">
+                        <a href="javascript:;" class="menu-link">
+                            <div class="menu-text">Screening Round</div>
+                            <div class="menu-caret"></div>
                         </a>
+                        <div class="menu-submenu">
+                            <div class="menu-item {{ (request()->segment(3) == 'races') ? 'active' : '' }}">
+                                <a href="{{ route('apps.event-mhx-cup.races.index') }}" class="menu-link">
+                                    <div class="menu-text">Races</div>
+                                </a>
+                            </div>
+                            <div class="menu-item {{ (request()->segment(3) == 'results') ? 'active' : '' }}">
+                                <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
+                                    <div class="menu-text">Result</div>
+                                </a>
+                            </div>
+                            <div class="menu-item {{ (request()->segment(3) == 'board') ? 'active' : '' }}">
+                                <a href="{{ route('apps.event-mhx-cup.board.index') }}" class="menu-link">
+                                    <div class="menu-text">Score Board</div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'results') ? 'active' : '' }}">
-                        <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
-                            <div class="menu-text">Result</div>
-                        </a>
-                    </div>
-                    <div class="menu-item {{ (request()->segment(2) == 'score-board') ? 'active' : '' }}">
-                        <a href="{{ route('apps.event-mhx-cup.results.index') }}" class="menu-link">
-                            <div class="menu-text">Score Board</div>
-                        </a>
-                    </div>
+
+
                 </div>
             </div>
-
+            @endcan
             @can('system-access')
             <div class="menu-header">Systems</div>
 

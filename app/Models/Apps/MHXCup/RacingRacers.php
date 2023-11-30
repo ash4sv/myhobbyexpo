@@ -62,4 +62,34 @@ class RacingRacers extends Model
     {
         return $this->hasMany(Racing::class, 'racer_3', 'id');
     }
+
+    public function mhxraceresult1()
+    {
+        return $this->hasMany(RacingResult::class, 'racing_racers_1', 'id');
+    }
+
+    public function mhxraceresult2()
+    {
+        return $this->hasMany(RacingResult::class, 'racing_racers_2', 'id');
+    }
+
+    public function mhxraceresult3()
+    {
+        return $this->hasMany(RacingResult::class, 'racing_racers_3', 'id');
+    }
+
+    public function mhxscoreline_1()
+    {
+        return $this->hasMany(RacingScoreBoard::class, 'line_1', 'id');
+    }
+
+    public function mhxscoreline_2()
+    {
+        return $this->hasMany(RacingScoreBoard::class, 'line_2', 'id');
+    }
+
+    public function mhxscoreline_3()
+    {
+        return $this->hasMany(RacingScoreBoard::class, 'line_3', 'id');
+    }
 }

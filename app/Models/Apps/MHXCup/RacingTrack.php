@@ -21,6 +21,11 @@ class RacingTrack extends Model
         return $this->hasMany(Racing::class, 'racing_tracks_id', 'id');
     }
 
+    public function mhxcupscore()
+    {
+        return $this->hasMany(RacingScoreBoard::class, 'racing_tracks_id', 'id');
+    }
+
     public function saveRacingTrack($track, $request)
     {
         $track->racing_categories_id = $request->racing_categories_id;

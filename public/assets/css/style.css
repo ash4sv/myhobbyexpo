@@ -308,3 +308,8 @@ ul.custom-accordion li a.accordion-toggle:hover {
         background-position: 200% 0;
     }
 }
+
+
+#scorebody {
+    height: 100vh;
+}
