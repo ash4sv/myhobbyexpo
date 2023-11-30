@@ -180,6 +180,7 @@
                     if (response.status === true) {
                         $('#dataTable').DataTable().ajax.reload(null, false);
                         $('#searchInput').val('');
+                        $('#dataTable').DataTable().search('').draw();
                         Swal.fire({
                             title: "Redeemed!",
                             text: "Visitor has been successfully redeemed.",
