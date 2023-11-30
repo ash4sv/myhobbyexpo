@@ -63,9 +63,9 @@
                         <td>
                             @foreach(json_decode($visitor->cart) as $key => $ticket)
                                 {{ $ticket->ticketType }} {{ $ticket->ticketQuantity }}x @if (!$loop->last), @endif
-                                @if(isset($item->shirtSizes))
-                                    T-Shirt Size:
-                                    @foreach($item->shirtSizes as $shirt)
+                                @if(isset($ticket->shirtSizes))
+                                    <br> T-Shirt Size:
+                                    @foreach($ticket->shirtSizes as $shirt)
                                         {{ $shirt }}@if (!$loop->last), @endif
                                     @endforeach
                                 @endif
