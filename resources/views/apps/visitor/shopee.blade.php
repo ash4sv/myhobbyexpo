@@ -179,6 +179,7 @@
                 success: function(response) {
                     if (response.status === true) {
                         $('#dataTable').DataTable().ajax.reload(null, false);
+                        $('#searchInput').val('');
                         Swal.fire({
                             title: "Redeemed!",
                             text: "Visitor has been successfully redeemed.",
