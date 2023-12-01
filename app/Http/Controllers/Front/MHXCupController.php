@@ -407,4 +407,85 @@ class MHXCupController extends Controller
 
         }
     }
+
+    public function cashPayment(Request $request)
+    {
+        $uniq = Str::random(4);
+
+        $webHook = [
+            'uniq'                      => $uniq,
+            'category'                  => $request->input('category'),
+            'price_category'            => $request->input('price_category'),
+            'total_cost'                => $request->input('total_cost'),
+            'full_name'                 => strtoupper($request->input('full_name')),
+            'identification_card_number' => $request->input('identification_card_number'),
+            'phone_number'              => $request->input('phone_number'),
+            'email'                     => strtolower($request->input('email')),
+            'nickname'                  => strtoupper($request->input('nickname')),
+            'team_group'                => $request->input('team_group'),
+            'registration'              => $request->input('registration'),
+            'merchandises'              => $request->input('merchandises'),
+            'runNum'                    => $request->input('runNum'),
+        ];
+
+        $racer = new RacerRegister();
+        $racer->uniq                      = $webHook['uniq'];
+        $racer->category                  = $webHook['category'];
+        $racer->price_category            = $webHook['price_category'];
+        $racer->total_cost                = $webHook['total_cost'];
+        $racer->full_name                 = $webHook['full_name'];
+        $racer->identification_card_number = $webHook['identification_card_number'];
+        $racer->phone_number              = $webHook['phone_number'];
+        $racer->email                     = $webHook['email'];
+        $racer->nickname                  = $webHook['nickname'];
+        $racer->team_group                = $webHook['team_group'];
+        $racer->registration              = $webHook['registration'];
+        $racer->receipt                   = null;
+        $racer->approval                  = false;
+        $racer->payment_type              = 3;
+        $racer->payment_status            = false;
+        $racer->save();
+
+        Log::info('== RACER REGISTER ==');
+
+        if ($webHook['registration'] > 0) {
+            $uniq = $webHook['uniq'];
+            $runNum = $webHook['runNum'];
+            $merchandises = $webHook['merchandises'] ?? [];
+
+            // Check if both arrays are not empty before combining
+            if (!empty($runNum)) {
+                // Merge the arrays to ensure that "runNum" is processed
+                $combinedData = array_map(null, $runNum, $merchandises);
+
+                foreach ($combinedData as $data) {
+                    $runNumber = $data[0];
+                    $merchandise = $data[1];
+
+                    $nickname = new RacerNickNameRegister();
+                    $nickname->category  = $racer->category;
+                    $nickname->racer_id  = $racer->id;
+                    $nickname->uniq      = $uniq;
+                    $nickname->nickname  = $racer->nickname;
+                    $nickname->register  = ltrim($runNumber, 0);
+                    $nickname->shirt_zie = $merchandise;
+                    $nickname->save();
+
+                    $lastNum = $nickname;
+                }
+            }
+        }
+
+        return response()->json([
+            'status'   => true,
+            'data'     => $webHook,
+            'redirect' => route('mhxcup.mhxCashConfirm'),
+        ]);
+    }
+
+    public function cashPaymentConfirm(Request $request)
+    {
+        
+        return view($this->view.'cash-confirm');
+    }
 }

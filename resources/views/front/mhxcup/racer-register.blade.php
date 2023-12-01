@@ -7,7 +7,7 @@
         <h2 class="text-center mt-sm-0 mb-sm-5 mt-4 mb-5 font-weight-700 text-uppercase">{{ $category['category'] }}</h2>
 
         <div class="row">
-            <div class="col-md-6 mx-auto">
+            <div id="confirm" class="col-md-6 mx-auto">
                 <form action="{{ route('mhxcup.mhxPayment') }}" method="POST" id="racer_register" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                     <div class="card mb-4" id="section_banner">
@@ -131,11 +131,24 @@
                                 <p class="mb-0 text-center">By clicking <strong>"Proceed to Pay"</strong>, I hereby agree and consent to the <a target="_blank" href="{{ asset('assets/upload/mhx2023_events-tnc.pdf') }}">Terms & Conditions</a> of the event.</p>
                             </div>
 
-                            <div class="mb-0 text-center">
-                                <button type="submit" class="btn btn-red btn-lg w-300px text-white">
-                                    Proceed
-                                </button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-0 text-center">
+                                        <input type="hidden" name="cashpayment" value="true">
+                                        <button type="button" class="btn btn-blue btn-lg w-100 text-white" onclick="submitForm('racer_register')">
+                                            By Cash
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-0 text-center">
+                                        <button type="submit" class="btn btn-red btn-lg w-100 text-white">
+                                            Proceed to Online
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </form>
@@ -440,5 +453,75 @@
                 console.error('Copy to clipboard failed: ' + e.action);
             });
         });
+
+        function submitForm(formId) {
+            var form = $('#' + formId);
+
+            var category = form.find('[name="category"]').val();
+            var price_category = form.find('[name="price_category"]').val();
+            var total_cost = form.find('[name="total_cost"]').val();
+            var full_name = form.find('[name="full_name"]').val();
+            var identification_card_number = form.find('[name="identification_card_number"]').val();
+            var phone_number = form.find('[name="phone_number"]').val();
+            var email = form.find('[name="email"]').val();
+            var nickname = form.find('[name="nickname"]').val();
+            var team_group = form.find('[name="team_group"]').val();
+            var registration = form.find('[name="registration"]').val();
+
+            var merchandises = form.find('[name^="merchandises"]').map(function () {
+                return $(this).val();
+            }).get();
+
+            var runNum = form.find('[name^="runNum"]').map(function () {
+                return $(this).val();
+            }).get();
+
+            // Make the AJAX request
+            $.ajax({
+                url: '{{ route('mhxcup.mhxCash') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    category: category,
+                    price_category: price_category,
+                    total_cost: total_cost,
+                    full_name: full_name,
+                    identification_card_number: identification_card_number,
+                    phone_number: phone_number,
+                    email: email,
+                    nickname: nickname,
+                    team_group: team_group,
+                    registration: registration,
+                    merchandises: merchandises,
+                    runNum: runNum,
+                },
+                success: function (response) {
+                    if (response.status === true) {
+
+                        $('#racer_register').remove();
+
+                        var confirmationCodeHtml = `
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h2 class="text-center mb-0 mt-sm-0 mt-4 font-weight-700 text-uppercase">Confirmation Code</h2>
+                                    <h1 class="text-center py-5">${response.data.uniq}</h1>
+                                    <h4 class="text-center">
+                                        Please take a screenshot of this code and show it to the counter for further processing to the next step.
+                                    </h4>
+                                </div>
+                            </div>
+                        `;
+                        $('#confirm').append(confirmationCodeHtml);
+
+                    } else {
+                        console.error('Unexpected response status:', response.status);
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
     </script>
 @endpush
