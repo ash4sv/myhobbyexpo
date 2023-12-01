@@ -113,6 +113,22 @@
                     track_id: track,
                     racer_id: racer,
                 },
+                success: function (response) {
+                    if (response.status === true) {
+                        Swal.fire({
+                            title: "Record submitted",
+                            text: "Race submitted completed!",
+                            icon: "success",
+                        });
+                    } else if (response.status === false)
+                    {
+                        Swal.fire({
+                            title: "Changes are not saved",
+                            text: "Race has not been completed!",
+                            icon: "info",
+                        });
+                    }
+                }
             });
         }
     </script>
