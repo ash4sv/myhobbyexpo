@@ -172,6 +172,7 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::resource('register', MHXCupRegisterController::class);
                Route::get('registered-recer', [AppsController::class, 'categoryCup'])->name('categoryMhxCup');
                Route::post('approve-register', [AppsController::class, 'approveRegister'])->name('approveRegister');
+               Route::post('approve-redeem', [AppsController::class, 'approveRedeem'])->name('approveRedeem');
            });
            Route::group([
                'prefix'  => 'event-mhx-cup',

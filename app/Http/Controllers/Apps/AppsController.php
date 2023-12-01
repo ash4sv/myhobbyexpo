@@ -244,4 +244,18 @@ class AppsController extends Controller
             'msg'    => 'System will send the email to the racer',
         ]);
     }
+
+    public function approveRedeem(Request $request)
+    {
+        $id = $request->input('id');
+        $data = RacerRegister::findOrFail($id);
+        $data->update([
+            'redeem_status' => 1
+        ]);
+        $data->save();
+        return response()->json([
+            'status' => true,
+            'data'   => $data
+        ]);
+    }
 }
