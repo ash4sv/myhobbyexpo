@@ -122,7 +122,7 @@
                     <th>Full Name</th>
                     <th>IC / Passport</th>
                     <th>Phone Number</th>
-                    <th>Total Purchase (RM)</th>
+                    <th>Tickets</th>
                     <th>Status</th>
                     <th width="1%">Redeem Status</th>
                     <th width="1%">Action</th>
