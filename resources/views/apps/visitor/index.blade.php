@@ -136,7 +136,12 @@
                         <td>{{ json_decode($visitor->visitor)->full_name }}</td>
                         <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
                         <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
-                        <td>{{ number_format($visitor->overallTotal, 2) }}</td>
+                        <td>
+                            {{--{{ number_format($visitor->overallTotal, 2) }}--}}
+                            @foreach(json_decode($visitor->cart) as $cart)
+                                <strong>{{ $cart->ticketType }} x {{ $cart->ticketQuantity }} Unit</strong> @if(!$loop->last)<br> @endif
+                            @endforeach
+                        </td>
                         <td>
                         <span class="badge {{ $visitor->payment_status == 1 ? 'bg-primary' : 'bg-danger' }}">
                         {{ $visitor->payment_status == 1 ? 'Paid' : 'Unpaid' }}
