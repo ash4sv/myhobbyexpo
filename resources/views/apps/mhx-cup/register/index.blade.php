@@ -85,7 +85,7 @@
                         var raceID = '';
                         $.each(item.number_register, function(key, number) {
                             // console.log(item.number_register);
-                            raceID += item.nickname + number.register.toString().padStart(3, '0');
+                            raceID += number.nickname + number.register.toString().padStart(3, '0');
                             if (key !== item.number_register.length - 1 && key % 4 !== 3) {
                                 raceID += ', ';
                             }
