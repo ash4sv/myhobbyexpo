@@ -17,6 +17,18 @@ class MHXCupCategorySeeder extends Seeder
     {
         // PdCd	LEE SENG LEONG	leesengleong668@gmail.com	LEESENG048, LEESENG049, LEESENG050	NA	3 FoC
 
+        // type of payment
+        //case 1: // Direct Pay
+        //paymentType = 'Direct',
+        //case 2: // BillPlz
+        //paymentType = 'BillPlz',
+        //case 3: // Cash
+        //paymentType = 'Cash',
+        //case 4: // Cash
+        //paymentType = 'FoC',
+        //default:
+        //paymentType = 'Unknown',
+
         $semitech = 'semi-tech class a';
         $bmax = 'b-max class b';
         $stockcar = 'stock-car class c';
@@ -27,220 +39,100 @@ class MHXCupCategorySeeder extends Seeder
 
         $folder = 'assets/upload/';
 
-        $racers = [
-            // semi-tech class a
-            [
-                'category' => $semitech,
-                'price_category' => $priceSemitech,
-                'total_cost' => $priceSemitech * 3,
-                'full_name' => strtoupper('360 Prohobby'),
-                'identification_card_number' => '830701045141',
-                'phone_number' => '+60165007262',
-                'email' => 'samlee6730@gmail.com',
-                'nickname' => strtoupper('360'),
-                'team_group' => 'Arrc',
-                'registration' => 3,
-                'receipt' => '',
-                'approval' => false,
-                'payment_type' => 4,
-                'payment_status' => 0,
-                'runNum' => [
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('360'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('360'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('360'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                ],
-            ],
-            [
-                'category' => $semitech,
-                'price_category' => $priceSemitech,
-                'total_cost' => $priceSemitech * 1,
-                'full_name' => strtoupper('Muhammad Safwan Bin Mohd Azri (KMALL)'),
-                'identification_card_number' => '971013145885',
-                'phone_number' => '+601121868085',
-                'email' => 'mr.safwan98@yahoo.com',
-                'nickname' => strtoupper('Safwan'),
-                'team_group' => 'ALK',
-                'registration' => 1,
-                'receipt' => '',
-                'approval' => false,
-                'payment_type' => 4,
-                'payment_status' => 0,
-                'runNum' => [
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('Safwan'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                ],
-            ],
-            [
-                'category' => $semitech,
-                'price_category' => $priceSemitech,
-                'total_cost' => $priceSemitech * 1,
-                'full_name' => strtoupper('MOHAMAD NAZROL BIN NORDIN (KMALL)'),
-                'identification_card_number' => '900302065437',
-                'phone_number' => '+60179017190',
-                'email' => 'mohdnazrol90@gmail.com',
-                'nickname' => strtoupper('NAZROL'),
-                'team_group' => 'yummy',
-                'registration' => 1,
-                'receipt' => '',
-                'approval' => false,
-                'payment_type' => 4,
-                'payment_status' => 0,
-                'runNum' => [
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('NAZROL'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                ],
-            ],
-            [
-                'category' => $semitech,
-                'price_category' => $priceSemitech,
-                'total_cost' => $priceSemitech * 3,
-                'full_name' => strtoupper('DYS HOBBY'),
-                'identification_card_number' => '831027145267',
-                'phone_number' => '+60172381281',
-                'email' => 'season.onlineshop@gmail.com',
-                'nickname' => strtoupper('DYSHOBBY'),
-                'team_group' => 'YUMMY',
-                'registration' => 3,
-                'receipt' => '',
-                'approval' => false,
-                'payment_type' => 4,
-                'payment_status' => 0,
-                'runNum' => [
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('DYSHOBBY'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('DYSHOBBY'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('DYSHOBBY'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                ],
-            ],
-            [
-                'category' => $semitech,
-                'price_category' => $priceSemitech,
-                'total_cost' => $priceSemitech * 1,
-                'full_name' => strtoupper('Saiful Mizan Bin Mustapha (KMALL)'),
-                'identification_card_number' => '830520035075',
-                'phone_number' => '+60126969649',
-                'email' => 'info.saifulmizan@gmail.com',
-                'nickname' => strtoupper('SaifulMizan'),
-                'team_group' => 'SD',
-                'registration' => 1,
-                'receipt' => '',
-                'approval' => false,
-                'payment_type' => 4,
-                'payment_status' => 0,
-                'runNum' => [
-                    [
-                        'category' => $semitech,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('SaifulMizan'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                ],
-            ],
-        ];
-
-        foreach ($racers as $racer) {
-            $uniq = Str::random(4);
-
-            $registered = RacerRegister::where('category', $semitech)->orderBy('id', 'DESC')->first();
-            if ($registered) {
-                $lastNumberRegister = $registered->numberRegister->last();
-                if ($lastNumberRegister) {
-                    $register = $lastNumberRegister->register;
-                }
-            } else {
-                $register = 0; // Start from 0 if no previous records found
-            }
-
-            $newRacer = new RacerRegister();
-            $newRacer->fill([
-                'uniq'                      => $uniq,
-                'category'                  => $racer['category'],
-                'price_category'            => $racer['price_category'],
-                'total_cost'                => $racer['total_cost'],
-                'full_name'                 => $racer['full_name'],
-                'identification_card_number' => $racer['identification_card_number'],
-                'phone_number'              => $racer['phone_number'],
-                'email'                     => $racer['email'],
-                'nickname'                  => $racer['nickname'],
-                'team_group'                => $racer['team_group'],
-                'registration'              => $racer['registration'],
-                'receipt'                   => $racer['receipt'],
-                'approval'                  => $racer['approval'],
-                'payment_type'              => $racer['payment_type'],
-                'payment_status'            => $racer['payment_status'],
-            ]);
-            $newRacer->save();
-
-            foreach ($racer['runNum'] as $number) {
-                $nickname = new RacerNickNameRegister();
-                $nickname->fill([
-                    'category'  => $newRacer->category,
-                    'racer_id'  => $newRacer->id,
-                    'uniq'      => $newRacer->uniq,
-                    'nickname'  => $newRacer->nickname,
-                    'register'  => $register + 1,
-                    'shirt_zie' => $number['shirt_zie'],
-                ]);
-                $nickname->save();
-
-                $register = $nickname->register;
-            }
-        }
+//        $racers = [
+//            // semi-tech class a
+//            [
+//                'category' => $semitech,
+//                'price_category' => $priceSemitech,
+//                'total_cost' => $priceSemitech * 3,
+//                'full_name' => strtoupper('360 Prohobby'),
+//                'identification_card_number' => '830701045141',
+//                'phone_number' => '+60165007262',
+//                'email' => 'samlee6730@gmail.com',
+//                'nickname' => strtoupper('360'),
+//                'team_group' => 'Arrc',
+//                'registration' => 3,
+//                'receipt' => '',
+//                'approval' => false,
+//                'payment_type' => 4,
+//                'payment_status' => 0,
+//                'runNum' => [
+//                    [
+//                        'category' => $semitech,
+//                        'racer_id' => '',
+//                        'uniq' => '',
+//                        'nickname' => strtoupper('360'),
+//                        'register' => '',
+//                        'shirt_zie' => '',
+//                    ],
+//                    [
+//                        'category' => $semitech,
+//                        'racer_id' => '',
+//                        'uniq' => '',
+//                        'nickname' => strtoupper('360'),
+//                        'register' => '',
+//                        'shirt_zie' => '',
+//                    ],
+//                    [
+//                        'category' => $semitech,
+//                        'racer_id' => '',
+//                        'uniq' => '',
+//                        'nickname' => strtoupper('360'),
+//                        'register' => '',
+//                        'shirt_zie' => '',
+//                    ],
+//                ],
+//            ],
+//        ];
+//
+//        foreach ($racers as $racer) {
+//            $uniq = Str::random(4);
+//
+//            $registered = RacerRegister::where('category', $semitech)->orderBy('id', 'DESC')->first();
+//            if ($registered) {
+//                $lastNumberRegister = $registered->numberRegister->last();
+//                if ($lastNumberRegister) {
+//                    $register = $lastNumberRegister->register;
+//                }
+//            } else {
+//                $register = 0; // Start from 0 if no previous records found
+//            }
+//
+//            $newRacer = new RacerRegister();
+//            $newRacer->fill([
+//                'uniq'                      => $uniq,
+//                'category'                  => $racer['category'],
+//                'price_category'            => $racer['price_category'],
+//                'total_cost'                => $racer['total_cost'],
+//                'full_name'                 => $racer['full_name'],
+//                'identification_card_number' => $racer['identification_card_number'],
+//                'phone_number'              => $racer['phone_number'],
+//                'email'                     => $racer['email'],
+//                'nickname'                  => $racer['nickname'],
+//                'team_group'                => $racer['team_group'],
+//                'registration'              => $racer['registration'],
+//                'receipt'                   => $racer['receipt'],
+//                'approval'                  => $racer['approval'],
+//                'payment_type'              => $racer['payment_type'],
+//                'payment_status'            => $racer['payment_status'],
+//            ]);
+//            $newRacer->save();
+//
+//            foreach ($racer['runNum'] as $number) {
+//                $nickname = new RacerNickNameRegister();
+//                $nickname->fill([
+//                    'category'  => $newRacer->category,
+//                    'racer_id'  => $newRacer->id,
+//                    'uniq'      => $newRacer->uniq,
+//                    'nickname'  => $newRacer->nickname,
+//                    'register'  => $register + 1,
+//                    'shirt_zie' => $number['shirt_zie'],
+//                ]);
+//                $nickname->save();
+//
+//                $register = $nickname->register;
+//            }
+//        }
 
 
         $racerClassBs = [
@@ -249,12 +141,12 @@ class MHXCupCategorySeeder extends Seeder
                 'category' => $bmax,
                 'price_category' => $priceBmax,
                 'total_cost' => $priceBmax * 1,
-                'full_name' => strtoupper('MD ZULFADLI BIN AWG HJ KASAH'),
-                'identification_card_number' => '00-297474',
-                'phone_number' => '+6737302039',
-                'email' => 'hamdifatinah@gmail.com',
-                'nickname' => strtoupper('ZULFADLI'),
-                'team_group' => 'sengat',
+                'full_name' => strtoupper('Lilik Haryanto'),
+                'identification_card_number' => 'C8198297',
+                'phone_number' => '+65 9739 3399',
+                'email' => ' ngebutbenjut.m4wd@gmail.com',
+                'nickname' => strtoupper('Avante'),
+                'team_group' => 'Avante',
                 'registration' => 1,
                 'receipt' => '',
                 'approval' => false,
@@ -265,7 +157,59 @@ class MHXCupCategorySeeder extends Seeder
                         'category' => $bmax,
                         'racer_id' => '',
                         'uniq' => '',
-                        'nickname' => strtoupper('ZULFADLI'),
+                        'nickname' => strtoupper('Avante'),
+                        'register' => '',
+                        'shirt_zie' => '',
+                    ],
+                ]
+            ],
+            [
+                'category' => $bmax,
+                'price_category' => $priceBmax,
+                'total_cost' => $priceBmax * 1,
+                'full_name' => strtoupper('Aniq Zulfadhli Bin Norizal'),
+                'identification_card_number' => '150831140359',
+                'phone_number' => '+60172303362',
+                'email' => ' jumaliah@hotmail.com',
+                'nickname' => strtoupper('Aniq'),
+                'team_group' => 'Aniq',
+                'registration' => 1,
+                'receipt' => '',
+                'approval' => false,
+                'payment_type' => 4,
+                'payment_status' => 1,
+                'runNum' => [
+                    [
+                        'category' => $bmax,
+                        'racer_id' => '',
+                        'uniq' => '',
+                        'nickname' => strtoupper('Aniq'),
+                        'register' => '',
+                        'shirt_zie' => '',
+                    ],
+                ]
+            ],
+            [
+                'category' => $bmax,
+                'price_category' => $priceBmax,
+                'total_cost' => $priceBmax * 1,
+                'full_name' => strtoupper('Putra Indra'),
+                'identification_card_number' => '940429106271',
+                'phone_number' => '+60182572429',
+                'email' => ' ucophassan@gmail.com',
+                'nickname' => strtoupper('Pakdik'),
+                'team_group' => 'Pakdik',
+                'registration' => 1,
+                'receipt' => '',
+                'approval' => false,
+                'payment_type' => 4,
+                'payment_status' => 1,
+                'runNum' => [
+                    [
+                        'category' => $bmax,
+                        'racer_id' => '',
+                        'uniq' => '',
+                        'nickname' => strtoupper('Pakdik'),
                         'register' => '',
                         'shirt_zie' => '',
                     ],
@@ -329,13 +273,13 @@ class MHXCupCategorySeeder extends Seeder
                 'category' => $stockcar,
                 'price_category' => $priceStockcar,
                 'total_cost' => $priceStockcar * 3,
-                'full_name' => strtoupper('Terry'),
-                'identification_card_number' => '871210145659',
-                'phone_number' => '+60173134439',
-                'email' => 'alyffd2@gmail.com',
-                'nickname' => strtoupper('TERRY'),
-                'team_group' => 'Seeker',
-                'registration' => 3,
+                'full_name' => strtoupper('muhamad hanif othman'),
+                'identification_card_number' => '990912566719',
+                'phone_number' => '+60172527455',
+                'email' => 'anop.othman88@gmail.com',
+                'nickname' => strtoupper('Team H'),
+                'team_group' => 'Team H',
+                'registration' => 2,
                 'receipt' => '',
                 'approval' => false,
                 'payment_type' => 1,
@@ -345,7 +289,7 @@ class MHXCupCategorySeeder extends Seeder
                         'category' => $stockcar,
                         'racer_id' => '',
                         'uniq' => '',
-                        'nickname' => strtoupper('TERRY'),
+                        'nickname' => strtoupper('Team H'),
                         'register' => '',
                         'shirt_zie' => '',
                     ],
@@ -353,15 +297,7 @@ class MHXCupCategorySeeder extends Seeder
                         'category' => $stockcar,
                         'racer_id' => '',
                         'uniq' => '',
-                        'nickname' => strtoupper('TERRY'),
-                        'register' => '',
-                        'shirt_zie' => '',
-                    ],
-                    [
-                        'category' => $stockcar,
-                        'racer_id' => '',
-                        'uniq' => '',
-                        'nickname' => strtoupper('TERRY'),
+                        'nickname' => strtoupper('Team H'),
                         'register' => '',
                         'shirt_zie' => '',
                     ],
