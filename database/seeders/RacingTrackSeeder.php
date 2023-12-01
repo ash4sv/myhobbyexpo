@@ -56,7 +56,7 @@ class RacingTrackSeeder extends Seeder
         $stockcarclassc = RacingCategory::where('category_name', 'Stock-Car Class C')->first();
 
         $tracks = [
-            [
+            /*[
                 'racing_categories_id' => $semitechclassa->id,
                 'track_name' => '',
                 'track_layouts' => $path . 'layout-semi-tech.jpeg',
@@ -75,30 +75,30 @@ class RacingTrackSeeder extends Seeder
                 'racing_categories_id' => $semitechclassa->id,
                 'track_name' => '',
                 'track_layouts' => $path . 'layout-semi-tech.jpeg',
-            ],
+            ],*/
 
             [
                 'racing_categories_id' => $bmaxclassb->id,
-                'track_name' => '',
+                'track_name' => 'RACE TRACK A',
                 'track_layouts' => $path . 'layout-b-max.jpeg',
             ],
             [
                 'racing_categories_id' => $bmaxclassb->id,
-                'track_name' => '',
+                'track_name' => 'RACE TRACK B',
                 'track_layouts' => $path . 'layout-b-max.jpeg',
             ],
             [
                 'racing_categories_id' => $bmaxclassb->id,
-                'track_name' => '',
+                'track_name' => 'RACE TRACK C',
                 'track_layouts' => $path . 'layout-b-max.jpeg',
             ],
             [
                 'racing_categories_id' => $bmaxclassb->id,
-                'track_name' => '',
+                'track_name' => 'RACE TRACK D',
                 'track_layouts' => $path . 'layout-b-max.jpeg',
             ],
 
-            [
+            /*[
                 'racing_categories_id' => $stockcarclassc->id,
                 'track_name' => '',
                 'track_layouts' => $path . 'layout-stock.jpeg',
@@ -117,10 +117,8 @@ class RacingTrackSeeder extends Seeder
                 'racing_categories_id' => $stockcarclassc->id,
                 'track_name' => '',
                 'track_layouts' => $path . 'layout-stock.jpeg',
-            ],
+            ],*/
         ];
-
-        $counters = []; // This array will store counts for each category
 
         foreach ($tracks as $track) {
             $categoryId = $track['racing_categories_id'];
@@ -130,9 +128,9 @@ class RacingTrackSeeder extends Seeder
             }
 
             RacingTrack::create([
-                'slug' => Str::slug('Layout ' . $counters[$categoryId]),
+                'slug' => Str::slug($track['track_name']),
                 'racing_categories_id' => $track['racing_categories_id'],
-                'track_name' => 'Layout ' . $counters[$categoryId],
+                'track_name' => $track['track_name'],
                 'track_layouts' => $track['track_layouts']
             ]);
             $counters[$categoryId]++;
