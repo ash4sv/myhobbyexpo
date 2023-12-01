@@ -119,7 +119,7 @@
                 <tr>
                     <th width="1%">No.</th>
                     <th>Uniq</th>
-                    <th width="200px">Full Name</th>
+                    <th>Full Name</th>
                     <th>IC / Passport</th>
                     <th>Phone Number</th>
                     <th>Tickets</th>
@@ -133,7 +133,7 @@
                     <tr class="{{ ($visitor->redeem_status === 1) ? 'bg-success-100':'' }}">
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $visitor->uniq }}</td>
-                        <td>{{ json_decode($visitor->visitor)->full_name }}</td>
+                        <td>{{ substr(json_decode($visitor->visitor)->full_name, 0, 30) }}</td>
                         <td>{{ json_decode($visitor->visitor)->identification_card_number }}</td>
                         <td>{{ json_decode($visitor->visitor)->phone_number }}</td>
                         <td>
