@@ -14,14 +14,6 @@
 
     <h1 class="page-header">@yield('page-header') {{--<small>header small text goes here...</small>--}}</h1>
 
-{{--    <div class="d-flex align-items-center mb-3">--}}
-{{--        <div class="me-auto">--}}
-{{--            <a href="{{ route('apps.mhx-cup.register.create') }}" class="btn btn-primary px-4">--}}
-{{--                <i class="fa fa-plus me-2 ms-n2 text-white"></i> Add Racer--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="" data-category-load="semi-tech class a" data-bs-toggle="tab" class="nav-link px-sm-5 active">Semi-Tech Class A</a>
@@ -35,6 +27,17 @@
     </ul>
     <div class="tab-content panel p-3 rounded-0 rounded-bottom">
         <div class="tab-pane fade active show" id="default-tab-1">
+
+             <div class="input-group mb-4">
+                <div class="flex-fill position-relative">
+                    <div class="input-group">
+                        <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1;">
+                            <i class="fa fa-search opacity-5"></i>
+                        </div>
+                        <input type="text" class="form-control px-35px bg-light" placeholder="Search tickets..." id="searchInput" />
+                    </div>
+                </div>
+            </div>
 
             <div class="table-responsive">
                 <table class="mhx-table table table-striped table-bordered align-middle text-nowrap mb-0">
@@ -52,6 +55,7 @@
                         <th>Invoices</th>
                         <th width="2%">Receipt</th>
                         <th width="1%">Approval</th>
+                        <th width="1%">Redeem</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,6 +71,49 @@
 @push('script')
     <script>
         $(document).ready(function() {
+            function promptRedeemConfirmation(redeemId) {
+                Swal.fire({
+                    title: "Redeem Confirmation",
+                    text: "Are you sure you want to redeem this item?",
+                    icon: "question",
+                    showDenyButton: true,
+                    confirmButtonText: 'Yes, redeem it!',
+                    denyButtonText: 'Cancel',
+                }).then((willRedeem) => {
+                    if (willRedeem.isConfirmed) {
+                        $.ajax({
+                            url: '{{ route('apps.mhx-cup.approveRedeem') }}',
+                            method: 'POST',
+                            data: {
+                                _token : '{{ csrf_token() }}',
+                                id     : redeemId
+                            }
+                        });
+                    }
+                });
+            }
+
+            function filterTableData(query) {
+                var tableRows = $('table.mhx-table tbody tr');
+
+                tableRows.each(function() {
+                    var ref = $(this).find('td:nth-child(2)').text().toLowerCase();
+                    var fullName = $(this).find('td:nth-child(3)').text().toLowerCase();
+                    var email = $(this).find('td:nth-child(4)').text().toLowerCase();
+
+                    if (ref.includes(query) || fullName.includes(query) || email.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val().toLowerCase();
+                filterTableData(searchTerm);
+            });
+
             function loadData(categoryLoad) {
                 $.get('{{ route('apps.mhx-cup.categoryMhxCup') }}', { category: categoryLoad }, function(data) {
                     var targetTable = $('table.mhx-table tbody');
@@ -76,6 +123,7 @@
                     targetTable.empty();
 
                     $.each(data, function(index, item) {
+                        console.log(item);
                         var tr = $('<tr>');
                         tr.append('<td>' + (index + 1) + '</td>');
                         tr.append('<td>' + item.uniq + '</td>');
@@ -86,10 +134,10 @@
                         $.each(item.number_register, function(key, number) {
                             // console.log(item.number_register);
                             raceID += number.nickname + number.register.toString().padStart(3, '0');
-                            if (key !== item.number_register.length - 1 && key % 4 !== 3) {
+                            if (key !== item.number_register.length - 1 && key % 3 !== 2) {
                                 raceID += ', ';
                             }
-                            if (key % 4 === 3) {
+                            if (key % 3 === 2) {
                                 raceID += '<br>';
                             }
                         });
@@ -147,12 +195,12 @@
                         tr.append('<td class="text-center">' + paymentTypeBadge + ' ' + paymentStatusBadge + '</td>');
 
                         tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + 'assets/upload/' + item.uniq + '_' + item.nickname.toUpperCase() + '.pdf' + '" class="btn btn-invoice btn-yellow btn-sm my-n1 ms-2' + (item.approval === 0 ? ' disabled' : '') + '">Invoice</a></td>');
-                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1 ms-2' + (item.receipt ? '' : ' disabled') + '">Receipt</a></td>');
+                        tr.append('<td width="1%"><a data-fancybox href="' + rootUrl + item.receipt + '" class="btn btn-receipt btn-indigo btn-sm my-n1' + (item.receipt ? '' : ' disabled') + '">Receipt</a></td>');
 
                         var badgeClass = item.approval == 1 ? 'bg-primary' : 'bg-danger';
                         var approvalText = item.approval == 1 ? 'Approve' : 'Pending';
-                        tr.append('<td width="1%" class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span>' +
-                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-warning btn-approval btn-sm my-n1 ms-2">Approve</a>' : '') + '</td>');
+                        tr.append('<td width="1%" class="text-center"><span class="badge ' + badgeClass + '">' + approvalText + '</span> <br>' +
+                            (item.approval == 0 ? '<a href="#" data-to-approve="' + item.id + '" class="btn btn-warning btn-approval btn-sm mt-1">Approve</a>' : '') + '</td>');
 
                         tr.find('.btn-approval').on('click', function(e) {
                             e.preventDefault();
@@ -207,6 +255,25 @@
                                     });
                                 }
                             });
+                        });
+                        tr.append('<td width="1%" class="text-center"><a href="#" data-to-redeem="' + item.id + '" class="btn btn-info btn-redeem btn-sm mt-1 ' + (item.redeem_status === 1 ? 'disabled':'') +'">Redeem</a></td>');
+
+                        $('table.mhx-table tbody').on('click', '.btn-redeem', function(e) {
+                            e.preventDefault();
+                            var redeemId = $(this).data('to-redeem');
+
+                            if (item.redeem_status !== 0) {
+                                // If redeem status is 0, prompt confirmation
+                                promptRedeemConfirmation(redeemId);
+                            } else {
+                                // If redeem status is 1, button is disabled
+                                Swal.fire({
+                                    title: "Already Redeemed",
+                                    text: "This item has already been redeemed.",
+                                    icon: "info",
+                                    type: "info",
+                                });
+                            }
                         });
 
                         {{--tr.append('<td>' +--}}
