@@ -119,7 +119,7 @@
                 <tr>
                     <th width="1%">No.</th>
                     <th>Uniq</th>
-                    <th>Full Name</th>
+                    <th width="200px">Full Name</th>
                     <th>IC / Passport</th>
                     <th>Phone Number</th>
                     <th>Tickets</th>
