@@ -32,7 +32,7 @@
                     <label for="racing_category" class="form-label">Racing Category</label>
                     <select class="form-control hobby-select" name="racing_category" id="racing_category">
                         <option value="">Select Category</option>
-                        @foreach($categories as $category)
+                        @foreach($categories->where('id', 2) as $category))
                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                         @endforeach
                     </select>
@@ -43,7 +43,7 @@
                         <option value=""></option>
                     </select>
                 </div>
-                <div class="row">
+                {{--<div class="row">
                     <div class="col-md-6">
                         <label for="racing_date" class="form-label">Racing Date</label>
                         <div class="input-group mb-3">
@@ -58,7 +58,7 @@
                             <span class="input-group-text" id="racing_date"><i class="fa fa-clock"></i></span>
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="mb-3">
