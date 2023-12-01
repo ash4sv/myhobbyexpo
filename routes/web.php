@@ -142,6 +142,8 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                Route::get('batch-booth-edit', [AppsController::class, 'batchboothEdit'])->name('batchboothedit');
                Route::put('batch-booth-update', [AppsController::class, 'batchboothUpdate'])->name('batchboothupdate');
            });
+           Route::get('/getSections/{hallId}', [VendorController::class, 'getSections']);
+           Route::get('/getBoothNumbers/{sectionId}', [VendorController::class, 'getBoothNumbers']);
            Route::post('batch-booth-add', [AppsController::class, 'batchStore'])->name('batchboothadd');
            Route::delete('batch-booth-delete', [AppsController::class, 'batchboothNumberDelete'])->name('batchboothdelete');
            Route::group([

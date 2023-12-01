@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Apps;
 use App\Http\Controllers\Controller;
 use App\Models\Apps\Vendor;
 use Illuminate\Http\Request;
+use App\Models\Apps\BoothNumber;
+use App\Models\Apps\Section;
+use App\Models\Apps\Hall;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class VendorController extends Controller
@@ -31,15 +34,48 @@ class VendorController extends Controller
      */
     public function create()
     {
+        $hall = Hall::all();
+        $section = Section::all();
+        $boothNumbers = BoothNumber::all();
 
+        return view($this->view . 'create', [
+            'vendors' => new Vendor(),
+            'boothNumbers' => $boothNumbers,
+            'hall' => $hall,
+            'section' => $section,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function getSections($hallId)
+    {
+        $sections = Section::where('hall_id', $hallId)->get();
+
+        return view('apps.vendor.ajaxsection', compact('sections'));
+    }
+
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'company' => 'required',
+            'roc_rob' => 'required',
+            'email' => 'email',
+            'pic_name' => 'required',
+            'phone_num' => 'required',
+            'social_media' => 'array',
+            'website' => 'required',
+        ]);
+
+        $validatedData['social_media'] = json_encode($validatedData['social_media']);
+        $vendor = Vendor::create($validatedData);
+
+        $vendor->registeredBooth()->create([
+            'booth_number' => $request->input('booth_register'),
+        ]);
+
+        Alert::success('Successfully saved!', 'Record has been saved successfully');
+        return view($this->view . 'index', [
+            'vendors' => Vendor::all(),
+        ]);
     }
 
     /**
