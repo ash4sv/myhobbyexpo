@@ -112,6 +112,9 @@ Route::domain('mhxcup.' . env('APP_URL'))->group(function (){
         Route::get('mhx-redirect', [MHXCupController::class, 'redirectUrl'])->name('redirectHook');
         Route::post('mhx-webhook', [MHXCupController::class, 'webhook'])->name('webHook');
 
+        Route::post('mhx-payment-cash', [MHXCupController::class, 'cashPayment'])->name('mhxCash');
+        Route::get('mhx-payment-confirm', [MHXCupController::class, 'cashPaymentConfirm'])->name('mhxCashConfirm');
+
         Route::get('scoreboard/{category}/{track}', [RaceController::class, 'scoreboard'])->name('scoreboard');
     });
 });
