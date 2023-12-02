@@ -291,7 +291,7 @@
             var lastNum = {{ $lastNum ?? 0 }};
             console.log('Last number for {{ $category['category'] }}', lastNum);
 
-            if( lastNum < 150 ){
+            if( lastNum < 250 ){
                 console.log('Less than 150')
             } else {
                 $('#section_banner, #section_b, #section_c, #payment').remove();
