@@ -12,6 +12,7 @@ use App\Models\Apps\MHXCup\RacingTrack;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -281,6 +282,40 @@ class MHXCupRaceController extends Controller
 //        }
 //    }
 
+    public function startRoundeRace(Request $request)
+    {
 
+        $data = [
+            'category_id' => $request->input('category_id'),
+            'track_id'    => $request->input('track_id'),
+            'racer_id_1'  => $request->input('racer_id_1'),
+            'racer_id_2'  => $request->input('racer_id_2'),
+            'racer_id_3'  => $request->input('racer_id_3'),
+        ];
+        Session::put('data', $data);
+
+        return response()->json([
+            'status' => true,
+            'redirect' => route('apps.event-mhx-cup.raceForm'),
+        ]);
+    }
+
+    public function raceForm(Request $request)
+    {
+        $data = Session::get('data');
+        $category_id = RacingCategory::findOrFail($data['category_id']);
+        $track_id    = RacingTrack::findOrFail($data['track_id']);
+        $racer_id_1 = RacingRacers::findOrFail($data['racer_id_1']);
+        $racer_id_2 = RacingRacers::findOrFail($data['racer_id_2']);
+        $racer_id_3 = RacingRacers::findOrFail($data['racer_id_3']);
+
+        return view('apps.mhx-cup.score.create', [
+            'category_id' => $category_id,
+            'track_id'    => $track_id,
+            'racer_id_1'  => $racer_id_1,
+            'racer_id_2'  => $racer_id_2,
+            'racer_id_3'  => $racer_id_3,
+        ]);
+    }
 
 }

@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         @foreach($bMaxClassBScores->where('racing_tracks_id', 1) as $key => $score)
-            <tr>
+            <tr data-track-id="1" data-category-id="2">
                 <td>{{ $loop->iteration }}</td>
                 <td data-line1-races="{{ $score->line_1 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_1) {{ $score->mhxscoreRacer_1->racer_name }} @endisset</td>
                 <td data-line2-races="{{ $score->line_2 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_2) {{ $score->mhxscoreRacer_2->racer_name }} @endisset</td>
@@ -53,13 +53,13 @@
         </thead>
         <tbody>
         @foreach($bMaxClassBScores->where('racing_tracks_id', 2) as $key => $score)
-            <tr>
+            <tr data-track-id="2" data-category-id="2">
                 <td>{{ $loop->iteration }}</td>
                 <td data-line1-races="{{ $score->line_1 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_1) {{ $score->mhxscoreRacer_1->racer_name }} @endisset</td>
                 <td data-line2-races="{{ $score->line_2 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_2) {{ $score->mhxscoreRacer_2->racer_name }} @endisset</td>
                 <td data-line3-races="{{ $score->line_3 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_3) {{ $score->mhxscoreRacer_3->racer_name }} @endisset</td>
                 <td>
-                    <a href="" class="btn btn-red">Start Races</a>
+                    <a href="" class="btn btn-red btn-start-roundrace">Start Races</a>
                 </td>
             </tr>
         @endforeach
@@ -79,13 +79,13 @@
         </thead>
         <tbody>
         @foreach($bMaxClassBScores->where('racing_tracks_id', 3) as $key => $score)
-            <tr>
+            <tr data-track-id="3" data-category-id="2">
                 <td>{{ $loop->iteration }}</td>
                 <td data-line1-races="{{ $score->line_1 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_1) {{ $score->mhxscoreRacer_1->racer_name }} @endisset</td>
                 <td data-line2-races="{{ $score->line_2 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_2) {{ $score->mhxscoreRacer_2->racer_name }} @endisset</td>
                 <td data-line3-races="{{ $score->line_3 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_3) {{ $score->mhxscoreRacer_3->racer_name }} @endisset</td>
                 <td>
-                    <a href="" class="btn btn-red">Start Races</a>
+                    <a href="" class="btn btn-red btn-start-roundrace">Start Races</a>
                 </td>
             </tr>
         @endforeach
@@ -105,13 +105,13 @@
         </thead>
         <tbody>
         @foreach($bMaxClassBScores->where('racing_tracks_id', 4) as $key => $score)
-            <tr>
+            <tr data-track-id="4" data-category-id="2">
                 <td>{{ $loop->iteration }}</td>
                 <td data-line1-races="{{ $score->line_1 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_1) {{ $score->mhxscoreRacer_1->racer_name }} @endisset</td>
                 <td data-line2-races="{{ $score->line_2 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_2) {{ $score->mhxscoreRacer_2->racer_name }} @endisset</td>
                 <td data-line3-races="{{ $score->line_3 }}" class="{{ ($score->mhxscoreRacer_1 != null)? 'bg-blue-200':'bg-danger-100' }} ">@isset($score->mhxscoreRacer_3) {{ $score->mhxscoreRacer_3->racer_name }} @endisset</td>
                 <td>
-                    <a href="" class="btn btn-red">Start Races</a>
+                    <a href="" class="btn btn-red btn-start-roundrace">Start Races</a>
                 </td>
             </tr>
         @endforeach
@@ -250,3 +250,45 @@
     </div>--}}
 
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            // Attach click event to the "Start Races" button
+            $('.btn-start-roundrace').on('click', function (e) {
+                e.preventDefault();
+
+                // Get all three racer IDs from the data attributes of the clicked button's parent row
+                var categoryId = $(this).closest('tr').data('category-id');
+                var trackId    = $(this).closest('tr').data('track-id');
+                var racerId1   = $(this).closest('tr').find('td[data-line1-races]').data('line1-races');
+                var racerId2   = $(this).closest('tr').find('td[data-line2-races]').data('line2-races');
+                var racerId3   = $(this).closest('tr').find('td[data-line3-races]').data('line3-races');
+
+                // Perform AJAX request to submit the form with all three racer IDs
+                $.ajax({
+                    url: '{{ route('apps.event-mhx-cup.startRoundeRace') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        category_id: categoryId,
+                        track_id   : trackId,
+                        racer_id_1 : racerId1,
+                        racer_id_2 : racerId2,
+                        racer_id_3 : racerId3,
+                    },
+                    success: function (response) {
+                        if (response.status === true) {
+                            window.location.href = response.redirect;
+                        } else {
+                            console.error('Unexpected response status:', response.status);
+                        }
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

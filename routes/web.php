@@ -190,10 +190,12 @@ Route::domain('apps.' . env('APP_URL'))->group(function(){
                    Route::resource('races', MHXCupRaceController::class);
                    Route::resource('results', MHXCupResultController::class);
                    Route::resource('board', MHXCupBoardController::class);
+                   Route::get('race-start-round', [MHXCupRaceController::class, 'raceForm'])->name('raceForm');
                });
                Route::get('getCategoryData/{categoryId}', [MHXCupRaceController::class, 'getCategoryData'])->name('getCategoryData');
                Route::post('submit-result', [MHXCupRaceController::class, 'submitResult'])->name('result');
                Route::post('race-complete', [MHXCupRaceController::class, 'completeReport'])->name('completeRace');
+               Route::post('round-races', [MHXCupRaceController::class, 'startRoundeRace'])->name('startRoundeRace');
            });
            Route::group([
                'prefix'  => 'race',
