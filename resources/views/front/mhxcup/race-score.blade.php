@@ -21,7 +21,7 @@
 
 </head>
 <body class="bg-mhx-red">
-
+<span id="start"></span>
 <div id="scorebody" class="container-fluid">
     <div class="row">
         <div class="apps-col col-6">
@@ -93,6 +93,7 @@
         </div>--}}
     </div>
 </div>
+<span id="end"></span>
 
 <script type="text/javascript" src="{{ asset('assets/js/blog/vendor.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/blog/app.min.js') }}"></script>
@@ -112,45 +113,35 @@
 {{--<script type="text/javascript" src="{{ asset('assets/js/demo/login-v2.demo.js') }}"></script>--}}
 {{--<script type="text/javascript" src="{{ asset('assets/js/front.js') }}"></script>--}}
 <script>
+
+
     $(document).ready(function () {
-    // Set the scrolling interval in milliseconds (e.g., 500 for half a second)
-    var scrollInterval = 250;
-
-    // Set the distance to scroll on each interval (in pixels)
-    var scrollDistance = 50;
-
-    // Function to perform scrolling
-    function scrollPage() {
-        $('html, body').animate({
-            scrollTop: $(window).scrollTop() + (scrollDistance)
-        }, scrollInterval, function () {
-            // Check if the page has reached the bottom
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                // If at the bottom, refresh the page
-                location.reload();
-            } else {
-                // Continue scrolling down
-                scrollPage();
-            }
+        function down() {
+            $('html, body').animate({ scrollTop: $('#end').offset().top }, 20000);
+            up();
+        };
+        function up() {
+            $('html, body').animate({ scrollTop: $('#start').offset().top }, 20000);
+            down();
+        };
+        $(document).ready(function () {
+            down();
         });
-    }
 
-    // Start scrolling when the document is ready
-    scrollPage();
 
         var bodyWidth = $('body').width();
         var bodyHeight = $('body').height();
 
-        var tableWidth = $('.table-score').width();
+        /*var tableWidth = $('.table-score').width();*/
 
-        $('.apps-col').height(bodyHeight);
-        $('.row-apps').height(bodyHeight / 3);
+        /*$('.apps-col').height(bodyHeight);
+        $('.row-apps').height(bodyHeight / 3);*/
         $('.table-score tr td').width(tableWidth / 3);
 
-        // setInterval(function() {
-        //     $('#scorebody').load(window.location.href + ' #scorebody .apps-col');
-        //     console.log(this);
-        // }, 5000);
+        setInterval(function() {
+            $('#scorebody').load(window.location.href + ' #scorebody .apps-col');
+            console.log(this);
+        }, 5000);
 
         const container = document.getElementById("myCarousel");
         const options = {
