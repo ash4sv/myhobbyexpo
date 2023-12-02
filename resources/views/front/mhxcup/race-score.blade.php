@@ -32,6 +32,7 @@
                     <tbody>
                     @foreach($listRaces as $races)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td class="py-3">
                                 <h2 class="m-0 p-0">@isset($races->mhxscoreRacer_1) {{ $races->mhxscoreRacer_1->racer_name }} @endisset</h2>
                             </td>
