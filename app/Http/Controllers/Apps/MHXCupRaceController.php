@@ -40,8 +40,8 @@ class MHXCupRaceController extends Controller
         $request->validate([
             'racing_category' => 'required',
             'racing_track' => 'required',
-            'racing_date' => 'required',
-            'racing_time' => 'required',
+            /*'racing_date' => 'required',*/
+            /*'racing_time' => 'required',*/
             'line_1' => [
                 'required',
                 'min:1',
