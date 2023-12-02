@@ -48,7 +48,7 @@
                 </table>
             </div>
         </div>
-        <div class="apps-col col-6">
+        {{--<div class="apps-col col-6">
             <div class="row-apps d-flex justify-content-center">
                 <div class="row align-items-center gx-5">
                     <div class="col-md-5">
@@ -90,7 +90,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>--}}
     </div>
 </div>
 
