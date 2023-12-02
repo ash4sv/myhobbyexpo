@@ -14,13 +14,13 @@ class RaceController extends Controller
 {
     public function scoreboard($category, $track)
     {
-        $category = RacingCategory::where('slug', $category)->first();
+        $category = RacingCategory::where('id', $category)->first();
         $categoryID = $category->id;
-        $track    = RacingTrack::where('slug', $track)->first();
+        $track    = RacingTrack::where('id', $track)->first();
         $trackID    = $track->id;
 
         $results = RacingResult::where('racing_categories_id', $categoryID)->where('racing_tracks_id', $trackID)->get();
-        $racingScore = RacingScoreBoard::where('racing_categories_id', $categoryID)->where('racing_tracks_id', $trackID)->get()->last();
+        $racingScore = RacingScoreBoard::where('racing_categories_id', $category)->where('racing_tracks_id', $track)->get()->last();
 
         $filteredResults = $results->filter(function ($result) {
             return $result->racing_racers_1_status == 1
@@ -42,8 +42,12 @@ class RaceController extends Controller
             return $selectedRacers;
         });
 
-        $listRaces = RacingScoreBoard::where('racing_categories_id', $category)->where('racing_tracks_id', $track)->get();
-        // return $selectedRacers;
+        $listRaces = RacingScoreBoard::where('racing_categories_id', $categoryID)->where('racing_tracks_id', $trackID)->get();
+        /*return [
+            $category,
+            $track,
+            $listRaces
+        ];*/
         return view('front.mhxcup.race-score', [
             'listRaces' => $listRaces,
             'category' => $category,
