@@ -91,14 +91,14 @@
             }
 
             // Call the function for each card
-            var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', 'RM79.00' + ' / [Normal]', '', '{{ asset('assets/images/ticket_concert.webp') }}');
-            var adultTicketCard = createCard('ADULT TICKET', 'ADULT TICKET', 'RM20.00 / 2 Days', '', '{{ asset('assets/images/ticket_adult.webp') }}');
+            // var elfMusicCard = createCard('ELF MUSIC PACK', 'ELF MUSIC PACK', 'RM79.00' + ' / [Normal]', '', '{{ asset('assets/images/ticket_concert.webp') }}');
+            var adultTicketCard = createCard('ADULT TICKET', 'ADULT TICKET', 'RM15.00 / 2 Days', '', '{{ asset('assets/images/ticket_adult.webp') }}');
             var kidsTicketCard = createCard('KIDS TICKET', 'KIDS TICKET', 'RM5.00 / 2 Days', '', '{{ asset('assets/images/ticket_kids.webp') }}');
             var choii64Card = createCard('CHOII 64 LIMITED EDITION PACK', 'CHOII 64 LIMITED EDITION PACK', 'RM259.00 / Pack', '', '{{ asset('assets/images/ticket_super_vvip.webp') }}');
             var choiiLimitedCard = createCard('CHOII LIMITED EDITION PACK', 'CHOII LIMITED EDITION PACK', 'RM189.00 / Pack', '', '{{ asset('assets/images/ticket_super_special.webp') }}');
 
             // Append the generated cards to the container (assuming there is a container with id "card-container")
-            $('#card-container').append(elfMusicCard, choiiLimitedCard, choii64Card, adultTicketCard, kidsTicketCard);
+            $('#card-container').append(choiiLimitedCard, choii64Card, adultTicketCard, kidsTicketCard);
 
             // Append the "Buy Ticket Now" section outside the card
             var buyTicketButton = $('<input class="btn btn-indigo btn-lg w-300px" type="button" value="Buy Ticket Now">');
