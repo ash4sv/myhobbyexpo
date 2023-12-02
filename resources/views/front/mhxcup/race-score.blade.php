@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
-<body>
+<body class="bg-mhx-red">
 
-<div id="scorebody" class="bg-mhx-red container-fluid">
+<div id="scorebody" class="container-fluid">
     <div class="row">
         <div class="apps-col col-6">
             <h1 class="text-center text-white pt-4 font-weight-700">{{ $category->category_name }}</h1>
