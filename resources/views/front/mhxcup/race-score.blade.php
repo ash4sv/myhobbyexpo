@@ -113,6 +113,31 @@
 {{--<script type="text/javascript" src="{{ asset('assets/js/front.js') }}"></script>--}}
 <script>
     $(document).ready(function () {
+    // Set the scrolling interval in milliseconds (e.g., 500 for half a second)
+    var scrollInterval = 250;
+
+    // Set the distance to scroll on each interval (in pixels)
+    var scrollDistance = 50;
+
+    // Function to perform scrolling
+    function scrollPage() {
+        $('html, body').animate({
+            scrollTop: $(window).scrollTop() + (scrollDistance)
+        }, scrollInterval, function () {
+            // Check if the page has reached the bottom
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                // If at the bottom, refresh the page
+                location.reload();
+            } else {
+                // Continue scrolling down
+                scrollPage();
+            }
+        });
+    }
+
+    // Start scrolling when the document is ready
+    scrollPage();
+
         var bodyWidth = $('body').width();
         var bodyHeight = $('body').height();
 
