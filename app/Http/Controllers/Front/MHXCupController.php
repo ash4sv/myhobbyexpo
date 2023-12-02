@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 use Billplz\Client;
 
-class MHXCupController extends Controller
+    class MHXCupController extends Controller
 {
     protected string $view = 'front.mhxcup.';
 
@@ -442,7 +442,7 @@ class MHXCupController extends Controller
         $racer->registration              = $webHook['registration'];
         $racer->receipt                   = null;
         $racer->approval                  = false;
-        $racer->payment_type              = 3;
+        $racer->payment_type              = 2;
         $racer->payment_status            = false;
         $racer->save();
 
@@ -485,7 +485,7 @@ class MHXCupController extends Controller
 
     public function cashPaymentConfirm(Request $request)
     {
-        
+
         return view($this->view.'cash-confirm');
     }
 }
