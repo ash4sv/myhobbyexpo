@@ -116,7 +116,7 @@
 
 
     $(document).ready(function () {
-        function down() {
+        /*function down() {
             $('html, body').animate({ scrollTop: $('#end').offset().top }, 20000);
             up();
         };
@@ -126,7 +126,7 @@
         };
         $(document).ready(function () {
             down();
-        });
+        });*/
 
 
         var bodyWidth = $('body').width();
