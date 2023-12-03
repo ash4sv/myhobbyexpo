@@ -30,7 +30,7 @@
                     </span>--}}
                 </a>
 
-                <div class="mx-sm-auto mx-0">
+                {{--<div class="mx-sm-auto mx-0">
                     <div class="countdown-container">
                         <div class="countdown-item">
                             <span class="number" id="days"></span>
@@ -49,7 +49,7 @@
                             <h4>Seconds</h4>
                         </div>
                     </div>
-                </div>
+                </div>--}}
 
                 <button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#header-navbar">
                     <span class="icon-bar"></span>
@@ -65,9 +65,9 @@
                         <li class="nav-item"><a class="nav-link" href="#layout" data-click="scroll-to-target">LAYOUT</a></li>
                         <li class="nav-item"><a class="nav-link" href="#faq" data-click="scroll-to-target">FAQ</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact" data-click="scroll-to-target">CONTACT</a></li>
-                        <li class="nav-item d-flex align-items-center">
+                        {{--<li class="nav-item d-flex align-items-center">
                             <a class="btn btn-indigo mb-4px" href="{{ route('participant.form') }}" target="_blank">VISITOR TICKET</a>
-                        </li>
+                        </li>--}}
                         {{--<li class="nav-item d-flex align-items-center">
                             <a class="btn btn-indigo mb-4px" href="{{ route('preregister') }}" target="_blank">Visitor Ticket</a>
                         </li>--}}
