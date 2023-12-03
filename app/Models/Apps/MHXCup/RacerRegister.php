@@ -26,6 +26,9 @@ class RacerRegister extends Model
         'registration',
         'receipt',
         'approval',
+        'payment_type',
+        'payment_status',
+        'redeem_status',
     ];
 
     protected $guarded = [
@@ -42,6 +45,9 @@ class RacerRegister extends Model
         'registration',
         'receipt',
         'approval',
+        'payment_type',
+        'payment_status',
+        'redeem_status',
     ];
 
     public function getActivitylogOptions(): LogOptions
