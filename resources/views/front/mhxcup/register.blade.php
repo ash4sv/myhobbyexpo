@@ -33,11 +33,11 @@
                 Rules & Regulations
             </a>
         </div>
-        <div class="card border-0">
+        {{--<div class="card border-0">
             <div class="card-body p-0 text-center">
                 <a href="" class="category-select">
                     <img src="{{ asset('assets/images/mini-4wd/mhxc_003.png') }}" alt="" class="img-fluid">
-                    {{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>--}}
+                    --}}{{--<h3 class="bg-mhx-red text-white card-title py-10px rounded-pill font-weight-700 mb-0">STOCK-CAR</h3>--}}{{--
                 </a>
                 <input type="hidden" name="category" value="stock-car class c">
                 <input type="hidden" name="price_category" value="35">
@@ -45,7 +45,7 @@
             <a href="{{ asset('assets/upload/') }}" class="card-footer text-center py-2 font-weight-600 text-uppercase">
                 Rules & Regulations
             </a>
-        </div>
+        </div>--}}
     </div>
 </div>
 @endsection
