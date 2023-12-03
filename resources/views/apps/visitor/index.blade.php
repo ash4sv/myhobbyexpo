@@ -175,60 +175,60 @@
 
 @push('script')
     <script>
-        $(document).ready(function () {
-            function updateRedeemStatus(visitorId, redeemButton) {
-                // Perform AJAX request to update redeem status
-                $.ajax({
-                    method: 'POST',
-                    url: 'ticket-visitor/' + visitorId + '/update-redeem-status',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: visitorId
-                    },
-                    success: function (response) {
-                        if (response.status == true) {
-                            Swal.fire({
-                                title: response.title,
-                                text: response.msg,
-                                icon: 'success',
-                            })
-                        }
-                        redeemButton.closest('td').find('.badge').removeClass('bg-danger').addClass('bg-primary').text('Redeemed');
-                        redeemButton.addClass('disabled');
-                    },
-                    error: function (error) {
-                        // Handle error, e.g., show an error message
-                    }
-                });
-            }
-
-            $('.btn-redeem').on('click', function (e) {
-                e.preventDefault();
-                const visitorId = $(this).data('to-redeem');
-                const redeemButton = $(this);
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to redeem this visitor.",
-                    icon: "warning",
-                    type: "warning",
-                    showDenyButton: true,
-                    confirmButtonText: 'Yes',
-                    denyButtonText: 'No',
-                }).then((willRedeem) => {
-                    if (willRedeem.isConfirmed) {
-                        updateRedeemStatus(visitorId, redeemButton);
-                    } else if (willRedeem.isDenied) {
+        function updateRedeemStatus(visitorId, redeemButton) {
+            // Perform AJAX request to update redeem status
+            $.ajax({
+                method: 'POST',
+                url: 'ticket-visitor/' + visitorId + '/update-redeem-status',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: visitorId
+                },
+                success: function (response) {
+                    if (response.status == true) {
                         Swal.fire({
-                            title: "Changes are not saved",
-                            text: "Visitor has not been redeemed!",
-                            icon: "info",
-                            type: "info",
-                        });
+                            title: response.title,
+                            text: response.msg,
+                            icon: 'success',
+                        })
                     }
-                });
+                    redeemButton.closest('td').find('.badge').removeClass('bg-danger').addClass('bg-primary').text('Redeemed');
+                    redeemButton.addClass('disabled');
+                },
+                error: function (error) {
+                    // Handle error, e.g., show an error message
+                }
             });
+        }
 
+        $('.btn-redeem').on('click', function (e) {
+            e.preventDefault();
+            const visitorId = $(this).data('to-redeem');
+            const redeemButton = $(this);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You are about to redeem this visitor.",
+                icon: "warning",
+                type: "warning",
+                showDenyButton: true,
+                confirmButtonText: 'Yes',
+                denyButtonText: 'No',
+            }).then((willRedeem) => {
+                if (willRedeem.isConfirmed) {
+                    updateRedeemStatus(visitorId, redeemButton);
+                } else if (willRedeem.isDenied) {
+                    Swal.fire({
+                        title: "Changes are not saved",
+                        text: "Visitor has not been redeemed!",
+                        icon: "info",
+                        type: "info",
+                    });
+                }
+            });
+        });
+
+        $(document).ready(function () {
             var dataTable = $('#dataTable').DataTable();
 
             $('#searchInput').on('keyup', function () {
